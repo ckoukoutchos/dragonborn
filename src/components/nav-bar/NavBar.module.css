@@ -1,9 +1,12 @@
 .NavBar {
   align-items: center;
-  background-color: black;
+  background: linear-gradient(rgba(211, 62, 62, 0.8), transparent)
+    rgb(135, 28, 28);
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.5);
   box-sizing: border-box;
   display: flex;
-  height: 56px;
+  font-family: 'Metamorphous', cursive;
+  height: 48px;
   justify-content: space-between;
   left: 0;
   padding: 0 20px;
@@ -20,3 +23,5 @@
   justify-content: space-between;
   list-style: none;
 }
+
+/* font-family: 'Rosario', sans-serif; */

@@ -1,12 +1,11 @@
 .NavItem {
-  display: block;
   margin: 10px;
   width: 100%;
 }
 
 .NavItem a {
   color: white;
-  display: block;
+  padding: 8px;
   text-decoration: none;
   width: 100%;
 }
@@ -14,5 +13,7 @@
 .NavItem a:hover,
 .NavItem a:active,
 .NavItem a.active {
-  color: grey;
+  background: white;
+  border-radius: 4px;
+  color: black;
 }
