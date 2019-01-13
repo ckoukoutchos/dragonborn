@@ -1,0 +1,22 @@
+.NavBar {
+  align-items: center;
+  background-color: black;
+  box-sizing: border-box;
+  display: flex;
+  height: 56px;
+  justify-content: space-between;
+  left: 0;
+  padding: 0 20px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 90;
+}
+
+.NavBar nav {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: space-between;
+  list-style: none;
+}

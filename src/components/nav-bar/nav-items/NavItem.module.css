@@ -1,0 +1,18 @@
+.NavItem {
+  display: block;
+  margin: 10px;
+  width: 100%;
+}
+
+.NavItem a {
+  color: white;
+  display: block;
+  text-decoration: none;
+  width: 100%;
+}
+
+.NavItem a:hover,
+.NavItem a:active,
+.NavItem a.active {
+  color: grey;
+}
