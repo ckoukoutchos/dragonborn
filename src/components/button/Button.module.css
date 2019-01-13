@@ -1,0 +1,21 @@
+.Button {
+  border: none;
+  color: white;
+  cursor: pointer;
+  margin: 4px;
+  outline: none;
+}
+
+.Button:disabled {
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+.Fab {
+  border-radius: 32px;
+  padding: 1px 5px 3px 5px;
+}
+
+.Primary {
+  background: rgb(184, 31, 31);
+}
