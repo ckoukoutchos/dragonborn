@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
@@ -66,3 +67,16 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+=======
+# DragonBorn
+Dungeons &amp; Dragons 5th edition character creation and tracker React app
+
+## Create a Character
+Making a new character is simple and easy with a step-by-step walkthrough to help you build a fun, memorable hero!
+
+## Track your Character
+Keep a tab on all your character's stats, gear, spells and more as you play!
+
+## DM Edition (for release 2)
+Track the progress of your campaign and keep all your players synced!
+>>>>>>> 78ffc0cb979b47b268fcaa0046f5d19f7e121f07
