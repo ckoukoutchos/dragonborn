@@ -1,0 +1,29 @@
+.Container {
+  margin: 4px;
+}
+
+.Edit {
+  background-color: white;
+  border-radius: 4px;
+}
+
+.Input {
+  border: none;
+  border-bottom: 1px solid rgb(192, 192, 192);
+  display: block;
+  font: inherit;
+  outline: none;
+  margin: 0 4px 4px 4px;
+  padding: 6px 10px;
+}
+
+.Disabled {
+  background-color: rgb(233, 233, 233);
+}
+
+.Label {
+  display: block;
+  font-size: 12px;
+  font-weight: bold;
+  padding-left: 12px;
+}

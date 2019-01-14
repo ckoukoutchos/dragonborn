@@ -5,15 +5,19 @@
 
 .NavItem a {
   color: white;
-  padding: 8px;
+  padding: 8px 8px 4px 8px;
   text-decoration: none;
   width: 100%;
 }
 
 .NavItem a:hover,
-.NavItem a:active,
-.NavItem a.active {
+.NavItem a:active {
   background: white;
   border-radius: 4px;
   color: black;
+}
+
+.NavItem a.active {
+  border-bottom: 4px solid white;
+  border-radius: 4px;
 }
