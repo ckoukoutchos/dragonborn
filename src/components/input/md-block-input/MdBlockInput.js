@@ -1,33 +1,58 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import classes from './MdBlockInput.module.css';
 
-const mdBlockInput = props => {
-  return (
-    <div
-      className={[
-        classes.Container,
-        props.edit ? classes.Edit : classes.Disabled
-      ].join(' ')}
-    >
-      <input
+class MdBlockInput extends Component {
+  state = {
+    selected: false
+  };
+
+  onSelection = () => {
+    this.setState(prevState => (prevState.selected = !prevState.selected));
+  };
+
+  render() {
+    return (
+      <div
         className={[
-          classes.Input,
-          props.edit ? classes.Edit : classes.Disabled
-        ].join(' ')}
-        disabled={!props.edit}
-        value={props.value}
-      />
-      <label
-        className={[
-          classes.Label,
-          props.edit ? classes.Edit : classes.Disabled
+          classes.Container,
+          this.props.edit ? classes.Edit : classes.Disabled
         ].join(' ')}
       >
-        {props.label}
-      </label>
-    </div>
-  );
-};
+        <div
+          style={{
+            display: 'inline-block',
+            padding: '6px',
+            width: '8px',
+            background: this.state.selected ? 'black' : 'white',
+            border: '1px solid black',
+            borderRadius: '50%'
+          }}
+          onClick={this.onSelection}
+        />
+        <div
+          style={{
+            display: 'inline-block',
+            padding: '6px',
+            width: '8px',
+            background: 'white',
+            border: '1px solid black',
+            borderRadius: '50%'
+          }}
+        />
+        <div
+          style={{
+            display: 'inline-block',
+            padding: '6px',
+            width: '8px',
+            background: 'white',
+            border: '1px solid black',
+            borderRadius: '50%'
+          }}
+        />
+      </div>
+    );
+  }
+}
 
-export default mdBlockInput;
+export default MdBlockInput;

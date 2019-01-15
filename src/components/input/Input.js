@@ -8,9 +8,9 @@ const input = props => {
       <input
         className={[
           classes.Input,
-          props.edit ? classes.Edit : classes.Disabled
+          props.editing ? classes.Edit : classes.Disabled
         ].join(' ')}
-        disabled={!props.edit}
+        disabled={!props.editing}
         value={props.value}
       />
       <label className={classes.Label}>{props.label}</label>

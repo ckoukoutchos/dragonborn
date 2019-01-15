@@ -13,12 +13,12 @@
 .Input {
   border: none;
   border-radius: 8px;
+  display: inline;
   font-family: 'Rosario', sans-serif;
   font-size: 24px;
   outline: none;
   padding: 4px;
   text-align: center;
-  width: 100%;
 }
 
 .Disabled {

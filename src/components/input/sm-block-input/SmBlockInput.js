@@ -7,21 +7,21 @@ const smBlockInput = props => {
     <div
       className={[
         classes.Container,
-        props.edit ? classes.Edit : classes.Disabled
+        props.editing ? classes.Edit : classes.Disabled
       ].join(' ')}
     >
       <input
         className={[
           classes.Input,
-          props.edit ? classes.Edit : classes.Disabled
+          props.editing ? classes.Edit : classes.Disabled
         ].join(' ')}
-        disabled={!props.edit}
+        disabled={!props.editing}
         value={props.value}
       />
       <label
         className={[
           classes.Label,
-          props.edit ? classes.Edit : classes.Disabled
+          props.editing ? classes.Edit : classes.Disabled
         ].join(' ')}
       >
         {props.label}
