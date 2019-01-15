@@ -1,20 +1,24 @@
 .Container {
+  border: 2px solid rgb(92, 92, 92);
+  border-radius: 7px;
+  height: 60px;
   margin: 4px;
+  width: 80px;
 }
 
 .Edit {
   background-color: white;
-  border-radius: 4px;
 }
 
 .Input {
   border: none;
-  border-bottom: 1px solid rgb(192, 192, 192);
-  display: block;
-  font: inherit;
+  border-radius: 8px;
+  font-family: 'Rosario', sans-serif;
+  font-size: 24px;
   outline: none;
-  margin: 0 4px 4px 4px;
-  padding: 6px 10px;
+  padding: 4px;
+  text-align: center;
+  width: 100%;
 }
 
 .Disabled {
@@ -26,5 +30,5 @@
   display: block;
   font-size: 12px;
   font-weight: bold;
-  padding-left: 12px;
+  text-align: center;
 }
