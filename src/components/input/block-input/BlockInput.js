@@ -1,8 +1,8 @@
 import React from 'react';
 
-import classes from './SmBlockInput.module.css';
+import classes from './BlockInput.module.css';
 
-const smBlockInput = props => {
+const blockInput = props => {
   return (
     <div
       className={[
@@ -30,4 +30,4 @@ const smBlockInput = props => {
   );
 };
 
-export default smBlockInput;
+export default blockInput;
