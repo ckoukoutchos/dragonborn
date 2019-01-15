@@ -3,13 +3,15 @@ import React, { Component } from 'react';
 import Card from '../../components/card/Card';
 import NavBar from '../../components/nav-bar/NavBar';
 import SmBlockInput from '../../components/input/sm-block-input/SmBlockInput';
-import ToggleLineInput from '../../components/input/toggle-line-input/ToggleLineInput';
+import ToggleList from '../../components/toggle-list/ToggleList';
 
 class HeroDetail extends Component {
   state = {
     editing: false,
     toggled: false
   };
+
+  items = [{ name: 'Strength' }, { name: 'Dexterity' }];
 
   onEditToggleHandler = () => {
     this.setState(prevState => (prevState.editing = !prevState.editing));
@@ -49,9 +51,9 @@ class HeroDetail extends Component {
             editing={this.state.editing}
             onEdit={this.onEditToggleHandler}
           >
-            <ToggleLineInput
-              label="Strength"
+            <ToggleList
               editing={this.state.editing}
+              items={this.items}
               onToggle={this.onToggleHandler}
               toggled={this.state.toggled}
             />

@@ -5,7 +5,7 @@ import classes from './ToggleLineInput.module.css';
 const toggleLineInput = props => {
   const { editing, label, onToggle, toggled, value } = props;
   return (
-    <div>
+    <div className={classes.Container}>
       <div
         className={[
           classes.Toggle,
@@ -21,14 +21,7 @@ const toggleLineInput = props => {
         disabled={!editing}
         value={value}
       />
-      <label
-        className={[
-          classes.Label,
-          editing ? classes.Edit : classes.Disabled
-        ].join(' ')}
-      >
-        {label}
-      </label>
+      <label className={classes.Label}>{label}</label>
     </div>
   );
 };
