@@ -4,6 +4,7 @@ import classes from './Card.module.css';
 import Button from '../button/Button';
 import Input from '../input/Input';
 import SmBlockInput from '../input/sm-block-input/SmBlockInput';
+import MdBlockInput from '../input/md-block-input/MdBlockInput';
 
 class Card extends Component {
   state = {
@@ -27,12 +28,14 @@ class Card extends Component {
             {this.state.isEditing ? 'x' : '+'}
           </Button>
         </div>
-        <SmBlockInput label="Armor Class" edit={this.state.isEditing} />
-        <SmBlockInput label="Initiative" edit={this.state.isEditing} />
-        <SmBlockInput label="Speed" edit={this.state.isEditing} />
-        <Input label="Hit Points" edit={this.state.isEditing} />
-        <Input label="Hit Dice" edit={this.state.isEditing} />
-        <Input label="Death Saves" edit={this.state.isEditing} />
+        <div className={classes.Body}>
+          <SmBlockInput label="Armor Class" edit={this.state.isEditing} />
+          <SmBlockInput label="Initiative" edit={this.state.isEditing} />
+          <SmBlockInput label="Speed" edit={this.state.isEditing} />
+          <Input label="Hit Points" edit={this.state.isEditing} />
+          <MdBlockInput label="Hit Dice" edit={this.state.isEditing} />
+          <MdBlockInput label="Death Saves" edit={this.state.isEditing} />
+        </div>
       </div>
     );
   }
