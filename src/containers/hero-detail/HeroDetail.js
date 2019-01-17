@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import Card from '../../components/card/Card';
 import NavBar from '../../components/nav-bar/NavBar';
 import BlockInput from '../../components/input/block-input/BlockInput';
+import BlockInsetInput from '../../components/input/block-inset-input/BlockInsetInput';
 import ToggleList from '../../components/toggle-list/ToggleList';
 
 class HeroDetail extends Component {
@@ -25,7 +26,19 @@ class HeroDetail extends Component {
     { name: 'Animal Herding' },
     { name: 'Arcana' },
     { name: 'Athletics' },
-    { name: 'Deception' }
+    { name: 'Deception' },
+    { name: 'Histroy' },
+    { name: 'Insight' },
+    { name: 'Intimidation' },
+    { name: '1' },
+    { name: '2' },
+    { name: '3' },
+    { name: '4' },
+    { name: '5' },
+    { name: '6' },
+    { name: '7' },
+    { name: '8' },
+    { name: '9' }
   ];
 
   onEditToggleHandler = () => {
@@ -38,7 +51,12 @@ class HeroDetail extends Component {
 
   render() {
     const abilities = this.ablities.map(ability => (
-      <BlockInput label={ability.name} editing={this.state.editing} />
+      <BlockInsetInput
+        key={ability.name}
+        label={ability.name}
+        editing={this.state.editing}
+        value={16}
+      />
     ));
 
     return (
@@ -72,6 +90,8 @@ class HeroDetail extends Component {
           >
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               {abilities}
+              <BlockInput label="Proficiency" editing={this.state.editing} />
+              <BlockInput label="Inspiration" editing={this.state.editing} />
             </div>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               <ToggleList

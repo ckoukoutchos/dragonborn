@@ -8,6 +8,7 @@ const toggleList = props => {
 
   const toggleItems = items.map(item => (
     <ToggleLineInput
+      key={item.name}
       label={item.name}
       editing={editing}
       onToggle={onToggle}

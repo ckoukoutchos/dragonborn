@@ -1,9 +1,11 @@
 import React from 'react';
 
-import classes from './BlockInput.module.css';
+import classes from './BlockInsetInput.module.css';
 
-const blockInput = props => {
+const blockInsetInput = props => {
   const { editing, label, value } = props;
+  const modifier = (value - 10) / 2;
+
   return (
     <div
       className={[
@@ -11,14 +13,6 @@ const blockInput = props => {
         editing ? classes.Edit : classes.Disabled
       ].join(' ')}
     >
-      <input
-        className={[
-          classes.Input,
-          editing ? classes.Edit : classes.Disabled
-        ].join(' ')}
-        disabled={!editing}
-        value={value}
-      />
       <label
         className={[
           classes.Label,
@@ -27,8 +21,17 @@ const blockInput = props => {
       >
         {label}
       </label>
+      <input
+        className={[
+          classes.Input,
+          editing ? classes.Edit : classes.Disabled
+        ].join(' ')}
+        disabled={!editing}
+        value={value}
+      />
+      <div className={classes.Inset}>+{modifier}</div>
     </div>
   );
 };
 
-export default blockInput;
+export default blockInsetInput;
