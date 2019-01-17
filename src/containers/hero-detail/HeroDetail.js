@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 import Card from '../../components/card/Card';
-import NavBar from '../../components/nav-bar/NavBar';
 import BlockInput from '../../components/input/block-input/BlockInput';
 import BlockInsetInput from '../../components/input/block-inset-input/BlockInsetInput';
 import ToggleList from '../../components/toggle-list/ToggleList';
@@ -61,56 +60,45 @@ class HeroDetail extends Component {
 
     return (
       <>
-        <NavBar />
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            flexWrap: 'wrap',
-            justifyContent: 'center',
-            marginTop: '64px'
-          }}
+        <Card
+          title="Vitals"
+          editing={this.state.editing}
+          onEdit={this.onEditToggleHandler}
         >
-          <Card
-            title="Vitals"
-            editing={this.state.editing}
-            onEdit={this.onEditToggleHandler}
-          >
-            <BlockInput label="Armor Class" editing={this.state.editing} />
-            <BlockInput label="Initiative" editing={this.state.editing} />
-            <BlockInput label="Speed" editing={this.state.editing} />
-            <BlockInput label="Hit Points" editing={this.state.editing} />
-            <BlockInput label="Hit Dice" editing={this.state.editing} />
-          </Card>
+          <BlockInput label="Armor Class" editing={this.state.editing} />
+          <BlockInput label="Initiative" editing={this.state.editing} />
+          <BlockInput label="Speed" editing={this.state.editing} />
+          <BlockInput label="Hit Points" editing={this.state.editing} />
+          <BlockInput label="Hit Dice" editing={this.state.editing} />
+        </Card>
 
-          <Card
-            title={'Abilities & Skills'}
-            editing={this.state.editing}
-            onEdit={this.onEditToggleHandler}
-          >
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-              {abilities}
-              <BlockInput label="Proficiency" editing={this.state.editing} />
-              <BlockInput label="Inspiration" editing={this.state.editing} />
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <ToggleList
-                editing={this.state.editing}
-                items={this.ablities}
-                label="Saving Throws"
-                onToggle={this.onToggleHandler}
-                toggled={this.state.toggled}
-              />
-              <ToggleList
-                editing={this.state.editing}
-                items={this.skills}
-                label="Skills"
-                onToggle={this.onToggleHandler}
-                toggled={this.state.toggled}
-              />
-            </div>
-          </Card>
-        </div>
+        <Card
+          title={'Abilities & Skills'}
+          editing={this.state.editing}
+          onEdit={this.onEditToggleHandler}
+        >
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
+            {abilities}
+            <BlockInput label="Proficiency" editing={this.state.editing} />
+            <BlockInput label="Inspiration" editing={this.state.editing} />
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <ToggleList
+              editing={this.state.editing}
+              items={this.ablities}
+              label="Saving Throws"
+              onToggle={this.onToggleHandler}
+              toggled={this.state.toggled}
+            />
+            <ToggleList
+              editing={this.state.editing}
+              items={this.skills}
+              label="Skills"
+              onToggle={this.onToggleHandler}
+              toggled={this.state.toggled}
+            />
+          </div>
+        </Card>
       </>
     );
   }
