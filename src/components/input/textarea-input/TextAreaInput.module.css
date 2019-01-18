@@ -1,0 +1,40 @@
+.Container {
+  border: 2px solid rgb(61, 61, 61);
+  border-radius: 7px;
+  margin: 8px;
+  width: 305px;
+}
+
+.Edit {
+  background-color: white;
+}
+
+.Input {
+  border: none;
+  border-radius: 8px;
+  font-family: 'Rosario', sans-serif;
+  font-size: 16px;
+  height: 300px;
+  outline: none;
+  padding: 8px 4px;
+  width: 100%;
+}
+
+.Disabled {
+  background: rgb(233, 233, 233);
+}
+
+textarea {
+  background-attachment: local;
+  background-image: linear-gradient(to right, white 10px, transparent 10px),
+    linear-gradient(to left, white 10px, transparent 10px),
+    repeating-linear-gradient(
+      white,
+      white 28px,
+      rgb(61, 61, 61) 28px,
+      rgb(61, 61, 61) 29px,
+      white 29px
+    );
+  line-height: 28px;
+  resize: none;
+}
