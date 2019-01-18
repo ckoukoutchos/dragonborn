@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 
-import Card from '../../components/card/Card';
+import BasicCard from '../../components/card/basic-card/BasicCard';
 import BlockInput from '../../components/input/block-input/BlockInput';
 import BlockInsetInput from '../../components/input/block-inset-input/BlockInsetInput';
+import Input from '../../components/input/Input';
+import TitleCard from '../../components/card/title-card/TitleCard';
 import ToggleList from '../../components/toggle-list/ToggleList';
 
 class HeroDetail extends Component {
@@ -54,25 +56,35 @@ class HeroDetail extends Component {
         key={ability.name}
         label={ability.name}
         editing={this.state.editing}
-        value={16}
+        value={21}
       />
     ));
 
     return (
       <>
-        <Card
+        <TitleCard
+          title="Thronk, Destroyer of Worlds"
+          editing={this.state.editing}
+          onEdit={this.onEditToggleHandler}
+        >
+          <Input label={'Class & level'} editing={this.state.editing} />
+          <Input label="Race" editing={this.state.editing} />
+          <Input label="Alignment" editing={this.state.editing} />
+        </TitleCard>
+        <BasicCard
           title="Vitals"
           editing={this.state.editing}
           onEdit={this.onEditToggleHandler}
         >
           <BlockInput label="Armor Class" editing={this.state.editing} />
           <BlockInput label="Initiative" editing={this.state.editing} />
+          <BlockInput label="Experience" editing={this.state.editing} />
           <BlockInput label="Speed" editing={this.state.editing} />
           <BlockInput label="Hit Points" editing={this.state.editing} />
           <BlockInput label="Hit Dice" editing={this.state.editing} />
-        </Card>
+        </BasicCard>
 
-        <Card
+        <BasicCard
           title={'Abilities & Skills'}
           editing={this.state.editing}
           onEdit={this.onEditToggleHandler}
@@ -80,7 +92,6 @@ class HeroDetail extends Component {
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             {abilities}
             <BlockInput label="Proficiency" editing={this.state.editing} />
-            <BlockInput label="Inspiration" editing={this.state.editing} />
           </div>
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             <ToggleList
@@ -98,7 +109,7 @@ class HeroDetail extends Component {
               toggled={this.state.toggled}
             />
           </div>
-        </Card>
+        </BasicCard>
       </>
     );
   }

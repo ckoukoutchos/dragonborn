@@ -4,7 +4,7 @@ import classes from './BlockInsetInput.module.css';
 
 const blockInsetInput = props => {
   const { editing, label, value } = props;
-  const modifier = (value - 10) / 2;
+  const modifier = Math.floor((value - 10) / 2);
 
   return (
     <div
@@ -29,7 +29,10 @@ const blockInsetInput = props => {
         disabled={!editing}
         value={value}
       />
-      <div className={classes.Inset}>+{modifier}</div>
+      <div className={classes.Inset}>
+        {modifier >= 0 ? '+' : ''}
+        {modifier}
+      </div>
     </div>
   );
 };

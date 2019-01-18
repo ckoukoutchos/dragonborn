@@ -1,5 +1,5 @@
 .Container {
-  margin: 4px;
+  margin: 8px;
 }
 
 .Edit {
@@ -9,12 +9,14 @@
 
 .Input {
   border: none;
-  border-bottom: 1px solid rgb(192, 192, 192);
+  border-bottom: 1px solid rgb(149, 149, 149);
   display: block;
-  font: inherit;
+  font-family: 'Rosario', sans-serif;
+  font-size: 24px;
   outline: none;
   margin: 0 4px 4px 4px;
   padding: 6px 10px;
+  width: 200px;
 }
 
 .Disabled {
@@ -22,7 +24,7 @@
 }
 
 .Label {
-  color: rgb(92, 92, 92);
+  color: rgb(61, 61, 61);
   display: block;
   font-size: 12px;
   font-weight: bold;

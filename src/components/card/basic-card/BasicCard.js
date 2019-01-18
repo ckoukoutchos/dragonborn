@@ -1,9 +1,9 @@
 import React from 'react';
 
-import classes from './Card.module.css';
-import Button from '../button/Button';
+import classes from './BasicCard.module.css';
+import Button from '../../button/Button';
 
-const card = props => {
+const basicCard = props => {
   const { editing, onEdit, title } = props;
   return (
     <div className={classes.Card}>
@@ -18,4 +18,4 @@ const card = props => {
   );
 };
 
-export default card;
+export default basicCard;
