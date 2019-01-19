@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-import HeroDetail from './containers/hero-detail/HeroDetail';
+import CharacterStats from './containers/character/character-stats/CharacterStats';
 import Layout from './hoc/layout/Layout';
 
 class App extends Component {
@@ -9,7 +9,7 @@ class App extends Component {
     return (
       <Layout>
         <Switch>
-          <Route path="/hero-detail" exact component={HeroDetail} />
+          <Route path="/character/:id/stats" exact component={CharacterStats} />
         </Switch>
       </Layout>
     );

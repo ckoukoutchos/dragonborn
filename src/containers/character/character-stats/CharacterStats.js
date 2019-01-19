@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 
-import BasicCard from '../../components/card/basic-card/BasicCard';
-import BlockInput from '../../components/input/block-input/BlockInput';
-import BlockInsetInput from '../../components/input/block-inset-input/BlockInsetInput';
-import Input from '../../components/input/Input';
-import TabBar from '../../components/tab-bar/TabBar';
-import TextAreaInput from '../../components/input/textarea-input/TextAreaInput';
-import TitleCard from '../../components/card/title-card/TitleCard';
-import ToggleList from '../../components/toggle-list/ToggleList';
+import BasicCard from '../../../components/card/basic-card/BasicCard';
+import BlockInput from '../../../components/input/block-input/BlockInput';
+import BlockInsetInput from '../../../components/input/block-inset-input/BlockInsetInput';
+import Input from '../../../components/input/Input';
+import TabBar from '../../../components/tab-bar/TabBar';
+import TextAreaInput from '../../../components/input/textarea-input/TextAreaInput';
+import TitleCard from '../../../components/card/title-card/TitleCard';
+import ToggleList from '../../../components/toggle-list/ToggleList';
 
-class HeroDetail extends Component {
+class CharacterStats extends Component {
   state = {
     editing: false,
     toggled: false
@@ -146,10 +146,10 @@ class HeroDetail extends Component {
             <TextAreaInput editing={this.state.editing} />
           </BasicCard>
         </div>
-        <TabBar />
+        <TabBar id={1} />
       </>
     );
   }
 }
 
-export default HeroDetail;
+export default CharacterStats;

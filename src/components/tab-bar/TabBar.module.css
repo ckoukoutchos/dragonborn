@@ -3,7 +3,7 @@
   background: linear-gradient(rgba(211, 62, 62, 0.8), transparent)
     rgb(135, 28, 28);
   border-radius: 8px;
-  bottom: 36px;
+  bottom: 20px;
   box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.5);
   display: flex;
   font-family: 'Metamorphous', cursive;
@@ -24,7 +24,20 @@
 .TabItem a:hover,
 .TabItem a:active {
   background: white;
-  border-radius: 4px;
+  color: black;
+}
+
+.TabItem:first-child a:hover,
+.TabItem a:active {
+  background: white;
+  border-radius: 8px 0 0 8px;
+  color: black;
+}
+
+.TabItem:last-child a:hover,
+.TabItem a:active {
+  background: white;
+  border-radius: 0 8px 8px 0;
   color: black;
 }
 
@@ -40,6 +53,8 @@
 
 .TabItem a.active {
   background: rgb(44, 44, 44);
+  border-bottom: 1px solid white;
+  border-top: 1px solid white;
   color: white;
 }
 
@@ -47,7 +62,10 @@
   background: rgb(44, 44, 44);
   border-radius: 8px 0 0 8px;
   border: none;
+  border-bottom: 1px solid white;
+  border-left: 1px solid white;
   border-right: 2px solid white;
+  border-top: 1px solid white;
   color: white;
 }
 
@@ -55,6 +73,9 @@
   background: rgb(44, 44, 44);
   border-radius: 0 8px 8px 0;
   border: none;
+  border-bottom: 1px solid white;
   border-left: 2px solid white;
+  border-right: 1px solid white;
+  border-top: 1px solid white;
   color: white;
 }

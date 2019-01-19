@@ -12,12 +12,8 @@ const navBar = props => {
         </NavItem>
       </div>
       <nav>
-        <NavItem link="/hero-create" exact>
-          Create
-        </NavItem>
-        <NavItem link="/hero-detail" exact>
-          Track
-        </NavItem>
+        <NavItem link="/create">Create</NavItem>
+        <NavItem link="/character">Track</NavItem>
         <NavItem link="/logout" exact>
           LogOut
         </NavItem>
