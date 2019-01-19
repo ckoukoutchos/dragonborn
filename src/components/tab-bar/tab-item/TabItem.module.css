@@ -1,0 +1,21 @@
+.TabItem a {
+  color: white;
+  /* border: 2px solid white; */
+  padding: 10px 72px;
+  text-decoration: none;
+  width: 100%;
+}
+
+.TabItem a:hover,
+.TabItem a:active {
+  background: white;
+  border-radius: 4px;
+  color: black;
+}
+
+.TabItem a.active {
+  background: rgb(44, 44, 44);
+  border-radius: 8px 0 0 8px;
+  border-right: 2px solid white;
+  color: white;
+}

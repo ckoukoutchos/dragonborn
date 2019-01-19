@@ -12,9 +12,14 @@
   border-radius: 8px;
   box-shadow: 4px 4px 8px 4px rgba(0, 0, 0, 0.5);
   font-family: 'Rosario', sans-serif;
-  height: 100%;
   margin: 16px;
   width: 690px;
+}
+
+@media (max-width: 730px) {
+  .Card {
+    width: 330px;
+  }
 }
 
 .Header {

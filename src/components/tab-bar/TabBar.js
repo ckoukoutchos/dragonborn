@@ -1,0 +1,27 @@
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+
+import classes from './TabBar.module.css';
+const tabBar = props => {
+  return (
+    <div className={classes.TabBar}>
+      <div className={classes.TabItem}>
+        <NavLink to="/hero-detai" exact activeClassName={classes.active}>
+          Stats
+        </NavLink>
+      </div>
+      <div className={classes.TabItem}>
+        <NavLink to="/hero-detai" exact activeClassName={classes.active}>
+          Spells
+        </NavLink>
+      </div>
+      <div className={classes.TabItem}>
+        <NavLink to="/hero-detail" exact activeClassName={classes.active}>
+          Play
+        </NavLink>
+      </div>
+    </div>
+  );
+};
+
+export default tabBar;

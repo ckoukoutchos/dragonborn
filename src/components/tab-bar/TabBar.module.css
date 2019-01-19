@@ -1,0 +1,60 @@
+.TabBar {
+  align-items: center;
+  background: linear-gradient(rgba(211, 62, 62, 0.8), transparent)
+    rgb(135, 28, 28);
+  border-radius: 8px;
+  bottom: 36px;
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.5);
+  display: flex;
+  font-family: 'Metamorphous', cursive;
+  height: 40px;
+  justify-content: space-around;
+  position: fixed;
+  width: 600px;
+  z-index: 80;
+}
+
+.TabItem a {
+  color: white;
+  padding: 10px 78px;
+  text-decoration: none;
+  width: 100%;
+}
+
+.TabItem a:hover,
+.TabItem a:active {
+  background: white;
+  border-radius: 4px;
+  color: black;
+}
+
+.TabItem:first-child a {
+  border: none;
+  border-right: 2px solid white;
+}
+
+.TabItem:last-child a {
+  border: none;
+  border-left: 2px solid white;
+}
+
+.TabItem a.active {
+  background: rgb(44, 44, 44);
+  color: white;
+}
+
+.TabItem:first-child a.active {
+  background: rgb(44, 44, 44);
+  border-radius: 8px 0 0 8px;
+  border: none;
+  border-right: 2px solid white;
+  color: white;
+}
+
+.TabItem:last-child a.active {
+  background: rgb(44, 44, 44);
+  border-radius: 0 8px 8px 0;
+  border: none;
+  border-left: 2px solid white;
+  color: white;
+}

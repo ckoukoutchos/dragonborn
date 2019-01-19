@@ -1,0 +1,16 @@
+.Footer {
+  background: linear-gradient(rgba(102, 29, 29, 0.8), transparent)
+    rgb(56, 11, 11);
+  bottom: 0;
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.5);
+  color: white;
+  font-family: 'Metamorphous', cursive;
+  font-size: 12px;
+  height: 24px;
+  left: 0;
+  padding: 4px;
+  position: fixed;
+  text-align: center;
+  width: 100%;
+  z-index: 90;
+}

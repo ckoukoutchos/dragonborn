@@ -3,9 +3,8 @@ import React, { Component } from 'react';
 import BasicCard from '../../components/card/basic-card/BasicCard';
 import BlockInput from '../../components/input/block-input/BlockInput';
 import BlockInsetInput from '../../components/input/block-inset-input/BlockInsetInput';
-import Button from '../../components/button/Button';
 import Input from '../../components/input/Input';
-import TableBlockInput from '../../components/input/table-block-input/TableBlockInput';
+import TabBar from '../../components/tab-bar/TabBar';
 import TextAreaInput from '../../components/input/textarea-input/TextAreaInput';
 import TitleCard from '../../components/card/title-card/TitleCard';
 import ToggleList from '../../components/toggle-list/ToggleList';
@@ -88,30 +87,6 @@ class HeroDetail extends Component {
             <BlockInput label="Hit Dice" editing={this.state.editing} />
           </BasicCard>
           <BasicCard
-            title={'Attacks & Spellcasting'}
-            editing={this.state.editing}
-            onEdit={this.onEditToggleHandler}
-          >
-            <TextAreaInput editing={this.state.editing} />
-          </BasicCard>
-          <BasicCard
-            title={'Equipment'}
-            editing={this.state.editing}
-            onEdit={this.onEditToggleHandler}
-          >
-            <TextAreaInput editing={this.state.editing} />
-          </BasicCard>
-          <BasicCard
-            title={'Features & Traits'}
-            editing={this.state.editing}
-            onEdit={this.onEditToggleHandler}
-          >
-            <TextAreaInput editing={this.state.editing} />
-          </BasicCard>
-        </div>
-
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
-          <BasicCard
             title={'Abilities & Skills'}
             editing={this.state.editing}
             onEdit={this.onEditToggleHandler}
@@ -147,6 +122,31 @@ class HeroDetail extends Component {
             <TextAreaInput editing={this.state.editing} />
           </BasicCard>
         </div>
+
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
+          <BasicCard
+            title={'Attacks & Spellcasting'}
+            editing={this.state.editing}
+            onEdit={this.onEditToggleHandler}
+          >
+            <TextAreaInput editing={this.state.editing} />
+          </BasicCard>
+          <BasicCard
+            title={'Equipment'}
+            editing={this.state.editing}
+            onEdit={this.onEditToggleHandler}
+          >
+            <TextAreaInput editing={this.state.editing} />
+          </BasicCard>
+          <BasicCard
+            title={'Features & Traits'}
+            editing={this.state.editing}
+            onEdit={this.onEditToggleHandler}
+          >
+            <TextAreaInput editing={this.state.editing} />
+          </BasicCard>
+        </div>
+        <TabBar />
       </>
     );
   }
