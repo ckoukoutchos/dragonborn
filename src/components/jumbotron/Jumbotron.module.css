@@ -1,0 +1,19 @@
+.Jumbotron {
+  background: linear-gradient(rgba(54, 54, 54, 0.8), transparent)
+    rgb(44, 44, 44);
+  color: white;
+  font-family: 'Metamorphous', cursive;
+  height: 180px;
+  text-align: center;
+  width: 100%;
+}
+
+.Header {
+  font-size: 72px;
+  margin: 16px 0 8px 0;
+}
+
+.SubHeader {
+  font-size: 32px;
+  margin: 8px;
+}

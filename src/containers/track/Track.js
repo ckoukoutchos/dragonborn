@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 
+import Jumbotron from '../../components/jumbotron/Jumbotron';
+
 class Track extends Component {
   render() {
-    return <h1>hi</h1>;
+    return <Jumbotron header="Track" subHeader="Keep Tabs on your Heroes" />;
   }
 }
 
