@@ -8,12 +8,13 @@ const navBar = props => {
     <header className={classes.NavBar}>
       <div>
         <NavItem link="/" exact>
-          DragonBorn
+          Dragonborn
         </NavItem>
       </div>
       <nav>
         <NavItem link="/create">Create</NavItem>
-        <NavItem link="/character">Track</NavItem>
+        <NavItem link="/track">Track</NavItem>
+        <NavItem link="/guide">Guide</NavItem>
         <NavItem link="/logout" exact>
           LogOut
         </NavItem>

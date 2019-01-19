@@ -9,7 +9,7 @@ import TextAreaInput from '../../../components/input/textarea-input/TextAreaInpu
 import TitleCard from '../../../components/card/title-card/TitleCard';
 import ToggleList from '../../../components/toggle-list/ToggleList';
 
-class CharacterStats extends Component {
+class TrackStats extends Component {
   state = {
     editing: false,
     toggled: false
@@ -152,4 +152,4 @@ class CharacterStats extends Component {
   }
 }
 
-export default CharacterStats;
+export default TrackStats;

@@ -7,7 +7,7 @@ const tabBar = props => {
     <div className={classes.TabBar}>
       <div className={classes.TabItem}>
         <NavLink
-          to={`/character/${props.id}/stats`}
+          to={`/track/${props.id}/stats`}
           activeClassName={classes.active}
         >
           Stats
@@ -15,7 +15,7 @@ const tabBar = props => {
       </div>
       <div className={classes.TabItem}>
         <NavLink
-          to={`/character/${props.id}/spells`}
+          to={`/track/${props.id}/spells`}
           exact
           activeClassName={classes.active}
         >
@@ -24,7 +24,7 @@ const tabBar = props => {
       </div>
       <div className={classes.TabItem}>
         <NavLink
-          to={`/character/${props.id}/play`}
+          to={`/track/${props.id}/play`}
           exact
           activeClassName={classes.active}
         >

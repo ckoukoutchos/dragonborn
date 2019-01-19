@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-import CharacterStats from './containers/character/character-stats/CharacterStats';
+import Track from './containers/track/Track';
 import Layout from './hoc/layout/Layout';
 
 class App extends Component {
@@ -9,7 +9,10 @@ class App extends Component {
     return (
       <Layout>
         <Switch>
-          <Route path="/character/:id/stats" exact component={CharacterStats} />
+          {/* <Route path="/" exact component={Dragonborn} /> */}
+          {/* <Route path="/create" exact component={Create} /> */}
+          <Route path="/track" exact component={Track} />
+          {/* <Route path="/guide" exact component={Guide} /> */}
         </Switch>
       </Layout>
     );
