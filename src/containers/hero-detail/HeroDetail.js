@@ -92,33 +92,21 @@ class HeroDetail extends Component {
             editing={this.state.editing}
             onEdit={this.onEditToggleHandler}
           >
-            <TableBlockInput label="Armor Class" editing={this.state.editing} />
-            {this.state.editing ? (
-              <>
-                <Button color="Primary" btnType="Raised">
-                  Add
-                </Button>
-                <Button color="Secondary" btnType="Raised">
-                  Remove
-                </Button>
-              </>
-            ) : null}
+            <TextAreaInput editing={this.state.editing} />
           </BasicCard>
           <BasicCard
             title={'Equipment'}
             editing={this.state.editing}
             onEdit={this.onEditToggleHandler}
           >
-            <BlockInput label="Armor Class" editing={this.state.editing} />
-            <BlockInput label="Initiative" editing={this.state.editing} />
-            <BlockInput label="Experience" editing={this.state.editing} />
+            <TextAreaInput editing={this.state.editing} />
           </BasicCard>
           <BasicCard
             title={'Features & Traits'}
             editing={this.state.editing}
             onEdit={this.onEditToggleHandler}
           >
-            <TextAreaInput label="Experience" editing={this.state.editing} />
+            <TextAreaInput editing={this.state.editing} />
           </BasicCard>
         </div>
 
@@ -150,6 +138,13 @@ class HeroDetail extends Component {
                 toggled={this.state.toggled}
               />
             </div>
+          </BasicCard>
+          <BasicCard
+            title={'Proficiencies & Languages'}
+            editing={this.state.editing}
+            onEdit={this.onEditToggleHandler}
+          >
+            <TextAreaInput editing={this.state.editing} />
           </BasicCard>
         </div>
       </>

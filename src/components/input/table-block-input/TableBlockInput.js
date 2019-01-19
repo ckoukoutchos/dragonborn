@@ -3,7 +3,7 @@ import React from 'react';
 import classes from './TableBlockInput.module.css';
 
 const tableBlockInput = props => {
-  const { editing, label, value } = props;
+  const { editing, value } = props;
   return (
     <div
       className={[
