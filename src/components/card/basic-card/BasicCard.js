@@ -9,7 +9,11 @@ const basicCard = props => {
     <div className={classes.Card}>
       <div className={classes.Header}>
         <h3 className={classes.Title}>{title}</h3>
-        <Button color="Primary" btnType="Fab" clicked={onEdit}>
+        <Button
+          color={editing ? 'Secondary' : 'Primary'}
+          btnType="Corner"
+          clicked={onEdit}
+        >
           {editing ? 'x' : '+'}
         </Button>
       </div>

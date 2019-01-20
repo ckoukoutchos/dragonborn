@@ -115,7 +115,7 @@ class TrackStats extends Component {
             </div>
           </BasicCard>
           <BasicCard
-            title={'Proficiencies & Languages'}
+            title={'Proficiency & Language'}
             editing={this.state.editing}
             onEdit={this.onEditToggleHandler}
           >

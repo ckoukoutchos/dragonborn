@@ -3,13 +3,20 @@
   color: white;
   cursor: pointer;
   font-family: 'Rosario', sans-serif;
-  margin: 0 4px;
+  margin: 0;
   outline: none;
 }
 
 .Button:disabled {
   color: #ccc;
   cursor: not-allowed;
+}
+
+.Corner {
+  border-radius: 0 8px 0 0;
+  padding: 10px 10px;
+  font-size: 16px;
+  width: 30px;
 }
 
 .Fab {
