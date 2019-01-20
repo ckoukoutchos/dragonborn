@@ -1,7 +1,7 @@
 .Body {
   background-color: rgb(233, 233, 233);
   border-radius: 0 0 8px 8px;
-  color: white;
+  color: black;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;

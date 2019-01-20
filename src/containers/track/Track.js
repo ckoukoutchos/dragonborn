@@ -7,45 +7,74 @@ import TitleCard from '../../components/card/title-card/TitleCard';
 
 class Track extends Component {
   state = {
-    class: 'Barbarian',
-    level: 3,
-    race: 'Half-orc',
-    alignment: 'Chaotic Neutral'
+    heroList: [
+      {
+        id: 1,
+        class: 'Barbarian',
+        level: 3,
+        race: 'Half-orc',
+        alignment: 'Chaotic Neutral',
+        name: 'Thronk, Destroyer of Worlds',
+        active: true
+      },
+      {
+        id: 5,
+        class: 'Rogue',
+        level: 7,
+        race: 'Elf',
+        alignment: 'Chaotic Good',
+        name: 'Valarian',
+        active: false
+      }
+    ]
   };
 
-  onHeroSelection = () => {
-    this.props.history.push('/track/1/stats');
+  onHeroDeletion = index => {
+    this.setState(prevState => {
+      const newList = [...prevState.heroList];
+      newList.splice(index, 1);
+      return { heroList: newList };
+    });
   };
+
+  onHeroSelection = id => {
+    this.props.history.push(`/track/${id}/stats`);
+  };
+
+  createHeroList(heroes) {
+    return heroes.map((hero, key) => (
+      <TitleCard key={key} title={hero.name} readOnly>
+        <Input label={'Class & Level'} value={hero.class + ' ' + hero.level} />
+        <Input label="Race" value={hero.race} />
+        <Input label="Alignment" value={hero.alignment} />
+        <Button
+          color="Primary"
+          btnType="Flat"
+          clicked={() => this.onHeroSelection(hero.id)}
+        >
+          View
+        </Button>
+        <div style={{ paddingTop: '10px' }}>
+          <strong>
+            {hero.active ? 'Active Campaign' : 'In Need of Quests'}
+          </strong>
+        </div>
+        <Button
+          color="Secondary"
+          btnType="Flat"
+          clicked={() => this.onHeroDeletion(key)}
+        >
+          Delete
+        </Button>
+      </TitleCard>
+    ));
+  }
 
   render() {
     return (
       <>
         <Jumbotron header="Track" subHeader="Keep Tabs on your Heroes" />
-        <TitleCard title="Thronk, Destroyer of Worlds" readOnly>
-          <Input
-            label={'Class & Level'}
-            value={this.state.class + ' ' + this.state.level}
-          />
-          <Input label="Race" value={this.state.race} />
-          <Input label="Alignment" value={this.state.alignment} />
-          <Button color="Primary" btnType="Flat" clicked={this.onHeroSelection}>
-            View
-          </Button>
-          <Button color="Secondary" btnType="Flat">
-            Delete
-          </Button>
-        </TitleCard>
-        <TitleCard title="Valarian" readOnly>
-          <Input label={'Class & Level'} value="Ranger 1" />
-          <Input label="Race" value="Elf" />
-          <Input label="Alignment" value="Chaotic Good" />
-          <Button color="Primary" btnType="Flat">
-            View
-          </Button>
-          <Button color="Secondary" btnType="Flat">
-            Delete
-          </Button>
-        </TitleCard>
+        {this.createHeroList(this.state.heroList)}
       </>
     );
   }
