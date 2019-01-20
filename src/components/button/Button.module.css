@@ -28,12 +28,38 @@
   width: 20px;
 }
 
+.Flat {
+  border-radius: 4px;
+  font-size: 16px;
+  height: 40px;
+  padding: 0 5px 3px 5px;
+  width: 100px;
+}
+
 .Primary {
   background: rgb(184, 31, 31);
 }
 
+.Primary.Flat {
+  background: transparent;
+  color: rgb(184, 31, 31);
+}
+
+.Primary.Flat:hover {
+  background: rgba(184, 31, 31, 0.1);
+}
+
 .Secondary {
   background: rgb(66, 66, 211);
+}
+
+.Secondary.Flat {
+  background: transparent;
+  color: rgb(66, 66, 211);
+}
+
+.Secondary.Flat:hover {
+  background: rgba(66, 66, 211, 0.1);
 }
 
 .Raised {
