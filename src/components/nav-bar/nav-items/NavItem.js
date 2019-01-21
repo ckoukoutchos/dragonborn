@@ -4,8 +4,12 @@ import { NavLink } from 'react-router-dom';
 import classes from './NavItem.module.css';
 
 const navItem = props => {
+  const attatchMenu = props.menu
+    ? [classes.NavItem, classes.Menu].join(' ')
+    : classes.NavItem;
+
   return (
-    <div className={classes.NavItem}>
+    <div className={attatchMenu}>
       <NavLink
         to={props.link}
         exact={props.exact}
