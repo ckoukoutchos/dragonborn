@@ -15,12 +15,6 @@
   width: 690px;
 }
 
-@media (max-width: 730px) {
-  .Card {
-    width: 330px;
-  }
-}
-
 .HeaderEdit {
   background-color: rgb(44, 44, 44);
   border-radius: 8px 8px 0 0;
@@ -45,4 +39,16 @@
 .Title {
   font-family: 'Metamorphous', cursive;
   text-align: center;
+}
+
+@media (max-width: 730px) {
+  .Card {
+    width: 330px;
+  }
+
+  .Body {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+  }
 }

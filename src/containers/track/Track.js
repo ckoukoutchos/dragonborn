@@ -54,7 +54,7 @@ class Track extends Component {
         >
           View
         </Button>
-        <div style={{ paddingTop: '10px' }}>
+        <div>
           <strong>
             {hero.active ? 'Active Campaign' : 'In Need of Quests'}
           </strong>

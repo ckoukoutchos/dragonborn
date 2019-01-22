@@ -31,7 +31,7 @@ class NavBar extends Component {
           </NavItem>
         </nav>
         <div className={classes.Menu} onClick={this.onMenuToggle}>
-          Menu
+          {this.state.menuToggle ? 'Close' : 'Menu'}
         </div>
         {this.state.menuToggle ? (
           <div className={classes.MenuContainer} onClick={this.onMenuToggle}>

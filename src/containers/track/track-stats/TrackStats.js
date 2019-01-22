@@ -8,41 +8,31 @@ import TabBar from '../../../components/tab-bar/TabBar';
 import TextAreaInput from '../../../components/input/textarea-input/TextAreaInput';
 import TitleCard from '../../../components/card/title-card/TitleCard';
 import ToggleList from '../../../components/toggle-list/ToggleList';
+import Hero from '../../../shared/Hero';
 
 class TrackStats extends Component {
   state = {
     editing: false,
+    hero: new Hero(),
     toggled: false
   };
 
-  ablities = [
-    { name: 'Strength' },
-    { name: 'Dexterity' },
-    { name: 'Constitution' },
-    { name: 'Intelligence' },
-    { name: 'Wisdom' },
-    { name: 'Charisma' }
-  ];
+  createAbilitiesArray() {
+    const { abilityScores } = this.state.hero;
+    const abilitiesArray = [];
 
-  skills = [
-    { name: 'Acrobatics' },
-    { name: 'Animal Herding' },
-    { name: 'Arcana' },
-    { name: 'Athletics' },
-    { name: 'Deception' },
-    { name: 'Histroy' },
-    { name: 'Insight' },
-    { name: 'Intimidation' },
-    { name: '1' },
-    { name: '2' },
-    { name: '3' },
-    { name: '4' },
-    { name: '5' },
-    { name: '6' },
-    { name: '7' },
-    { name: '8' },
-    { name: '9' }
-  ];
+    for (const ability in abilityScores) {
+      abilitiesArray.push(
+        <BlockInsetInput
+          key={ability}
+          label={ability}
+          editing={this.state.editing}
+          value={abilityScores[ability]}
+        />
+      );
+    }
+    return abilitiesArray;
+  }
 
   onEditToggleHandler = () => {
     this.setState(prevState => (prevState.editing = !prevState.editing));
@@ -53,14 +43,8 @@ class TrackStats extends Component {
   };
 
   render() {
-    const abilities = this.ablities.map(ability => (
-      <BlockInsetInput
-        key={ability.name}
-        label={ability.name}
-        editing={this.state.editing}
-        value={17}
-      />
-    ));
+    const { editing, hero } = this.state;
+    const abilitiesArray = this.createAbilitiesArray();
 
     return (
       <>
@@ -69,9 +53,9 @@ class TrackStats extends Component {
           editing={this.state.editing}
           onEdit={this.onEditToggleHandler}
         >
-          <Input label={'Class & Level'} editing={this.state.editing} />
-          <Input label="Race" editing={this.state.editing} />
-          <Input label="Alignment" editing={this.state.editing} />
+          <Input label={'Class & Level'} editing={editing} />
+          <Input label="Race" editing={editing} />
+          <Input label="Alignment" editing={editing} />
         </TitleCard>
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           <BasicCard
@@ -82,7 +66,11 @@ class TrackStats extends Component {
             <BlockInput label="Armor Class" editing={this.state.editing} />
             <BlockInput label="Initiative" editing={this.state.editing} />
             <BlockInput label="Experience" editing={this.state.editing} />
-            <BlockInput label="Speed" editing={this.state.editing} />
+            <BlockInput
+              label="Speed"
+              editing={this.state.editing}
+              value={this.state.hero.speed}
+            />
             <BlockInput label="Hit Points" editing={this.state.editing} />
             <BlockInput label="Hit Dice" editing={this.state.editing} />
           </BasicCard>
@@ -92,7 +80,7 @@ class TrackStats extends Component {
             onEdit={this.onEditToggleHandler}
           >
             <div style={{ display: 'flex', flexDirection: 'column' }}>
-              {abilities}
+              {abilitiesArray}
               <div style={{ height: '24px' }} />
               <BlockInput label="Proficiency" editing={this.state.editing} />
               <BlockInput label="Inspiration" editing={this.state.editing} />
@@ -100,14 +88,14 @@ class TrackStats extends Component {
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               <ToggleList
                 editing={this.state.editing}
-                items={this.ablities}
+                items={hero.abilityScores}
                 label="Saving Throws"
                 onToggle={this.onToggleHandler}
                 toggled={this.state.toggled}
               />
               <ToggleList
                 editing={this.state.editing}
-                items={this.skills}
+                items={hero.skills}
                 label="Skills"
                 onToggle={this.onToggleHandler}
                 toggled={this.state.toggled}

@@ -13,6 +13,7 @@
 .Input {
   border: none;
   border-radius: 8px;
+  color: black;
   font-family: 'Rosario', sans-serif;
   font-size: 24px;
   outline: none;

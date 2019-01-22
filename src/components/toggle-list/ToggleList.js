@@ -6,15 +6,18 @@ import ToggleLineInput from '../input/toggle-line-input/ToggleLineInput';
 const toggleList = props => {
   const { editing, items, label, onToggle, toggled } = props;
 
-  const toggleItems = items.map(item => (
-    <ToggleLineInput
-      key={item.name}
-      label={item.name}
-      editing={editing}
-      onToggle={onToggle}
-      toggled={toggled}
-    />
-  ));
+  const toggleItems = [];
+  for (const item in items) {
+    toggleItems.push(
+      <ToggleLineInput
+        key={item}
+        label={item}
+        editing={editing}
+        onToggle={onToggle}
+        toggled={toggled}
+      />
+    );
+  }
 
   return (
     <div className={classes.Container}>
