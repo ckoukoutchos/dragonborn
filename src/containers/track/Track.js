@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+import * as actions from '../../store/actions/index';
 
 import Button from '../../components/button/Button';
 import Input from '../../components/input/Input';
@@ -6,34 +9,15 @@ import Jumbotron from '../../components/jumbotron/Jumbotron';
 import TitleCard from '../../components/card/title-card/TitleCard';
 
 class Track extends Component {
-  state = {
-    heroList: [
-      {
-        id: 1,
-        class: 'Barbarian',
-        level: 3,
-        race: 'Half-orc',
-        alignment: 'Chaotic Neutral',
-        name: 'Thronk, Destroyer of Worlds',
-        active: true
-      },
-      {
-        id: 5,
-        class: 'Rogue',
-        level: 7,
-        race: 'Elf',
-        alignment: 'Chaotic Good',
-        name: 'Valarian',
-        active: false
-      }
-    ]
-  };
+  componentDidMount() {
+    this.props.onFetchHeroes(this.props.userId);
+  }
 
   onHeroDeletion = index => {
     this.setState(prevState => {
-      const newList = [...prevState.heroList];
+      const newList = [...prevState.heroes];
       newList.splice(index, 1);
-      return { heroList: newList };
+      return { heroes: newList };
     });
   };
 
@@ -74,10 +58,22 @@ class Track extends Component {
     return (
       <>
         <Jumbotron header="Track" subHeader="Keep Tabs on your Heroes" />
-        {this.createHeroList(this.state.heroList)}
+        {this.createHeroList(this.props.heroes)}
       </>
     );
   }
 }
 
-export default Track;
+const mapStateToProps = state => ({
+  heroes: state.hero.heroes,
+  userId: state.hero.userId
+});
+
+const mapDispatchToProps = dispatch => ({
+  onFetchHeroes: userId => dispatch(actions.fetchHeroes(userId))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Track);
