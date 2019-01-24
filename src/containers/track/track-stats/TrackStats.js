@@ -63,16 +63,38 @@ class TrackStats extends Component {
             editing={this.state.editing}
             onEdit={this.onEditToggleHandler}
           >
-            <BlockInput label="Armor Class" editing={this.state.editing} />
-            <BlockInput label="Initiative" editing={this.state.editing} />
-            <BlockInput label="Experience" editing={this.state.editing} />
+            <BlockInput
+              label="Armor Class"
+              editing={this.state.editing}
+              value={hero.armorClass}
+            />
+            <BlockInput
+              label="Initiative"
+              editing={this.state.editing}
+              value={hero.initative}
+            />
+            <BlockInput
+              label="Experience"
+              editing={this.state.editing}
+              value={hero.xp}
+            />
             <BlockInput
               label="Speed"
               editing={this.state.editing}
-              value={this.state.hero.speed}
+              value={hero.speed}
             />
-            <BlockInput label="Hit Points" editing={this.state.editing} />
-            <BlockInput label="Hit Dice" editing={this.state.editing} />
+            <BlockInput
+              label="Hit Points"
+              editing={this.state.editing}
+              value={hero.currentHP}
+            />
+            <BlockInput
+              label="Hit Dice"
+              editing={this.state.editing}
+              value={
+                hero.hitDice.numberOfDice + 'd' + hero.hitDice.numberOfSides
+              }
+            />
           </BasicCard>
           <BasicCard
             title={'Abilities & Skills'}
@@ -86,19 +108,18 @@ class TrackStats extends Component {
               <BlockInput label="Inspiration" editing={this.state.editing} />
             </div>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <ToggleList
+              {/* <ToggleList
                 editing={this.state.editing}
                 items={hero.abilityScores}
                 label="Saving Throws"
                 onToggle={this.onToggleHandler}
                 toggled={this.state.toggled}
-              />
+              /> */}
               <ToggleList
                 editing={this.state.editing}
                 items={hero.skills}
                 label="Skills"
                 onToggle={this.onToggleHandler}
-                toggled={this.state.toggled}
               />
             </div>
           </BasicCard>

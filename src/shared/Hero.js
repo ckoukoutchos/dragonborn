@@ -8,120 +8,72 @@ export default class Hero {
     wisdom: 0
   };
   alignment = ['', ''];
-  armor = null;
+  armor = [];
+  armorClass = 0;
   attacks = [];
   background = '';
-  heorClass = '';
-  level = 0;
-  name = '';
-  playerName = '';
-  race = '';
-  subrace = null;
-  skills = [];
-  armorClass = 0;
   currentHP = 0;
   deathSaves = {
     failures: 0,
     successes: 0
   };
+  heroClass = '';
   hitDice = {
     numberOfDice: 1,
     numberOfSides: 4
   };
   initative = 0;
+  level = 0;
+  name = '';
+  playerName = '';
+  race = '';
   speed = 0;
+  skills = [
+    { name: 'Acrobatics', isProficient: false, ability: 'Dexterity', value: 0 },
+    {
+      name: 'Animal Handling',
+      isProficient: true,
+      ability: 'Wisdom',
+      value: 0
+    },
+    { name: 'Arcana', isProficient: false, ability: 'Intelligence', value: 0 },
+    { name: 'Athletics', isProficient: false, ability: 'Strength', value: 0 },
+    { name: 'Deception', isProficient: false, ability: 'Charisma', value: 0 },
+    { name: 'History', isProficient: false, ability: 'Intelligence', value: 0 },
+    { name: 'Insight', isProficient: false, ability: 'wisdom', value: 0 },
+    {
+      name: 'Intimidation',
+      isProficient: false,
+      ability: 'Charisma',
+      value: 0
+    },
+    {
+      name: 'Investigation',
+      isProficient: false,
+      ability: 'Intelligence',
+      value: 0
+    },
+    { name: 'Medicine', isProficient: false, ability: 'Wisdom', value: 0 },
+    { name: 'Nature', isProficient: false, ability: 'Intelligence', value: 0 },
+    { name: 'Perception', isProficient: false, ability: 'Wisdom', value: 0 },
+    { name: 'Performance', isProficient: false, ability: 'Charisma', value: 0 },
+    { name: 'Persuasion', isProficient: false, ability: 'Charisma', value: 0 },
+    {
+      name: 'Religion',
+      isProficient: false,
+      ability: 'Intelligence',
+      value: 0
+    },
+    {
+      name: 'Sleight Of Hand',
+      isProficient: false,
+      ability: 'Dexterity',
+      value: 0
+    },
+    { name: 'Stealth', isProficient: false, ability: 'Dexterity', value: 0 },
+    { name: 'Survival', isProficient: false, ability: 'Wisdom', value: 0 }
+  ];
+  subrace = null;
   temporaryHP = 0;
   xp = 0;
-  skills = {
-    acrobatics: {
-      isProficient: false,
-      ability: 'dexterity',
-      value: 0
-    },
-    animalHandling: {
-      isProficient: false,
-      ability: 'wisdom',
-      value: 0
-    },
-    arcana: {
-      isProficient: false,
-      ability: 'intelligence',
-      value: 0
-    },
-    athletics: {
-      isProficient: false,
-      ability: 'strength',
-      value: 0
-    },
-    deception: {
-      isProficient: false,
-      ability: 'charisma',
-      value: 0
-    },
-    history: {
-      isProficient: false,
-      ability: 'intelligence',
-      value: 0
-    },
-    insight: {
-      isProficient: false,
-      ability: 'wisdom',
-      value: 0
-    },
-    intimidation: {
-      isProficient: false,
-      ability: 'charisma',
-      value: 0
-    },
-    investigation: {
-      isProficient: false,
-      ability: 'intelligence',
-      value: 0
-    },
-    medicine: {
-      isProficient: false,
-      ability: 'wisdom',
-      value: 0
-    },
-    nature: {
-      isProficient: false,
-      ability: 'intelligence',
-      value: 0
-    },
-    perception: {
-      isProficient: false,
-      ability: 'wisdom',
-      value: 0
-    },
-    performance: {
-      isProficient: false,
-      ability: 'charisma',
-      value: 0
-    },
-    persuasion: {
-      isProficient: false,
-      ability: 'charisma',
-      value: 0
-    },
-    religion: {
-      isProficient: false,
-      ability: 'intelligence',
-      value: 0
-    },
-    sleightOfHand: {
-      isProficient: false,
-      ability: 'dexterity',
-      value: 0
-    },
-    stealth: {
-      isProficient: false,
-      ability: 'dexterity',
-      value: 0
-    },
-    survival: {
-      isProficient: false,
-      ability: 'wisdom',
-      value: 0
-    }
-  };
 }
