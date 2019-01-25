@@ -9,17 +9,15 @@ import TabBar from '../../../components/tab-bar/TabBar';
 import TextAreaInput from '../../../components/input/textarea-input/TextAreaInput';
 import TitleCard from '../../../components/card/title-card/TitleCard';
 import ToggleList from '../../../components/toggle-list/ToggleList';
-import Hero from '../../../shared/Hero';
 
 class TrackStats extends Component {
   state = {
     editing: false,
-    hero: this.getSelectedHero(this.props.match.params.id),
     toggled: false
   };
 
   createAbilitiesArray() {
-    const { abilityScores } = this.state.hero;
+    const { abilityScores } = this.props.hero;
     const abilitiesArray = [];
 
     for (const ability in abilityScores) {
@@ -35,13 +33,6 @@ class TrackStats extends Component {
     return abilitiesArray;
   }
 
-  getSelectedHero(heroId) {
-    console.log(this.props.heroes);
-    return this.props.heroes.find(hero => {
-      return hero.id === +heroId;
-    });
-  }
-
   onEditToggleHandler = () => {
     this.setState(prevState => (prevState.editing = !prevState.editing));
   };
@@ -51,7 +42,9 @@ class TrackStats extends Component {
   };
 
   render() {
-    const { editing, hero } = this.state;
+    const { editing } = this.state;
+    const { hero } = this.props;
+
     const abilitiesArray = this.createAbilitiesArray();
 
     return (
@@ -163,14 +156,14 @@ class TrackStats extends Component {
             <TextAreaInput editing={this.state.editing} />
           </BasicCard>
         </div>
-        <TabBar id={1} />
+        <TabBar id={this.props.match.params.id} />
       </>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  heroes: state.hero.heroes
+  hero: state.hero.hero
 });
 
 export default connect(mapStateToProps)(TrackStats);

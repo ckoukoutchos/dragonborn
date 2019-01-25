@@ -2,6 +2,7 @@ import * as actionTypes from '../actions/actionTypes';
 import Hero from '../../shared/Hero';
 
 const initialState = {
+  hero: new Hero(),
   heroes: [
     new Hero()
     // {
@@ -32,6 +33,8 @@ const reducer = (state = initialState, action) => {
       return state;
     case actionTypes.FETCH_HEROES_SUCCESS:
       return { heroes: action.heros };
+    case actionTypes.GET_HERO:
+      return state.heroes.find(hero => hero.id === action.heroId);
     default:
       return state;
   }

@@ -9,3 +9,8 @@ export const fetchHeroesSuccess = heroes => ({
   type: actionTypes.FETCH_HEROES_SUCCESS,
   heroes
 });
+
+export const getHero = heroId => ({
+  type: actionTypes.GET_HERO,
+  heroId
+});

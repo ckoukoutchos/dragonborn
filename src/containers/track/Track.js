@@ -22,6 +22,7 @@ class Track extends Component {
   };
 
   onHeroSelection = id => {
+    this.props.onGetHero(id);
     this.props.history.push(`/track/${id}/stats`);
   };
 
@@ -73,7 +74,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onFetchHeroes: userId => dispatch(actions.fetchHeroes(userId))
+  onFetchHeroes: userId => dispatch(actions.fetchHeroes(userId)),
+  onGetHero: heroId => dispatch(actions.getHero(heroId))
 });
 
 export default connect(
