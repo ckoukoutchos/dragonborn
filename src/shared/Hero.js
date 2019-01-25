@@ -22,6 +22,7 @@ export default class Hero {
     numberOfDice: 1,
     numberOfSides: 4
   };
+  id = 1;
   initative = 0;
   level = 0;
   name = '';

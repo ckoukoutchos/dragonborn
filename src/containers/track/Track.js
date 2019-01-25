@@ -28,7 +28,10 @@ class Track extends Component {
   createHeroList(heroes) {
     return heroes.map((hero, key) => (
       <TitleCard key={key} title={hero.name} readOnly>
-        <Input label={'Class & Level'} value={hero.class + ' ' + hero.level} />
+        <Input
+          label={'Class & Level'}
+          value={hero.heroClass + ' ' + hero.level}
+        />
         <Input label="Race" value={hero.race} />
         <Input label="Alignment" value={hero.alignment} />
         <Button

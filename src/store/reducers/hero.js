@@ -1,25 +1,27 @@
 import * as actionTypes from '../actions/actionTypes';
+import Hero from '../../shared/Hero';
 
 const initialState = {
   heroes: [
-    {
-      id: 1,
-      class: 'Barbarian',
-      level: 3,
-      race: 'Half-orc',
-      alignment: 'Chaotic Neutral',
-      name: 'Thronk, Destroyer of Worlds',
-      active: true
-    },
-    {
-      id: 5,
-      class: 'Rogue',
-      level: 7,
-      race: 'Elf',
-      alignment: 'Chaotic Good',
-      name: 'Valarian',
-      active: false
-    }
+    new Hero()
+    // {
+    //   id: 1,
+    //   class: 'Barbarian',
+    //   level: 3,
+    //   race: 'Half-orc',
+    //   alignment: 'Chaotic Neutral',
+    //   name: 'Thronk, Destroyer of Worlds',
+    //   active: true
+    // },
+    // {
+    //   id: 5,
+    //   class: 'Rogue',
+    //   level: 7,
+    //   race: 'Elf',
+    //   alignment: 'Chaotic Good',
+    //   name: 'Valarian',
+    //   active: false
+    // }
   ],
   userId: 1
 };

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import BasicCard from '../../../components/card/basic-card/BasicCard';
 import BlockInput from '../../../components/input/block-input/BlockInput';
@@ -13,7 +14,7 @@ import Hero from '../../../shared/Hero';
 class TrackStats extends Component {
   state = {
     editing: false,
-    hero: new Hero(),
+    hero: this.getSelectedHero(this.props.match.params.id),
     toggled: false
   };
 
@@ -34,6 +35,13 @@ class TrackStats extends Component {
     return abilitiesArray;
   }
 
+  getSelectedHero(heroId) {
+    console.log(this.props.heroes);
+    return this.props.heroes.find(hero => {
+      return hero.id === +heroId;
+    });
+  }
+
   onEditToggleHandler = () => {
     this.setState(prevState => (prevState.editing = !prevState.editing));
   };
@@ -49,7 +57,7 @@ class TrackStats extends Component {
     return (
       <>
         <TitleCard
-          title="Thronk, Destroyer of Worlds"
+          title={hero.name}
           editing={this.state.editing}
           onEdit={this.onEditToggleHandler}
         >
@@ -161,4 +169,8 @@ class TrackStats extends Component {
   }
 }
 
-export default TrackStats;
+const mapStateToProps = state => ({
+  heroes: state.hero.heroes
+});
+
+export default connect(mapStateToProps)(TrackStats);
