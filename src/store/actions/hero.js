@@ -10,6 +10,11 @@ export const fetchHeroesSuccess = heroes => ({
   heroes
 });
 
+export const deleteHero = heroId => ({
+  type: actionTypes.DELETE_HERO,
+  heroId
+});
+
 export const getHero = heroId => ({
   type: actionTypes.GET_HERO,
   heroId

@@ -1,1 +1,1 @@
-export { fetchHeroes, fetchHeroesSuccess, getHero } from './hero';
+export { deleteHero, fetchHeroes, fetchHeroesSuccess, getHero } from './hero';

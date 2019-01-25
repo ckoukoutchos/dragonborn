@@ -13,12 +13,8 @@ class Track extends Component {
     this.props.onFetchHeroes(this.props.userId);
   }
 
-  onHeroDeletion = index => {
-    this.setState(prevState => {
-      const newList = [...prevState.heroes];
-      newList.splice(index, 1);
-      return { heroes: newList };
-    });
+  onHeroDeletion = heroId => {
+    this.props.onDeleteHero(heroId);
   };
 
   onHeroSelection = id => {
@@ -50,7 +46,7 @@ class Track extends Component {
         <Button
           color="Secondary"
           btnType="Flat"
-          clicked={() => this.onHeroDeletion(key)}
+          clicked={() => this.onHeroDeletion(hero.id)}
         >
           Delete
         </Button>
@@ -74,6 +70,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+  onDeleteHero: heroId => dispatch(actions.deleteHero(heroId)),
   onFetchHeroes: userId => dispatch(actions.fetchHeroes(userId)),
   onGetHero: heroId => dispatch(actions.getHero(heroId))
 });

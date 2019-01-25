@@ -29,12 +29,20 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case actionTypes.DELETE_HERO:
+      return {
+        ...state,
+        heroes: state.heroes.filter(hero => hero.id !== action.heroId)
+      };
     case actionTypes.FETCH_HEROES:
       return state;
     case actionTypes.FETCH_HEROES_SUCCESS:
       return { heroes: action.heros };
     case actionTypes.GET_HERO:
-      return state.heroes.find(hero => hero.id === action.heroId);
+      return {
+        ...state,
+        hero: { ...state.heroes.find(hero => hero.id === action.heroId) }
+      };
     default:
       return state;
   }

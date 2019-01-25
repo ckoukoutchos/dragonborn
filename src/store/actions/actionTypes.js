@@ -1,4 +1,4 @@
+export const DELETE_HERO = 'DELETE_HERO';
 export const FETCH_HEROES = 'FETCH_HEROES';
 export const FETCH_HEROES_SUCCESS = 'FETCH_HEROES_SUCCESS';
-
 export const GET_HERO = 'GET_HERO';
