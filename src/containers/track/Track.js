@@ -23,8 +23,8 @@ class Track extends Component {
   };
 
   createHeroList(heroes) {
-    return heroes.map((hero, key) => (
-      <TitleCard key={key} title={hero.name} readOnly>
+    return heroes.map((hero, index) => (
+      <TitleCard key={index} title={hero.name} readOnly>
         <Input
           label={'Class & Level'}
           value={hero.heroClass + ' ' + hero.level}
