@@ -3,17 +3,19 @@ import React from 'react';
 import classes from './Input.module.css';
 
 const input = props => {
+  const { editing, label, onChange, value } = props;
   return (
     <div className={classes.Container}>
       <input
         className={[
           classes.Input,
-          props.editing ? classes.Edit : classes.Disabled
+          editing ? classes.Edit : classes.Disabled
         ].join(' ')}
-        disabled={!props.editing}
-        value={props.value}
+        disabled={!editing}
+        onChange={onChange}
+        value={value}
       />
-      <label className={classes.Label}>{props.label}</label>
+      <label className={classes.Label}>{label}</label>
     </div>
   );
 };

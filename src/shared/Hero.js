@@ -26,7 +26,7 @@ export default class Hero {
   initative = 0;
   inspiration = 0;
   level = 0;
-  name = '';
+  name = 'Thronk';
   playerName = '';
   proficiency = 0;
   race = '';

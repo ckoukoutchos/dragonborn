@@ -10,6 +10,7 @@
 .Input {
   border: none;
   border-bottom: 1px solid rgb(149, 149, 149);
+  color: black;
   display: inline-block;
   font-family: 'Rosario', sans-serif;
   font-size: 20px;

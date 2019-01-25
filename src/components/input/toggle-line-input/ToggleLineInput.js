@@ -3,7 +3,7 @@ import React from 'react';
 import classes from './ToggleLineInput.module.css';
 
 const toggleLineInput = props => {
-  const { editing, label, onToggle, toggled, value } = props;
+  const { editing, label, onChange, onToggle, toggled, value } = props;
   return (
     <div className={classes.Container}>
       <div
@@ -19,6 +19,7 @@ const toggleLineInput = props => {
           editing ? classes.Edit : classes.Disabled
         ].join(' ')}
         disabled={!editing}
+        onChange={onChange}
         value={value}
       />
       <label className={classes.Label}>{label}</label>
