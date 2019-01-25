@@ -10,16 +10,16 @@ import TitleCard from '../../components/card/title-card/TitleCard';
 
 class Track extends Component {
   componentDidMount() {
-    this.props.onFetchHeroes(this.props.userId);
+    this.props.fetchHeroes(this.props.userId);
   }
 
   onHeroDeletion = heroId => {
-    this.props.onDeleteHero(heroId);
+    this.props.deleteHero(heroId);
   };
 
-  onHeroSelection = id => {
-    this.props.onGetHero(id);
-    this.props.history.push(`/track/${id}/stats`);
+  onHeroSelection = heroId => {
+    this.props.getHero(heroId);
+    this.props.history.push(`/track/${heroId}/stats`);
   };
 
   createHeroList(heroes) {
@@ -70,9 +70,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onDeleteHero: heroId => dispatch(actions.deleteHero(heroId)),
-  onFetchHeroes: userId => dispatch(actions.fetchHeroes(userId)),
-  onGetHero: heroId => dispatch(actions.getHero(heroId))
+  deleteHero: heroId => dispatch(actions.deleteHero(heroId)),
+  fetchHeroes: userId => dispatch(actions.fetchHeroes(userId)),
+  getHero: heroId => dispatch(actions.getHero(heroId))
 });
 
 export default connect(

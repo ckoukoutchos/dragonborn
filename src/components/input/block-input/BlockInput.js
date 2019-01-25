@@ -3,7 +3,7 @@ import React from 'react';
 import classes from './BlockInput.module.css';
 
 const blockInput = props => {
-  const { editing, label, value } = props;
+  const { editing, label, onChange, value } = props;
   return (
     <div
       className={[
@@ -17,6 +17,7 @@ const blockInput = props => {
           editing ? classes.Edit : classes.Disabled
         ].join(' ')}
         disabled={!editing}
+        onChange={onChange}
         value={value}
       />
       <label

@@ -13,11 +13,12 @@ import ToggleList from '../../../components/toggle-list/ToggleList';
 class TrackStats extends Component {
   state = {
     editing: false,
+    hero: this.props.hero,
     toggled: false
   };
 
   createAbilitiesArray() {
-    const { abilityScores } = this.props.hero;
+    const { abilityScores } = this.state.hero;
     const abilitiesArray = [];
 
     for (const ability in abilityScores) {
@@ -33,6 +34,14 @@ class TrackStats extends Component {
     return abilitiesArray;
   }
 
+  onInputChange = label => evt => {
+    const updatedValue = {
+      ...this.state.hero,
+      [label]: evt.target.value
+    };
+    this.setState({ hero: updatedValue });
+  };
+
   onEditToggleHandler = () => {
     this.setState(prevState => (prevState.editing = !prevState.editing));
   };
@@ -42,8 +51,7 @@ class TrackStats extends Component {
   };
 
   render() {
-    const { editing } = this.state;
-    const { hero } = this.props;
+    const { editing, hero } = this.state;
 
     const abilitiesArray = this.createAbilitiesArray();
 
@@ -67,26 +75,31 @@ class TrackStats extends Component {
             <BlockInput
               label="Armor Class"
               editing={this.state.editing}
+              onChange={this.onInputChange('armorClass')}
               value={hero.armorClass}
             />
             <BlockInput
               label="Initiative"
               editing={this.state.editing}
+              onChange={this.onInputChange('initiative')}
               value={hero.initative}
             />
             <BlockInput
               label="Experience"
               editing={this.state.editing}
+              onChange={this.onInputChange('xp')}
               value={hero.xp}
             />
             <BlockInput
               label="Speed"
               editing={this.state.editing}
+              onChange={this.onInputChange('speed')}
               value={hero.speed}
             />
             <BlockInput
               label="Hit Points"
               editing={this.state.editing}
+              onChange={this.onInputChange('currentHp')}
               value={hero.currentHP}
             />
             <BlockInput
@@ -105,22 +118,32 @@ class TrackStats extends Component {
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               {abilitiesArray}
               <div style={{ height: '24px' }} />
-              <BlockInput label="Proficiency" editing={this.state.editing} />
-              <BlockInput label="Inspiration" editing={this.state.editing} />
+              <BlockInput
+                label="Proficiency"
+                editing={this.state.editing}
+                onChange={this.onInputChange('proficiency')}
+                value={hero.proficiency}
+              />
+              <BlockInput
+                label="Inspiration"
+                editing={this.state.editing}
+                onChange={this.onInputChange('inspiration')}
+                value={hero.inspiration}
+              />
             </div>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
-              {/* <ToggleList
-                editing={this.state.editing}
-                items={hero.abilityScores}
-                label="Saving Throws"
-                onToggle={this.onToggleHandler}
-                toggled={this.state.toggled}
-              /> */}
               <ToggleList
                 editing={this.state.editing}
                 items={hero.skills}
                 label="Skills"
                 onToggle={this.onToggleHandler}
+              />
+              <ToggleList
+                editing={this.state.editing}
+                items={hero.savingThrows}
+                label="Saving Throws"
+                onToggle={this.onToggleHandler}
+                toggled={this.state.toggled}
               />
             </div>
           </BasicCard>

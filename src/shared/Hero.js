@@ -24,10 +24,20 @@ export default class Hero {
   };
   id = 1;
   initative = 0;
+  inspiration = 0;
   level = 0;
   name = '';
   playerName = '';
+  proficiency = 0;
   race = '';
+  savingThrows = [
+    { name: 'Constitution', isProficient: false, value: 0 },
+    { name: 'Charisma', isProficient: false, value: 0 },
+    { name: 'Dexterity', isProficient: false, value: 0 },
+    { name: 'Intelligence', isProficient: false, value: 0 },
+    { name: 'Strength', isProficient: false, value: 0 },
+    { name: 'Wisdom', isProficient: false, value: 0 }
+  ];
   speed = 0;
   skills = [
     { name: 'Acrobatics', isProficient: false, ability: 'Dexterity', value: 0 },
@@ -41,7 +51,7 @@ export default class Hero {
     { name: 'Athletics', isProficient: false, ability: 'Strength', value: 0 },
     { name: 'Deception', isProficient: false, ability: 'Charisma', value: 0 },
     { name: 'History', isProficient: false, ability: 'Intelligence', value: 0 },
-    { name: 'Insight', isProficient: false, ability: 'wisdom', value: 0 },
+    { name: 'Insight', isProficient: false, ability: 'Wisdom', value: 0 },
     {
       name: 'Intimidation',
       isProficient: false,

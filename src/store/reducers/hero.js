@@ -1,28 +1,12 @@
 import * as actionTypes from '../actions/actionTypes';
+import { updateObject } from '../../shared/Utility';
 import Hero from '../../shared/Hero';
 
 const initialState = {
   hero: new Hero(),
   heroes: [
+    // TODO: remove dummy data
     new Hero()
-    // {
-    //   id: 1,
-    //   class: 'Barbarian',
-    //   level: 3,
-    //   race: 'Half-orc',
-    //   alignment: 'Chaotic Neutral',
-    //   name: 'Thronk, Destroyer of Worlds',
-    //   active: true
-    // },
-    // {
-    //   id: 5,
-    //   class: 'Rogue',
-    //   level: 7,
-    //   race: 'Elf',
-    //   alignment: 'Chaotic Good',
-    //   name: 'Valarian',
-    //   active: false
-    // }
   ],
   userId: 1
 };
@@ -30,22 +14,28 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.DELETE_HERO:
-      return {
-        ...state,
-        heroes: state.heroes.filter(hero => hero.id !== action.heroId)
-      };
+      return deleteHero(state, action);
     case actionTypes.FETCH_HEROES:
       return state;
     case actionTypes.FETCH_HEROES_SUCCESS:
-      return { heroes: action.heros };
+      return fetchHeroesSuccess(state, action);
     case actionTypes.GET_HERO:
-      return {
-        ...state,
-        hero: { ...state.heroes.find(hero => hero.id === action.heroId) }
-      };
+      return getHero(state, action);
     default:
       return state;
   }
+};
+
+const deleteHero = (state, { heroId }) => {
+  const newHeroes = state.heroes.filter(hero => hero.id !== heroId);
+  return updateObject(state, { heroes: newHeroes });
+};
+
+const fetchHeroesSuccess = (state, { heroes }) => updateObject(state, heroes);
+
+const getHero = (state, { heroId }) => {
+  const selectedHero = state.heroes.find(hero => hero.id === heroId);
+  return updateObject(state, { hero: selectedHero });
 };
 
 export default reducer;
