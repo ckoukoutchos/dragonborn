@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+import { updateObjectInArray } from '../../shared/Utility';
 import ToggleLineInput from '../input/toggle-line-input/ToggleLineInput';
 
 class ToggleList extends Component {
@@ -7,19 +8,25 @@ class ToggleList extends Component {
     items: this.props.items
   };
 
-  onInputChange = index => evt => {
-    const updatedValue = [...this.state.items];
-    updatedValue[index].value = evt.target.value;
-    this.setState({ items: updatedValue });
-  };
-
-  onInputToggle = index => () => {
-    this.setState(prevState => {
-      const updatedValue = [...prevState.items];
-      updatedValue[index].isProficient = !prevState.items[index].isProficient;
-      return { items: updatedValue };
+  onInputChange = index => evt =>
+    this.setState({
+      items: updateObjectInArray(
+        this.state.items,
+        index,
+        'value',
+        evt.target.value
+      )
     });
-  };
+
+  onInputToggle = index => () =>
+    this.setState(prevState => ({
+      items: updateObjectInArray(
+        prevState.items,
+        index,
+        'proficient',
+        !prevState.items[index].proficient
+      )
+    }));
 
   render() {
     return this.state.items.map((item, index) => (
@@ -29,7 +36,7 @@ class ToggleList extends Component {
         editing={this.props.editing}
         onChange={this.onInputChange(index)}
         onToggle={this.onInputToggle(index)}
-        toggled={item.isProficient}
+        toggled={item.proficient}
       />
     ));
   }

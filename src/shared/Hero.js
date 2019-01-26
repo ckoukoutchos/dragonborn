@@ -1,12 +1,12 @@
 export default class Hero {
-  abilityScores = {
-    charisma: 0,
-    constitution: 0,
-    dexterity: 0,
-    intelligence: 0,
-    strength: 0,
-    wisdom: 0
-  };
+  abilityScores = [
+    { name: 'Charisma', value: 0 },
+    { name: 'Constitution', value: 0 },
+    { name: 'Dexterity', value: 0 },
+    { name: 'Intelligence', value: 0 },
+    { name: 'Strength', value: 0 },
+    { name: 'Wisdom', value: 0 }
+  ];
   alignment = ['', ''];
   armor = [];
   armorClass = 0;
@@ -31,58 +31,58 @@ export default class Hero {
   proficiency = 0;
   race = '';
   savingThrows = [
-    { name: 'Constitution', isProficient: false, value: 0 },
-    { name: 'Charisma', isProficient: false, value: 0 },
-    { name: 'Dexterity', isProficient: false, value: 0 },
-    { name: 'Intelligence', isProficient: false, value: 0 },
-    { name: 'Strength', isProficient: false, value: 0 },
-    { name: 'Wisdom', isProficient: false, value: 0 }
+    { name: 'Charisma', proficient: false, value: 0 },
+    { name: 'Constitution', proficient: false, value: 0 },
+    { name: 'Dexterity', proficient: false, value: 0 },
+    { name: 'Intelligence', proficient: false, value: 0 },
+    { name: 'Strength', proficient: false, value: 0 },
+    { name: 'Wisdom', proficient: false, value: 0 }
   ];
   speed = 0;
   skills = [
-    { name: 'Acrobatics', isProficient: false, ability: 'Dexterity', value: 0 },
+    { name: 'Acrobatics', proficient: false, ability: 'dexterity', value: 0 },
     {
       name: 'Animal Handling',
-      isProficient: true,
+      proficient: true,
       ability: 'Wisdom',
       value: 0
     },
-    { name: 'Arcana', isProficient: false, ability: 'Intelligence', value: 0 },
-    { name: 'Athletics', isProficient: false, ability: 'Strength', value: 0 },
-    { name: 'Deception', isProficient: false, ability: 'Charisma', value: 0 },
-    { name: 'History', isProficient: false, ability: 'Intelligence', value: 0 },
-    { name: 'Insight', isProficient: false, ability: 'Wisdom', value: 0 },
+    { name: 'Arcana', proficient: false, ability: 'intelligence', value: 0 },
+    { name: 'Athletics', proficient: false, ability: 'strength', value: 0 },
+    { name: 'Deception', proficient: false, ability: 'charisma', value: 0 },
+    { name: 'History', proficient: false, ability: 'intelligence', value: 0 },
+    { name: 'Insight', proficient: false, ability: 'wisdom', value: 0 },
     {
       name: 'Intimidation',
-      isProficient: false,
-      ability: 'Charisma',
+      proficient: false,
+      ability: 'charisma',
       value: 0
     },
     {
       name: 'Investigation',
-      isProficient: false,
-      ability: 'Intelligence',
+      proficient: false,
+      ability: 'intelligence',
       value: 0
     },
-    { name: 'Medicine', isProficient: false, ability: 'Wisdom', value: 0 },
-    { name: 'Nature', isProficient: false, ability: 'Intelligence', value: 0 },
-    { name: 'Perception', isProficient: false, ability: 'Wisdom', value: 0 },
-    { name: 'Performance', isProficient: false, ability: 'Charisma', value: 0 },
-    { name: 'Persuasion', isProficient: false, ability: 'Charisma', value: 0 },
+    { name: 'Medicine', proficient: false, ability: 'wisdom', value: 0 },
+    { name: 'Nature', proficient: false, ability: 'intelligence', value: 0 },
+    { name: 'Perception', proficient: false, ability: 'wisdom', value: 0 },
+    { name: 'Performance', proficient: false, ability: 'charisma', value: 0 },
+    { name: 'Persuasion', proficient: false, ability: 'charisma', value: 0 },
     {
       name: 'Religion',
-      isProficient: false,
-      ability: 'Intelligence',
+      proficient: false,
+      ability: 'intelligence',
       value: 0
     },
     {
       name: 'Sleight Of Hand',
-      isProficient: false,
-      ability: 'Dexterity',
+      proficient: false,
+      ability: 'dexterity',
       value: 0
     },
-    { name: 'Stealth', isProficient: false, ability: 'Dexterity', value: 0 },
-    { name: 'Survival', isProficient: false, ability: 'Wisdom', value: 0 }
+    { name: 'Stealth', proficient: false, ability: 'dexterity', value: 0 },
+    { name: 'Survival', proficient: false, ability: 'wisdom', value: 0 }
   ];
   subrace = null;
   temporaryHP = 0;

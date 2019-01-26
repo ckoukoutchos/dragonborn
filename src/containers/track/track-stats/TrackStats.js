@@ -31,26 +31,30 @@ class TrackStats extends Component {
       editing,
       hero: { abilityScores }
     } = this.state;
-    const abilitiesArray = [];
 
-    for (const ability in abilityScores) {
-      abilitiesArray.push(
-        <BlockInsetInput
-          key={ability}
-          editing={editing.abilities}
-          label={ability}
-          onChange={() => console.log('lol')}
-          value={abilityScores[ability]}
-        />
-      );
-    }
-    return abilitiesArray;
+    return abilityScores.map((ability, index) => (
+      <BlockInsetInput
+        key={index}
+        editing={editing.abilities}
+        label={ability.name}
+        onChange={this.onInputListChange('')}
+        value={ability.value}
+      />
+    ));
   }
 
   onInputChange = label => evt => {
     const updatedValue = {
       ...this.state.hero,
       [label]: evt.target.value
+    };
+    this.setState({ hero: updatedValue });
+  };
+
+  onInputListChange = label => list => {
+    const updatedValue = {
+      ...this.state.hero,
+      [label]: list
     };
     this.setState({ hero: updatedValue });
   };
