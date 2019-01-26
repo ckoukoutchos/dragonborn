@@ -10,6 +10,9 @@ import TabBar from '../../../components/tab-bar/TabBar';
 import TextAreaInput from '../../../components/input/textarea-input/TextAreaInput';
 import TitleCard from '../../../components/card/title-card/TitleCard';
 import ToggleList from '../../../components/toggle-list/ToggleList';
+import ToggleLineInput from '../../../components/input/toggle-line-input/ToggleLineInput';
+
+import { updateObject, updateObjectInArray } from '../../../shared/Utility';
 
 class TrackStats extends Component {
   state = {
@@ -26,37 +29,63 @@ class TrackStats extends Component {
     toggled: false
   };
 
-  createAbilitiesArray() {
-    const {
-      editing,
-      hero: { abilityScores }
-    } = this.state;
-
+  createAbilityInputs(abilityScores, editing) {
     return abilityScores.map((ability, index) => (
       <BlockInsetInput
         key={index}
         editing={editing.abilities}
         label={ability.name}
-        onChange={this.onInputListChange('')}
+        onChange={this.onListInputChange(index, 'abilityScores')}
         value={ability.value}
       />
     ));
   }
 
+  createSkillInputs(hero, editing, section) {
+    return hero[section].map((skill, index) => (
+      <ToggleLineInput
+        key={index}
+        label={skill.name}
+        editing={editing}
+        onChange={this.onListInputChange(index, section)}
+        onToggle={this.onListInputToggle(index, section)}
+        proficient={skill.proficient}
+        proficientBonus={hero.proficiency}
+        value={skill.value}
+      />
+    ));
+  }
+
   onInputChange = label => evt => {
-    const updatedValue = {
-      ...this.state.hero,
-      [label]: evt.target.value
-    };
-    this.setState({ hero: updatedValue });
+    this.setState({
+      hero: updateObject(this.state.hero, { [label]: evt.target.value })
+    });
   };
 
-  onInputListChange = label => list => {
-    const updatedValue = {
-      ...this.state.hero,
-      [label]: list
-    };
-    this.setState({ hero: updatedValue });
+  onListInputChange = (index, section) => evt => {
+    const updatedValue = updateObjectInArray(
+      this.state.hero[section],
+      index,
+      'value',
+      evt.target.value
+    );
+    this.setState({
+      hero: updateObject(this.state.hero, { [section]: updatedValue })
+    });
+  };
+
+  onListInputToggle = (index, section) => () => {
+    this.setState(prevState => {
+      const updatedValue = updateObjectInArray(
+        prevState.hero[section],
+        index,
+        'proficient',
+        !prevState.hero[section][index].proficient
+      );
+      return {
+        hero: updateObject(this.state.hero, { [section]: updatedValue })
+      };
+    });
   };
 
   onEditToggled = section => () => {
@@ -65,17 +94,12 @@ class TrackStats extends Component {
     );
   };
 
-  onToggleHandler = () => {
-    this.setState(prevState => (prevState.toggled = !prevState.toggled));
-  };
-
   render() {
     const { editing, hero } = this.state;
 
-    const abilitiesArray = this.createAbilitiesArray();
-
     return (
       <>
+        {/* Basic */}
         <TitleCard
           title={hero.name}
           editing={editing.basics}
@@ -97,6 +121,8 @@ class TrackStats extends Component {
             onChange={this.onInputChange('alignment')}
           />
         </TitleCard>
+
+        {/* Vitals */}
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           <BasicCard
             title="Vitals"
@@ -142,13 +168,16 @@ class TrackStats extends Component {
               }
             />
           </BasicCard>
+
+          {/* Abilities */}
           <BasicCard
             title={'Abilities & Skills'}
             editing={editing.abilities}
             onEdit={this.onEditToggled('abilities')}
           >
             <div style={{ display: 'flex', flexDirection: 'column' }}>
-              {abilitiesArray}
+              {this.createAbilityInputs(hero.abilityScores, editing)}
+
               <div style={{ height: '24px' }} />
               <BlockInput
                 label="Proficiency"
@@ -163,24 +192,22 @@ class TrackStats extends Component {
                 value={hero.inspiration}
               />
             </div>
+
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               <SecondaryCard label="Skills">
-                <ToggleList
-                  editing={editing.abilities}
-                  items={hero.skills}
-                  onToggle={this.onToggleHandler}
-                />
+                {this.createSkillInputs(hero, editing.abilities, 'skills')}
               </SecondaryCard>
               <SecondaryCard label="Saving Throws">
-                <ToggleList
-                  editing={editing.abilities}
-                  items={hero.savingThrows}
-                  onToggle={this.onToggleHandler}
-                  toggled={this.state.toggled}
-                />
+                {this.createSkillInputs(
+                  hero,
+                  editing.abilities,
+                  'savingThrows'
+                )}
               </SecondaryCard>
             </div>
           </BasicCard>
+
+          {/* Proficiencies */}
           <BasicCard
             title={'Proficiency & Language'}
             editing={editing.proficiencies}
@@ -190,6 +217,7 @@ class TrackStats extends Component {
           </BasicCard>
         </div>
 
+        {/* Attacks */}
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           <BasicCard
             title={'Attacks & Spellcasting'}
@@ -198,6 +226,8 @@ class TrackStats extends Component {
           >
             <TextAreaInput editing={editing.attacks} />
           </BasicCard>
+
+          {/* Equipment */}
           <BasicCard
             title={'Equipment'}
             editing={editing.equipment}
@@ -205,6 +235,8 @@ class TrackStats extends Component {
           >
             <TextAreaInput editing={editing.equipment} />
           </BasicCard>
+
+          {/* Features */}
           <BasicCard
             title={'Features & Traits'}
             editing={editing.features}

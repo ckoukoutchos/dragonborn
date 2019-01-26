@@ -1,10 +1,11 @@
 import React from 'react';
 
+import { calcAbilityModifier } from '../../../shared/Convert';
 import classes from './BlockInsetInput.module.css';
 
 const blockInsetInput = props => {
-  const { editing, label, value } = props;
-  const modifier = Math.floor((value - 10) / 2);
+  const { editing, label, onChange, value } = props;
+  const modifier = calcAbilityModifier(value);
 
   return (
     <div
@@ -27,6 +28,7 @@ const blockInsetInput = props => {
           editing ? classes.Edit : classes.Disabled
         ].join(' ')}
         disabled={!editing}
+        onChange={onChange}
         value={value}
       />
       <div className={classes.Inset}>

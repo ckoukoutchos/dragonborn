@@ -28,7 +28,7 @@ export default class Hero {
   level = 0;
   name = 'Thronk';
   playerName = '';
-  proficiency = 0;
+  proficiency = 2;
   race = '';
   savingThrows = [
     { name: 'Charisma', proficient: false, value: 0 },
