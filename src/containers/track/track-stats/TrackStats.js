@@ -9,13 +9,13 @@ import SecondaryCard from '../../../components/card/secondary-card/SecondaryCard
 import TabBar from '../../../components/tab-bar/TabBar';
 import TextAreaInput from '../../../components/input/textarea-input/TextAreaInput';
 import TitleCard from '../../../components/card/title-card/TitleCard';
-import ToggleList from '../../../components/toggle-list/ToggleList';
 import ToggleLineInput from '../../../components/input/toggle-line-input/ToggleLineInput';
 
 import { updateObject, updateObjectInArray } from '../../../shared/Utility';
 
 class TrackStats extends Component {
   state = {
+    changesMade: false,
     editing: {
       abilities: false,
       attacks: false,
@@ -58,6 +58,7 @@ class TrackStats extends Component {
 
   onInputChange = label => evt => {
     this.setState({
+      changesMade: true,
       hero: updateObject(this.state.hero, { [label]: evt.target.value })
     });
   };
@@ -70,6 +71,7 @@ class TrackStats extends Component {
       evt.target.value
     );
     this.setState({
+      changesMade: true,
       hero: updateObject(this.state.hero, { [section]: updatedValue })
     });
   };
@@ -83,15 +85,18 @@ class TrackStats extends Component {
         !prevState.hero[section][index].proficient
       );
       return {
+        changesMade: true,
         hero: updateObject(this.state.hero, { [section]: updatedValue })
       };
     });
   };
 
   onEditToggled = section => () => {
-    this.setState(
-      prevState => (prevState.editing[section] = !prevState.editing[section])
-    );
+    this.setState(prevState => {
+      if (prevState.editing[section] && prevState.changesMade) {
+      }
+      prevState.editing[section] = !prevState.editing[section];
+    });
   };
 
   render() {
