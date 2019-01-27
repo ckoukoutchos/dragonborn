@@ -5,6 +5,11 @@ export const fetchHeroes = userId => ({
   userId
 });
 
+export const fetchHeroesFail = error => ({
+  type: actionTypes.FETCH_HEROES_FAIL,
+  error
+});
+
 export const fetchHeroesSuccess = heroes => ({
   type: actionTypes.FETCH_HEROES_SUCCESS,
   heroes
