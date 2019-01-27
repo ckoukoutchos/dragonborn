@@ -10,7 +10,7 @@ import TitleCard from '../../components/card/title-card/TitleCard';
 
 class Track extends Component {
   componentDidMount() {
-    // this.props.fetchHeroes(this.props.userId);
+    this.props.fetchHeroes();
   }
 
   onHeroDeletion = heroId => {
@@ -22,8 +22,8 @@ class Track extends Component {
     this.props.history.push(`/track/${heroId}/stats`);
   };
 
-  createHeroList(heroes) {
-    return heroes.map((hero, index) => (
+  render() {
+    const heroes = this.props.heroes.map((hero, index) => (
       <TitleCard key={index} title={hero.name} readOnly>
         <Input
           label={'Class & Level'}
@@ -52,13 +52,11 @@ class Track extends Component {
         </Button>
       </TitleCard>
     ));
-  }
 
-  render() {
     return (
       <>
         <Jumbotron header="Track" subHeader="Keep Tabs on your Heroes" />
-        {this.createHeroList(this.props.heroes)}
+        {heroes}
       </>
     );
   }
@@ -71,7 +69,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   deleteHero: heroId => dispatch(actions.deleteHero(heroId)),
-  fetchHeroes: userId => dispatch(actions.fetchHeroes(userId)),
+  fetchHeroes: () => dispatch(actions.fetchHeroes()),
   getHero: heroId => dispatch(actions.getHero(heroId))
 });
 

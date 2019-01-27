@@ -15,9 +15,8 @@ export const createHeroSuccess = hero => ({
   hero
 });
 
-export const fetchHeroes = userId => ({
-  type: actionTypes.FETCH_HEROES,
-  userId
+export const fetchHeroes = () => ({
+  type: actionTypes.FETCH_HEROES
 });
 
 export const fetchHeroesFail = error => ({

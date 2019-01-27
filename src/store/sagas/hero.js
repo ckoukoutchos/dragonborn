@@ -3,13 +3,16 @@ import axios from 'axios';
 
 import * as actions from '../actions/index';
 
-export function* createHeroSaga(action) {
+export function* createHeroSaga({ hero }) {
   try {
-    const res = yield axios.post(
+    const {
+      data: { name }
+    } = yield axios.post(
       'https://dragonborn-1077c.firebaseio.com/heroes.json',
-      action.hero
+      hero
     );
-    yield put(actions.createHeroSuccess(res));
+    hero.id = name;
+    yield put(actions.createHeroSuccess(hero));
   } catch (error) {
     // TODO: swap out action for fail
     yield put(actions.createHeroSuccess(error));
@@ -17,10 +20,17 @@ export function* createHeroSaga(action) {
 }
 
 export function* fetchHeroesSaga(action) {
-  yield put(actions.fetchHeroes());
   try {
-    const res = yield axios.get('');
-    yield put(actions.fetchHeroesSuccess(res));
+    const { data } = yield axios.get(
+      'https://dragonborn-1077c.firebaseio.com/heroes.json'
+    );
+
+    const heroes = [];
+    for (const key in data) {
+      heroes.push({ ...data[key], id: key });
+    }
+
+    yield put(actions.fetchHeroesSuccess(heroes));
   } catch (error) {
     yield put(actions.fetchHeroesFail(error));
   }

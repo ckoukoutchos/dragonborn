@@ -4,7 +4,7 @@ import Hero from '../../shared/Hero';
 
 const initialState = {
   hero: new Hero(),
-  heroes: [new Hero()],
+  heroes: [],
   userId: 1
 };
 
@@ -26,7 +26,6 @@ const reducer = (state = initialState, action) => {
 };
 
 const createHeroSuccess = (state, { hero }) => {
-  console.log(hero);
   const newHeroes = [...state.heroes];
   newHeroes.push(hero);
   return { ...state, heroes: newHeroes };
@@ -37,7 +36,9 @@ const deleteHero = (state, { heroId }) => {
   return updateObject(state, { heroes: newHeroes });
 };
 
-const fetchHeroesSuccess = (state, { heroes }) => updateObject(state, heroes);
+const fetchHeroesSuccess = (state, { heroes }) => {
+  return { ...state, heroes };
+};
 
 const getHero = (state, { heroId }) => {
   const selectedHero = state.heroes.find(hero => hero.id === heroId);
