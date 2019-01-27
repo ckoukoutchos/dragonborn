@@ -13,10 +13,12 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case actionTypes.CREATE_HERO_FAIL:
+      return state;
+    case actionTypes.CREATE_HERO_SUCCESS:
+      return createHeroSuccess(state, action);
     case actionTypes.DELETE_HERO:
       return deleteHero(state, action);
-    case actionTypes.FETCH_HEROES:
-      return state;
     case actionTypes.FETCH_HEROES_SUCCESS:
       return fetchHeroesSuccess(state, action);
     case actionTypes.GET_HERO:
@@ -24,6 +26,12 @@ const reducer = (state = initialState, action) => {
     default:
       return state;
   }
+};
+
+const createHeroSuccess = (state, { hero }) => {
+  const newHeroes = [...state.heroes];
+  newHeroes.push(hero);
+  return { ...state, heroes: newHeroes };
 };
 
 const deleteHero = (state, { heroId }) => {

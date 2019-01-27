@@ -8,10 +8,12 @@ import createSagaMiddleware from 'redux-saga';
 import './index.css';
 import App from './App';
 import rootReducer from './store/reducers/index';
+import { watchHero } from './store/sagas';
 
 const sagaMiddleware = createSagaMiddleware();
 
 const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
+sagaMiddleware.run(watchHero);
 
 const app = (
   <Provider store={store}>

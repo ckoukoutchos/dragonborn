@@ -1,5 +1,20 @@
 import * as actionTypes from './actionTypes';
 
+export const createHero = hero => ({
+  type: actionTypes.CREATE_HERO,
+  hero
+});
+
+export const createHeroFail = error => ({
+  type: actionTypes.CREATE_HERO,
+  error
+});
+
+export const createHeroSuccess = hero => ({
+  type: actionTypes.CREATE_HERO,
+  hero
+});
+
 export const fetchHeroes = userId => ({
   type: actionTypes.FETCH_HEROES,
   userId

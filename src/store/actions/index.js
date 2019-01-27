@@ -1,4 +1,7 @@
 export {
+  createHero,
+  createHeroFail,
+  createHeroSuccess,
   deleteHero,
   fetchHeroes,
   fetchHeroesFail,
