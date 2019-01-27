@@ -4,7 +4,6 @@ import axios from 'axios';
 import * as actions from '../actions/index';
 
 export function* createHeroSaga(action) {
-  yield put(actions.createHero());
   try {
     const res = yield axios.post(
       'https://dragonborn-1077c.firebaseio.com/heroes.json',

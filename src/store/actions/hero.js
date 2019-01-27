@@ -6,12 +6,12 @@ export const createHero = hero => ({
 });
 
 export const createHeroFail = error => ({
-  type: actionTypes.CREATE_HERO,
+  type: actionTypes.CREATE_HERO_FAIL,
   error
 });
 
 export const createHeroSuccess = hero => ({
-  type: actionTypes.CREATE_HERO,
+  type: actionTypes.CREATE_HERO_SUCCESS,
   hero
 });
 

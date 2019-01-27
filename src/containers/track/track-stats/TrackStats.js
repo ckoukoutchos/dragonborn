@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import * as actions from '../../../store/actions/index';
+
 import BasicCard from '../../../components/card/basic-card/BasicCard';
 import BlockInput from '../../../components/input/block-input/BlockInput';
 import BlockInsetInput from '../../../components/input/block-inset-input/BlockInsetInput';
@@ -40,6 +42,10 @@ class TrackStats extends Component {
       />
     ));
   }
+
+  createHero = () => {
+    this.props.createHero(this.state.hero);
+  };
 
   createSkillInputs(hero, editing, section) {
     return hero[section].map((skill, index) => (
@@ -104,6 +110,7 @@ class TrackStats extends Component {
 
     return (
       <>
+        <button onClick={this.createHero}>Create</button>
         {/* Basic */}
         <TitleCard
           title={hero.name}
@@ -256,8 +263,15 @@ class TrackStats extends Component {
   }
 }
 
+const mapDispatchToProps = dispatch => ({
+  createHero: hero => dispatch(actions.createHero(hero))
+});
+
 const mapStateToProps = state => ({
   hero: state.hero.hero
 });
 
-export default connect(mapStateToProps)(TrackStats);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TrackStats);

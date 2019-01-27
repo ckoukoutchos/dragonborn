@@ -10,7 +10,7 @@ import TitleCard from '../../components/card/title-card/TitleCard';
 
 class Track extends Component {
   componentDidMount() {
-    this.props.fetchHeroes(this.props.userId);
+    // this.props.fetchHeroes(this.props.userId);
   }
 
   onHeroDeletion = heroId => {

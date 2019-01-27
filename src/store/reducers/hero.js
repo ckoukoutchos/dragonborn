@@ -4,10 +4,7 @@ import Hero from '../../shared/Hero';
 
 const initialState = {
   hero: new Hero(),
-  heroes: [
-    // TODO: remove dummy data
-    new Hero()
-  ],
+  heroes: [new Hero()],
   userId: 1
 };
 
@@ -29,6 +26,7 @@ const reducer = (state = initialState, action) => {
 };
 
 const createHeroSuccess = (state, { hero }) => {
+  console.log(hero);
   const newHeroes = [...state.heroes];
   newHeroes.push(hero);
   return { ...state, heroes: newHeroes };
