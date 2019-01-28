@@ -5,6 +5,7 @@ import Button from '../../button/Button';
 
 const basicCard = props => {
   const { editing, onEdit, title } = props;
+
   return (
     <div className={classes.Card}>
       <div className={classes.Header}>

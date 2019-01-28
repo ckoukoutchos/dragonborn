@@ -26,9 +26,7 @@ const reducer = (state = initialState, action) => {
 };
 
 const createHeroSuccess = (state, { hero }) => {
-  const newHeroes = [...state.heroes];
-  newHeroes.push(hero);
-  return { ...state, heroes: newHeroes };
+  return updateObject(state, { heroes: state.heroes.concat(hero) });
 };
 
 const deleteHero = (state, { heroId }) => {
@@ -37,7 +35,7 @@ const deleteHero = (state, { heroId }) => {
 };
 
 const fetchHeroesSuccess = (state, { heroes }) => {
-  return { ...state, heroes };
+  return updateObject(state, { heroes });
 };
 
 const getHero = (state, { heroId }) => {

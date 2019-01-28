@@ -17,7 +17,6 @@ import { updateObject, updateObjectInArray } from '../../../shared/Utility';
 
 class TrackStats extends Component {
   state = {
-    changesMade: false,
     editing: {
       abilities: false,
       attacks: false,
@@ -43,10 +42,6 @@ class TrackStats extends Component {
     ));
   }
 
-  createHero = () => {
-    this.props.createHero(this.state.hero);
-  };
-
   createSkillInputs(hero, editing, section) {
     return hero[section].map((skill, index) => (
       <ToggleLineInput
@@ -64,7 +59,6 @@ class TrackStats extends Component {
 
   onInputChange = label => evt => {
     this.setState({
-      changesMade: true,
       hero: updateObject(this.state.hero, { [label]: evt.target.value })
     });
   };
@@ -77,7 +71,6 @@ class TrackStats extends Component {
       evt.target.value
     );
     this.setState({
-      changesMade: true,
       hero: updateObject(this.state.hero, { [section]: updatedValue })
     });
   };
@@ -91,7 +84,6 @@ class TrackStats extends Component {
         !prevState.hero[section][index].proficient
       );
       return {
-        changesMade: true,
         hero: updateObject(this.state.hero, { [section]: updatedValue })
       };
     });
@@ -99,9 +91,10 @@ class TrackStats extends Component {
 
   onEditToggled = section => () => {
     this.setState(prevState => {
-      if (prevState.editing[section] && prevState.changesMade) {
-      }
-      prevState.editing[section] = !prevState.editing[section];
+      const updatedValue = updateObject(prevState.editing, {
+        [section]: !prevState.editing[section]
+      });
+      return { editing: updatedValue };
     });
   };
 
@@ -110,27 +103,31 @@ class TrackStats extends Component {
 
     return (
       <>
-        <button onClick={this.createHero}>Create</button>
         {/* Basic */}
         <TitleCard
           title={hero.name}
           editing={editing.basics}
           onEdit={this.onEditToggled('basics')}
+          onChange={this.onInputChange('name')}
+          value={hero.name}
         >
           <Input
             label={'Class & Level'}
             editing={editing.basics}
             onChange={this.onInputChange('heroClass')}
+            value={hero.heroClass}
           />
           <Input
             label="Race"
             editing={editing.basics}
             onChange={this.onInputChange('race')}
+            value={hero.race}
           />
           <Input
             label="Alignment"
             editing={editing.basics}
             onChange={this.onInputChange('alignment')}
+            value={hero.alignment}
           />
         </TitleCard>
 

@@ -7,7 +7,7 @@ export default class Hero {
     { name: 'Strength', value: 0 },
     { name: 'Wisdom', value: 0 }
   ];
-  alignment = ['', ''];
+  alignment = '';
   armor = [];
   armorClass = 0;
   attacks = [];
@@ -22,13 +22,13 @@ export default class Hero {
     numberOfDice: 1,
     numberOfSides: 4
   };
-  id = 1;
+  id = null;
   initative = 0;
   inspiration = 0;
   level = 0;
-  name = 'Thronk';
+  name = '';
   playerName = '';
-  proficiency = 2;
+  proficiency = 0;
   race = '';
   savingThrows = [
     { name: 'Charisma', proficient: false, value: 0 },

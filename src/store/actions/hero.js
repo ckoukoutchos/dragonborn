@@ -1,8 +1,9 @@
 import * as actionTypes from './actionTypes';
 
-export const createHero = hero => ({
+export const createHero = (hero, route) => ({
   type: actionTypes.CREATE_HERO,
-  hero
+  hero,
+  route
 });
 
 export const createHeroFail = error => ({

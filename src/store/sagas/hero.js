@@ -3,7 +3,7 @@ import axios from 'axios';
 
 import * as actions from '../actions/index';
 
-export function* createHeroSaga({ hero }) {
+export function* createHeroSaga({ hero, route }) {
   try {
     const {
       data: { name }
@@ -13,6 +13,7 @@ export function* createHeroSaga({ hero }) {
     );
     hero.id = name;
     yield put(actions.createHeroSuccess(hero));
+    yield route.push(`/track/${name}/stats`);
   } catch (error) {
     // TODO: swap out action for fail
     yield put(actions.createHeroSuccess(error));
