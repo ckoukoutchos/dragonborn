@@ -6,5 +6,8 @@ export {
   fetchHeroes,
   fetchHeroesFail,
   fetchHeroesSuccess,
-  getHero
+  getHero,
+  updateHero,
+  updateHeroFail,
+  updateHeroSuccess
 } from './hero';

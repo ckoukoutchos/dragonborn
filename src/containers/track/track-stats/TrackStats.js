@@ -27,7 +27,8 @@ class TrackStats extends Component {
       vitals: false
     },
     hero: this.props.hero,
-    toggled: false
+    toggled: false,
+    updated: false
   };
 
   createAbilityInputs(abilityScores, editing) {

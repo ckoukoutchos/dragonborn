@@ -39,3 +39,17 @@ export const getHero = heroId => ({
   type: actionTypes.GET_HERO,
   heroId
 });
+
+export const updateHero = hero => ({
+  type: actionTypes.UPDATE_HERO,
+  hero
+});
+
+export const updateHeroFail = error => ({
+  type: actionTypes.UPDATE_HERO_FAIL,
+  error
+});
+
+export const updateHeroSuccess = () => ({
+  type: actionTypes.UPDATE_HERO_SUCCESS
+});

@@ -37,4 +37,14 @@ export function* fetchHeroesSaga(action) {
   }
 }
 
-export function* updateHeroSaga(action) {}
+export function* updateHeroSaga({ hero }) {
+  try {
+    const data = yield axios.put(
+      `https://dragonborn-1077c.firebaseio.com/heroes/${hero.id}.json`,
+      hero
+    );
+    console.log(data);
+  } catch (error) {
+    console.log(error);
+  }
+}

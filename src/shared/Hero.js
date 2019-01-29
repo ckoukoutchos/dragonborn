@@ -43,7 +43,7 @@ export default class Hero {
     { name: 'Acrobatics', proficient: false, ability: 'dexterity', value: 0 },
     {
       name: 'Animal Handling',
-      proficient: true,
+      proficient: false,
       ability: 'Wisdom',
       value: 0
     },
