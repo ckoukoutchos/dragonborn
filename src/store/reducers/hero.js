@@ -1,5 +1,5 @@
 import * as actionTypes from '../actions/actionTypes';
-import { updateObject } from '../../shared/Utility';
+import { updateObject, updateArray } from '../../shared/Utility';
 import Hero from '../../shared/Hero';
 
 const initialState = {
@@ -16,10 +16,14 @@ const reducer = (state = initialState, action) => {
       return createHeroSuccess(state, action);
     case actionTypes.DELETE_HERO:
       return deleteHero(state, action);
+    case actionTypes.FETCH_HERO_SUCCESS:
+      return fetchHeroSuccess(state, action);
     case actionTypes.FETCH_HEROES_SUCCESS:
       return fetchHeroesSuccess(state, action);
     case actionTypes.GET_HERO:
       return getHero(state, action);
+    case actionTypes.UPDATE_HERO_SUCCESS:
+      return updateHeroSuccess(state, action);
     default:
       return state;
   }
@@ -34,6 +38,10 @@ const deleteHero = (state, { heroId }) => {
   return updateObject(state, { heroes: newHeroes });
 };
 
+const fetchHeroSuccess = (state, { hero }) => {
+  return updateObject(state, { hero });
+};
+
 const fetchHeroesSuccess = (state, { heroes }) => {
   return updateObject(state, { heroes });
 };
@@ -41,6 +49,12 @@ const fetchHeroesSuccess = (state, { heroes }) => {
 const getHero = (state, { heroId }) => {
   const selectedHero = state.heroes.find(hero => hero.id === heroId);
   return updateObject(state, { hero: selectedHero });
+};
+
+const updateHeroSuccess = (state, { hero }) => {
+  const index = state.heroes.findIndex(item => item.id === hero.id);
+  const updatedHeroes = updateArray(state.heroes, hero, index);
+  return updateObject({ heroes: updatedHeroes, hero });
 };
 
 export default reducer;

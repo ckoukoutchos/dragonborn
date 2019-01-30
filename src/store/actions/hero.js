@@ -16,6 +16,21 @@ export const createHeroSuccess = hero => ({
   hero
 });
 
+export const fetchHero = heroId => ({
+  type: actionTypes.FETCH_HERO,
+  heroId
+});
+
+export const fetchHeroFail = error => ({
+  type: actionTypes.FETCH_HERO_FAIL,
+  error
+});
+
+export const fetchHeroSuccess = hero => ({
+  type: actionTypes.FETCH_HERO_SUCCESS,
+  hero
+});
+
 export const fetchHeroes = () => ({
   type: actionTypes.FETCH_HEROES
 });
@@ -50,6 +65,7 @@ export const updateHeroFail = error => ({
   error
 });
 
-export const updateHeroSuccess = () => ({
-  type: actionTypes.UPDATE_HERO_SUCCESS
+export const updateHeroSuccess = hero => ({
+  type: actionTypes.UPDATE_HERO_SUCCESS,
+  hero
 });

@@ -20,6 +20,18 @@ export function* createHeroSaga({ hero, route }) {
   }
 }
 
+export function* fetchHeroSaga({ heroId }) {
+  try {
+    const { data } = yield axios.get(
+      `https://dragonborn-1077c.firebaseio.com/heroes/${heroId}.json`
+    );
+    yield put(actions.fetchHeroSuccess(data));
+  } catch (error) {
+    // TODO: add error handling
+    console.log(error);
+  }
+}
+
 export function* fetchHeroesSaga(action) {
   try {
     const { data } = yield axios.get(
@@ -39,12 +51,13 @@ export function* fetchHeroesSaga(action) {
 
 export function* updateHeroSaga({ hero }) {
   try {
-    const data = yield axios.put(
+    const { data } = yield axios.put(
       `https://dragonborn-1077c.firebaseio.com/heroes/${hero.id}.json`,
       hero
     );
-    console.log(data);
+    yield put(actions.updateHeroSuccess(data));
   } catch (error) {
+    // TODO: add error handling
     console.log(error);
   }
 }

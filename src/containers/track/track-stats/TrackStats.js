@@ -31,6 +31,12 @@ class TrackStats extends Component {
     updated: false
   };
 
+  componentDidMount() {
+    if (this.props.hero.id !== this.props.match.params.id) {
+      this.props.history.push('/track');
+    }
+  }
+
   createAbilityInputs(abilityScores, editing) {
     return abilityScores.map((ability, index) => (
       <BlockInsetInput
@@ -60,7 +66,8 @@ class TrackStats extends Component {
 
   onInputChange = label => evt => {
     this.setState({
-      hero: updateObject(this.state.hero, { [label]: evt.target.value })
+      hero: updateObject(this.state.hero, { [label]: evt.target.value }),
+      updated: true
     });
   };
 
@@ -72,7 +79,8 @@ class TrackStats extends Component {
       evt.target.value
     );
     this.setState({
-      hero: updateObject(this.state.hero, { [section]: updatedValue })
+      hero: updateObject(this.state.hero, { [section]: updatedValue }),
+      updated: true
     });
   };
 
@@ -85,7 +93,8 @@ class TrackStats extends Component {
         !prevState.hero[section][index].proficient
       );
       return {
-        hero: updateObject(this.state.hero, { [section]: updatedValue })
+        hero: updateObject(this.state.hero, { [section]: updatedValue }),
+        updated: true
       };
     });
   };
@@ -95,7 +104,12 @@ class TrackStats extends Component {
       const updatedValue = updateObject(prevState.editing, {
         [section]: !prevState.editing[section]
       });
-      return { editing: updatedValue };
+
+      if (prevState.updated) {
+        this.props.updateHero(prevState.hero);
+      }
+
+      return { editing: updatedValue, updated: false };
     });
   };
 
@@ -262,7 +276,9 @@ class TrackStats extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  createHero: hero => dispatch(actions.createHero(hero))
+  fetchHero: heroId => dispatch(actions.fetchHero(heroId)),
+  getHero: heroId => dispatch(actions.getHero(heroId)),
+  updateHero: hero => dispatch(actions.updateHero(hero))
 });
 
 const mapStateToProps = state => ({
