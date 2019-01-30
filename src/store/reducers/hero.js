@@ -14,8 +14,8 @@ const reducer = (state = initialState, action) => {
       return state;
     case actionTypes.CREATE_HERO_SUCCESS:
       return createHeroSuccess(state, action);
-    case actionTypes.DELETE_HERO:
-      return deleteHero(state, action);
+    case actionTypes.DELETE_HERO_SUCCESS:
+      return deleteHeroSuccess(state, action);
     case actionTypes.FETCH_HERO_SUCCESS:
       return fetchHeroSuccess(state, action);
     case actionTypes.FETCH_HEROES_SUCCESS:
@@ -33,7 +33,7 @@ const createHeroSuccess = (state, { hero }) => {
   return updateObject(state, { heroes: state.heroes.concat(hero) });
 };
 
-const deleteHero = (state, { heroId }) => {
+const deleteHeroSuccess = (state, { heroId }) => {
   const newHeroes = state.heroes.filter(hero => hero.id !== heroId);
   return updateObject(state, { heroes: newHeroes });
 };

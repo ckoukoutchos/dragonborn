@@ -3,6 +3,8 @@ export {
   createHeroFail,
   createHeroSuccess,
   deleteHero,
+  deleteHeroFail,
+  deleteHeroSuccess,
   fetchHero,
   fetchHeroFail,
   fetchHeroSuccess,

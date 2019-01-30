@@ -20,6 +20,18 @@ export function* createHeroSaga({ hero, route }) {
   }
 }
 
+export function* deleteHeroSaga({ heroId }) {
+  try {
+    yield axios.delete(
+      `https://dragonborn-1077c.firebaseio.com/heroes/${heroId}.json`
+    );
+    yield put(actions.deleteHeroSuccess(heroId));
+  } catch (error) {
+    // TODO: add error handling
+    console.log(error);
+  }
+}
+
 export function* fetchHeroSaga({ heroId }) {
   try {
     const { data } = yield axios.get(

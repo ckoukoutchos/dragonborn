@@ -16,6 +16,21 @@ export const createHeroSuccess = hero => ({
   hero
 });
 
+export const deleteHero = heroId => ({
+  type: actionTypes.DELETE_HERO,
+  heroId
+});
+
+export const deleteHeroFail = error => ({
+  type: actionTypes.DELETE_HERO_FAIL,
+  error
+});
+
+export const deleteHeroSuccess = heroId => ({
+  type: actionTypes.DELETE_HERO_SUCCESS,
+  heroId
+});
+
 export const fetchHero = heroId => ({
   type: actionTypes.FETCH_HERO,
   heroId
@@ -43,11 +58,6 @@ export const fetchHeroesFail = error => ({
 export const fetchHeroesSuccess = heroes => ({
   type: actionTypes.FETCH_HEROES_SUCCESS,
   heroes
-});
-
-export const deleteHero = heroId => ({
-  type: actionTypes.DELETE_HERO,
-  heroId
 });
 
 export const getHero = heroId => ({
