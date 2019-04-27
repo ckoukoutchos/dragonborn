@@ -8,7 +8,7 @@ export const updateArray = (
   return newArray;
 };
 
-export const updateObject = (prevObject: {}, updatedProps: any): {} => ({
+export const updateObject = (prevObject: any, updatedProps: any): any => ({
   ...prevObject,
   ...updatedProps
 });
