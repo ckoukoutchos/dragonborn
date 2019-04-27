@@ -30,7 +30,7 @@ const reducer = (state = initialState, action) => {
 };
 
 const createHeroSuccess = (state, { hero }) => {
-  return updateObject(state, { heroes: state.heroes.concat(hero) });
+  return updateObject(state, { heroes: state.heroes.concat(hero), hero });
 };
 
 const deleteHeroSuccess = (state, { heroId }) => {

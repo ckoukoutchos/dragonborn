@@ -15,7 +15,7 @@ import ToggleLineInput from '../../../components/input/toggle-line-input/ToggleL
 
 import { updateObject, updateObjectInArray } from '../../../shared/Utility';
 
-class TrackStats extends Component {
+class TrackStats extends Component<any, any> {
   state = {
     editing: {
       abilities: false,
@@ -37,8 +37,8 @@ class TrackStats extends Component {
     }
   }
 
-  createAbilityInputs(abilityScores, editing) {
-    return abilityScores.map((ability, index) => (
+  createAbilityInputs(abilityScores: any, editing: any) {
+    return abilityScores.map((ability: any, index: any) => (
       <BlockInsetInput
         key={index}
         editing={editing.abilities}
@@ -49,8 +49,8 @@ class TrackStats extends Component {
     ));
   }
 
-  createSkillInputs(hero, editing, section) {
-    return hero[section].map((skill, index) => (
+  createSkillInputs(hero: any, editing: any, section: any) {
+    return hero[section].map((skill: any, index: any) => (
       <ToggleLineInput
         key={index}
         label={skill.name}
@@ -64,14 +64,14 @@ class TrackStats extends Component {
     ));
   }
 
-  onInputChange = label => evt => {
+  onInputChange = (label: any) => (evt: any) => {
     this.setState({
       hero: updateObject(this.state.hero, { [label]: evt.target.value }),
       updated: true
     });
   };
 
-  onListInputChange = (index, section) => evt => {
+  onListInputChange = (index: any, section: any) => (evt: any) => {
     const updatedValue = updateObjectInArray(
       this.state.hero[section],
       index,
@@ -84,8 +84,8 @@ class TrackStats extends Component {
     });
   };
 
-  onListInputToggle = (index, section) => () => {
-    this.setState(prevState => {
+  onListInputToggle = (index: any, section: any) => () => {
+    this.setState((prevState: any) => {
       const updatedValue = updateObjectInArray(
         prevState.hero[section],
         index,
@@ -99,8 +99,8 @@ class TrackStats extends Component {
     });
   };
 
-  onEditToggled = section => () => {
-    this.setState(prevState => {
+  onEditToggled = (section: any) => () => {
+    this.setState((prevState: any) => {
       const updatedValue = updateObject(prevState.editing, {
         [section]: !prevState.editing[section]
       });
@@ -275,13 +275,13 @@ class TrackStats extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  fetchHero: heroId => dispatch(actions.fetchHero(heroId)),
-  getHero: heroId => dispatch(actions.getHero(heroId)),
-  updateHero: hero => dispatch(actions.updateHero(hero))
+const mapDispatchToProps = (dispatch: any) => ({
+  fetchHero: (heroId: any) => dispatch(actions.fetchHero(heroId)),
+  getHero: (heroId: any) => dispatch(actions.getHero(heroId)),
+  updateHero: (hero: any) => dispatch(actions.updateHero(hero))
 });
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: any) => ({
   hero: state.hero.hero
 });
 
