@@ -1,6 +1,6 @@
 import * as actionTypes from '../actions/actionTypes';
 import { updateObject, updateArray } from '../../shared/Utility';
-import { Action } from '../storeTypes';
+import { Action } from '../actions/index';
 import Hero from '../../shared/Hero';
 
 interface State {

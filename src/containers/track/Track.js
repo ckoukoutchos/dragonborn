@@ -6,6 +6,7 @@ import * as actions from '../../store/actions/index';
 import Button from '../../components/button/Button';
 import Input from '../../components/input/Input';
 import Jumbotron from '../../components/jumbotron/Jumbotron';
+import Spinner from '../../components/spinner/Spinner';
 import TitleCard from '../../components/card/title-card/TitleCard';
 
 class Track extends Component {
@@ -59,6 +60,7 @@ class Track extends Component {
       <>
         <Jumbotron header="Track" subHeader="Keep Tabs on your Heroes" />
         {heroes}
+        <Spinner />
       </>
     );
   }
