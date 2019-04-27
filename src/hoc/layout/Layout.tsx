@@ -1,10 +1,13 @@
 import React from 'react';
-
 import classes from './Layout.module.css';
 import Footer from '../../components/footer/Footer';
 import NavBar from '../../components/nav-bar/NavBar';
 
-const layout = props => {
+interface Props {
+  children: any;
+}
+
+const layout = (props: Props) => {
   return (
     <>
       <NavBar />

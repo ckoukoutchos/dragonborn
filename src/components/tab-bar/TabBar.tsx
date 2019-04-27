@@ -1,8 +1,12 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-
 import classes from './TabBar.module.css';
-const tabBar = props => {
+
+interface Props {
+  id: number;
+}
+
+const tabBar = (props: Props) => {
   return (
     <div className={classes.TabBar}>
       <div className={classes.TabItem}>
