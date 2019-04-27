@@ -26,8 +26,8 @@ class NavBar extends Component {
           <NavItem link="/create">Create</NavItem>
           <NavItem link="/track">Track</NavItem>
           <NavItem link="/guide">Guide</NavItem>
-          <NavItem link="/logout" exact>
-            LogOut
+          <NavItem link="/" exact>
+            Login
           </NavItem>
         </nav>
         <div className={classes.Menu} onClick={this.onMenuToggle}>

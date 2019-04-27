@@ -45,6 +45,7 @@ export function* fetchHeroSaga({ heroId }) {
 }
 
 export function* fetchHeroesSaga(action) {
+  yield put(actions.fetchHeroesStart());
   try {
     const { data } = yield axios.get(
       'https://dragonborn-1077c.firebaseio.com/heroes.json'

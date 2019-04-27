@@ -14,6 +14,7 @@ export {
   fetchHeroFail,
   fetchHeroSuccess,
   fetchHeroes,
+  fetchHeroesStart,
   fetchHeroesFail,
   fetchHeroesSuccess,
   getHero,

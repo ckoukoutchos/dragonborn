@@ -9,8 +9,18 @@ import Jumbotron from '../../components/jumbotron/Jumbotron';
 import TitleCard from '../../components/card/title-card/TitleCard';
 
 class Create extends Component {
+  state = {
+    modalOpen: false
+  };
+
   onCreateClicked = () => {
     this.props.createHero(new Hero(), this.props.history);
+  };
+
+  clicked = () => {
+    this.setState(prevState => {
+      return { modalOpen: !prevState.modalOpen };
+    });
   };
 
   render() {
@@ -31,6 +41,7 @@ class Create extends Component {
             Create
           </Button>
         </TitleCard>
+        <button onClick={this.clicked}>Modal</button>
       </>
     );
   }

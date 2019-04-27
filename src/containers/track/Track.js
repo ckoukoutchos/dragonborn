@@ -26,41 +26,44 @@ class Track extends Component {
   };
 
   render() {
-    const heroes = this.props.heroes.map((hero, index) => (
-      <TitleCard key={index} title={hero.name} readOnly>
-        <Input
-          label={'Class & Level'}
-          value={hero.heroClass + ' ' + hero.level}
-        />
-        <Input label="Race" value={hero.race} />
-        <Input label="Alignment" value={hero.alignment} />
-        <Button
-          color="Primary"
-          btnType="Flat"
-          clicked={() => this.onHeroSelection(hero.id)}
-        >
-          View
-        </Button>
-        <div>
-          <strong>
-            {hero.active ? 'Active Campaign' : 'In Need of Quests'}
-          </strong>
-        </div>
-        <Button
-          color="Secondary"
-          btnType="Flat"
-          clicked={() => this.onHeroDeletion(hero.id)}
-        >
-          Delete
-        </Button>
-      </TitleCard>
-    ));
+    let heroes = <Spinner />;
+
+    if (!this.props.loading) {
+      heroes = this.props.heroes.map((hero, index) => (
+        <TitleCard key={index} title={hero.name} readOnly>
+          <Input
+            label={'Class & Level'}
+            value={hero.heroClass + ' ' + hero.level}
+          />
+          <Input label="Race" value={hero.race} />
+          <Input label="Alignment" value={hero.alignment} />
+          <Button
+            color="Primary"
+            btnType="Flat"
+            clicked={() => this.onHeroSelection(hero.id)}
+          >
+            View
+          </Button>
+          <div>
+            <strong>
+              {hero.active ? 'Active Campaign' : 'In Need of Quests'}
+            </strong>
+          </div>
+          <Button
+            color="Secondary"
+            btnType="Flat"
+            clicked={() => this.onHeroDeletion(hero.id)}
+          >
+            Delete
+          </Button>
+        </TitleCard>
+      ));
+    }
 
     return (
       <>
         <Jumbotron header="Track" subHeader="Keep Tabs on your Heroes" />
         {heroes}
-        <Spinner />
       </>
     );
   }
@@ -68,6 +71,7 @@ class Track extends Component {
 
 const mapStateToProps = state => ({
   heroes: state.hero.heroes,
+  loading: state.hero.loading,
   userId: state.hero.userId
 });
 

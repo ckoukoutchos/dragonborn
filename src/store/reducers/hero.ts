@@ -6,12 +6,14 @@ import Hero from '../../shared/Hero';
 interface State {
   hero: Hero;
   heroes: Hero[];
+  loading: boolean;
   userId: number;
 }
 
 const initialState = {
   hero: new Hero(),
   heroes: [],
+  loading: false,
   userId: 1
 };
 
@@ -28,6 +30,8 @@ const reducer = (
       return deleteHeroSuccess(state, action);
     case actionTypes.FETCH_HERO_SUCCESS:
       return fetchHeroSuccess(state, action);
+    case actionTypes.FETCH_HEROES_START:
+      return fetchHeroesStart(state, action);
     case actionTypes.FETCH_HEROES_SUCCESS:
       return fetchHeroesSuccess(state, action);
     case actionTypes.GET_HERO:
@@ -58,11 +62,15 @@ const fetchHeroSuccess = (state: State, { hero }: { hero: Hero }): State => {
   return updateObject(state, { hero });
 };
 
+const fetchHeroesStart = (state: State, action: Action): State => {
+  return updateObject(state, { loading: true });
+};
+
 const fetchHeroesSuccess = (
   state: State,
   { heroes }: { heroes: Hero[] }
 ): State => {
-  return updateObject(state, { heroes });
+  return updateObject(state, { heroes, loading: false });
 };
 
 const getHero = (state: State, { heroId }: { heroId: number }): State => {

@@ -52,6 +52,10 @@ export const fetchHeroes = () => ({
   type: actionTypes.FETCH_HEROES
 });
 
+export const fetchHeroesStart = () => ({
+  type: actionTypes.FETCH_HEROES_START
+});
+
 export const fetchHeroesFail = (error: any): Action => ({
   type: actionTypes.FETCH_HEROES_FAIL,
   error
