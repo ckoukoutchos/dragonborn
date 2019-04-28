@@ -26,7 +26,7 @@ class NavBar extends Component {
           <NavItem link="/create">Create</NavItem>
           <NavItem link="/track">Track</NavItem>
           <NavItem link="/guide">Guide</NavItem>
-          <NavItem link="/" exact>
+          <NavItem link="/login" exact>
             Login
           </NavItem>
         </nav>

@@ -10,6 +10,7 @@
     "@types/react-redux": "^7.0.8",
     "@types/react-router-dom": "^4.3.2",
     "axios": "^0.18.0",
+    "firebase": "^5.10.1",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-redux": "^6.0.0",
