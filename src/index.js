@@ -10,14 +10,19 @@ import App from './App';
 import rootReducer from './store/reducers/index';
 import { watchHero } from './store/sagas/index';
 
+// initialize saga middleware
 const sagaMiddleware = createSagaMiddleware();
 
+// initialize redux store with reducers and middleware
 const store = createStore(
   rootReducer,
   compose(applyMiddleware(sagaMiddleware))
 );
+
+// attatch hero saga to middleware
 sagaMiddleware.run(watchHero);
 
+// wrap App component with react-router and redux store
 const app = (
   <Provider store={store}>
     <BrowserRouter>

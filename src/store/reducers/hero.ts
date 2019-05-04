@@ -3,7 +3,7 @@ import { updateObject, updateArray } from '../../shared/Utility';
 import { Action } from '../actions/index';
 import Hero from '../../shared/Hero';
 
-interface State {
+interface HeroState {
   hero: Hero;
   heroes: Hero[];
   loading: boolean;
@@ -17,10 +17,10 @@ const initialState = {
   userId: 1
 };
 
-const reducer = (
-  state: State = initialState,
+const heroReducer = (
+  state: HeroState = initialState,
   action: any
-): Function | State => {
+): HeroState => {
   switch (action.type) {
     case actionTypes.CREATE_HERO_FAIL:
       return state;
@@ -43,7 +43,10 @@ const reducer = (
   }
 };
 
-const createHeroSuccess = (state: State, { hero }: { hero: Hero }): State => {
+const createHeroSuccess = (
+  state: HeroState,
+  { hero }: { hero: Hero }
+): HeroState => {
   return updateObject(state, {
     heroes: state.heroes.concat(hero),
     hero
@@ -51,37 +54,46 @@ const createHeroSuccess = (state: State, { hero }: { hero: Hero }): State => {
 };
 
 const deleteHeroSuccess = (
-  state: State,
+  state: HeroState,
   { heroId }: { heroId: number }
-): State => {
+): HeroState => {
   const newHeroes = state.heroes.filter((hero: Hero) => hero.id !== heroId);
   return updateObject(state, { heroes: newHeroes });
 };
 
-const fetchHeroSuccess = (state: State, { hero }: { hero: Hero }): State => {
+const fetchHeroSuccess = (
+  state: HeroState,
+  { hero }: { hero: Hero }
+): HeroState => {
   return updateObject(state, { hero });
 };
 
-const fetchHeroesStart = (state: State, action: Action): State => {
+const fetchHeroesStart = (state: HeroState, action: Action): HeroState => {
   return updateObject(state, { loading: true });
 };
 
 const fetchHeroesSuccess = (
-  state: State,
+  state: HeroState,
   { heroes }: { heroes: Hero[] }
-): State => {
+): HeroState => {
   return updateObject(state, { heroes, loading: false });
 };
 
-const getHero = (state: State, { heroId }: { heroId: number }): State => {
+const getHero = (
+  state: HeroState,
+  { heroId }: { heroId: number }
+): HeroState => {
   const selectedHero = state.heroes.find((hero: Hero) => hero.id === heroId);
   return updateObject(state, { hero: selectedHero });
 };
 
-const updateHeroSuccess = (state: State, { hero }: { hero: Hero }): State => {
-  const index = state.heroes.findIndex(item => item.id === hero.id);
+const updateHeroSuccess = (
+  state: HeroState,
+  { hero }: { hero: Hero }
+): HeroState => {
+  const index = state.heroes.findIndex((item: Hero) => item.id === hero.id);
   const updatedHeroes = updateArray(state.heroes, hero, index);
   return updateObject(state, { heroes: updatedHeroes, hero });
 };
 
-export default reducer;
+export default heroReducer;

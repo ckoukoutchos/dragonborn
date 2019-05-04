@@ -1,23 +1,31 @@
 import { put } from 'redux-saga/effects';
 import axios from 'axios';
-
+import { DB } from '../../firebase/firebase';
 import * as actions from '../actions/index';
 
 export function* createHeroSaga({ hero, route }) {
   try {
-    const {
-      data: { name }
-    } = yield axios.post(
-      'https://dragonborn-1077c.firebaseio.com/heroes.json',
-      hero
-    );
-    hero.id = name;
-    yield put(actions.createHeroSuccess(hero));
-    yield route.push(`/track/${name}/stats`);
+    const data = yield DB.ref('heroes').push();
+    const data2 = yield data.set(hero);
+
+    console.log(data.key);
   } catch (error) {
-    // TODO: swap out action for fail
-    yield put(actions.createHeroSuccess(error));
+    console.log(error);
   }
+  // try {
+  //   const {
+  //     data: { name }
+  //   } = yield axios.post(
+  //     'https://dragonborn-1077c.firebaseio.com/heroes.json',
+  //     hero
+  //   );
+  //   hero.id = name;
+  //   yield put(actions.createHeroSuccess(hero));
+  //   yield route.push(`/track/${name}/stats`);
+  // } catch (error) {
+  //   // TODO: swap out action for fail
+  //   yield put(actions.createHeroSuccess(error));
+  // }
 }
 
 export function* deleteHeroSaga({ heroId }) {
@@ -46,14 +54,15 @@ export function* fetchHeroSaga({ heroId }) {
 
 export function* fetchHeroesSaga(action) {
   yield put(actions.fetchHeroesStart());
+
   try {
-    const { data } = yield axios.get(
-      'https://dragonborn-1077c.firebaseio.com/heroes.json'
-    );
+    const data = yield DB.ref('heroes').once('value');
+
+    const heroData = data.val();
 
     const heroes = [];
-    for (const key in data) {
-      heroes.push({ ...data[key], id: key });
+    for (const key in heroData) {
+      heroes.push({ ...heroData[key], id: key });
     }
 
     yield put(actions.fetchHeroesSuccess(heroes));

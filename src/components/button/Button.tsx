@@ -5,7 +5,7 @@ interface Props {
   btnType: string;
   children: any;
   color: string;
-  disabled: boolean;
+  disabled?: boolean;
   clicked: (event: React.MouseEvent) => void;
 }
 

@@ -1,5 +1,8 @@
-import app from 'firebase/app';
+import Firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/database';
 
+// config file required to initialize Firebase app, values injected based on .ev file at runtime
 const config = {
   apiKey: process.env.REACT_APP_API_KEY,
   authDomain: process.env.REACT_APP_AUTH_DOMAIN,
@@ -9,10 +12,11 @@ const config = {
   messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID
 };
 
-class Firebase {
-  constructor() {
-    app.initializeApp(config);
-  }
-}
+// intialize Firebase app
+Firebase.initializeApp(config);
 
-export default Firebase;
+// access to auth
+export const Auth = Firebase.auth();
+
+// access to real-time database
+export const DB = Firebase.database();
