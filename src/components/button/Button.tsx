@@ -1,7 +1,7 @@
 import React from 'react';
 import classes from './Button.module.css';
 
-interface Props {
+interface ButtonProps {
   btnType: string;
   children: any;
   color: string;
@@ -9,7 +9,7 @@ interface Props {
   clicked: (event: React.MouseEvent) => void;
 }
 
-const button = (props: Props) => (
+const button = (props: ButtonProps) => (
   <button
     className={[
       classes.Button,

@@ -4,8 +4,19 @@ import classes from './TitleCard.module.css';
 import Button from '../../button/Button';
 import Input from '../../input/Input';
 
-const titleCard = props => {
+interface TitleCardProps {
+  editing: boolean;
+  children: any;
+  onChange: any;
+  onEdit: any;
+  readOnly?: boolean;
+  title: string;
+  value: string;
+}
+
+const titleCard = (props: TitleCardProps) => {
   const { editing, onChange, onEdit, readOnly, title, value } = props;
+
   return (
     <div className={classes.Card}>
       <div className={readOnly ? classes.Header : classes.HeaderEdit}>
@@ -14,6 +25,7 @@ const titleCard = props => {
         ) : (
           <h1 className={classes.Title}>{title}</h1>
         )}
+
         {readOnly ? null : (
           <Button
             color={editing ? 'Secondary' : 'Primary'}
@@ -24,6 +36,7 @@ const titleCard = props => {
           </Button>
         )}
       </div>
+
       <div className={classes.Body}>{props.children}</div>
     </div>
   );

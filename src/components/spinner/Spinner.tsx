@@ -1,7 +1,7 @@
 import React from 'react';
 import classes from './Spinner.module.css';
 
-const spinner = (props: any) => (
+const spinner = () => (
   <div className={classes.Spinner}>
     <div className={classes.DoubleBounce1} />
     <div className={classes.DoubleBounce2} />

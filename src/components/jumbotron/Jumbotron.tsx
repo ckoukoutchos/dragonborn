@@ -2,7 +2,12 @@ import React from 'react';
 
 import classes from './Jumbotron.module.css';
 
-const jumbotron = props => {
+interface JumbotronProps {
+  header: string;
+  subHeader: string;
+}
+
+const jumbotron = (props: JumbotronProps) => {
   return (
     <div className={classes.Jumbotron}>
       <h1 className={classes.Header}>{props.header}</h1>

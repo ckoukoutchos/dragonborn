@@ -2,11 +2,11 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import classes from './TabBar.module.css';
 
-interface Props {
+interface TabBarProps {
   id: number;
 }
 
-const tabBar = (props: Props) => {
+const tabBar = (props: TabBarProps) => {
   return (
     <div className={classes.TabBar}>
       <div className={classes.TabItem}>
@@ -17,6 +17,7 @@ const tabBar = (props: Props) => {
           Stats
         </NavLink>
       </div>
+
       <div className={classes.TabItem}>
         <NavLink
           to={`/track/${props.id}/spells`}
@@ -26,6 +27,7 @@ const tabBar = (props: Props) => {
           Spells
         </NavLink>
       </div>
+
       <div className={classes.TabItem}>
         <NavLink
           to={`/track/${props.id}/play`}
