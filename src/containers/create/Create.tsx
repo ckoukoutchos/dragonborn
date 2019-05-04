@@ -9,8 +9,8 @@ import Jumbotron from '../../components/jumbotron/Jumbotron';
 import TitleCard from '../../components/card/title-card/TitleCard';
 
 /*
-* Container for Create character page
-*/
+ * Container for Create character page
+ */
 class Create extends Component<any, any> {
   state = {
     modalOpen: false
@@ -51,7 +51,8 @@ class Create extends Component<any, any> {
 }
 
 const mapDispatchToProps = (dispatch: any) => ({
-  createHero: (hero: Hero, route: ) => dispatch(actions.createHero(hero, route))
+  createHero: (hero: Hero, route: any) =>
+    dispatch(actions.createHero(hero, route))
 });
 
 export default connect(

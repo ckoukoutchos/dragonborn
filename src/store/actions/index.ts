@@ -21,4 +21,4 @@ export {
   updateHero,
   updateHeroFail,
   updateHeroSuccess
-} from './hero';
+} from '../hero/heroActions';

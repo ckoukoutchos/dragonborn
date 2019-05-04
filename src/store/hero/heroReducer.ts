@@ -10,7 +10,7 @@ interface HeroState {
   userId: number;
 }
 
-const initialState = {
+const initialState: HeroState = {
   hero: new Hero(),
   heroes: [],
   loading: false,

@@ -1,5 +1,5 @@
-import * as actionTypes from './actionTypes';
-import { Action } from './index';
+import * as actionTypes from '../actions/actionTypes';
+import { Action } from '../actions/index';
 import Hero from '../../shared/Hero';
 
 export const createHero = (hero: Hero, route: string): Action => ({

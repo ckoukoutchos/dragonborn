@@ -7,8 +7,8 @@ import createSagaMiddleware from 'redux-saga';
 
 import './index.css';
 import App from './App';
-import rootReducer from './store/reducers/index';
-import { watchHero } from './store/sagas/index';
+import rootReducer from './store/rootReducer';
+import { watchHero } from './store/rootSaga';
 
 // initialize saga middleware
 const sagaMiddleware = createSagaMiddleware();

@@ -1,13 +1,13 @@
 import { all, takeEvery } from 'redux-saga/effects';
 
-import * as actionTypes from '../actions/actionTypes';
+import * as actionTypes from './actions/actionTypes';
 import {
   createHeroSaga,
   deleteHeroSaga,
   fetchHeroSaga,
   fetchHeroesSaga,
   updateHeroSaga
-} from './hero';
+} from './hero/heroReducer';
 
 export function* watchHero() {
   yield all([
