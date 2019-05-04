@@ -1,14 +1,17 @@
-import * as actionTypes from '../actions/actionTypes';
 import { updateObject, updateArray } from '../../shared/Utility';
-import { Action } from '../actions/index';
 import Hero from '../../shared/Hero';
-
-interface HeroState {
-  hero: Hero;
-  heroes: Hero[];
-  loading: boolean;
-  userId: number;
-}
+import {
+  HeroState,
+  HeroActionTypes,
+  CREATE_HERO_FAIL,
+  CREATE_HERO_SUCCESS,
+  DELETE_HERO_SUCCESS,
+  FETCH_HERO_SUCCESS,
+  FETCH_HEROES_START,
+  FETCH_HEROES_SUCCESS,
+  GET_HERO,
+  UPDATE_HERO_SUCCESS
+} from './heroTypes';
 
 const initialState: HeroState = {
   hero: new Hero(),
@@ -19,24 +22,24 @@ const initialState: HeroState = {
 
 const heroReducer = (
   state: HeroState = initialState,
-  action: any
+  action: HeroActionTypes
 ): HeroState => {
   switch (action.type) {
-    case actionTypes.CREATE_HERO_FAIL:
+    case CREATE_HERO_FAIL:
       return state;
-    case actionTypes.CREATE_HERO_SUCCESS:
+    case CREATE_HERO_SUCCESS:
       return createHeroSuccess(state, action);
-    case actionTypes.DELETE_HERO_SUCCESS:
+    case DELETE_HERO_SUCCESS:
       return deleteHeroSuccess(state, action);
-    case actionTypes.FETCH_HERO_SUCCESS:
+    case FETCH_HERO_SUCCESS:
       return fetchHeroSuccess(state, action);
-    case actionTypes.FETCH_HEROES_START:
-      return fetchHeroesStart(state, action);
-    case actionTypes.FETCH_HEROES_SUCCESS:
+    case FETCH_HEROES_START:
+      return fetchHeroesStart(state);
+    case FETCH_HEROES_SUCCESS:
       return fetchHeroesSuccess(state, action);
-    case actionTypes.GET_HERO:
+    case GET_HERO:
       return getHero(state, action);
-    case actionTypes.UPDATE_HERO_SUCCESS:
+    case UPDATE_HERO_SUCCESS:
       return updateHeroSuccess(state, action);
     default:
       return state;
@@ -68,7 +71,7 @@ const fetchHeroSuccess = (
   return updateObject(state, { hero });
 };
 
-const fetchHeroesStart = (state: HeroState, action: Action): HeroState => {
+const fetchHeroesStart = (state: HeroState): HeroState => {
   return updateObject(state, { loading: true });
 };
 

@@ -2,6 +2,8 @@ import { combineReducers } from 'redux';
 
 import heroReducer from './hero/heroReducer';
 
-export default combineReducers({
+const rootReducer = combineReducers({
   hero: heroReducer
 });
+
+export type AppState = ReturnType<typeof rootReducer>;

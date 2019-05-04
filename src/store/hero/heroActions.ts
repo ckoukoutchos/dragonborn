@@ -1,87 +1,105 @@
-import * as actionTypes from '../actions/actionTypes';
-import { Action } from '../actions/index';
 import Hero from '../../shared/Hero';
+import {
+  HeroActionTypes,
+  CREATE_HERO,
+  CREATE_HERO_FAIL,
+  CREATE_HERO_SUCCESS,
+  DELETE_HERO,
+  DELETE_HERO_FAIL,
+  DELETE_HERO_SUCCESS,
+  FETCH_HERO,
+  FETCH_HERO_FAIL,
+  FETCH_HERO_SUCCESS,
+  FETCH_HEROES,
+  FETCH_HEROES_START,
+  FETCH_HEROES_FAIL,
+  FETCH_HEROES_SUCCESS,
+  GET_HERO,
+  UPDATE_HERO,
+  UPDATE_HERO_FAIL,
+  UPDATE_HERO_SUCCESS
+} from './heroTypes';
 
-export const createHero = (hero: Hero, route: string): Action => ({
-  type: actionTypes.CREATE_HERO,
+export const createHero = (hero: Hero, route: string): HeroActionTypes => ({
+  type: CREATE_HERO,
   hero,
   route
 });
 
-export const createHeroFail = (error: any): Action => ({
-  type: actionTypes.CREATE_HERO_FAIL,
+export const createHeroFail = (error: any): HeroActionTypes => ({
+  type: CREATE_HERO_FAIL,
   error
 });
 
-export const createHeroSuccess = (hero: Hero): Action => ({
-  type: actionTypes.CREATE_HERO_SUCCESS,
+export const createHeroSuccess = (hero: Hero): HeroActionTypes => ({
+  type: CREATE_HERO_SUCCESS,
   hero
 });
 
-export const deleteHero = (heroId: number): Action => ({
-  type: actionTypes.DELETE_HERO,
+export const deleteHero = (heroId: number): HeroActionTypes => ({
+  type: DELETE_HERO,
   heroId
 });
 
-export const deleteHeroFail = (error: any): Action => ({
-  type: actionTypes.DELETE_HERO_FAIL,
+export const deleteHeroFail = (error: any): HeroActionTypes => ({
+  type: DELETE_HERO_FAIL,
   error
 });
 
-export const deleteHeroSuccess = (heroId: number): Action => ({
-  type: actionTypes.DELETE_HERO_SUCCESS,
+export const deleteHeroSuccess = (heroId: number): HeroActionTypes => ({
+  type: DELETE_HERO_SUCCESS,
   heroId
 });
 
-export const fetchHero = (heroId: number): Action => ({
-  type: actionTypes.FETCH_HERO,
+export const fetchHero = (heroId: number): HeroActionTypes => ({
+  type: FETCH_HERO,
   heroId
 });
 
-export const fetchHeroFail = (error: any): Action => ({
-  type: actionTypes.FETCH_HERO_FAIL,
+export const fetchHeroFail = (error: any): HeroActionTypes => ({
+  type: FETCH_HERO_FAIL,
   error
 });
 
-export const fetchHeroSuccess = (hero: Hero): Action => ({
-  type: actionTypes.FETCH_HERO_SUCCESS,
+export const fetchHeroSuccess = (hero: Hero): HeroActionTypes => ({
+  type: FETCH_HERO_SUCCESS,
   hero
 });
 
-export const fetchHeroes = () => ({
-  type: actionTypes.FETCH_HEROES
+export const fetchHeroes = (): HeroActionTypes => ({
+  type: FETCH_HEROES
 });
 
-export const fetchHeroesStart = () => ({
-  type: actionTypes.FETCH_HEROES_START
+export const fetchHeroesStart = (): HeroActionTypes => ({
+  type: FETCH_HEROES_START
 });
 
-export const fetchHeroesFail = (error: any): Action => ({
-  type: actionTypes.FETCH_HEROES_FAIL,
+export const fetchHeroesFail = (error: any): HeroActionTypes => ({
+  type: FETCH_HEROES_FAIL,
   error
 });
 
-export const fetchHeroesSuccess = (heroes: Hero[]): Action => ({
-  type: actionTypes.FETCH_HEROES_SUCCESS,
+export const fetchHeroesSuccess = (heroes: Hero[]): HeroActionTypes => ({
+  type: FETCH_HEROES_SUCCESS,
   heroes
 });
 
-export const getHero = (heroId: number): Action => ({
-  type: actionTypes.GET_HERO,
+export const getHero = (heroId: number): HeroActionTypes => ({
+  type: GET_HERO,
   heroId
 });
 
-export const updateHero = (hero: Hero): Action => ({
-  type: actionTypes.UPDATE_HERO,
+export const updateHero = (hero: Hero): HeroActionTypes => ({
+  type: UPDATE_HERO,
   hero
 });
 
-export const updateHeroFail = (error: any): Action => ({
-  type: actionTypes.UPDATE_HERO_FAIL,
+export const updateHeroFail = (error: any): HeroActionTypes => ({
+  type: UPDATE_HERO_FAIL,
   error
 });
 
-export const updateHeroSuccess = (hero: Hero): Action => ({
-  type: actionTypes.UPDATE_HERO_SUCCESS,
+export const updateHeroSuccess = (hero: Hero): HeroActionTypes => ({
+  type: UPDATE_HERO_SUCCESS,
   hero
 });

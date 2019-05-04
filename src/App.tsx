@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
+import { AppState } from './store/rootReducer';
+import { HeroState } from './store/hero/heroTypes';
+
 import Layout from './hoc/layout/Layout';
 import Create from './containers/create/Create';
 import Track from './containers/track/Track';
 import TrackStats from './containers/track/track-stats/TrackStats';
 
-class App extends Component {
+interface AppProps {
+  hero: HeroState;
+}
+
+class App extends Component<AppProps> {
   render() {
     return (
       <Layout>
@@ -21,5 +28,9 @@ class App extends Component {
     );
   }
 }
+
+const mapStateToProps = (state: AppState) => ({
+  hero: state.hero
+});
 
 export default App;
