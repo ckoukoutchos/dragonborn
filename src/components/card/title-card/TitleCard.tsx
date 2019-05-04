@@ -5,13 +5,13 @@ import Button from '../../button/Button';
 import Input from '../../input/Input';
 
 interface TitleCardProps {
-  editing: boolean;
+  editing?: boolean;
   children: any;
-  onChange: any;
-  onEdit: any;
+  onChange?: any;
+  onEdit?: any;
   readOnly?: boolean;
   title: string;
-  value: string;
+  value?: string;
 }
 
 const titleCard = (props: TitleCardProps) => {

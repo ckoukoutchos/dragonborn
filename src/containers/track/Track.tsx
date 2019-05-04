@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
 
-import * as actions from '../../store/actions/index';
+import Hero from '../../shared/Hero';
+import { deleteHero, fetchHeroes, getHero } from '../../store/hero/heroActions';
+import { HeroActionTypes } from '../../store/hero/heroTypes';
+import { AppState } from '../../store/rootReducer';
 
 import Button from '../../components/button/Button';
 import Input from '../../components/input/Input';
@@ -9,18 +13,20 @@ import Jumbotron from '../../components/jumbotron/Jumbotron';
 import Spinner from '../../components/spinner/Spinner';
 import TitleCard from '../../components/card/title-card/TitleCard';
 
-class Track extends Component {
+interface TrackProps {}
+
+class Track extends Component<any, any> {
   componentDidMount() {
     if (!this.props.heroes.length) {
       this.props.fetchHeroes();
     }
   }
 
-  onHeroDeletion = heroId => {
+  onHeroDeletion = (heroId: number): void => {
     this.props.deleteHero(heroId);
   };
 
-  onHeroSelection = heroId => {
+  onHeroSelection = (heroId: number): void => {
     this.props.getHero(heroId);
     this.props.history.push(`/track/${heroId}/stats`);
   };
@@ -29,14 +35,17 @@ class Track extends Component {
     let heroes = <Spinner />;
 
     if (!this.props.loading) {
-      heroes = this.props.heroes.map((hero, index) => (
+      heroes = this.props.heroes.map((hero: Hero, index: number) => (
         <TitleCard key={index} title={hero.name} readOnly>
           <Input
             label={'Class & Level'}
             value={hero.heroClass + ' ' + hero.level}
           />
+
           <Input label="Race" value={hero.race} />
+
           <Input label="Alignment" value={hero.alignment} />
+
           <Button
             color="Primary"
             btnType="Flat"
@@ -44,11 +53,13 @@ class Track extends Component {
           >
             View
           </Button>
+
           <div>
             <strong>
               {hero.active ? 'Active Campaign' : 'In Need of Quests'}
             </strong>
           </div>
+
           <Button
             color="Secondary"
             btnType="Flat"
@@ -69,16 +80,16 @@ class Track extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: AppState) => ({
   heroes: state.hero.heroes,
   loading: state.hero.loading,
   userId: state.hero.userId
 });
 
-const mapDispatchToProps = dispatch => ({
-  deleteHero: heroId => dispatch(actions.deleteHero(heroId)),
-  fetchHeroes: () => dispatch(actions.fetchHeroes()),
-  getHero: heroId => dispatch(actions.getHero(heroId))
+const mapDispatchToProps = (dispatch: Dispatch<HeroActionTypes>) => ({
+  deleteHero: (heroId: number) => dispatch(deleteHero(heroId)),
+  fetchHeroes: () => dispatch(fetchHeroes()),
+  getHero: (heroId: number) => dispatch(getHero(heroId))
 });
 
 export default connect(

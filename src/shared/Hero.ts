@@ -7,6 +7,7 @@ export default class Hero {
     { name: 'Strength', value: 0 },
     { name: 'Wisdom', value: 0 }
   ];
+  active = false;
   alignment = '';
   armor = [];
   armorClass = 0;
@@ -22,7 +23,7 @@ export default class Hero {
     numberOfDice: 1,
     numberOfSides: 4
   };
-  id = null;
+  id = 0;
   initative = 0;
   inspiration = 0;
   level = 0;
