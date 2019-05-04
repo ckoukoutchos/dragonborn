@@ -1,21 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
 
-import * as actions from '../../store/actions/index';
 import Hero from '../../shared/Hero';
+import { createHero } from '../../store/hero/heroActions';
+import { HeroActionTypes } from '../../store/hero/heroTypes';
 
 import Button from '../../components/button/Button';
 import Jumbotron from '../../components/jumbotron/Jumbotron';
 import TitleCard from '../../components/card/title-card/TitleCard';
 
+interface CreateProps {
+  history: History;
+  createHero: (hero: Hero, route: any) => HeroActionTypes;
+}
+
 /*
  * Container for Create character page
  */
-class Create extends Component<any, any> {
-  state = {
-    modalOpen: false
-  };
-
+class Create extends Component<CreateProps> {
   /**
    * @name onCreateClicked
    * @description triggers action to create new hero and redirect to track page
@@ -50,9 +53,8 @@ class Create extends Component<any, any> {
   }
 }
 
-const mapDispatchToProps = (dispatch: any) => ({
-  createHero: (hero: Hero, route: any) =>
-    dispatch(actions.createHero(hero, route))
+const mapDispatchToProps = (dispatch: Dispatch<HeroActionTypes>) => ({
+  createHero: (hero: Hero, route: any) => dispatch(createHero(hero, route))
 });
 
 export default connect(

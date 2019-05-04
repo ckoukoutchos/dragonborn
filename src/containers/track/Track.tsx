@@ -13,9 +13,20 @@ import Jumbotron from '../../components/jumbotron/Jumbotron';
 import Spinner from '../../components/spinner/Spinner';
 import TitleCard from '../../components/card/title-card/TitleCard';
 
-interface TrackProps {}
+interface TrackProps {
+  history: History;
+  heroes: any;
+  loading: boolean;
+  userId: number;
+  deleteHero: (heroId: number) => HeroActionTypes;
+  fetchHeroes: () => HeroActionTypes;
+  getHero: (heroId: number) => HeroActionTypes;
+}
 
-class Track extends Component<any, any> {
+/*
+ * Container for Track page
+ */
+class Track extends Component<TrackProps> {
   componentDidMount() {
     if (!this.props.heroes.length) {
       this.props.fetchHeroes();

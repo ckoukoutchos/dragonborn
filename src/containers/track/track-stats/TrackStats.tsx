@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import * as actions from '../../../store/actions/index';
+import { updateObject, updateObjectInArray } from '../../../shared/Utility';
+import {
+  fetchHero,
+  getHero,
+  updateHero
+} from '../../../store/hero/heroActions';
 
 import BasicCard from '../../../components/card/basic-card/BasicCard';
 import BlockInput from '../../../components/input/block-input/BlockInput';
@@ -12,8 +17,6 @@ import TabBar from '../../../components/tab-bar/TabBar';
 import TextAreaInput from '../../../components/input/textarea-input/TextAreaInput';
 import TitleCard from '../../../components/card/title-card/TitleCard';
 import ToggleLineInput from '../../../components/input/toggle-line-input/ToggleLineInput';
-
-import { updateObject, updateObjectInArray } from '../../../shared/Utility';
 
 class TrackStats extends Component<any, any> {
   state = {
@@ -276,9 +279,9 @@ class TrackStats extends Component<any, any> {
 }
 
 const mapDispatchToProps = (dispatch: any) => ({
-  fetchHero: (heroId: any) => dispatch(actions.fetchHero(heroId)),
-  getHero: (heroId: any) => dispatch(actions.getHero(heroId)),
-  updateHero: (hero: any) => dispatch(actions.updateHero(hero))
+  fetchHero: (heroId: any) => dispatch(fetchHero(heroId)),
+  getHero: (heroId: any) => dispatch(getHero(heroId)),
+  updateHero: (hero: any) => dispatch(updateHero(hero))
 });
 
 const mapStateToProps = (state: any) => ({
