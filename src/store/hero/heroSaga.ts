@@ -1,6 +1,5 @@
 /* eslint-disable no-unused-vars */
 import { put } from 'redux-saga/effects';
-import axios from 'axios';
 import { DB } from '../../firebase/firebase';
 import {
   createHeroSuccess,
@@ -11,8 +10,9 @@ import {
   fetchHeroesFail,
   updateHeroSuccess
 } from './heroActions';
+import Hero from '../../shared/Hero';
 
-export function* createHeroSaga({ hero, route }) {
+export function* createHeroSaga({ hero, route }: { hero: Hero; route: any }) {
   try {
     // create new entry spot in Firebase
     const newHeroRef = yield DB.ref('heroes').push();
@@ -33,7 +33,7 @@ export function* createHeroSaga({ hero, route }) {
   }
 }
 
-export function* deleteHeroSaga({ heroId }) {
+export function* deleteHeroSaga({ heroId }: { heroId: number }) {
   try {
     // grab specific hero DB ref
     const heroRef = yield DB.ref(`heroes/${heroId}`);
@@ -48,7 +48,7 @@ export function* deleteHeroSaga({ heroId }) {
   }
 }
 
-export function* fetchHeroSaga({ heroId }) {
+export function* fetchHeroSaga({ heroId }: { heroId: number }) {
   try {
     // hero specif DB ref
     const heroRef = yield DB.ref(`heroes/${heroId}`);
@@ -66,7 +66,7 @@ export function* fetchHeroSaga({ heroId }) {
   }
 }
 
-export function* fetchHeroesSaga(action) {
+export function* fetchHeroesSaga() {
   yield put(fetchHeroesStart());
 
   try {
@@ -90,7 +90,7 @@ export function* fetchHeroesSaga(action) {
   }
 }
 
-export function* updateHeroSaga({ hero }) {
+export function* updateHeroSaga({ hero }: { hero: Hero }) {
   try {
     // grab specific hero DB ref
     const heroRef = yield DB.ref(`heroes/${hero.id}`);
