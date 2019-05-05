@@ -1,8 +1,13 @@
 import React from 'react';
 
-import classes from './TableBlockInput.module.css';
+import classes from './TextAreaInput.module.css';
 
-const tableBlockInput = props => {
+interface TextareaInput {
+  editing: boolean;
+  value: string;
+}
+
+const textareaInput = (props: TextareaInput) => {
   const { editing, value } = props;
   return (
     <div
@@ -11,7 +16,7 @@ const tableBlockInput = props => {
         editing ? classes.Edit : classes.Disabled
       ].join(' ')}
     >
-      <input
+      <textarea
         className={[
           classes.Input,
           editing ? classes.Edit : classes.Disabled
@@ -23,4 +28,4 @@ const tableBlockInput = props => {
   );
 };
 
-export default tableBlockInput;
+export default textareaInput;

@@ -2,8 +2,16 @@ import React from 'react';
 
 import classes from './BlockInput.module.css';
 
-const blockInput = props => {
+interface BlockInput {
+  editing: boolean;
+  label: string;
+  onChange: any;
+  value: string;
+}
+
+const blockInput = (props: BlockInput) => {
   const { editing, label, onChange, value } = props;
+
   return (
     <div
       className={[
@@ -20,6 +28,7 @@ const blockInput = props => {
         onChange={onChange}
         value={value}
       />
+
       <label
         className={[
           classes.Label,

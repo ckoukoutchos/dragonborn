@@ -2,7 +2,17 @@ import React from 'react';
 
 import classes from './ToggleLineInput.module.css';
 
-const toggleLineInput = props => {
+interface ToggleLineInput {
+  editing: boolean;
+  label: string;
+  onChange: any;
+  onToggle: any;
+  proficient: boolean;
+  proficientBonus: number;
+  value: any;
+}
+
+const toggleLineInput = (props: ToggleLineInput) => {
   const {
     editing,
     label,
@@ -22,6 +32,7 @@ const toggleLineInput = props => {
         ].join(' ')}
         onClick={onToggle}
       />
+
       <input
         className={[
           classes.Input,
@@ -31,6 +42,7 @@ const toggleLineInput = props => {
         onChange={onChange}
         value={proficient ? Number(value) + Number(proficientBonus) : value}
       />
+
       <label className={classes.Label}>{label}</label>
     </div>
   );

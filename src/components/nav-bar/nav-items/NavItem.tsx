@@ -3,7 +3,14 @@ import { NavLink } from 'react-router-dom';
 
 import classes from './NavItem.module.css';
 
-const navItem = props => {
+interface NavItemProps {
+  exact?: boolean;
+  children: any;
+  link: string;
+  menu: any;
+}
+
+const navItem = (props: NavItemProps) => {
   const attatchMenu = props.menu
     ? [classes.NavItem, classes.Menu].join(' ')
     : classes.NavItem;

@@ -2,8 +2,16 @@ import React from 'react';
 
 import classes from './Input.module.css';
 
-const input = props => {
+interface InputProps {
+  editing: boolean;
+  label: string;
+  onChange: any;
+  value: string;
+}
+
+const input = (props: InputProps) => {
   const { editing, label, onChange, value } = props;
+
   return (
     <div className={classes.Container}>
       <input
@@ -15,6 +23,7 @@ const input = props => {
         onChange={onChange}
         value={value}
       />
+
       <label className={classes.Label}>{label}</label>
     </div>
   );

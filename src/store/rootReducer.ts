@@ -13,3 +13,4 @@ const rootReducer = combineReducers({
  * TS infers state shape using return type
  */
 export type AppState = ReturnType<typeof rootReducer>;
+export default rootReducer;

@@ -3,13 +3,21 @@ import React, { Component } from 'react';
 import classes from './NavBar.module.css';
 import NavItem from './nav-items/NavItem';
 
-class NavBar extends Component {
+interface NavBarState {
+  menuToggle: boolean;
+}
+
+class NavBar extends Component<any, NavBarState> {
   state = {
     menuToggle: false
   };
 
-  onMenuToggle = () => {
-    this.setState(prevState => {
+  /**
+   * @name onMenuToggle
+   * @description toogles menu open/closed state
+   */
+  onMenuToggle = (): void => {
+    this.setState((prevState: NavBarState) => {
       return { menuToggle: !prevState.menuToggle };
     });
   };
@@ -22,6 +30,7 @@ class NavBar extends Component {
             Dragonborn
           </NavItem>
         </div>
+
         <nav className={classes.Links}>
           <NavItem link="/create">Create</NavItem>
           <NavItem link="/track">Track</NavItem>
@@ -30,9 +39,11 @@ class NavBar extends Component {
             Login
           </NavItem>
         </nav>
+
         <div className={classes.Menu} onClick={this.onMenuToggle}>
           {this.state.menuToggle ? 'Close' : 'Menu'}
         </div>
+
         {this.state.menuToggle ? (
           <div className={classes.MenuContainer} onClick={this.onMenuToggle}>
             <nav>

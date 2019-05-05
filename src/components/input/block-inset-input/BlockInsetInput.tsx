@@ -3,7 +3,14 @@ import React from 'react';
 import { calcAbilityModifier } from '../../../shared/Convert';
 import classes from './BlockInsetInput.module.css';
 
-const blockInsetInput = props => {
+interface BlockInsetInput {
+  editing: boolean;
+  label: string;
+  onChange: any;
+  value: any;
+}
+
+const blockInsetInput = (props: BlockInsetInput) => {
   const { editing, label, onChange, value } = props;
   const modifier = calcAbilityModifier(value);
 
@@ -22,6 +29,7 @@ const blockInsetInput = props => {
       >
         {label}
       </label>
+
       <input
         className={[
           classes.Input,
@@ -31,6 +39,7 @@ const blockInsetInput = props => {
         onChange={onChange}
         value={value}
       />
+
       <div className={classes.Inset}>
         {modifier >= 0 ? '+' : ''}
         {modifier}
