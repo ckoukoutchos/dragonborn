@@ -1,5 +1,8 @@
 import Hero from '../../shared/Hero';
 
+/*
+ * Hero action constants
+ */
 export const CREATE_HERO = 'CREATE_HERO';
 export const CREATE_HERO_FAIL = 'CREATE_HERO_FAIL';
 export const CREATE_HERO_SUCCESS = 'CREATE_HERO_SUCCESS';
@@ -23,6 +26,9 @@ export const UPDATE_HERO = 'UPDATE_HERO';
 export const UPDATE_HERO_FAIL = 'UPDATE_HERO_FAIL';
 export const UPDATE_HERO_SUCCESS = 'UPDATE_HERO_SUCCESS';
 
+/*
+ * Hero action type interfaces
+ */
 export interface HeroState {
   hero: Hero;
   heroes: Hero[];

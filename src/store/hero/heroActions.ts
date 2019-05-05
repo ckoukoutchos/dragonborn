@@ -20,6 +20,9 @@ import {
   UPDATE_HERO_SUCCESS
 } from './heroTypes';
 
+/*
+ * Hero action creators
+ */
 export const createHero = (hero: Hero, route: string): HeroActionTypes => ({
   type: CREATE_HERO,
   hero,

@@ -13,6 +13,9 @@ import {
   UPDATE_HERO_SUCCESS
 } from './heroTypes';
 
+/*
+ * Inital Hero state
+ */
 const initialState: HeroState = {
   hero: new Hero(),
   heroes: [],
@@ -20,6 +23,12 @@ const initialState: HeroState = {
   userId: 1
 };
 
+/**
+ * @name heroReducer
+ * @description reducer for hero slice of state
+ * @param state
+ * @param action
+ */
 const heroReducer = (
   state: HeroState = initialState,
   action: HeroActionTypes
@@ -46,6 +55,9 @@ const heroReducer = (
   }
 };
 
+/*
+ *
+ */
 const createHeroSuccess = (
   state: HeroState,
   { hero }: { hero: Hero }

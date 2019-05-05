@@ -14,8 +14,8 @@ import Spinner from '../../components/spinner/Spinner';
 import TitleCard from '../../components/card/title-card/TitleCard';
 
 interface TrackProps {
-  history: History;
-  heroes: any;
+  history: any;
+  heroes: any; // TS bug, needs to be declared type <any>
   loading: boolean;
   userId: number;
   deleteHero: (heroId: number) => HeroActionTypes;
@@ -43,10 +43,10 @@ class Track extends Component<TrackProps> {
   };
 
   render() {
-    let heroes = <Spinner />;
+    let heroList = <Spinner />;
 
     if (!this.props.loading) {
-      heroes = this.props.heroes.map((hero: Hero, index: number) => (
+      heroList = this.props.heroes.map((hero: Hero, index: number) => (
         <TitleCard key={index} title={hero.name} readOnly>
           <Input
             label={'Class & Level'}
@@ -85,7 +85,7 @@ class Track extends Component<TrackProps> {
     return (
       <>
         <Jumbotron header="Track" subHeader="Keep Tabs on your Heroes" />
-        {heroes}
+        {heroList}
       </>
     );
   }
