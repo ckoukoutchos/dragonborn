@@ -4,7 +4,7 @@ import classes from './TextAreaInput.module.css';
 
 interface TextareaInput {
   editing: boolean;
-  value: string;
+  value?: string;
 }
 
 const textareaInput = (props: TextareaInput) => {

@@ -7,7 +7,7 @@ interface NavItemProps {
   exact?: boolean;
   children: any;
   link: string;
-  menu: any;
+  menu?: any;
 }
 
 const navItem = (props: NavItemProps) => {

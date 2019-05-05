@@ -11,7 +11,7 @@ interface TitleCardProps {
   onEdit?: any;
   readOnly?: boolean;
   title: string;
-  value?: string;
+  value?: any;
 }
 
 const titleCard = (props: TitleCardProps) => {

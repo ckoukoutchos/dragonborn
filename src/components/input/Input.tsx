@@ -3,9 +3,9 @@ import React from 'react';
 import classes from './Input.module.css';
 
 interface InputProps {
-  editing: boolean;
-  label: string;
-  onChange: any;
+  editing?: boolean;
+  label?: string;
+  onChange?: any;
   value: string;
 }
 

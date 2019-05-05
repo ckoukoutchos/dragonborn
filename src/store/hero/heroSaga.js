@@ -1,7 +1,14 @@
 import { put } from 'redux-saga/effects';
 import axios from 'axios';
 import { DB } from '../../firebase/firebase';
-import * as actions from '../actions/index';
+import {
+  deleteHeroSuccess,
+  fetchHeroesStart,
+  fetchHeroSuccess,
+  fetchHeroesSuccess,
+  fetchHeroesFail,
+  updateHeroSuccess
+} from './heroActions';
 
 export function* createHeroSaga({ hero, route }) {
   try {
@@ -33,7 +40,7 @@ export function* deleteHeroSaga({ heroId }) {
     yield axios.delete(
       `https://dragonborn-1077c.firebaseio.com/heroes/${heroId}.json`
     );
-    yield put(actions.deleteHeroSuccess(heroId));
+    yield put(deleteHeroSuccess(heroId));
   } catch (error) {
     // TODO: add error handling
     console.log(error);
@@ -45,7 +52,7 @@ export function* fetchHeroSaga({ heroId }) {
     const { data } = yield axios.get(
       `https://dragonborn-1077c.firebaseio.com/heroes/${heroId}.json`
     );
-    yield put(actions.fetchHeroSuccess(data));
+    yield put(fetchHeroSuccess(data));
   } catch (error) {
     // TODO: add error handling
     console.log(error);
@@ -53,7 +60,7 @@ export function* fetchHeroSaga({ heroId }) {
 }
 
 export function* fetchHeroesSaga(action) {
-  yield put(actions.fetchHeroesStart());
+  yield put(fetchHeroesStart());
 
   try {
     const data = yield DB.ref('heroes').once('value');
@@ -65,9 +72,9 @@ export function* fetchHeroesSaga(action) {
       heroes.push({ ...heroData[key], id: key });
     }
 
-    yield put(actions.fetchHeroesSuccess(heroes));
+    yield put(fetchHeroesSuccess(heroes));
   } catch (error) {
-    yield put(actions.fetchHeroesFail(error));
+    yield put(fetchHeroesFail(error));
   }
 }
 
@@ -77,7 +84,7 @@ export function* updateHeroSaga({ hero }) {
       `https://dragonborn-1077c.firebaseio.com/heroes/${hero.id}.json`,
       hero
     );
-    yield put(actions.updateHeroSuccess(data));
+    yield put(updateHeroSuccess(data));
   } catch (error) {
     // TODO: add error handling
     console.log(error);
