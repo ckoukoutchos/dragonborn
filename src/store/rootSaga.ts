@@ -6,14 +6,14 @@ import {
   fetchHeroSaga,
   fetchHeroesSaga,
   updateHeroSaga
-} from './hero/heroSaga';
+} from './hero/heroSagas';
 import {
   CREATE_HERO,
   DELETE_HERO,
   FETCH_HERO,
   FETCH_HEROES,
   UPDATE_HERO
-} from './hero/heroTypes';
+} from './hero/heroActionTypes';
 
 /**
  * @name watchHero

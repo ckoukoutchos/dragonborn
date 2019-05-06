@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import { AppState } from './store/rootReducer';
-import { HeroState } from './store/hero/heroTypes';
+import { HeroState } from './store/hero/heroActionTypes';
 
 import Layout from './hoc/layout/Layout';
 import Create from './containers/create/Create';

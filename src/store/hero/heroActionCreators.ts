@@ -18,7 +18,7 @@ import {
   UPDATE_HERO,
   UPDATE_HERO_FAIL,
   UPDATE_HERO_SUCCESS
-} from './heroTypes';
+} from './heroActionTypes';
 
 /*
  * Hero action creators

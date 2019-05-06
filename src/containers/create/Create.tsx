@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 
 import Hero from '../../shared/Hero';
-import { createHero } from '../../store/hero/heroActions';
-import { HeroActionTypes } from '../../store/hero/heroTypes';
+import { createHero } from '../../store/hero/heroActionCreators';
+import { HeroActionTypes } from '../../store/hero/heroActionTypes';
 
 import Button from '../../components/button/Button';
 import Jumbotron from '../../components/jumbotron/Jumbotron';
@@ -34,6 +34,7 @@ class Create extends Component<CreateProps> {
         <Jumbotron header="Create" subHeader="So Begins a New Legend" />
 
         <TitleCard title="Traditional" readOnly>
+          {/* TODO: remove inline styles */}
           <p
             style={{
               fontSize: '20px',

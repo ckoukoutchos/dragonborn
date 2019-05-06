@@ -3,8 +3,12 @@ import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 
 import Hero from '../../shared/Hero';
-import { deleteHero, fetchHeroes, getHero } from '../../store/hero/heroActions';
-import { HeroActionTypes } from '../../store/hero/heroTypes';
+import {
+  deleteHero,
+  fetchHeroes,
+  getHero
+} from '../../store/hero/heroActionCreators';
+import { HeroActionTypes } from '../../store/hero/heroActionTypes';
 import { AppState } from '../../store/rootReducer';
 
 import Button from '../../components/button/Button';

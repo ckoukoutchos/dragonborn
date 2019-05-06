@@ -6,7 +6,7 @@ import {
   fetchHero,
   getHero,
   updateHero
-} from '../../../store/hero/heroActions';
+} from '../../../store/hero/heroActionCreators';
 
 import BasicCard from '../../../components/card/basic-card/BasicCard';
 import BlockInput from '../../../components/input/block-input/BlockInput';

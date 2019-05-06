@@ -11,7 +11,7 @@ import {
   FETCH_HEROES_SUCCESS,
   GET_HERO,
   UPDATE_HERO_SUCCESS
-} from './heroTypes';
+} from './heroActionTypes';
 
 /*
  * Inital Hero state

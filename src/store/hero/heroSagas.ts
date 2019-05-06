@@ -9,7 +9,7 @@ import {
   fetchHeroesSuccess,
   fetchHeroesFail,
   updateHeroSuccess
-} from './heroActions';
+} from './heroActionCreators';
 import Hero from '../../shared/Hero';
 
 export function* createHeroSaga({ hero, route }: { hero: Hero; route: any }) {
