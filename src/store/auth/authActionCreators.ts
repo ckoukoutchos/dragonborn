@@ -12,16 +12,19 @@ import {
 /*
  * Auth action creators
  */
-export const login = (): AuthActionTypes => ({
-  type: LOGIN
+export const login = (email: string, password: string): AuthActionTypes => ({
+  type: LOGIN,
+  email,
+  password
 });
 
 export const loginFail = (): AuthActionTypes => ({
   type: LOGIN_FAIL
 });
 
-export const loginSuccess = (): AuthActionTypes => ({
-  type: LOGIN_SUCCESS
+export const loginSuccess = (user: any): AuthActionTypes => ({
+  type: LOGIN_SUCCESS,
+  user
 });
 
 export const logout = (): AuthActionTypes => ({

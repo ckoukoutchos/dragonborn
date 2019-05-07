@@ -15,11 +15,13 @@ export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
  * Auth action type interfaces
  */
 export interface AuthState {
-  authUser: null | any;
+  user: null | any;
 }
 
 interface LoginAction {
   type: typeof LOGIN;
+  email: string;
+  password: string;
 }
 
 interface LoginFailAction {
@@ -28,6 +30,7 @@ interface LoginFailAction {
 
 interface LoginSuccessAction {
   type: typeof LOGIN_SUCCESS;
+  user: any;
 }
 
 interface LogoutAction {

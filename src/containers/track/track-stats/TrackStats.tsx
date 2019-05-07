@@ -109,7 +109,7 @@ class TrackStats extends Component<any, any> {
       });
 
       if (prevState.updated) {
-        this.props.updateHero(prevState.hero);
+        this.props.updateHero(prevState.hero, this.props.user.uid);
       }
 
       return { editing: updatedValue, updated: false };
@@ -279,13 +279,14 @@ class TrackStats extends Component<any, any> {
 }
 
 const mapDispatchToProps = (dispatch: any) => ({
-  fetchHero: (heroId: any) => dispatch(fetchHero(heroId)),
+  fetchHero: (heroId: any, uid: string) => dispatch(fetchHero(heroId, uid)),
   getHero: (heroId: any) => dispatch(getHero(heroId)),
-  updateHero: (hero: any) => dispatch(updateHero(hero))
+  updateHero: (hero: any, uid: string) => dispatch(updateHero(hero, uid))
 });
 
 const mapStateToProps = (state: any) => ({
-  hero: state.hero.hero
+  hero: state.hero.hero,
+  user: state.auth.user
 });
 
 export default connect(

@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 import { AppState } from './store/rootReducer';
 import { HeroState } from './store/hero/heroActionTypes';
 
+import Auth from './containers/auth/auth';
 import Layout from './hoc/layout/Layout';
 import Create from './containers/create/Create';
 import Track from './containers/track/Track';
@@ -23,6 +24,7 @@ class App extends Component<AppProps> {
           <Route path="/track" exact component={Track} />
           <Route path="/track/:id/stats" exact component={TrackStats} />
           {/* <Route path="/guide" exact component={Guide} /> */}
+          <Route path="/auth" exact component={Auth} />
         </Switch>
       </Layout>
     );

@@ -23,10 +23,11 @@ import {
 /*
  * Hero action creators
  */
-export const createHero = (hero: Hero, route: string): HeroActionTypes => ({
+export const createHero = (hero: Hero, route: string, uid: string): HeroActionTypes => ({
   type: CREATE_HERO,
   hero,
-  route
+  route,
+  uid
 });
 
 export const createHeroFail = (error: any): HeroActionTypes => ({
@@ -39,9 +40,10 @@ export const createHeroSuccess = (hero: Hero): HeroActionTypes => ({
   hero
 });
 
-export const deleteHero = (heroId: number): HeroActionTypes => ({
+export const deleteHero = (heroId: number, uid: string): HeroActionTypes => ({
   type: DELETE_HERO,
-  heroId
+  heroId,
+  uid
 });
 
 export const deleteHeroFail = (error: any): HeroActionTypes => ({
@@ -54,9 +56,10 @@ export const deleteHeroSuccess = (heroId: number): HeroActionTypes => ({
   heroId
 });
 
-export const fetchHero = (heroId: number): HeroActionTypes => ({
+export const fetchHero = (heroId: number, uid: string): HeroActionTypes => ({
   type: FETCH_HERO,
-  heroId
+  heroId,
+  uid
 });
 
 export const fetchHeroFail = (error: any): HeroActionTypes => ({
@@ -69,8 +72,9 @@ export const fetchHeroSuccess = (hero: Hero): HeroActionTypes => ({
   hero
 });
 
-export const fetchHeroes = (): HeroActionTypes => ({
-  type: FETCH_HEROES
+export const fetchHeroes = (uid: string): HeroActionTypes => ({
+  type: FETCH_HEROES,
+  uid
 });
 
 export const fetchHeroesStart = (): HeroActionTypes => ({
@@ -92,9 +96,10 @@ export const getHero = (heroId: number): HeroActionTypes => ({
   heroId
 });
 
-export const updateHero = (hero: Hero): HeroActionTypes => ({
+export const updateHero = (hero: Hero, uid: string): HeroActionTypes => ({
   type: UPDATE_HERO,
-  hero
+  hero,
+  uid
 });
 
 export const updateHeroFail = (error: any): HeroActionTypes => ({

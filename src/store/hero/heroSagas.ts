@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { put } from 'redux-saga/effects';
-import { DB } from '../../firebase/firebase';
+import { DATABASE } from '../../firebase/firebase';
 
 import {
   createHeroSuccess,
@@ -13,10 +13,10 @@ import {
 } from './heroActionCreators';
 import Hero from '../../shared/Hero';
 
-export function* createHeroSaga({ hero, route }: { hero: Hero; route: any }) {
+export function* createHeroSaga({ hero, route, uid }: { hero: Hero; route: any, uid: string }) {
   try {
     // create new entry spot in Firebase
-    const newHeroRef = yield DB.ref('heroes').push();
+    const newHeroRef = yield DATABASE.ref(`users/${uid}/heroes`).push();
 
     // set new hero in created spot
     const res = yield newHeroRef.set(hero);
@@ -34,10 +34,10 @@ export function* createHeroSaga({ hero, route }: { hero: Hero; route: any }) {
   }
 }
 
-export function* deleteHeroSaga({ heroId }: { heroId: number }) {
+export function* deleteHeroSaga({ heroId, uid }: { heroId: number, uid: string }) {
   try {
     // grab specific hero DB ref
-    const heroRef = yield DB.ref(`heroes/${heroId}`);
+    const heroRef = yield DATABASE.ref(`users/${uid}/heroes/${heroId}`);
 
     // delete hero
     const res = yield heroRef.remove();
@@ -49,10 +49,10 @@ export function* deleteHeroSaga({ heroId }: { heroId: number }) {
   }
 }
 
-export function* fetchHeroSaga({ heroId }: { heroId: number }) {
+export function* fetchHeroSaga({ heroId, uid }: { heroId: number, uid: string }) {
   try {
     // hero specif DB ref
-    const heroRef = yield DB.ref(`heroes/${heroId}`);
+    const heroRef = yield DATABASE.ref(`users/${uid}/heroes/${heroId}`);
 
     // retrieve snapshot of hero
     const heroData = yield heroRef.once('value');
@@ -67,12 +67,12 @@ export function* fetchHeroSaga({ heroId }: { heroId: number }) {
   }
 }
 
-export function* fetchHeroesSaga() {
+export function* fetchHeroesSaga({ uid }: { uid: string }) {
   yield put(fetchHeroesStart());
 
   try {
     // hero list specific DB reference
-    const heroesRef = yield DB.ref('heroes');
+    const heroesRef = yield DATABASE.ref(`users/${uid}/heroes`);
 
     // retrieve snapshot of heroes list
     const heroesData = yield heroesRef.once('value');
@@ -91,10 +91,10 @@ export function* fetchHeroesSaga() {
   }
 }
 
-export function* updateHeroSaga({ hero }: { hero: Hero }) {
+export function* updateHeroSaga({ hero, uid }: { hero: Hero, uid: string }) {
   try {
     // grab specific hero DB ref
-    const heroRef = yield DB.ref(`heroes/${hero.id}`);
+    const heroRef = yield DATABASE.ref(`users/${uid}/heroes/${hero.id}`);
 
     // set updated hero
     const res = yield heroRef.set(hero);

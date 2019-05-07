@@ -22,8 +22,9 @@ interface TrackProps {
   heroes: any; // TS bug, needs to be declared type <any>
   loading: boolean;
   userId: number;
-  deleteHero: (heroId: number) => HeroActionTypes;
-  fetchHeroes: () => HeroActionTypes;
+  user: any;
+  deleteHero: (heroId: number, uid: string) => HeroActionTypes;
+  fetchHeroes: (uid: string) => HeroActionTypes;
   getHero: (heroId: number) => HeroActionTypes;
 }
 
@@ -33,12 +34,12 @@ interface TrackProps {
 class Track extends Component<TrackProps> {
   componentDidMount() {
     if (!this.props.heroes.length) {
-      this.props.fetchHeroes();
+      this.props.fetchHeroes(this.props.user.uid);
     }
   }
 
   onHeroDeletion = (heroId: number): void => {
-    this.props.deleteHero(heroId);
+    this.props.deleteHero(heroId, this.props.user.uid);
   };
 
   onHeroSelection = (heroId: number): void => {
@@ -98,12 +99,14 @@ class Track extends Component<TrackProps> {
 const mapStateToProps = (state: AppState) => ({
   heroes: state.hero.heroes,
   loading: state.hero.loading,
-  userId: state.hero.userId
+  userId: state.hero.userId,
+  user: state.auth.user
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<HeroActionTypes>) => ({
-  deleteHero: (heroId: number) => dispatch(deleteHero(heroId)),
-  fetchHeroes: () => dispatch(fetchHeroes()),
+  deleteHero: (heroId: number, uid: string) =>
+    dispatch(deleteHero(heroId, uid)),
+  fetchHeroes: (uid: string) => dispatch(fetchHeroes(uid)),
   getHero: (heroId: number) => dispatch(getHero(heroId))
 });
 

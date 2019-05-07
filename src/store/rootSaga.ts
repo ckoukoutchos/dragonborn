@@ -14,6 +14,8 @@ import {
   FETCH_HEROES,
   UPDATE_HERO
 } from './hero/heroActionTypes';
+import { loginSaga } from './auth/authSagas';
+import { LOGIN } from './auth/authActionTypes';
 
 /**
  * @name watchHero
@@ -25,6 +27,7 @@ export function* watchHero() {
     takeEvery(DELETE_HERO, deleteHeroSaga),
     takeEvery(FETCH_HERO, fetchHeroSaga),
     takeEvery(FETCH_HEROES, fetchHeroesSaga),
-    takeEvery(UPDATE_HERO, updateHeroSaga)
+    takeEvery(UPDATE_HERO, updateHeroSaga),
+    takeEvery(LOGIN, loginSaga)
   ]);
 }

@@ -1,78 +1,25 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
 
-// class SignUpForm extends Component<any, any> {
-//   state = {
-//     username: '',
-//     email: '',
-//     passwordOne: '',
-//     passwordTwo: '',
-//     error: null
-//   };
+import { login } from '../../store/auth/authActionCreators';
+import { AuthActionTypes } from '../../store/auth/authActionTypes';
 
-//   onChange = (evt: any) => {
-//     this.setState({ [evt.target.name]: evt.target.value });
-//   };
+class Login extends Component<any, any> {
+  login = () => {
+    this.props.login();
+  };
 
-//   onSubmit = (evt: any) => {
-//     const { username, email, passwordOne } = this.state;
+  render() {
+    return <button onClick={this.login}>Auth</button>;
+  }
+}
 
-//     this.props.firebase
-//       .createUserWithEmailAndPassword(email, passwordOne)
-//       .then((authUser: any) => {
-//         this.setState(this.state);
-//       })
-//       .catch((error: any) => {
-//         this.setState({ error });
-//       });
+const mapDispatchToProps = (dispatch: Dispatch<AuthActionTypes>) => ({
+  login: (email: string, password: string) => dispatch(login(email, password))
+});
 
-//     evt.preventDefault();
-//   };
-
-//   render() {
-//     const { username, email, passwordOne, passwordTwo, error } = this.state;
-
-//     const isInvalid =
-//       passwordOne !== passwordTwo ||
-//       passwordOne === '' ||
-//       email === '' ||
-//       username === '';
-
-//     return (
-//       <form onSubmit={this.onSubmit}>
-//         <input
-//           name="username"
-//           value={username}
-//           onChange={this.onChange}
-//           type="text"
-//           placeholder="Username"
-//         />
-//         <input
-//           name="email"
-//           value={email}
-//           onChange={this.onChange}
-//           type="text"
-//           placeholder="Email"
-//         />
-//         <input
-//           name="passwordOne"
-//           value={passwordOne}
-//           onChange={this.onChange}
-//           type="password"
-//           placeholder="Password"
-//         />
-//         <input
-//           name="passwordTwo"
-//           value={passwordTwo}
-//           onChange={this.onChange}
-//           type="password"
-//           placeholder="Confirm Password"
-//         />
-//         <button disabled={isInvalid} type="submit">
-//           Sign Up
-//         </button>
-
-//         {error && <p>{error.message}</p>}
-//       </form>
-//     );
-//   }
-// }
+export default connect(
+  null,
+  mapDispatchToProps
+)(Login);

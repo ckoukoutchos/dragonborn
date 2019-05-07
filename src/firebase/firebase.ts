@@ -16,7 +16,7 @@ const config = {
 Firebase.initializeApp(config);
 
 // access to auth
-export const Auth = Firebase.auth();
+export const AUTH = Firebase.auth();
 
 // access to real-time database
-export const DB = Firebase.database();
+export const DATABASE = Firebase.database();

@@ -40,6 +40,7 @@ interface CreateHeroAction {
   type: typeof CREATE_HERO;
   hero: Hero;
   route: string;
+  uid: string;
 }
 
 interface CreateHeroFailAction {
@@ -55,6 +56,7 @@ interface CreateHeroSuccessAction {
 interface DeleteHeroAction {
   type: typeof DELETE_HERO;
   heroId: number;
+  uid: string;
 }
 
 interface DeleteHeroFailAction {
@@ -70,6 +72,7 @@ interface DeleteHeroSuccessAction {
 interface FetchHeroAction {
   type: typeof FETCH_HERO;
   heroId: number;
+  uid: string;
 }
 
 interface FetchHeroFailAction {
@@ -84,6 +87,7 @@ interface FetchHeroSuccessAction {
 
 interface FetchHeroesAction {
   type: typeof FETCH_HEROES;
+  uid: string;
 }
 
 interface FetchHeroesStartAction {
@@ -108,6 +112,7 @@ interface GetHeroAction {
 interface UpdateHeroAction {
   type: typeof UPDATE_HERO;
   hero: Hero;
+  uid: string;
 }
 
 interface UpdateHeroFailAction {
