@@ -18,11 +18,18 @@
   background-color: rgb(44, 44, 44);
   border-radius: 8px 8px 0 0;
   color: white;
+  text-align: center;
+}
+
+.HeaderEdit {
+  background-color: rgb(44, 44, 44);
+  border-radius: 8px 8px 0 0;
+  color: white;
   display: flex;
   justify-content: space-between;
 }
 
-.Header h3 {
+h3 {
   margin: 0px;
   padding: 8px 16px;
 }

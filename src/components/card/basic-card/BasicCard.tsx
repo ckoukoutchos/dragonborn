@@ -5,26 +5,29 @@ import Button from '../../button/Button';
 
 interface BasicCardProps {
   children: any;
-  editing: boolean;
-  onEdit: any;
+  editing?: boolean;
+  onEdit?: any;
+  readOnly?: boolean;
   title: string;
 }
 
 const basicCard = (props: BasicCardProps) => {
-  const { editing, onEdit, title } = props;
+  const { editing, onEdit, readOnly, title } = props;
 
   return (
     <div className={classes.Card}>
-      <div className={classes.Header}>
+      <div className={readOnly ? classes.Header : classes.HeaderEdit}>
         <h3 className={classes.Title}>{title}</h3>
 
-        <Button
-          color={editing ? 'Secondary' : 'Primary'}
-          btnType="Corner"
-          clicked={onEdit}
-        >
-          {editing ? 'x' : '+'}
-        </Button>
+        {!readOnly ? (
+          <Button
+            color={editing ? 'Secondary' : 'Primary'}
+            btnType="Corner"
+            clicked={onEdit}
+          >
+            {editing ? 'x' : '+'}
+          </Button>
+        ) : null}
       </div>
 
       <div className={classes.Body}>{props.children}</div>

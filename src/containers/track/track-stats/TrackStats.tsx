@@ -18,6 +18,7 @@ import TextAreaInput from '../../../components/input/textarea-input/TextAreaInpu
 import TitleCard from '../../../components/card/title-card/TitleCard';
 import ToggleLineInput from '../../../components/input/toggle-line-input/ToggleLineInput';
 
+// TODO: refactor, remove style tags, use loops to repeat similar sections, use object fields to generate labels rather than strings?, comment functions
 class TrackStats extends Component<any, any> {
   state = {
     editing: {
@@ -278,15 +279,15 @@ class TrackStats extends Component<any, any> {
   }
 }
 
+const mapStateToProps = (state: any) => ({
+  hero: state.hero.hero,
+  user: state.auth.user
+});
+
 const mapDispatchToProps = (dispatch: any) => ({
   fetchHero: (heroId: any, uid: string) => dispatch(fetchHero(heroId, uid)),
   getHero: (heroId: any) => dispatch(getHero(heroId)),
   updateHero: (hero: any, uid: string) => dispatch(updateHero(hero, uid))
-});
-
-const mapStateToProps = (state: any) => ({
-  hero: state.hero.hero,
-  user: state.auth.user
 });
 
 export default connect(

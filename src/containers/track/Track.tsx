@@ -21,7 +21,6 @@ interface TrackProps {
   history: any;
   heroes: any; // TS bug, needs to be declared type <any>
   loading: boolean;
-  userId: number;
   user: any;
   deleteHero: (heroId: number, uid: string) => HeroActionTypes;
   fetchHeroes: (uid: string) => HeroActionTypes;
@@ -99,7 +98,6 @@ class Track extends Component<TrackProps> {
 const mapStateToProps = (state: AppState) => ({
   heroes: state.hero.heroes,
   loading: state.hero.loading,
-  userId: state.hero.userId,
   user: state.auth.user
 });
 

@@ -13,13 +13,14 @@ import TitleCard from '../../components/card/title-card/TitleCard';
 
 interface CreateProps {
   history: History;
-  createHero: (hero: Hero, route: any) => HeroActionTypes;
+  user: any;
+  createHero: (hero: Hero, route: any, uid: string) => HeroActionTypes;
 }
 
 /*
  * Container for Create character page
  */
-class Create extends Component<any, CreateProps> {
+class Create extends Component<CreateProps> {
   /**
    * @name onCreateClicked
    * @description triggers action to create new hero and redirect to track page

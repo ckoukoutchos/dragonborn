@@ -14,6 +14,7 @@ interface TitleCardProps {
   value?: any;
 }
 
+// TODO: refactor, maybe merged with another card or unnecessary
 const titleCard = (props: TitleCardProps) => {
   const { editing, onChange, onEdit, readOnly, title, value } = props;
 
