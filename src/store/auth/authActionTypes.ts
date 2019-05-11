@@ -1,8 +1,8 @@
+import { User } from "../../models/User";
+
 /*
  * Auth action constants
  */
-export const AUTH_UPDATE = 'AUTH_UPDATE';
-
 export const LOGIN = 'LOGIN';
 export const LOGIN_FAIL = 'LOGIN_FAIL';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
@@ -18,12 +18,7 @@ export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
  * Auth action type interfaces
  */
 export interface AuthState {
-  user: null | any;
-}
-
-interface AuthUpdate {
-  type: typeof AUTH_UPDATE;
-  user: any;
+  user: User | null;
 }
 
 interface LoginAction {
@@ -38,7 +33,7 @@ interface LoginFailAction {
 
 interface LoginSuccessAction {
   type: typeof LOGIN_SUCCESS;
-  user: any;
+  user: User;
 }
 
 interface LogoutAction {
@@ -47,6 +42,7 @@ interface LogoutAction {
 
 interface LogoutSuccessAction {
   type: typeof LOGOUT_SUCCESS;
+  user: null;
 }
 
 interface SignupAction {
@@ -62,7 +58,6 @@ interface SignupSuccessAction {
 }
 
 export type AuthActionTypes =
-  | AuthUpdate
   | LoginAction
   | LoginFailAction
   | LoginSuccessAction

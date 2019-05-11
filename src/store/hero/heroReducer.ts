@@ -1,5 +1,5 @@
 import { updateObject, updateArray } from '../../shared/Utility';
-import Hero from '../../shared/Hero';
+import Hero from '../../models/Hero';
 import {
   HeroState,
   HeroActionTypes,
@@ -56,17 +56,15 @@ const heroReducer = (
 };
 
 /*
- *
+ * reducer case functions
  */
 const createHeroSuccess = (
   state: HeroState,
   { hero }: { hero: Hero }
-): HeroState => {
-  return updateObject(state, {
-    heroes: state.heroes.concat(hero),
-    hero
-  });
-};
+): HeroState => updateObject(state, {
+  heroes: state.heroes.concat(hero),
+  hero
+});
 
 const deleteHeroSuccess = (
   state: HeroState,
@@ -79,20 +77,14 @@ const deleteHeroSuccess = (
 const fetchHeroSuccess = (
   state: HeroState,
   { hero }: { hero: Hero }
-): HeroState => {
-  return updateObject(state, { hero });
-};
+): HeroState => updateObject(state, { hero });
 
-const fetchHeroesStart = (state: HeroState): HeroState => {
-  return updateObject(state, { loading: true });
-};
+const fetchHeroesStart = (state: HeroState): HeroState => updateObject(state, { loading: true });
 
 const fetchHeroesSuccess = (
   state: HeroState,
   { heroes }: { heroes: Hero[] }
-): HeroState => {
-  return updateObject(state, { heroes, loading: false });
-};
+): HeroState => updateObject(state, { heroes, loading: false });
 
 const getHero = (
   state: HeroState,

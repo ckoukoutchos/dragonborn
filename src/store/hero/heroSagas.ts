@@ -18,7 +18,7 @@ import {
   fetchHeroesFail,
   updateHeroSuccess
 } from './heroActionCreators';
-import Hero from '../../shared/Hero';
+import Hero from '../../models/Hero';
 
 // TODO: function docs
 

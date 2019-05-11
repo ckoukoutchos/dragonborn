@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 
-import Hero from '../../shared/Hero';
+import Hero from '../../models/Hero';
 import { AppState } from '../../store/rootReducer';
 import { createHero } from '../../store/hero/heroActionCreators';
 import { HeroActionTypes } from '../../store/hero/heroActionTypes';

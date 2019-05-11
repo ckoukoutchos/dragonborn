@@ -31,7 +31,6 @@ class NavBar extends Component<NavBarProps, NavBarState> {
   };
 
   render() {
-    console.log('nav auth', this.props.user);
     return (
       <header className={classes.NavBar}>
         <div className={classes.Logo}>

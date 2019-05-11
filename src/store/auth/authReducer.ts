@@ -1,4 +1,6 @@
-import { AuthState, AuthActionTypes, LOGIN_SUCCESS, LOGOUT_SUCCESS, AUTH_UPDATE } from './authActionTypes';
+import { AuthState, AuthActionTypes, LOGIN_SUCCESS, LOGOUT_SUCCESS } from './authActionTypes';
+import { User } from '../../models/User';
+import { updateObject } from '../../shared/Utility';
 
 /*
  * Inital Auth state
@@ -18,17 +20,20 @@ const authReducer = (
   action: AuthActionTypes
 ): AuthState => {
   switch (action.type) {
-    case AUTH_UPDATE:
-      console.log(action.user);
-      return { ...state, user: action.user };
     case LOGIN_SUCCESS:
-      return { ...state, user: action.user };
+      return loginSuccess(state, action);
     case LOGOUT_SUCCESS:
-      console.log('logout');
-      return { ...state, user: null };
+      return logoutSuccess(state, action);
     default:
       return state;
   }
 };
+
+/*
+ * reducer case functions
+ */
+const loginSuccess = (state: AuthState, { user }: { user: User }) => updateObject(state, { user });
+
+const logoutSuccess = (state: AuthState, { user }: { user: null }) => updateObject(state, { user });
 
 export default authReducer;

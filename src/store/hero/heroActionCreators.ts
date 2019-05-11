@@ -1,4 +1,4 @@
-import Hero from '../../shared/Hero';
+import Hero from '../../models/Hero';
 import {
   HeroActionTypes,
   CREATE_HERO,

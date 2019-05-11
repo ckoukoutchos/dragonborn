@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 
-import Hero from '../../shared/Hero';
+import Hero from '../../models/Hero';
 import {
   deleteHero,
   fetchHeroes,
