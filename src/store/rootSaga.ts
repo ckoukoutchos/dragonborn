@@ -1,7 +1,6 @@
-import { all, takeEvery } from 'redux-saga/effects';
+import { all } from 'redux-saga/effects';
 
-import { loginSaga } from './auth/authSagas';
-import { LOGIN } from './auth/authActionTypes';
+import watchAuth from './auth/authSagas';
 import watchHero from './hero/heroSagas';
 
 /**
@@ -10,7 +9,7 @@ import watchHero from './hero/heroSagas';
  */
 export default function* rootSage() {
   yield all([
-    watchHero(),
-    takeEvery(LOGIN, loginSaga)
+    watchAuth(),
+    watchHero()
   ]);
 }

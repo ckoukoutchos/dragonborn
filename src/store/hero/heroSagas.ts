@@ -21,6 +21,7 @@ import {
 import Hero from '../../shared/Hero';
 
 // TODO: function docs
+
 /**
  * @name watchHero
  * @description hero saga combinator

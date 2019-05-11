@@ -1,10 +1,19 @@
-import { put, take } from 'redux-saga/effects';
-import { eventChannel, Subscribe } from 'redux-saga';
+import { put, take, all, takeEvery } from 'redux-saga/effects';
+import { eventChannel } from 'redux-saga';
 import { AUTH } from '../../firebase/firebase';
 
+import { LOGIN } from '../auth/authActionTypes';
 import { loginSuccess } from './authActionCreators';
 
-export function* loginSaga({
+// TODO: function docs, comments
+
+export default function* watchAuth() {
+  yield all([
+    takeEvery(LOGIN, loginSaga)
+  ])
+}
+
+function* loginSaga({
   email,
   password
 }: {
@@ -33,6 +42,6 @@ function* updateAuth() {
   const updateAuth = createEventChannel();
   while (true) {
     const user = yield take(updateAuth);
-    yield put(loginSuccess(user))
+    yield put({ type: 'None' })
   }
 }
