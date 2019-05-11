@@ -39,6 +39,9 @@ export default function* watchHero() {
 /**
  * @name createHeroSaga
  * @description creates new hero in firebase db for current user
+ * @param hero new hero
+ * @param route router history object
+ * @param uid firebase user id
  */
 function* createHeroSaga({ hero, route, uid }: { hero: Hero; route: any, uid: string }): IterableIterator<{}> {
   try {
@@ -64,6 +67,8 @@ function* createHeroSaga({ hero, route, uid }: { hero: Hero; route: any, uid: st
 /**
  * @name deleteHeroSaga
  * @description deletes hero in firebase bd for current user
+ * @param heroId hero db id
+ * @param uid firebase user id
  */
 function* deleteHeroSaga({ heroId, uid }: { heroId: number, uid: string }): IterableIterator<{}> {
   try {
@@ -83,6 +88,8 @@ function* deleteHeroSaga({ heroId, uid }: { heroId: number, uid: string }): Iter
 /**
  * @name fetchHeroSaga
  * @description retrieves individual hero from firebase db for current user
+ * @param heroId hero db id
+ * @param uid firebase user id
  */
 function* fetchHeroSaga({ heroId, uid }: { heroId: number, uid: string }): IterableIterator<{}> {
   try {
@@ -105,6 +112,7 @@ function* fetchHeroSaga({ heroId, uid }: { heroId: number, uid: string }): Itera
 /**
  * @name fetchHeroesSaga
  * @description retrieves all heroes from firebase db for current user
+ * @param uid firebase user id
  */
 function* fetchHeroesSaga({ uid }: { uid: string }): IterableIterator<{}> {
   yield put(fetchHeroesStart());
@@ -133,6 +141,8 @@ function* fetchHeroesSaga({ uid }: { uid: string }): IterableIterator<{}> {
 /**
  * @name updateHeroSaga
  * @description updates a hero in firebase db for current user
+ * @param hero updated hero
+ * @param uid firebase user id
  */
 function* updateHeroSaga({ hero, uid }: { hero: Hero, uid: string }): IterableIterator<{}> {
   try {
