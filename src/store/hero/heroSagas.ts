@@ -1,7 +1,14 @@
 /* eslint-disable no-unused-vars */
-import { put } from 'redux-saga/effects';
+import { put, all, takeEvery } from 'redux-saga/effects';
 import { DATABASE } from '../../firebase/firebase';
 
+import {
+  CREATE_HERO,
+  DELETE_HERO,
+  FETCH_HERO,
+  FETCH_HEROES,
+  UPDATE_HERO
+} from '../hero/heroActionTypes';
 import {
   createHeroSuccess,
   deleteHeroSuccess,
@@ -13,7 +20,22 @@ import {
 } from './heroActionCreators';
 import Hero from '../../shared/Hero';
 
-export function* createHeroSaga({ hero, route, uid }: { hero: Hero; route: any, uid: string }) {
+// TODO: function docs
+/**
+ * @name watchHero
+ * @description hero saga combinator
+ */
+export default function* watchHero() {
+  yield all([
+    takeEvery(CREATE_HERO, createHeroSaga),
+    takeEvery(DELETE_HERO, deleteHeroSaga),
+    takeEvery(FETCH_HERO, fetchHeroSaga),
+    takeEvery(FETCH_HEROES, fetchHeroesSaga),
+    takeEvery(UPDATE_HERO, updateHeroSaga)
+  ]);
+}
+
+function* createHeroSaga({ hero, route, uid }: { hero: Hero; route: any, uid: string }) {
   try {
     // create new entry spot in Firebase
     const newHeroRef = yield DATABASE.ref(`users/${uid}/heroes`).push();
@@ -29,12 +51,12 @@ export function* createHeroSaga({ hero, route, uid }: { hero: Hero; route: any, 
     // redirect to track page
     yield route.push(`/track/${hero.id}/stats`);
   } catch (error) {
-    // TODO: swap out action for fail
-    yield console.log(error);
+    // TODO: add error handling
+    console.log(error);
   }
 }
 
-export function* deleteHeroSaga({ heroId, uid }: { heroId: number, uid: string }) {
+function* deleteHeroSaga({ heroId, uid }: { heroId: number, uid: string }) {
   try {
     // grab specific hero DB ref
     const heroRef = yield DATABASE.ref(`users/${uid}/heroes/${heroId}`);
@@ -49,9 +71,9 @@ export function* deleteHeroSaga({ heroId, uid }: { heroId: number, uid: string }
   }
 }
 
-export function* fetchHeroSaga({ heroId, uid }: { heroId: number, uid: string }) {
+function* fetchHeroSaga({ heroId, uid }: { heroId: number, uid: string }) {
   try {
-    // hero specif DB ref
+    // hero specific DB ref
     const heroRef = yield DATABASE.ref(`users/${uid}/heroes/${heroId}`);
 
     // retrieve snapshot of hero
@@ -67,7 +89,7 @@ export function* fetchHeroSaga({ heroId, uid }: { heroId: number, uid: string })
   }
 }
 
-export function* fetchHeroesSaga({ uid }: { uid: string }) {
+function* fetchHeroesSaga({ uid }: { uid: string }) {
   yield put(fetchHeroesStart());
 
   try {
@@ -91,7 +113,7 @@ export function* fetchHeroesSaga({ uid }: { uid: string }) {
   }
 }
 
-export function* updateHeroSaga({ hero, uid }: { hero: Hero, uid: string }) {
+function* updateHeroSaga({ hero, uid }: { hero: Hero, uid: string }) {
   try {
     // grab specific hero DB ref
     const heroRef = yield DATABASE.ref(`users/${uid}/heroes/${hero.id}`);

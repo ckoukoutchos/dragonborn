@@ -8,7 +8,7 @@ import createSagaMiddleware from 'redux-saga';
 import './index.css';
 import App from './App';
 import rootReducer from './store/rootReducer';
-import { watchHero } from './store/rootSaga';
+import rootSaga from './store/rootSaga';
 
 // initialize saga middleware
 const sagaMiddleware = createSagaMiddleware();
@@ -19,8 +19,8 @@ const store = createStore(
   compose(applyMiddleware(sagaMiddleware))
 );
 
-// attatch hero saga to middleware
-sagaMiddleware.run(watchHero);
+// attatch root saga to middleware
+sagaMiddleware.run(rootSaga);
 
 // wrap App component with react-router and redux store
 const app = (

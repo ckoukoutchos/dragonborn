@@ -6,18 +6,20 @@ interface InputProps {
   editing?: boolean;
   label?: string;
   onChange?: any;
+  long?: boolean;
   value: string;
 }
 
 const input = (props: InputProps) => {
-  const { editing, label, onChange, value } = props;
+  const { editing, label, long, onChange, value } = props;
 
   return (
     <div className={classes.Container}>
       <input
         className={[
           classes.Input,
-          editing ? classes.Edit : classes.Disabled
+          editing ? classes.Edit : classes.Disabled,
+          long ? classes.Long : null
         ].join(' ')}
         disabled={!editing}
         onChange={onChange}

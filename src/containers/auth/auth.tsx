@@ -5,10 +5,11 @@ import { Dispatch } from 'redux';
 import { login } from '../../store/auth/authActionCreators';
 import { AuthActionTypes } from '../../store/auth/authActionTypes';
 
-import BasicCard from '../../components/card/basic-card/BasicCard';
+import TitleCard from '../../components/card/title-card/TitleCard';
 import Button from '../../components/button/Button';
 import Input from '../../components/input/Input';
 
+// TODO: comments, func docs, prop interface
 class Login extends Component<any, any> {
   state = {
     email: '',
@@ -28,16 +29,18 @@ class Login extends Component<any, any> {
     const { email, password, passwordCheck } = this.state;
     return (
       <>
-        <BasicCard title="Login" readOnly>
+        <TitleCard title="Login" readOnly>
           <Input
             value={email}
             label="Email"
+            long
             onChange={this.onInputChange('email')}
             editing
           />
           <Input
             value={password}
             label="Password"
+            long
             onChange={this.onInputChange('password')}
             editing
           />
@@ -45,7 +48,7 @@ class Login extends Component<any, any> {
           <Button btnType="Raised" color="Primary" clicked={this.login}>
             Login
           </Button>
-        </BasicCard>
+        </TitleCard>
       </>
     );
   }

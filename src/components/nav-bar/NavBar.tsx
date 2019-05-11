@@ -1,13 +1,21 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+import { AppState } from '../../store/rootReducer';
 
 import classes from './NavBar.module.css';
 import NavItem from './nav-items/NavItem';
+
+interface NavBarProps {
+  user: any;
+}
 
 interface NavBarState {
   menuToggle: boolean;
 }
 
-class NavBar extends Component<any, NavBarState> {
+// TODO: fix wonky resolution issues
+class NavBar extends Component<NavBarProps, NavBarState> {
   state = {
     menuToggle: false
   };
@@ -32,17 +40,39 @@ class NavBar extends Component<any, NavBarState> {
         </div>
 
         <nav className={classes.Links}>
-          <NavItem link="/create">Create</NavItem>
-          <NavItem link="/track">Track</NavItem>
-          <NavItem link="/guide">Guide</NavItem>
-          <NavItem link="/login" exact>
-            Login
-          </NavItem>
+          {this.props.user ? (
+            <>
+              <NavItem link="/create" exact>
+                Create
+              </NavItem>
+              <NavItem link="/track" exact>
+                Track
+              </NavItem>
+              <NavItem link="/guide" exact>
+                Guide
+              </NavItem>
+              <NavItem link="/auth" exact>
+                Logout
+              </NavItem>
+            </>
+          ) : (
+            <NavItem link="/auth" exact>
+              Login
+            </NavItem>
+          )}
         </nav>
 
-        <div className={classes.Menu} onClick={this.onMenuToggle}>
-          {this.state.menuToggle ? 'Close' : 'Menu'}
-        </div>
+        {this.props.user ? (
+          <div className={classes.Menu} onClick={this.onMenuToggle}>
+            {this.state.menuToggle ? 'Close' : 'Menu'}
+          </div>
+        ) : (
+          <div className={classes.Menu}>
+            <NavItem link="/auth" exact>
+              Login
+            </NavItem>
+          </div>
+        )}
 
         {this.state.menuToggle ? (
           <div className={classes.MenuContainer} onClick={this.onMenuToggle}>
@@ -67,4 +97,8 @@ class NavBar extends Component<any, NavBarState> {
   }
 }
 
-export default NavBar;
+const mapStatetoProps = (state: AppState) => ({
+  user: state.auth.user
+});
+
+export default connect(mapStatetoProps)(NavBar);

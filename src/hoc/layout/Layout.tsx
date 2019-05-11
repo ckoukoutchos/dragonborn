@@ -7,6 +7,7 @@ interface Props {
   children: any;
 }
 
+// TODO: move into component folder
 const layout = (props: Props) => {
   return (
     <>

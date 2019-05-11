@@ -1,33 +1,16 @@
 import { all, takeEvery } from 'redux-saga/effects';
 
-import {
-  createHeroSaga,
-  deleteHeroSaga,
-  fetchHeroSaga,
-  fetchHeroesSaga,
-  updateHeroSaga
-} from './hero/heroSagas';
-import {
-  CREATE_HERO,
-  DELETE_HERO,
-  FETCH_HERO,
-  FETCH_HEROES,
-  UPDATE_HERO
-} from './hero/heroActionTypes';
 import { loginSaga } from './auth/authSagas';
 import { LOGIN } from './auth/authActionTypes';
+import watchHero from './hero/heroSagas';
 
 /**
- * @name watchHero
- * @description hero saga combinator
+ * @name rootSaga
+ * @description root saga combinator
  */
-export function* watchHero() {
+export default function* rootSage() {
   yield all([
-    takeEvery(CREATE_HERO, createHeroSaga),
-    takeEvery(DELETE_HERO, deleteHeroSaga),
-    takeEvery(FETCH_HERO, fetchHeroSaga),
-    takeEvery(FETCH_HEROES, fetchHeroesSaga),
-    takeEvery(UPDATE_HERO, updateHeroSaga),
+    watchHero(),
     takeEvery(LOGIN, loginSaga)
   ]);
 }
