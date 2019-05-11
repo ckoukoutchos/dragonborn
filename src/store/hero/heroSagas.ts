@@ -20,7 +20,7 @@ import {
 } from './heroActionCreators';
 import Hero from '../../models/Hero';
 
-// TODO: function docs
+// TODO: error handling
 
 /**
  * @name watchHero
@@ -36,7 +36,11 @@ export default function* watchHero() {
   ]);
 }
 
-function* createHeroSaga({ hero, route, uid }: { hero: Hero; route: any, uid: string }) {
+/**
+ * @name createHeroSaga
+ * @description creates new hero in firebase db for current user
+ */
+function* createHeroSaga({ hero, route, uid }: { hero: Hero; route: any, uid: string }): IterableIterator<{}> {
   try {
     // create new entry spot in Firebase
     const newHeroRef = yield DATABASE.ref(`users/${uid}/heroes`).push();
@@ -57,7 +61,11 @@ function* createHeroSaga({ hero, route, uid }: { hero: Hero; route: any, uid: st
   }
 }
 
-function* deleteHeroSaga({ heroId, uid }: { heroId: number, uid: string }) {
+/**
+ * @name deleteHeroSaga
+ * @description deletes hero in firebase bd for current user
+ */
+function* deleteHeroSaga({ heroId, uid }: { heroId: number, uid: string }): IterableIterator<{}> {
   try {
     // grab specific hero DB ref
     const heroRef = yield DATABASE.ref(`users/${uid}/heroes/${heroId}`);
@@ -72,7 +80,11 @@ function* deleteHeroSaga({ heroId, uid }: { heroId: number, uid: string }) {
   }
 }
 
-function* fetchHeroSaga({ heroId, uid }: { heroId: number, uid: string }) {
+/**
+ * @name fetchHeroSaga
+ * @description retrieves individual hero from firebase db for current user
+ */
+function* fetchHeroSaga({ heroId, uid }: { heroId: number, uid: string }): IterableIterator<{}> {
   try {
     // hero specific DB ref
     const heroRef = yield DATABASE.ref(`users/${uid}/heroes/${heroId}`);
@@ -90,7 +102,11 @@ function* fetchHeroSaga({ heroId, uid }: { heroId: number, uid: string }) {
   }
 }
 
-function* fetchHeroesSaga({ uid }: { uid: string }) {
+/**
+ * @name fetchHeroesSaga
+ * @description retrieves all heroes from firebase db for current user
+ */
+function* fetchHeroesSaga({ uid }: { uid: string }): IterableIterator<{}> {
   yield put(fetchHeroesStart());
 
   try {
@@ -114,7 +130,11 @@ function* fetchHeroesSaga({ uid }: { uid: string }) {
   }
 }
 
-function* updateHeroSaga({ hero, uid }: { hero: Hero, uid: string }) {
+/**
+ * @name updateHeroSaga
+ * @description updates a hero in firebase db for current user
+ */
+function* updateHeroSaga({ hero, uid }: { hero: Hero, uid: string }): IterableIterator<{}> {
   try {
     // grab specific hero DB ref
     const heroRef = yield DATABASE.ref(`users/${uid}/heroes/${hero.id}`);
