@@ -6,12 +6,19 @@ import {
   LOGOUT,
   SIGNUP,
   SIGNUP_FAIL,
-  SIGNUP_SUCCESS
+  SIGNUP_SUCCESS,
+  LOGOUT_SUCCESS,
+  AUTH_UPDATE
 } from './authActionTypes';
 
 /*
  * Auth action creators
  */
+export const authUpdate = (user: any) => ({
+  type: AUTH_UPDATE,
+  user
+});
+
 export const login = (email: string, password: string): AuthActionTypes => ({
   type: LOGIN,
   email,
@@ -29,6 +36,10 @@ export const loginSuccess = (user: any): AuthActionTypes => ({
 
 export const logout = (): AuthActionTypes => ({
   type: LOGOUT
+});
+
+export const logoutSuccess = (): AuthActionTypes => ({
+  type: LOGOUT_SUCCESS
 });
 
 export const signup = (): AuthActionTypes => ({

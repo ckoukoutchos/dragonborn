@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 
-import { login } from '../../store/auth/authActionCreators';
+import { login, logout } from '../../store/auth/authActionCreators';
 import { AuthActionTypes } from '../../store/auth/authActionTypes';
 
 import TitleCard from '../../components/card/title-card/TitleCard';
@@ -19,6 +19,10 @@ class Login extends Component<any, any> {
 
   login = () => {
     this.props.login(this.state.email, this.state.password);
+  };
+
+  logout = () => {
+    this.props.logout();
   };
 
   onInputChange = (label: string) => (evt: any) => {
@@ -49,13 +53,15 @@ class Login extends Component<any, any> {
             Login
           </Button>
         </TitleCard>
+        <button onClick={this.logout}>logout</button>
       </>
     );
   }
 }
 
 const mapDispatchToProps = (dispatch: Dispatch<AuthActionTypes>) => ({
-  login: (email: string, password: string) => dispatch(login(email, password))
+  login: (email: string, password: string) => dispatch(login(email, password)),
+  logout: () => dispatch(logout())
 });
 
 export default connect(

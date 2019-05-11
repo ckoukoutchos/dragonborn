@@ -1,17 +1,21 @@
 import { put, take, all, takeEvery } from 'redux-saga/effects';
-import { eventChannel } from 'redux-saga';
+import { eventChannel, Subscribe } from 'redux-saga';
 import { AUTH } from '../../firebase/firebase';
 
-import { LOGIN } from '../auth/authActionTypes';
-import { loginSuccess } from './authActionCreators';
+import { LOGIN, LOGOUT } from '../auth/authActionTypes';
+import { loginSuccess, logoutSuccess, authUpdate } from './authActionCreators';
 
 // TODO: function docs, comments
 
 export default function* watchAuth() {
   yield all([
-    takeEvery(LOGIN, loginSaga)
+    updateAuth(),
+    takeEvery(LOGIN, loginSaga),
+    takeEvery(LOGOUT, logoutSaga)
   ])
 }
+
+// TODO: func docs, comments
 
 function* loginSaga({
   email,
@@ -29,19 +33,34 @@ function* loginSaga({
   }
 }
 
-const createEventChannel = () => {
-  return eventChannel(
-    (emitter: any) => {
-      AUTH.onAuthStateChanged(user => emitter(user));
-      return () => emitter('END');
-    }
-  )
+function* logoutSaga() {
+  try {
+    const res = yield AUTH.signOut();
+    yield put(logoutSuccess());
+  } catch (error) {
+    // TODO: add error handling
+    console.log(error);
+  }
 }
 
+const authStateChangeChannel = () => {
+  return eventChannel((emit: any) => {
+    AUTH.onAuthStateChanged(user =>
+      emit(user || 'null'));
+    return () => console.log('unsub');
+  });
+};
+
 function* updateAuth() {
-  const updateAuth = createEventChannel();
+  console.log('updateAuth');
+  const userChannel = authStateChangeChannel();
+  console.log('userChannel', userChannel);
   while (true) {
-    const user = yield take(updateAuth);
-    yield put({ type: 'None' })
+    const user = yield take(userChannel);
+    if (user === 'null') {
+      yield put(authUpdate(null));
+    } else {
+      yield put(authUpdate(user));
+    }
   }
 }
