@@ -20,7 +20,7 @@ const titleCard = (props: TitleCardProps) => {
   const { editing, onChange, onEdit, readOnly, title, value, wide } = props;
 
   return (
-    <div className={classes.Card}>
+    <div className={wide ? classes.CardWide : classes.Card}>
       <div className={readOnly ? classes.Header : classes.HeaderEdit}>
         {!readOnly && editing ? (
           <Input onChange={onChange} value={value} editing={editing} />

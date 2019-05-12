@@ -7,11 +7,12 @@ interface InputProps {
   label?: string;
   onChange?: any;
   long?: boolean;
+  type?: string;
   value: string;
 }
 
 const input = (props: InputProps) => {
-  const { editing, label, long, onChange, value } = props;
+  const { editing, label, long, onChange, type, value } = props;
 
   return (
     <div className={classes.Container}>
@@ -23,6 +24,7 @@ const input = (props: InputProps) => {
         ].join(' ')}
         disabled={!editing}
         onChange={onChange}
+        type={type}
         value={value}
       />
 

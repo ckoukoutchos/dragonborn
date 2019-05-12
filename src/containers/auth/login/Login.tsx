@@ -75,19 +75,21 @@ class Login extends Component<LoginProps, LoginState> {
             {error ? <p className={classes.Error}>{error}</p> : null}
 
             <Input
-              value={email}
+              editing
               label="Email"
               long
+              type="email"
+              value={email}
               onChange={this.onInputChange('email')}
-              editing
             />
 
             <Input
-              value={password}
+              editing
               label="Password"
               long
+              type="password"
+              value={password}
               onChange={this.onInputChange('password')}
-              editing
             />
 
             <p>Forgot your password? Click here to reset it.</p>

@@ -6,7 +6,11 @@ import { Redirect } from 'react-router';
 import { logout } from '../../../store/auth/authActionCreators';
 import { AuthActionTypes } from '../../../store/auth/authActionTypes';
 
-class Logout extends Component<any, any> {
+interface LogoutProps {
+  logout: () => AuthActionTypes;
+}
+
+class Logout extends Component<LogoutProps> {
   componentDidMount() {
     this.props.logout();
   }

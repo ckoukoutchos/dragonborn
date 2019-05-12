@@ -6,33 +6,55 @@ import { Redirect } from 'react-router';
 import { AppState } from '../../../store/rootReducer';
 import { AuthActionTypes } from '../../../store/auth/authActionTypes';
 import { signup } from '../../../store/auth/authActionCreators';
+import { User } from '../../../models/User';
 import {
   passwordMatch,
   validPassword,
   validEmail
 } from '../../../shared/validation';
 
-import classes from './Signup.module.css';
 import Button from '../../../components/button/Button';
+import classes from './Signup.module.css';
 import Input from '../../../components/input/Input';
 import Spinner from '../../../components/spinner/Spinner';
 import TitleCard from '../../../components/card/title-card/TitleCard';
 
-// TODO: comments, func docs, prop interface
+interface SignupProps {
+  error: string;
+  loading: boolean;
+  user: User | null;
+  signup: (email: string, password: string) => AuthActionTypes;
+}
 
-class Signup extends Component<any, any> {
+interface SignupState {
+  email: string;
+  error: string | null;
+  password: string;
+  passwordCheck: string;
+}
+
+class Signup extends Component<SignupProps, SignupState> {
   state = {
     email: '',
-    error: false,
+    error: null,
     password: '',
     passwordCheck: ''
   };
 
+  /**
+   * @name signup
+   * @description validates email and passwords and triggers signup action or displays error message
+   * @param evt form submit event
+   */
   signup = (evt: FormEvent) => {
     evt.preventDefault();
     const { email, password, passwordCheck } = this.state;
 
-    if (passwordMatch(password, passwordCheck) && validPassword(password)) {
+    if (
+      passwordMatch(password, passwordCheck) &&
+      validPassword(password) &&
+      validEmail(email)
+    ) {
       this.props.signup(email, password);
     } else {
       this.setState({
@@ -42,12 +64,18 @@ class Signup extends Component<any, any> {
     }
   };
 
+  /**
+   * @name onInputChange
+   * @description updates local state field of corresponding input field on change
+   * @param label name of input field
+   */
   onInputChange = (label: string) => (evt: ChangeEvent<HTMLInputElement>) => {
-    this.setState({ [label]: evt.target.value });
+    // ts-bug requires this.state to prevent error with string lteral type
+    this.setState({ ...this.state, [label]: evt.target.value });
   };
 
   render() {
-    const { email, error, password, passwordCheck } = this.state;
+    const { email, password, passwordCheck } = this.state;
 
     // redirect if already signed in
     let authRedirect = null;
@@ -71,27 +99,30 @@ class Signup extends Component<any, any> {
             ) : null}
 
             <Input
-              value={email}
+              editing
               label="Email"
               long
+              type="email"
+              value={email}
               onChange={this.onInputChange('email')}
-              editing
             />
 
             <Input
-              value={password}
+              editing
               label="Password"
               long
+              type="password"
+              value={password}
               onChange={this.onInputChange('password')}
-              editing
             />
 
             <Input
-              value={passwordCheck}
+              editing
               label="Password Check"
               long
+              type="password"
+              value={passwordCheck}
               onChange={this.onInputChange('passwordCheck')}
-              editing
             />
 
             <Button btnType="Raised" color="Primary">
