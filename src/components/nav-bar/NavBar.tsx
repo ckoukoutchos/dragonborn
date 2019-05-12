@@ -51,12 +51,12 @@ class NavBar extends Component<NavBarProps, NavBarState> {
               <NavItem link="/guide" exact>
                 Guide
               </NavItem>
-              <NavItem link="/auth" exact>
+              <NavItem link="/" exact>
                 Logout
               </NavItem>
             </>
           ) : (
-            <NavItem link="/auth" exact>
+            <NavItem link="/login" exact>
               Login
             </NavItem>
           )}
@@ -68,7 +68,7 @@ class NavBar extends Component<NavBarProps, NavBarState> {
           </div>
         ) : (
           <div className={classes.Menu}>
-            <NavItem link="/auth" exact>
+            <NavItem link="/login" exact>
               Login
             </NavItem>
           </div>

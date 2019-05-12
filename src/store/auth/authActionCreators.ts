@@ -7,13 +7,18 @@ import {
   SIGNUP,
   SIGNUP_FAIL,
   SIGNUP_SUCCESS,
-  LOGOUT_SUCCESS
+  LOGOUT_SUCCESS,
+  AUTH_LOADING
 } from './authActionTypes';
 import { User } from '../../models/User';
 
 /*
  * Auth action creators
  */
+export const authLoading = (): AuthActionTypes => ({
+  type: AUTH_LOADING
+});
+
 export const login = (email: string, password: string): AuthActionTypes => ({
   type: LOGIN,
   email,

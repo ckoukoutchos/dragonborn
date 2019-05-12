@@ -1,4 +1,4 @@
-import { AuthState, AuthActionTypes, LOGIN_SUCCESS, LOGOUT_SUCCESS } from './authActionTypes';
+import { AuthState, AuthActionTypes, LOGIN_SUCCESS, LOGOUT_SUCCESS, AUTH_LOADING } from './authActionTypes';
 import { User } from '../../models/User';
 import { updateObject } from '../../shared/Utility';
 
@@ -6,6 +6,7 @@ import { updateObject } from '../../shared/Utility';
  * Inital Auth state
  */
 const initialState: AuthState = {
+  loading: false,
   user: null
 };
 
@@ -20,6 +21,8 @@ const authReducer = (
   action: AuthActionTypes
 ): AuthState => {
   switch (action.type) {
+    case AUTH_LOADING:
+      return authLoading(state);
     case LOGIN_SUCCESS:
       return loginSuccess(state, action);
     case LOGOUT_SUCCESS:
@@ -32,8 +35,10 @@ const authReducer = (
 /*
  * reducer case functions
  */
-const loginSuccess = (state: AuthState, { user }: { user: User }) => updateObject(state, { user });
+const authLoading = (state: AuthState): AuthState => updateObject(state, { loading: true });
 
-const logoutSuccess = (state: AuthState, { user }: { user: null }) => updateObject(state, { user });
+const loginSuccess = (state: AuthState, { user }: { user: User }): AuthState => updateObject(state, { user, loading: false });
+
+const logoutSuccess = (state: AuthState, { user }: { user: null }): AuthState => updateObject(state, { user, loading: false });
 
 export default authReducer;

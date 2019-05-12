@@ -17,6 +17,8 @@ import Jumbotron from '../../components/jumbotron/Jumbotron';
 import Spinner from '../../components/spinner/Spinner';
 import TitleCard from '../../components/card/title-card/TitleCard';
 
+// TODO: func docs, comments
+
 interface TrackProps {
   history: any;
   heroes: any; // TS bug, needs to be declared type <any>

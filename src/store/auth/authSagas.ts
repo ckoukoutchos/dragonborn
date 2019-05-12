@@ -3,7 +3,7 @@ import { eventChannel } from 'redux-saga';
 import { AUTH } from '../../firebase/firebase';
 
 import { LOGIN, LOGOUT } from '../auth/authActionTypes';
-import { loginSuccess, logoutSuccess } from './authActionCreators';
+import { loginSuccess, logoutSuccess, authLoading } from './authActionCreators';
 
 // TODO: error handling
 
@@ -32,6 +32,8 @@ function* loginSaga({
   email: string;
   password: string;
 }): IterableIterator<{}> {
+  yield put(authLoading());
+
   try {
     const user = yield AUTH.signInWithEmailAndPassword(email, password);
   } catch (error) {
@@ -88,6 +90,7 @@ function* updateAuth(): IterableIterator<{}> {
         email: user.email,
         uid: user.uid
       };
+
       yield put(loginSuccess(formattedUser));
     }
   }
