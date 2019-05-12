@@ -25,8 +25,9 @@ export const login = (email: string, password: string): AuthActionTypes => ({
   password
 });
 
-export const loginFail = (): AuthActionTypes => ({
-  type: LOGIN_FAIL
+export const loginFail = (error: string): AuthActionTypes => ({
+  type: LOGIN_FAIL,
+  error
 });
 
 export const loginSuccess = (user: User): AuthActionTypes => ({
@@ -49,8 +50,9 @@ export const signup = (email: string, password: string): AuthActionTypes => ({
   password
 });
 
-export const signupFail = (): AuthActionTypes => ({
-  type: SIGNUP_FAIL
+export const signupFail = (error: string): AuthActionTypes => ({
+  type: SIGNUP_FAIL,
+  error
 });
 
 export const signupSuccess = (): AuthActionTypes => ({

@@ -6,7 +6,7 @@ interface ButtonProps {
   children: any;
   color: string;
   disabled?: boolean;
-  clicked: (event: React.MouseEvent) => void;
+  clicked?: (event: React.MouseEvent) => void;
 }
 
 const button = (props: ButtonProps) => (

@@ -4,10 +4,28 @@
   color: black;
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-around;
+  text-align: center;
+}
+
+.BodyWide {
+  background-color: rgb(233, 233, 233);
+  border-radius: 0 0 8px 8px;
+  color: black;
+  display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
 }
 
 .Card {
+  border-radius: 8px;
+  box-shadow: 4px 4px 8px 4px rgba(0, 0, 0, 0.5);
+  font-family: 'Rosario', sans-serif;
+  margin: 24px 16px 16px 16px;
+  width: 330px;
+}
+
+.CardWide {
   border-radius: 8px;
   box-shadow: 4px 4px 8px 4px rgba(0, 0, 0, 0.5);
   font-family: 'Rosario', sans-serif;

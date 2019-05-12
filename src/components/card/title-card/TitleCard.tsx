@@ -12,11 +12,12 @@ interface TitleCardProps {
   readOnly?: boolean;
   title: string;
   value?: any;
+  wide?: boolean;
 }
 
 // TODO: refactor, maybe merged with another card or unnecessary
 const titleCard = (props: TitleCardProps) => {
-  const { editing, onChange, onEdit, readOnly, title, value } = props;
+  const { editing, onChange, onEdit, readOnly, title, value, wide } = props;
 
   return (
     <div className={classes.Card}>
@@ -38,7 +39,9 @@ const titleCard = (props: TitleCardProps) => {
         )}
       </div>
 
-      <div className={classes.Body}>{props.children}</div>
+      <div className={wide ? classes.BodyWide : classes.Body}>
+        {props.children}
+      </div>
     </div>
   );
 };

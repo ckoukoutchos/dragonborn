@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { updateObject, updateObjectInArray } from '../../../shared/Utility';
+import { updateObject, updateObjectInArray } from '../../../shared/immutable';
 import {
   fetchHero,
   getHero,
@@ -129,6 +129,7 @@ class TrackStats extends Component<any, any> {
           onEdit={this.onEditToggled('basics')}
           onChange={this.onInputChange('name')}
           value={hero.name}
+          wide
         >
           <Input
             label={'Class & Level'}

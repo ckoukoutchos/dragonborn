@@ -5,10 +5,11 @@ import { Route, Switch, Redirect, withRouter } from 'react-router-dom';
 import { AppState } from './store/rootReducer';
 import { User } from './models/User';
 
-import Login from './containers/auth/login/Login';
 import Create from './containers/create/Create';
 import Home from './containers/home/Home';
 import Layout from './hoc/layout/Layout';
+import Login from './containers/auth/login/Login';
+import Logout from './containers/auth/logout/Logout';
 import Signup from './containers/auth/signup/Signup';
 import Track from './containers/track/Track';
 import TrackStats from './containers/track/track-stats/TrackStats';
@@ -32,10 +33,11 @@ class App extends Component<any> {
       routes = (
         <Switch>
           <Route path="/create" component={Create} />
-          <Route path="/track" component={Track} />
+          <Route path="/track" exact component={Track} />
           <Route path="/track/:id/stats" component={TrackStats} />
           {/* <Route path="/guide" exact component={Guide} /> */}
           <Route path="/login" component={Login} />
+          <Route path="/logout" component={Logout} />
           <Route path="/" exact component={Home} />
           <Redirect to="/" />
         </Switch>

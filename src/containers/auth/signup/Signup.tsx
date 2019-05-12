@@ -1,11 +1,18 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component, FormEvent, ChangeEvent } from 'react';
 import { Dispatch } from 'redux';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router';
 
 import { AppState } from '../../../store/rootReducer';
 import { AuthActionTypes } from '../../../store/auth/authActionTypes';
 import { signup } from '../../../store/auth/authActionCreators';
+import {
+  passwordMatch,
+  validPassword,
+  validEmail
+} from '../../../shared/validation';
 
+import classes from './Signup.module.css';
 import Button from '../../../components/button/Button';
 import Input from '../../../components/input/Input';
 import Spinner from '../../../components/spinner/Spinner';
@@ -16,27 +23,53 @@ import TitleCard from '../../../components/card/title-card/TitleCard';
 class Signup extends Component<any, any> {
   state = {
     email: '',
+    error: false,
     password: '',
     passwordCheck: ''
   };
 
-  signup = () => {
-    this.props.signup(this.state.email, this.state.password);
+  signup = (evt: FormEvent) => {
+    evt.preventDefault();
+    const { email, password, passwordCheck } = this.state;
+
+    if (passwordMatch(password, passwordCheck) && validPassword(password)) {
+      this.props.signup(email, password);
+    } else {
+      this.setState({
+        error:
+          'Please use a valid email address and ensure your passwords match.'
+      });
+    }
   };
 
-  onInputChange = (label: string) => (evt: any) => {
+  onInputChange = (label: string) => (evt: ChangeEvent<HTMLInputElement>) => {
     this.setState({ [label]: evt.target.value });
   };
 
   render() {
-    const { email, password, passwordCheck } = this.state;
+    const { email, error, password, passwordCheck } = this.state;
+
+    // redirect if already signed in
+    let authRedirect = null;
+    if (this.props.user) {
+      authRedirect = <Redirect to="/" />;
+    }
 
     let signup = <Spinner />;
 
     if (!this.props.loading) {
       signup = (
-        <>
+        <form onSubmit={this.signup}>
+          {authRedirect}
+
           <TitleCard title="Sign Up" readOnly>
+            {this.state.error ? (
+              <p className={classes.Error}>{this.state.error}</p>
+            ) : null}
+            {this.props.error ? (
+              <p className={classes.Error}>{this.props.error}</p>
+            ) : null}
+
             <Input
               value={email}
               label="Email"
@@ -44,6 +77,7 @@ class Signup extends Component<any, any> {
               onChange={this.onInputChange('email')}
               editing
             />
+
             <Input
               value={password}
               label="Password"
@@ -51,6 +85,7 @@ class Signup extends Component<any, any> {
               onChange={this.onInputChange('password')}
               editing
             />
+
             <Input
               value={passwordCheck}
               label="Password Check"
@@ -58,11 +93,12 @@ class Signup extends Component<any, any> {
               onChange={this.onInputChange('passwordCheck')}
               editing
             />
-            <Button btnType="Raised" color="Primary" clicked={this.signup}>
+
+            <Button btnType="Raised" color="Primary">
               Login
             </Button>
           </TitleCard>
-        </>
+        </form>
       );
     }
 
@@ -71,7 +107,9 @@ class Signup extends Component<any, any> {
 }
 
 const mapStateToProps = (state: AppState) => ({
-  loading: state.auth.loading
+  error: state.auth.error,
+  loading: state.auth.loading,
+  user: state.auth.user
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<AuthActionTypes>) => ({

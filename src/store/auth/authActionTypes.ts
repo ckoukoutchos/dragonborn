@@ -20,6 +20,7 @@ export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
  * Auth action type interfaces
  */
 export interface AuthState {
+  error: any;
   loading: boolean;
   user: User | null;
 }
@@ -36,6 +37,7 @@ interface LoginAction {
 
 interface LoginFailAction {
   type: typeof LOGIN_FAIL;
+  error: string;
 }
 
 interface LoginSuccessAction {
@@ -60,6 +62,7 @@ interface SignupAction {
 
 interface SignupFailAction {
   type: typeof SIGNUP_FAIL;
+  error: string;
 }
 
 interface SignupSuccessAction {

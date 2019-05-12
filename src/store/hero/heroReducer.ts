@@ -1,4 +1,4 @@
-import { updateObject, updateArray } from '../../shared/Utility';
+import { updateObject, updateArray } from '../../shared/immutable';
 import Hero from '../../models/Hero';
 import {
   HeroState,

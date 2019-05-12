@@ -53,7 +53,7 @@ class Track extends Component<TrackProps> {
 
     if (!this.props.loading) {
       heroList = this.props.heroes.map((hero: Hero, index: number) => (
-        <TitleCard key={index} title={hero.name} readOnly>
+        <TitleCard key={index} title={hero.name} readOnly wide>
           <Input
             label={'Class & Level'}
             value={hero.heroClass + ' ' + hero.level}

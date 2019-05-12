@@ -15,6 +15,7 @@ interface NavBarState {
 }
 
 // TODO: fix wonky resolution issues
+
 class NavBar extends Component<NavBarProps, NavBarState> {
   state = {
     menuToggle: false
@@ -34,9 +35,7 @@ class NavBar extends Component<NavBarProps, NavBarState> {
     return (
       <header className={classes.NavBar}>
         <div className={classes.Logo}>
-          <NavItem link="/" exact>
-            Dragonborn
-          </NavItem>
+          <NavItem link="/">Dragonborn</NavItem>
         </div>
 
         <nav className={classes.Links}>
@@ -51,14 +50,13 @@ class NavBar extends Component<NavBarProps, NavBarState> {
               <NavItem link="/guide" exact>
                 Guide
               </NavItem>
-              <NavItem link="/" exact>
-                Logout
+              <NavItem link="/profile" exact>
+                Profile
               </NavItem>
+              <NavItem link="/logout">Logout</NavItem>
             </>
           ) : (
-            <NavItem link="/login" exact>
-              Login
-            </NavItem>
+            <NavItem link="/login">Login</NavItem>
           )}
         </nav>
 
@@ -86,7 +84,10 @@ class NavBar extends Component<NavBarProps, NavBarState> {
               <NavItem link="/guide" menu>
                 Guide
               </NavItem>
-              <NavItem link="/logout" exact menu>
+              <NavItem link="/profile" menu>
+                Profile
+              </NavItem>
+              <NavItem link="/logout" menu>
                 LogOut
               </NavItem>
             </nav>
