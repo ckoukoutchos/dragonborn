@@ -2,8 +2,8 @@ import { put, take, all, takeEvery } from 'redux-saga/effects';
 import { eventChannel } from 'redux-saga';
 import { AUTH } from '../../firebase/firebase';
 
-import { LOGIN, LOGOUT } from '../auth/authActionTypes';
-import { loginSuccess, logoutSuccess, authLoading } from './authActionCreators';
+import { LOGIN, LOGOUT, SIGNUP } from '../auth/authActionTypes';
+import { loginSuccess, logoutSuccess, authLoading, signupSuccess } from './authActionCreators';
 
 // TODO: error handling
 
@@ -15,8 +15,11 @@ export default function* watchAuth() {
   yield all([
     updateAuth(),
     takeEvery(LOGIN, loginSaga),
-    takeEvery(LOGOUT, logoutSaga)
-  ])
+    takeEvery(LOGOUT, logoutSaga),
+    // ts bug with takeEvery defaulting to wrong type
+    //@ts-ignore
+    takeEvery(SIGNUP, signupSaga)
+  ]);
 }
 
 /**
@@ -49,6 +52,23 @@ function* loginSaga({
 function* logoutSaga(): IterableIterator<{}> {
   try {
     const res = yield AUTH.signOut();
+  } catch (error) {
+    // TODO: add error handling
+    console.log(error);
+  }
+}
+
+/**
+ * @name signupSaga
+ * @description signs up user in firebase
+ */
+function* signupSaga({ email, password }: { email: string, password: string }): IterableIterator<{}> {
+  yield put(authLoading());
+
+  try {
+    const res = yield AUTH.createUserWithEmailAndPassword(email, password);
+
+    yield put(signupSuccess());
   } catch (error) {
     // TODO: add error handling
     console.log(error);

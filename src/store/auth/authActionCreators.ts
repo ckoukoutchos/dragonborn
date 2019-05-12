@@ -43,8 +43,10 @@ export const logoutSuccess = (user: null): AuthActionTypes => ({
   user
 });
 
-export const signup = (): AuthActionTypes => ({
-  type: SIGNUP
+export const signup = (email: string, password: string): AuthActionTypes => ({
+  type: SIGNUP,
+  email,
+  password
 });
 
 export const signupFail = (): AuthActionTypes => ({

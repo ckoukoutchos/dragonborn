@@ -1,4 +1,4 @@
-import { AuthState, AuthActionTypes, LOGIN_SUCCESS, LOGOUT_SUCCESS, AUTH_LOADING } from './authActionTypes';
+import { AuthState, AuthActionTypes, LOGIN_SUCCESS, LOGOUT_SUCCESS, AUTH_LOADING, SIGNUP_SUCCESS } from './authActionTypes';
 import { User } from '../../models/User';
 import { updateObject } from '../../shared/Utility';
 
@@ -27,6 +27,8 @@ const authReducer = (
       return loginSuccess(state, action);
     case LOGOUT_SUCCESS:
       return logoutSuccess(state, action);
+    case SIGNUP_SUCCESS:
+      return signupSuccess(state);
     default:
       return state;
   }
@@ -40,5 +42,7 @@ const authLoading = (state: AuthState): AuthState => updateObject(state, { loadi
 const loginSuccess = (state: AuthState, { user }: { user: User }): AuthState => updateObject(state, { user, loading: false });
 
 const logoutSuccess = (state: AuthState, { user }: { user: null }): AuthState => updateObject(state, { user, loading: false });
+
+const signupSuccess = (state: AuthState): AuthState => updateObject(state, { loading: false });
 
 export default authReducer;

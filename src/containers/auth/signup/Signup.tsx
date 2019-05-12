@@ -4,7 +4,7 @@ import { Dispatch } from 'redux';
 
 import { AppState } from '../../../store/rootReducer';
 import { AuthActionTypes } from '../../../store/auth/authActionTypes';
-import { login, logout } from '../../../store/auth/authActionCreators';
+import { signup } from '../../../store/auth/authActionCreators';
 
 import Button from '../../../components/button/Button';
 import Input from '../../../components/input/Input';
@@ -20,8 +20,8 @@ class Signup extends Component<any, any> {
     passwordCheck: ''
   };
 
-  login = () => {
-    this.props.login(this.state.email, this.state.password);
+  signup = () => {
+    this.props.signup(this.state.email, this.state.password);
   };
 
   onInputChange = (label: string) => (evt: any) => {
@@ -36,7 +36,7 @@ class Signup extends Component<any, any> {
     if (!this.props.loading) {
       signup = (
         <>
-          <TitleCard title="Login" readOnly>
+          <TitleCard title="Sign Up" readOnly>
             <Input
               value={email}
               label="Email"
@@ -52,13 +52,13 @@ class Signup extends Component<any, any> {
               editing
             />
             <Input
-              value={password}
+              value={passwordCheck}
               label="Password Check"
               long
               onChange={this.onInputChange('passwordCheck')}
               editing
             />
-            <Button btnType="Raised" color="Primary" clicked={this.login}>
+            <Button btnType="Raised" color="Primary" clicked={this.signup}>
               Login
             </Button>
           </TitleCard>
@@ -75,7 +75,7 @@ const mapStateToProps = (state: AppState) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<AuthActionTypes>) => ({
-  login: (email: string, password: string) => dispatch(login(email, password))
+  signup: (email: string, password: string) => dispatch(signup(email, password))
 });
 
 export default connect(

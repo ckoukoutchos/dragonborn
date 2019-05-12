@@ -54,6 +54,8 @@ interface LogoutSuccessAction {
 
 interface SignupAction {
   type: typeof SIGNUP;
+  email: string;
+  password: string;
 }
 
 interface SignupFailAction {

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 class Home extends Component<any> {
   signup = () => {
-    console.log(this.props.history);
     this.props.history.push('/signup');
   };
 
