@@ -12,6 +12,8 @@ import Login from './containers/auth/login/Login';
 import Logout from './containers/auth/logout/Logout';
 import Signup from './containers/auth/signup/Signup';
 import Track from './containers/track/Track';
+import TrackPlay from './containers/track/track-play/TrackPlay';
+import TrackSpells from './containers/track/track-spells/TrackSpells';
 import TrackStats from './containers/track/track-stats/TrackStats';
 
 interface AppProps {
@@ -35,6 +37,8 @@ class App extends Component<any> {
           <Route path="/create" component={Create} />
           <Route path="/track" exact component={Track} />
           <Route path="/track/:id/stats" component={TrackStats} />
+          <Route path="/track/:id/spells" component={TrackSpells} />
+          <Route path="/track/:id/play" component={TrackPlay} />
           {/* <Route path="/guide" exact component={Guide} /> */}
           <Route path="/login" component={Login} />
           <Route path="/logout" component={Logout} />
