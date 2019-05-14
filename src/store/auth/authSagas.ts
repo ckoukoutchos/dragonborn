@@ -2,8 +2,8 @@ import { put, take, all, takeEvery } from 'redux-saga/effects';
 import { eventChannel } from 'redux-saga';
 import { AUTH } from '../../firebase/firebase';
 
-import { LOGIN, LOGOUT, SIGNUP } from '../auth/authActionTypes';
-import { loginSuccess, logoutSuccess, authLoading, signupSuccess, signupFail, loginFail } from './authActionCreators';
+import { LOGIN, LOGOUT, SIGNUP, UPDATE_DISPLAY_NAME } from '../auth/authActionTypes';
+import { loginSuccess, logoutSuccess, authLoading, signupSuccess, signupFail, loginFail, updateDisplayNameSuccess, updateDisplayNameFail } from './authActionCreators';
 
 // TODO: error handling
 
@@ -18,7 +18,8 @@ export default function* watchAuth() {
     takeEvery(LOGOUT, logoutSaga),
     // ts bug with takeEvery defaulting to wrong type
     //@ts-ignore
-    takeEvery(SIGNUP, signupSaga)
+    takeEvery(SIGNUP, signupSaga),
+    takeEvery(UPDATE_DISPLAY_NAME, updateDisplayName)
   ]);
 }
 
@@ -38,7 +39,7 @@ function* loginSaga({
   yield put(authLoading());
 
   try {
-    const user = yield AUTH.signInWithEmailAndPassword(email, password);
+    yield AUTH.signInWithEmailAndPassword(email, password);
 
   } catch (error) {
     yield put(loginFail(error.message));
@@ -51,7 +52,7 @@ function* loginSaga({
  */
 function* logoutSaga(): IterableIterator<any> {
   try {
-    const res = yield AUTH.signOut();
+    yield AUTH.signOut();
 
   } catch (error) {
     // TODO: add error handling
@@ -67,8 +68,7 @@ function* signupSaga({ email, password }: { email: string, password: string }): 
   yield put(authLoading());
 
   try {
-    const res = yield AUTH.createUserWithEmailAndPassword(email, password);
-
+    yield AUTH.createUserWithEmailAndPassword(email, password);
     yield put(signupSuccess());
 
   } catch (error) {
@@ -116,18 +116,25 @@ function* updateAuth(): IterableIterator<any> {
   }
 }
 
-function* updateDisplayName(displayName: string): IterableIterator<any> {
+/**
+ * @name updateDisplayName
+ * @description updates the display name of current user in firebase
+ * @param displayName 
+ */
+function* updateDisplayName({ displayName }: { displayName: string }): IterableIterator<any> {
   yield put(authLoading());
 
   try {
+    // get current signed in user
     const user = yield AUTH.currentUser;
 
+    // check if there is a valid user
     if (user != null) {
       yield user.updateProfile({ displayName });
-      yield put(upda)
+      yield put(updateDisplayNameSuccess());
     }
 
   } catch (error) {
-
+    yield put(updateDisplayNameFail(error));
   }
 }

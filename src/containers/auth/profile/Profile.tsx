@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import { AppState } from '../../../store/rootReducer';
 import { AuthActionTypes } from '../../../store/auth/authActionTypes';
+import { updateDisplayName } from '../../../store/auth/authActionCreators';
 import { updateObject } from '../../../shared/immutable';
 
 import Button from '../../../components/button/Button';
@@ -32,7 +33,9 @@ class Profile extends Component<any, any> {
       });
 
       if (prevState.updated) {
+        this.saveUpdatedSection(section, prevState);
       }
+
       return { editing: updatedValue, updated: false };
     });
   };
@@ -41,14 +44,15 @@ class Profile extends Component<any, any> {
     this.setState({ [label]: evt.target.value, updated: true });
   };
 
-  saveUpdatedSection = (section: string) => {
+  saveUpdatedSection = (section: string, prevState: any) => {
     switch (section) {
       case 'displayName':
-
+        this.props.updateDisplayName(prevState.displayName);
+        return;
       case 'email':
-
+        return;
       case 'password':
-
+        return;
       default:
         return;
     }
@@ -126,7 +130,10 @@ const mapStateToProps = (state: AppState) => ({
   user: state.auth.user
 });
 
-const mapDispatchToProps = (dispatch: Dispatch<AuthActionTypes>) => ({});
+const mapDispatchToProps = (dispatch: Dispatch<AuthActionTypes>) => ({
+  updateDisplayName: (displayName: string) =>
+    dispatch(updateDisplayName(displayName))
+});
 
 export default connect(
   mapStateToProps,
