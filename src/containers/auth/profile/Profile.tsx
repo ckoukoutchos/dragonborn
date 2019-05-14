@@ -1,4 +1,4 @@
-import React, { Component, Dispatch } from 'react';
+import React, { Component, Dispatch, ChangeEvent } from 'react';
 import { connect } from 'react-redux';
 
 import { AppState } from '../../../store/rootReducer';
@@ -21,10 +21,11 @@ class Profile extends Component<any, any> {
     displayName: this.props.user.displayName || '',
     email: this.props.user.email,
     password: '',
-    passwordCheck: ''
+    passwordCheck: '',
+    updated: false
   };
 
-  onEditToggled = (section: any) => () => {
+  onEditToggled = (section: string) => () => {
     this.setState((prevState: any) => {
       const updatedValue = updateObject(prevState.editing, {
         [section]: !prevState.editing[section]
@@ -36,8 +37,21 @@ class Profile extends Component<any, any> {
     });
   };
 
-  onInputChange = (label: any) => (evt: any) => {
-    this.setState({ [label]: evt.target.value });
+  onInputChange = (label: string) => (evt: ChangeEvent<HTMLInputElement>) => {
+    this.setState({ [label]: evt.target.value, updated: true });
+  };
+
+  saveUpdatedSection = (section: string) => {
+    switch (section) {
+      case 'displayName':
+
+      case 'email':
+
+      case 'password':
+
+      default:
+        return;
+    }
   };
 
   render() {

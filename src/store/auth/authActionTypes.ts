@@ -16,6 +16,18 @@ export const SIGNUP = 'SIGNUP';
 export const SIGNUP_FAIL = 'SIGNUP_FAIL';
 export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
 
+export const UPDATE_DISPLAY_NAME = 'UPDATE_DISPLAY_NAME';
+export const UPDATE_DISPLAY_NAME_FAIL = 'UPDATE_DISPLAY_NAME_FAILURE';
+export const UPDATE_DISPLAY_NAME_SUCCESS = 'UPDATE_DISPLAY_NAME_SUCCESS';
+
+export const UPDATE_EMAIL = 'UPDATE_EMAIL';
+export const UPDATE_EMAIL_FAIL = 'UPDATE_EMAIL_FAIL';
+export const UPDATE_EMAIL_SUCCESS = 'UPDATE_EMAIL_SUCCESS';
+
+export const UPDATE_PASSWORD = 'UPDATE_PASSWORD';
+export const UPDATE_PASSWORD_FAIL = 'UPDATE_PASSWORD_FAIL';
+export const UPDATE_PASSWORD_SUCCESS = 'UPDATE_PASSWORD_SUCCESS';
+
 /*
  * Auth action type interfaces
  */
@@ -69,6 +81,48 @@ interface SignupSuccessAction {
   type: typeof SIGNUP_SUCCESS;
 }
 
+interface UpdateDisplayName {
+  type: typeof UPDATE_DISPLAY_NAME;
+  displayName: string;
+}
+
+interface UpdateDisplayNameFail {
+  type: typeof UPDATE_DISPLAY_NAME_FAIL;
+  error: any;
+}
+
+interface UpdateDisplayNameSuccess {
+  type: typeof UPDATE_DISPLAY_NAME_SUCCESS;
+}
+
+interface UpdateEmail {
+  type: typeof UPDATE_EMAIL;
+  email: string;
+}
+
+interface UpdateEmailFail {
+  type: typeof UPDATE_EMAIL_FAIL;
+  error: any;
+}
+
+interface UpdateEmailSuccess {
+  type: typeof UPDATE_EMAIL_SUCCESS;
+}
+
+interface UpdatePassword {
+  type: typeof UPDATE_PASSWORD;
+  password: string;
+}
+
+interface UpdatePasswordFail {
+  type: typeof UPDATE_PASSWORD_FAIL;
+  error: any;
+}
+
+interface UpdatePasswordSuccess {
+  type: typeof UPDATE_PASSWORD_SUCCESS;
+}
+
 export type AuthActionTypes =
   | AuthLoading
   | LoginAction
@@ -78,4 +132,13 @@ export type AuthActionTypes =
   | LogoutSuccessAction
   | SignupAction
   | SignupFailAction
-  | SignupSuccessAction;
+  | SignupSuccessAction
+  | UpdateDisplayName
+  | UpdateDisplayNameFail
+  | UpdateDisplayNameSuccess
+  | UpdateEmail
+  | UpdateEmailFail
+  | UpdateEmailSuccess
+  | UpdatePassword
+  | UpdatePasswordFail
+  | UpdatePasswordSuccess;

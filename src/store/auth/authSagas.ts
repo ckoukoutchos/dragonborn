@@ -34,7 +34,7 @@ function* loginSaga({
 }: {
   email: string;
   password: string;
-}): IterableIterator<{}> {
+}): IterableIterator<any> {
   yield put(authLoading());
 
   try {
@@ -49,7 +49,7 @@ function* loginSaga({
  * @name logoutSaga
  * @description logs user out of firebase
  */
-function* logoutSaga(): IterableIterator<{}> {
+function* logoutSaga(): IterableIterator<any> {
   try {
     const res = yield AUTH.signOut();
 
@@ -63,7 +63,7 @@ function* logoutSaga(): IterableIterator<{}> {
  * @name signupSaga
  * @description signs up user in firebase
  */
-function* signupSaga({ email, password }: { email: string, password: string }): IterableIterator<{}> {
+function* signupSaga({ email, password }: { email: string, password: string }): IterableIterator<any> {
   yield put(authLoading());
 
   try {
@@ -92,7 +92,7 @@ const authStateChangeChannel = () => {
  * @name updateAuth
  * @description updates the auth state of a user when firebase registers a change
  */
-function* updateAuth(): IterableIterator<{}> {
+function* updateAuth(): IterableIterator<any> {
   // create listener to firebase auth
   const userChannel = authStateChangeChannel();
 
@@ -113,5 +113,21 @@ function* updateAuth(): IterableIterator<{}> {
 
       yield put(loginSuccess(formattedUser));
     }
+  }
+}
+
+function* updateDisplayName(displayName: string): IterableIterator<any> {
+  yield put(authLoading());
+
+  try {
+    const user = yield AUTH.currentUser;
+
+    if (user != null) {
+      yield user.updateProfile({ displayName });
+      yield put(upda)
+    }
+
+  } catch (error) {
+
   }
 }
