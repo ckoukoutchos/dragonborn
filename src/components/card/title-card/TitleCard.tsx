@@ -34,7 +34,7 @@ const titleCard = (props: TitleCardProps) => {
             btnType="Corner"
             clicked={onEdit}
           >
-            {editing ? 'x' : '+'}
+            {editing ? 'Save' : 'Edit'}
           </Button>
         )}
       </div>

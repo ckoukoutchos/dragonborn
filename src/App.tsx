@@ -10,6 +10,7 @@ import Home from './containers/home/Home';
 import Layout from './hoc/layout/Layout';
 import Login from './containers/auth/login/Login';
 import Logout from './containers/auth/logout/Logout';
+import Profile from './containers/auth/profile/Profile';
 import Signup from './containers/auth/signup/Signup';
 import Track from './containers/track/Track';
 import TrackPlay from './containers/track/track-play/TrackPlay';
@@ -40,6 +41,7 @@ class App extends Component<any> {
           <Route path="/track/:id/spells" component={TrackSpells} />
           <Route path="/track/:id/play" component={TrackPlay} />
           {/* <Route path="/guide" exact component={Guide} /> */}
+          <Route path="/profile" component={Profile} />
           <Route path="/login" component={Login} />
           <Route path="/logout" component={Logout} />
           <Route path="/" exact component={Home} />

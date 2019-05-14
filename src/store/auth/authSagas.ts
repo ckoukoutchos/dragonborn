@@ -103,9 +103,8 @@ function* updateAuth(): IterableIterator<{}> {
     // if not logged in
     if (user === 'null') {
       yield put(logoutSuccess(null));
-
-      // if logged in
     } else {
+      // if logged in
       const formattedUser = {
         displayName: user.displayName,
         email: user.email,

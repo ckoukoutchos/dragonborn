@@ -25,7 +25,7 @@ const basicCard = (props: BasicCardProps) => {
             btnType="Corner"
             clicked={onEdit}
           >
-            {editing ? 'x' : '+'}
+            {editing ? 'Save' : 'Edit'}
           </Button>
         ) : null}
       </div>
