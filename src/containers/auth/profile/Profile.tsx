@@ -3,14 +3,22 @@ import { connect } from 'react-redux';
 
 import { AppState } from '../../../store/rootReducer';
 import { AuthActionTypes } from '../../../store/auth/authActionTypes';
-import { updateDisplayName } from '../../../store/auth/authActionCreators';
+import {
+  updatePassword,
+  updateDisplayName,
+  updateEmail
+} from '../../../store/auth/authActionCreators';
 import { updateObject } from '../../../shared/immutable';
 
-import Button from '../../../components/button/Button';
 import Input from '../../../components/input/Input';
 import Spinner from '../../../components/spinner/Spinner';
 import TitleCard from '../../../components/card/title-card/TitleCard';
 import SecondaryCard from '../../../components/card/secondary-card/SecondaryCard';
+import {
+  validEmail,
+  passwordMatch,
+  validPassword
+} from '../../../shared/validation';
 
 class Profile extends Component<any, any> {
   state = {
@@ -44,14 +52,22 @@ class Profile extends Component<any, any> {
     this.setState({ [label]: evt.target.value, updated: true });
   };
 
+  // TODO: error handling
   saveUpdatedSection = (section: string, prevState: any) => {
     switch (section) {
       case 'displayName':
         this.props.updateDisplayName(prevState.displayName);
         return;
       case 'email':
+        if (validEmail(prevState.displayName))
+          this.props.updateEmail(prevState.email);
         return;
       case 'password':
+        if (
+          passwordMatch(prevState.password, prevState.passwordCheck) &&
+          validPassword(prevState.password)
+        )
+          this.props.updatePassword(prevState.password);
         return;
       default:
         return;
@@ -59,7 +75,7 @@ class Profile extends Component<any, any> {
   };
 
   render() {
-    const { error, loading, user } = this.props;
+    const { error, loading } = this.props;
     const { editing, displayName, email, password, passwordCheck } = this.state;
 
     let profile = <Spinner />;
@@ -132,7 +148,9 @@ const mapStateToProps = (state: AppState) => ({
 
 const mapDispatchToProps = (dispatch: Dispatch<AuthActionTypes>) => ({
   updateDisplayName: (displayName: string) =>
-    dispatch(updateDisplayName(displayName))
+    dispatch(updateDisplayName(displayName)),
+  updateEmail: (email: string) => dispatch(updateEmail(email)),
+  updatePassword: (password: string) => dispatch(updatePassword(password))
 });
 
 export default connect(

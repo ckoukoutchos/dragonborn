@@ -21,7 +21,7 @@ const basicCard = (props: BasicCardProps) => {
 
         {!readOnly ? (
           <Button
-            color={editing ? 'Secondary' : 'Primary'}
+            color={editing ? 'Accent' : 'Primary'}
             btnType="Corner"
             clicked={onEdit}
           >

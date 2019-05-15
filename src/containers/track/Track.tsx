@@ -78,7 +78,7 @@ class Track extends Component<TrackProps> {
           </div>
 
           <Button
-            color="Secondary"
+            color="Warn"
             btnType="Flat"
             clicked={() => this.onHeroDeletion(hero.id)}
           >

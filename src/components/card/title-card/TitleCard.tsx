@@ -30,7 +30,7 @@ const titleCard = (props: TitleCardProps) => {
 
         {readOnly ? null : (
           <Button
-            color={editing ? 'Secondary' : 'Primary'}
+            color={editing ? 'Accent' : 'Primary'}
             btnType="Corner"
             clicked={onEdit}
           >

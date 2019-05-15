@@ -22,7 +22,7 @@ const secondaryCard = (props: SecondaryCardProps) => {
         <div className={classes.Label}>{label}</div>
         {!readOnly ? (
           <Button
-            color={editing ? 'Secondary' : 'Primary'}
+            color={editing ? 'Accent' : 'Primary'}
             btnType="CornerBottom"
             clicked={onEdit}
           >
