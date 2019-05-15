@@ -16,7 +16,7 @@ interface NavBarState {
 
 // TODO: fix wonky resolution issues
 
-class NavBar extends Component<NavBarProps, NavBarState> {
+class NavBar extends Component<any, NavBarState> {
   state = {
     menuToggle: false
   };
@@ -35,40 +35,32 @@ class NavBar extends Component<NavBarProps, NavBarState> {
     return (
       <header className={classes.NavBar}>
         <div className={classes.Logo}>
-          <NavItem link="/">Dragonborn</NavItem>
+          <NavItem link="/" exact>
+            Dragonborn
+          </NavItem>
         </div>
 
-        <nav className={classes.Links}>
-          {this.props.user ? (
-            <>
-              <NavItem link="/create" exact>
-                Create
-              </NavItem>
-              <NavItem link="/track" exact>
-                Track
-              </NavItem>
-              <NavItem link="/guide" exact>
-                Guide
-              </NavItem>
-              <NavItem link="/profile" exact>
-                Profile
-              </NavItem>
-              <NavItem link="/logout">Logout</NavItem>
-            </>
-          ) : (
-            <NavItem link="/login">Login</NavItem>
-          )}
-        </nav>
-
         {this.props.user ? (
-          <div className={classes.Menu} onClick={this.onMenuToggle}>
-            {this.state.menuToggle ? 'Close' : 'Menu'}
+          <div>
+            <nav className={classes.Links}>
+              <NavItem link="/create">Create</NavItem>
+              <NavItem link="/track">Track</NavItem>
+              <NavItem link="/guide">Guide</NavItem>
+              <NavItem link="/profile">Profile</NavItem>
+              <NavItem link="/logout">Logout</NavItem>
+            </nav>
+            <div className={classes.Menu} onClick={this.onMenuToggle}>
+              {this.state.menuToggle ? 'Close' : 'Menu'}
+            </div>
           </div>
         ) : (
-          <div className={classes.Menu}>
-            <NavItem link="/login" exact>
-              Login
-            </NavItem>
+          <div>
+            <nav className={classes.Links}>
+              <NavItem link="/login">Login</NavItem>
+            </nav>
+            <div className={classes.Menu}>
+              <NavItem link="/login">Login</NavItem>
+            </div>
           </div>
         )}
 

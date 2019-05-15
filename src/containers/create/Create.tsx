@@ -35,7 +35,7 @@ class Create extends Component<CreateProps> {
       <>
         <Jumbotron header="Create" subHeader="So Begins a New Legend" />
 
-        <TitleCard title="Traditional" readOnly>
+        <TitleCard title="Traditional" readOnly wide>
           {/* TODO: remove inline styles */}
           <p
             style={{

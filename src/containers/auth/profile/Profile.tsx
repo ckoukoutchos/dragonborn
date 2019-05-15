@@ -9,6 +9,7 @@ import {
   updateEmail
 } from '../../../store/auth/authActionCreators';
 import { updateObject } from '../../../shared/immutable';
+import classes from './Profile.module.css';
 
 import Input from '../../../components/input/Input';
 import Spinner from '../../../components/spinner/Spinner';
@@ -20,6 +21,8 @@ import {
   validPassword
 } from '../../../shared/validation';
 
+// TODO: error msg, func docs, comments, interfaces
+
 class Profile extends Component<any, any> {
   state = {
     editing: {
@@ -28,6 +31,7 @@ class Profile extends Component<any, any> {
       password: false
     },
     displayName: this.props.user.displayName || '',
+    error: null,
     email: this.props.user.email,
     password: '',
     passwordCheck: '',
@@ -40,11 +44,12 @@ class Profile extends Component<any, any> {
         [section]: !prevState.editing[section]
       });
 
+      let error = null;
       if (prevState.updated) {
-        this.saveUpdatedSection(section, prevState);
+        error = this.saveUpdatedSection(section, prevState);
       }
 
-      return { editing: updatedValue, updated: false };
+      return { editing: updatedValue, error, updated: false };
     });
   };
 
@@ -59,30 +64,44 @@ class Profile extends Component<any, any> {
         this.props.updateDisplayName(prevState.displayName);
         return;
       case 'email':
-        if (validEmail(prevState.displayName))
+        if (validEmail(prevState.displayName)) {
           this.props.updateEmail(prevState.email);
-        return;
+          return;
+        } else {
+          return 'Please use a valid email address';
+        }
       case 'password':
         if (
           passwordMatch(prevState.password, prevState.passwordCheck) &&
           validPassword(prevState.password)
-        )
+        ) {
           this.props.updatePassword(prevState.password);
-        return;
+          return;
+        } else {
+          return 'Please ensure your passwords match';
+        }
       default:
         return;
     }
   };
 
   render() {
-    const { error, loading } = this.props;
-    const { editing, displayName, email, password, passwordCheck } = this.state;
+    const { loading } = this.props;
+    const {
+      editing,
+      error,
+      displayName,
+      email,
+      password,
+      passwordCheck
+    } = this.state;
 
     let profile = <Spinner />;
 
     if (!loading) {
       profile = (
         <TitleCard title="Profile" readOnly>
+          {error ? <p className={classes.Error}>{error}</p> : null}
           <SecondaryCard
             label="Display Name"
             editing={editing.displayName}
