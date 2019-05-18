@@ -9,18 +9,18 @@ interface ButtonProps {
   clicked?: (event: React.MouseEvent) => void;
 }
 
-const button = (props: ButtonProps) => (
-  <button
-    className={[
-      classes.Button,
-      classes[props.btnType],
-      classes[props.color]
-    ].join(' ')}
-    disabled={props.disabled}
-    onClick={props.clicked}
-  >
-    <strong>{props.children}</strong>
-  </button>
-);
+const button = (props: ButtonProps) => {
+  const { btnType, children, clicked, color, disabled } = props;
+
+  return (
+    <button
+      className={[classes.Button, classes[btnType], classes[color]].join(' ')}
+      disabled={disabled}
+      onClick={clicked}
+    >
+      <strong>{children}</strong>
+    </button>
+  );
+};
 
 export default button;

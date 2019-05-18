@@ -1,6 +1,8 @@
+// library
 import React, { Component, Dispatch, ChangeEvent } from 'react';
 import { connect } from 'react-redux';
 
+// store
 import { AppState } from '../../../store/rootReducer';
 import { AuthActionTypes } from '../../../store/auth/authActionTypes';
 import {
@@ -8,13 +10,18 @@ import {
   updateDisplayName,
   updateEmail
 } from '../../../store/auth/authActionCreators';
-import { updateObject } from '../../../shared/immutable';
-import classes from './Profile.module.css';
 
+// components
+import Button from '../../../components/button/Button';
+import classes from './Profile.module.css';
 import Input from '../../../components/input/Input';
+import Modal from '../../../components/modal/Modal';
 import Spinner from '../../../components/spinner/Spinner';
-import TitleCard from '../../../components/card/title-card/TitleCard';
 import SecondaryCard from '../../../components/card/secondary-card/SecondaryCard';
+import TitleCard from '../../../components/card/title-card/TitleCard';
+
+// shared
+import { updateObject } from '../../../shared/immutable';
 import {
   validEmail,
   passwordMatch,
@@ -35,6 +42,7 @@ class Profile extends Component<any, any> {
     email: this.props.user.email,
     password: '',
     passwordCheck: '',
+    showModal: false,
     updated: false
   };
 
@@ -51,6 +59,10 @@ class Profile extends Component<any, any> {
 
       return { editing: updatedValue, error, updated: false };
     });
+  };
+
+  onModalToggled = () => {
+    this.setState((prevState: any) => ({ showModal: !prevState.showModal }));
   };
 
   onInputChange = (label: string) => (evt: ChangeEvent<HTMLInputElement>) => {
@@ -151,11 +163,34 @@ class Profile extends Component<any, any> {
               value={passwordCheck}
             />
           </SecondaryCard>
+          <Button btnType="Flat" color="Warn" clicked={this.onModalToggled}>
+            Delete Account
+          </Button>
         </TitleCard>
       );
     }
 
-    return profile;
+    return (
+      <>
+        <Modal
+          color="Warn"
+          onClose={this.onModalToggled}
+          show={this.state.showModal}
+          title="Delete Account"
+        >
+          <p>
+            Are you sure you want to delete your account? This cannot be undone.
+          </p>
+          <Button btnType="Raised" color="Warn">
+            Yes
+          </Button>
+          <Button btnType="Flat" color="Primary" clicked={this.onModalToggled}>
+            No
+          </Button>
+        </Modal>
+        {profile}
+      </>
+    );
   }
 }
 
