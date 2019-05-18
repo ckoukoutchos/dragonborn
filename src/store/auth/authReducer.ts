@@ -1,4 +1,4 @@
-import { AuthState, AuthActionTypes, LOGIN_SUCCESS, LOGOUT_SUCCESS, AUTH_LOADING, SIGNUP_SUCCESS, SIGNUP_FAIL, LOGIN_FAIL, UPDATE_DISPLAY_NAME, UPDATE_DISPLAY_NAME_SUCCESS } from './authActionTypes';
+import { AuthState, AuthActionTypes, LOGIN_SUCCESS, LOGOUT_SUCCESS, AUTH_LOADING, SIGNUP_SUCCESS, SIGNUP_FAIL, LOGIN_FAIL, UPDATE_DISPLAY_NAME, UPDATE_DISPLAY_NAME_SUCCESS, UPDATE_EMAIL_FAIL, UPDATE_DISPLAY_NAME_FAIL, UPDATE_EMAIL_SUCCESS } from './authActionTypes';
 import { User } from '../../models/User';
 import { updateObject } from '../../shared/immutable';
 
@@ -34,8 +34,14 @@ const authReducer = (
       return signupFail(state, action);
     case SIGNUP_SUCCESS:
       return signupSuccess(state);
+    case UPDATE_DISPLAY_NAME_FAIL:
+      return updateDisplayNameFail(state, action);
     case UPDATE_DISPLAY_NAME_SUCCESS:
       return updateDisplayNameSuccess(state);
+    case UPDATE_EMAIL_FAIL:
+      return updateEmailFail(state, action);
+    case UPDATE_EMAIL_SUCCESS:
+      return updateEmailSuccess(state);
     default:
       return state;
   }
@@ -56,6 +62,12 @@ const signupFail = (state: AuthState, { error }: { error: string }): AuthState =
 
 const signupSuccess = (state: AuthState): AuthState => updateObject(state, { loading: false, error: null });
 
+const updateDisplayNameFail = (state: AuthState, { error }: { error: string }): AuthState => updateObject(state, { error, loading: false });
+
 const updateDisplayNameSuccess = (state: AuthState): AuthState => updateObject(state, { loading: false });
+
+const updateEmailFail = (state: AuthState, { error }: { error: string }): AuthState => updateObject(state, { error, loading: false });
+
+const updateEmailSuccess = (state: AuthState): AuthState => updateObject(state, { loading: false });
 
 export default authReducer;

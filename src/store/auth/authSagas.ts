@@ -2,8 +2,8 @@ import { put, take, all, takeEvery } from 'redux-saga/effects';
 import { eventChannel } from 'redux-saga';
 import { AUTH } from '../../firebase/firebase';
 
-import { LOGIN, LOGOUT, SIGNUP, UPDATE_DISPLAY_NAME } from '../auth/authActionTypes';
-import { loginSuccess, logoutSuccess, authLoading, signupSuccess, signupFail, loginFail, updateDisplayNameSuccess, updateDisplayNameFail } from './authActionCreators';
+import { LOGIN, LOGOUT, SIGNUP, UPDATE_DISPLAY_NAME, UPDATE_EMAIL } from '../auth/authActionTypes';
+import { loginSuccess, logoutSuccess, authLoading, signupSuccess, signupFail, loginFail, updateDisplayNameSuccess, updateDisplayNameFail, updateEmailSuccess, updateEmailFail } from './authActionCreators';
 
 // TODO: error handling
 
@@ -19,7 +19,8 @@ export default function* watchAuth() {
     // ts bug with takeEvery defaulting to wrong type
     //@ts-ignore
     takeEvery(SIGNUP, signupSaga),
-    takeEvery(UPDATE_DISPLAY_NAME, updateDisplayName)
+    takeEvery(UPDATE_DISPLAY_NAME, updateDisplayName),
+    takeEvery(UPDATE_EMAIL, updateEmail)
   ]);
 }
 
@@ -136,5 +137,28 @@ function* updateDisplayName({ displayName }: { displayName: string }): IterableI
 
   } catch (error) {
     yield put(updateDisplayNameFail(error));
+  }
+}
+
+/**
+ * @name updateEmail
+ * @description updates the email of current user in firebase
+ * @param email 
+ */
+function* updateEmail({ email }: { email: string }): IterableIterator<any> {
+  yield put(authLoading());
+
+  try {
+    // get current signed in user
+    const user = yield AUTH.currentUser;
+
+    // check if there is a valid user
+    if (user != null) {
+      yield user.updateEmail(email);
+      yield put(updateEmailSuccess());
+    }
+
+  } catch (error) {
+    yield put(updateEmailFail(error));
   }
 }

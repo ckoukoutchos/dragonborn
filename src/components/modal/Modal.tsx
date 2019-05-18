@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import classes from './Modal.module.css';
 import Backdrop from '../backdrop/Backdrop';
 
+// TODO: comments, interfaces
+
 class Modal extends Component<any, any> {
   shouldComponentUpdate(nextProps: any, nextState: any) {
     return (

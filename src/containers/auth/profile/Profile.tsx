@@ -112,8 +112,9 @@ class Profile extends Component<any, any> {
 
     if (!loading) {
       profile = (
-        <TitleCard title="Profile" readOnly>
+        <TitleCard editing={false} onEdit={this.onModalToggled} title="Profile">
           {error ? <p className={classes.Error}>{error}</p> : null}
+
           <SecondaryCard
             label="Display Name"
             editing={editing.displayName}
@@ -127,6 +128,7 @@ class Profile extends Component<any, any> {
               value={displayName}
             />
           </SecondaryCard>
+
           <SecondaryCard
             label="Email Address"
             editing={editing.email}
@@ -140,6 +142,7 @@ class Profile extends Component<any, any> {
               value={email}
             />
           </SecondaryCard>
+
           <SecondaryCard
             label="Reset Password"
             editing={editing.password}
@@ -154,6 +157,7 @@ class Profile extends Component<any, any> {
               type="password"
               value={password}
             />
+
             <Input
               editing={editing.password}
               onChange={this.onInputChange('passwordCheck')}
@@ -163,9 +167,6 @@ class Profile extends Component<any, any> {
               value={passwordCheck}
             />
           </SecondaryCard>
-          <Button btnType="Flat" color="Warn" clicked={this.onModalToggled}>
-            Delete Account
-          </Button>
         </TitleCard>
       );
     }
@@ -181,13 +182,16 @@ class Profile extends Component<any, any> {
           <p>
             Are you sure you want to delete your account? This cannot be undone.
           </p>
-          <Button btnType="Raised" color="Warn">
+
+          <Button btnType="Flat" color="Warn">
             Yes
           </Button>
+
           <Button btnType="Flat" color="Primary" clicked={this.onModalToggled}>
             No
           </Button>
         </Modal>
+
         {profile}
       </>
     );
