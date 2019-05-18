@@ -2,8 +2,8 @@ import { put, take, all, takeEvery } from 'redux-saga/effects';
 import { eventChannel } from 'redux-saga';
 import { AUTH } from '../../firebase/firebase';
 
-import { LOGIN, LOGOUT, SIGNUP, UPDATE_DISPLAY_NAME, UPDATE_EMAIL } from '../auth/authActionTypes';
-import { loginSuccess, logoutSuccess, authLoading, signupSuccess, signupFail, loginFail, updateDisplayNameSuccess, updateDisplayNameFail, updateEmailSuccess, updateEmailFail } from './authActionCreators';
+import { LOGIN, LOGOUT, SIGNUP, UPDATE_DISPLAY_NAME, UPDATE_EMAIL, UPDATE_PASSWORD } from '../auth/authActionTypes';
+import { loginSuccess, logoutSuccess, authLoading, signupSuccess, signupFail, loginFail, updateDisplayNameSuccess, updateDisplayNameFail, updateEmailSuccess, updateEmailFail, updatePasswordSuccess, updatePasswordFail } from './authActionCreators';
 
 // TODO: error handling
 
@@ -20,7 +20,8 @@ export default function* watchAuth() {
     //@ts-ignore
     takeEvery(SIGNUP, signupSaga),
     takeEvery(UPDATE_DISPLAY_NAME, updateDisplayName),
-    takeEvery(UPDATE_EMAIL, updateEmail)
+    takeEvery(UPDATE_EMAIL, updateEmail),
+    takeEvery(UPDATE_PASSWORD, updatePassword)
   ]);
 }
 
@@ -160,5 +161,28 @@ function* updateEmail({ email }: { email: string }): IterableIterator<any> {
 
   } catch (error) {
     yield put(updateEmailFail(error));
+  }
+}
+
+/**
+ * @name updatePassword
+ * @description updates the password of current user in firebase
+ * @param password 
+ */
+function* updatePassword({ password }: { password: string }): IterableIterator<any> {
+  yield put(authLoading());
+
+  try {
+    // get current signed in user
+    const user = yield AUTH.currentUser;
+
+    // check if there is a valid user
+    if (user != null) {
+      yield user.updatePassword(password);
+      yield put(updatePasswordSuccess());
+    }
+
+  } catch (error) {
+    yield put(updatePasswordFail(error));
   }
 }

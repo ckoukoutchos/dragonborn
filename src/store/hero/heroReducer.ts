@@ -34,24 +34,15 @@ const heroReducer = (
   action: HeroActionTypes
 ): HeroState => {
   switch (action.type) {
-    case CREATE_HERO_FAIL:
-      return state;
-    case CREATE_HERO_SUCCESS:
-      return createHeroSuccess(state, action);
-    case DELETE_HERO_SUCCESS:
-      return deleteHeroSuccess(state, action);
-    case FETCH_HERO_SUCCESS:
-      return fetchHeroSuccess(state, action);
-    case FETCH_HEROES_START:
-      return fetchHeroesStart(state);
-    case FETCH_HEROES_SUCCESS:
-      return fetchHeroesSuccess(state, action);
-    case GET_HERO:
-      return getHero(state, action);
-    case UPDATE_HERO_SUCCESS:
-      return updateHeroSuccess(state, action);
-    default:
-      return state;
+    case CREATE_HERO_FAIL: return state;
+    case CREATE_HERO_SUCCESS: return createHeroSuccess(state, action);
+    case DELETE_HERO_SUCCESS: return deleteHeroSuccess(state, action);
+    case FETCH_HERO_SUCCESS: return fetchHeroSuccess(state, action);
+    case FETCH_HEROES_START: return fetchHeroesStart(state);
+    case FETCH_HEROES_SUCCESS: return fetchHeroesSuccess(state, action);
+    case GET_HERO: return getHero(state, action);
+    case UPDATE_HERO_SUCCESS: return updateHeroSuccess(state, action);
+    default: return state;
   }
 };
 

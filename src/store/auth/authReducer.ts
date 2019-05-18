@@ -1,4 +1,4 @@
-import { AuthState, AuthActionTypes, LOGIN_SUCCESS, LOGOUT_SUCCESS, AUTH_LOADING, SIGNUP_SUCCESS, SIGNUP_FAIL, LOGIN_FAIL, UPDATE_DISPLAY_NAME, UPDATE_DISPLAY_NAME_SUCCESS, UPDATE_EMAIL_FAIL, UPDATE_DISPLAY_NAME_FAIL, UPDATE_EMAIL_SUCCESS } from './authActionTypes';
+import { AuthState, AuthActionTypes, LOGIN_SUCCESS, LOGOUT_SUCCESS, AUTH_LOADING, SIGNUP_SUCCESS, SIGNUP_FAIL, LOGIN_FAIL, UPDATE_DISPLAY_NAME, UPDATE_DISPLAY_NAME_SUCCESS, UPDATE_EMAIL_FAIL, UPDATE_DISPLAY_NAME_FAIL, UPDATE_EMAIL_SUCCESS, UPDATE_PASSWORD_FAIL, UPDATE_PASSWORD_SUCCESS } from './authActionTypes';
 import { User } from '../../models/User';
 import { updateObject } from '../../shared/immutable';
 
@@ -22,28 +22,19 @@ const authReducer = (
   action: AuthActionTypes
 ): AuthState => {
   switch (action.type) {
-    case AUTH_LOADING:
-      return authLoading(state);
-    case LOGIN_FAIL:
-      return loginFail(state, action);
-    case LOGIN_SUCCESS:
-      return loginSuccess(state, action);
-    case LOGOUT_SUCCESS:
-      return logoutSuccess(state, action);
-    case SIGNUP_FAIL:
-      return signupFail(state, action);
-    case SIGNUP_SUCCESS:
-      return signupSuccess(state);
-    case UPDATE_DISPLAY_NAME_FAIL:
-      return updateDisplayNameFail(state, action);
-    case UPDATE_DISPLAY_NAME_SUCCESS:
-      return updateDisplayNameSuccess(state);
-    case UPDATE_EMAIL_FAIL:
-      return updateEmailFail(state, action);
-    case UPDATE_EMAIL_SUCCESS:
-      return updateEmailSuccess(state);
-    default:
-      return state;
+    case AUTH_LOADING: return authLoading(state);
+    case LOGIN_FAIL: return loginFail(state, action);
+    case LOGIN_SUCCESS: return loginSuccess(state, action);
+    case LOGOUT_SUCCESS: return logoutSuccess(state, action);
+    case SIGNUP_FAIL: return signupFail(state, action);
+    case SIGNUP_SUCCESS: return signupSuccess(state);
+    case UPDATE_DISPLAY_NAME_FAIL: return updateDisplayNameFail(state, action);
+    case UPDATE_DISPLAY_NAME_SUCCESS: return updateDisplayNameSuccess(state);
+    case UPDATE_EMAIL_FAIL: return updateEmailFail(state, action);
+    case UPDATE_EMAIL_SUCCESS: return updateEmailSuccess(state);
+    case UPDATE_PASSWORD_FAIL: return updatePasswordFail(state, action);
+    case UPDATE_PASSWORD_SUCCESS: return updatePasswordSuccess(state);
+    default: return state;
   }
 };
 
@@ -69,5 +60,9 @@ const updateDisplayNameSuccess = (state: AuthState): AuthState => updateObject(s
 const updateEmailFail = (state: AuthState, { error }: { error: string }): AuthState => updateObject(state, { error, loading: false });
 
 const updateEmailSuccess = (state: AuthState): AuthState => updateObject(state, { loading: false });
+
+const updatePasswordFail = (state: AuthState, { error }: { error: string }): AuthState => updateObject(state, { error, loading: false });
+
+const updatePasswordSuccess = (state: AuthState): AuthState => updateObject(state, { loading: false });
 
 export default authReducer;
