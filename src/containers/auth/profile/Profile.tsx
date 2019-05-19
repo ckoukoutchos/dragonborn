@@ -47,6 +47,15 @@ class Profile extends Component<any, any> {
     updated: false
   };
 
+  onCancelClicked = (section: string) => () => {
+    this.setState((prevState: any) => {
+      const updatedValue = updateObject(prevState.editing, {
+        [section]: !prevState.editing[section]
+      });
+      return { editing: updatedValue, updated: false };
+    });
+  };
+
   onDeleteClicked = () => this.props.deleteUser();
 
   onEditToggled = (section: string) => () => {
@@ -127,6 +136,7 @@ class Profile extends Component<any, any> {
           <SecondaryCard
             label="Display Name"
             editing={editing.displayName}
+            onCancel={this.onCancelClicked('displayName')}
             onEdit={this.onEditToggled('displayName')}
             wide
           >
@@ -141,6 +151,7 @@ class Profile extends Component<any, any> {
           <SecondaryCard
             label="Email Address"
             editing={editing.email}
+            onCancel={this.onCancelClicked('email')}
             onEdit={this.onEditToggled('email')}
             wide
           >
@@ -155,6 +166,7 @@ class Profile extends Component<any, any> {
           <SecondaryCard
             label="Reset Password"
             editing={editing.password}
+            onCancel={this.onCancelClicked('password')}
             onEdit={this.onEditToggled('password')}
             wide
           >

@@ -16,18 +16,28 @@
   cursor: not-allowed;
 }
 
-.Corner {
+.CornerTopLeft {
+  border-radius: 8px 0 0 0;
+  font-size: 14px;
+  padding: 10px 10px;
+}
+
+.CornerTopRight {
   border-radius: 0 8px 0 0;
   font-size: 14px;
   padding: 10px 10px;
-  width: 60px;
 }
 
-.CornerBottom {
+.CornerBottomLeft {
+  border-radius: 0 0 0 4px;
+  font-size: 12px;
+  padding: 8px 8px;
+}
+
+.CornerBottomRight {
   border-radius: 0 0 4px 0;
   font-size: 12px;
   padding: 8px 8px;
-  width: 50px;
 }
 
 .Fab {
