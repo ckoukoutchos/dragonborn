@@ -12,6 +12,7 @@ interface TitleCardProps {
   onCancel?: any;
   onChange?: any;
   onEdit?: any;
+  subTitle?: string;
   title: string;
   value?: any;
   wide?: boolean;
@@ -27,6 +28,7 @@ const titleCard = (props: TitleCardProps) => {
     onCancel,
     onChange,
     onEdit,
+    subTitle,
     title,
     value,
     wide
@@ -66,6 +68,7 @@ const titleCard = (props: TitleCardProps) => {
       <div className={onEdit ? classes.HeaderEdit : classes.Header}>
         {secondaryButton}
         {heading}
+        {subTitle ? <h4>{subTitle}</h4> : null}
         {primaryButton}
       </div>
 

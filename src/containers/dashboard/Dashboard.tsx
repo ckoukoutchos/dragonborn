@@ -8,8 +8,9 @@ import { createHero } from '../../store/hero/heroActionCreators';
 import { HeroActionTypes } from '../../store/hero/heroActionTypes';
 
 // components
-import Button from '../../components/button/Button';
+import Create from '../../containers/create/Create';
 import Jumbotron from '../../components/jumbotron/Jumbotron';
+import Profile from '../../containers/auth/profile/Profile';
 import SecondaryCard from '../../components/card/secondary-card/SecondaryCard';
 import TitleCard from '../../components/card/title-card/TitleCard';
 
@@ -17,14 +18,6 @@ import TitleCard from '../../components/card/title-card/TitleCard';
 import Hero from '../../models/Hero';
 
 class Dashboard extends Component<any> {
-  /**
-   * @name onCreateClicked
-   * @description triggers action to create new hero and redirect to track page
-   */
-  onCreateClicked = () => {
-    this.props.createHero(new Hero(), this.props.history, this.props.user.uid);
-  };
-
   signup = () => {
     this.props.history.push('/signup');
   };
@@ -34,29 +27,24 @@ class Dashboard extends Component<any> {
 
     return (
       <>
-        <Jumbotron header="Dragonborn" subHeader="Create, Track & Guide" />
+        <Jumbotron
+          header="Dragonborn"
+          subHeader={
+            user.displayName ? `${user.displayName}'s Dashboard` : 'DashBoard'
+          }
+        />
 
-        <TitleCard title="Create">
-          <SecondaryCard
-            btnText={['', 'Create']}
-            label="Traditional"
-            onEdit={this.onCreateClicked}
-            wide
-          >
-            <p>Just a clean new hero sheet</p>
-          </SecondaryCard>
-          <SecondaryCard btnText={['', 'Create']} label="Hero Builder" wide>
-            <p>
-              Coming in phase 3! Step-by-step guide to creating your next hero
-            </p>
-          </SecondaryCard>
-        </TitleCard>
+        <div style={{ display: 'flex', flexDirection: 'column' }} />
+        <Create />
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
+          <TitleCard subTitle="Troll-in-chief" title="Guide">
+            <SecondaryCard label="Campaign Guide" wide>
+              <p>Lead your friends on an epic adventure! Coming in phase 4.</p>
+            </SecondaryCard>
+          </TitleCard>
 
-        {!user ? (
-          <Button btnType="Raised" color="Primary" clicked={this.signup}>
-            Sign Up
-          </Button>
-        ) : null}
+          <Profile />
+        </div>
       </>
     );
   }
