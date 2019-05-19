@@ -2,10 +2,17 @@ import React, { Component } from 'react';
 import classes from './Modal.module.css';
 import Backdrop from '../backdrop/Backdrop';
 
-// TODO: comments, interfaces
+interface ModalProps {
+  children: any;
+  color: string;
+  onClose: () => void;
+  show: boolean;
+  title: string;
+}
 
-class Modal extends Component<any, any> {
-  shouldComponentUpdate(nextProps: any, nextState: any) {
+class Modal extends Component<ModalProps> {
+  // only re-render if show state has changed
+  shouldComponentUpdate(nextProps: ModalProps) {
     return (
       nextProps.show !== this.props.show ||
       nextProps.children !== this.props.children
@@ -13,26 +20,25 @@ class Modal extends Component<any, any> {
   }
 
   render() {
+    const { children, color, onClose, show, title } = this.props;
+
     return (
       <>
-        <Backdrop show={this.props.show} clicked={this.props.onClose} />
-        {this.props.show ? (
+        <Backdrop show={show} clicked={onClose} />
+        {show ? (
           <div
-            className={classes.Card}
+            className={classes.Modal}
             // @ts-ignore
             style={{
-              transform: this.props.show
-                ? 'translateY(0)'
-                : 'translateY(-100vh)',
+              transform: show ? 'translateY(0)' : 'translateY(-100vh)',
               opacity: this.props.show ? '1' : '0'
             }}
           >
-            <div
-              className={[classes.Header, classes[this.props.color]].join(' ')}
-            >
-              <h3 className={classes.Title}>{this.props.title}</h3>
+            <div className={[classes.Header, classes[color]].join(' ')}>
+              <h3 className={classes.Title}>{title}</h3>
             </div>
-            <div className={classes.Body}>{this.props.children}</div>
+
+            <div className={classes.Body}>{children}</div>
           </div>
         ) : null}
       </>

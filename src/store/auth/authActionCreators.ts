@@ -17,7 +17,10 @@ import {
   UPDATE_EMAIL_FAIL,
   UPDATE_EMAIL_SUCCESS,
   UPDATE_PASSWORD_FAIL,
-  UPDATE_PASSWORD_SUCCESS
+  UPDATE_PASSWORD_SUCCESS,
+  DELETE_USER,
+  DELETE_USER_FAIL,
+  DELETE_USER_SUCCESS
 } from './authActionTypes';
 import { User } from '../../models/User';
 
@@ -26,6 +29,19 @@ import { User } from '../../models/User';
  */
 export const authLoading = (): AuthActionTypes => ({
   type: AUTH_LOADING
+});
+
+export const deleteUser = (): AuthActionTypes => ({
+  type: DELETE_USER
+});
+
+export const deleteUserFail = (error: any): AuthActionTypes => ({
+  type: DELETE_USER_FAIL,
+  error
+});
+
+export const deleteUserSuccess = (): AuthActionTypes => ({
+  type: DELETE_USER_SUCCESS
 });
 
 export const login = (email: string, password: string): AuthActionTypes => ({

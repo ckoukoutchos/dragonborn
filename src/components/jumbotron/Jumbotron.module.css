@@ -1,7 +1,7 @@
 .Jumbotron {
   background: rgb(44, 44, 44);
   color: white;
-  height: 170px;
+  height: 140px;
   margin-bottom: 16px;
   text-align: center;
   width: 100%;
@@ -9,12 +9,12 @@
 
 .Header {
   font-family: 'Metamorphous', cursive;
-  font-size: 72px;
+  font-size: 48px;
   margin: 16px 0 0 0;
 }
 
 .SubHeader {
   font-family: 'Rosario', sans-serif;
-  font-size: 32px;
+  font-size: 24px;
   margin: 0;
 }

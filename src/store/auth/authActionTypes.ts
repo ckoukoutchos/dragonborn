@@ -5,6 +5,10 @@ import { User } from "../../models/User";
  */
 export const AUTH_LOADING = 'AUTH_LOADING';
 
+export const DELETE_USER = 'DELETE_USER';
+export const DELETE_USER_FAIL = 'DELETE_USER_FAIL';
+export const DELETE_USER_SUCCESS = 'DELETE_USER_SUCCESS';
+
 export const LOGIN = 'LOGIN';
 export const LOGIN_FAIL = 'LOGIN_FAIL';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
@@ -39,6 +43,19 @@ export interface AuthState {
 
 interface AuthLoading {
   type: typeof AUTH_LOADING;
+}
+
+interface DeleteUser {
+  type: typeof DELETE_USER;
+}
+
+interface DeleteUserFail {
+  type: typeof DELETE_USER_FAIL;
+  error: any;
+}
+
+interface DeleteUserSuccess {
+  type: typeof DELETE_USER_SUCCESS;
 }
 
 interface LoginAction {
@@ -125,6 +142,9 @@ interface UpdatePasswordSuccess {
 
 export type AuthActionTypes =
   | AuthLoading
+  | DeleteUser
+  | DeleteUserFail
+  | DeleteUserSuccess
   | LoginAction
   | LoginFailAction
   | LoginSuccessAction

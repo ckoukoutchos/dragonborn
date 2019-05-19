@@ -2,8 +2,8 @@ import { put, take, all, takeEvery } from 'redux-saga/effects';
 import { eventChannel } from 'redux-saga';
 import { AUTH } from '../../firebase/firebase';
 
-import { LOGIN, LOGOUT, SIGNUP, UPDATE_DISPLAY_NAME, UPDATE_EMAIL, UPDATE_PASSWORD } from '../auth/authActionTypes';
-import { loginSuccess, logoutSuccess, authLoading, signupSuccess, signupFail, loginFail, updateDisplayNameSuccess, updateDisplayNameFail, updateEmailSuccess, updateEmailFail, updatePasswordSuccess, updatePasswordFail } from './authActionCreators';
+import { LOGIN, LOGOUT, SIGNUP, UPDATE_DISPLAY_NAME, UPDATE_EMAIL, UPDATE_PASSWORD, DELETE_USER } from '../auth/authActionTypes';
+import { loginSuccess, logoutSuccess, authLoading, signupSuccess, signupFail, loginFail, updateDisplayNameSuccess, updateDisplayNameFail, updateEmailSuccess, updateEmailFail, updatePasswordSuccess, updatePasswordFail, deleteUserSuccess, deleteUserFail } from './authActionCreators';
 
 // TODO: error handling
 
@@ -14,6 +14,7 @@ import { loginSuccess, logoutSuccess, authLoading, signupSuccess, signupFail, lo
 export default function* watchAuth() {
   yield all([
     updateAuth(),
+    takeEvery(DELETE_USER, deleteUserSaga),
     takeEvery(LOGIN, loginSaga),
     takeEvery(LOGOUT, logoutSaga),
     // ts bug with takeEvery defaulting to wrong type
@@ -25,6 +26,27 @@ export default function* watchAuth() {
   ]);
 }
 
+/**
+ * @name deleteUserSaga
+ * @description deletes current user in firebase
+ */
+function* deleteUserSaga(): IterableIterator<any> {
+  yield put(authLoading());
+
+  try {
+    // get current signed in user
+    const user = yield AUTH.currentUser;
+
+    // check if there is a valid user
+    if (user != null) {
+      yield user.delete();
+      yield put(deleteUserSuccess());
+    }
+
+  } catch (error) {
+    yield put(deleteUserFail(error));
+  }
+}
 /**
  * @name loginSaga
  * @description logs user into firebase

@@ -8,7 +8,8 @@ import { AuthActionTypes } from '../../../store/auth/authActionTypes';
 import {
   updatePassword,
   updateDisplayName,
-  updateEmail
+  updateEmail,
+  deleteUser
 } from '../../../store/auth/authActionCreators';
 
 // components
@@ -45,6 +46,8 @@ class Profile extends Component<any, any> {
     showModal: false,
     updated: false
   };
+
+  onDeleteClicked = () => this.props.deleteUser();
 
   onEditToggled = (section: string) => () => {
     this.setState((prevState: any) => {
@@ -183,7 +186,7 @@ class Profile extends Component<any, any> {
             Are you sure you want to delete your account? This cannot be undone.
           </p>
 
-          <Button btnType="Flat" color="Warn">
+          <Button btnType="Flat" color="Warn" clicked={this.onDeleteClicked}>
             Yes
           </Button>
 
@@ -205,6 +208,7 @@ const mapStateToProps = (state: AppState) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<AuthActionTypes>) => ({
+  deleteUser: () => dispatch(deleteUser()),
   updateDisplayName: (displayName: string) =>
     dispatch(updateDisplayName(displayName)),
   updateEmail: (email: string) => dispatch(updateEmail(email)),

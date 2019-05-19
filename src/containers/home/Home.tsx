@@ -1,4 +1,10 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+import { AppState } from '../../store/rootReducer';
+
+import Button from '../../components/button/Button';
+import Jumbotron from '../../components/jumbotron/Jumbotron';
 
 class Home extends Component<any> {
   signup = () => {
@@ -6,13 +12,24 @@ class Home extends Component<any> {
   };
 
   render() {
+    const { user } = this.props;
+
     return (
       <>
-        <h1>Home Page</h1>
-        <button onClick={this.signup}>Signup</button>
+        <Jumbotron header="Dragonborn" subHeader="Create, Track & Guide" />
+
+        {!user ? (
+          <Button btnType="Raised" color="Primary" clicked={this.signup}>
+            Sign Up
+          </Button>
+        ) : null}
       </>
     );
   }
 }
 
-export default Home;
+const mapStateToProps = (state: AppState) => ({
+  user: state.auth.user
+});
+
+export default connect(mapStateToProps)(Home);

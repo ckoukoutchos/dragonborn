@@ -3,9 +3,10 @@
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
+  text-align: center;
 }
 
-.Card {
+.Modal {
   background-color: rgb(233, 233, 233);
   border-radius: 8px;
   box-shadow: 3px 3px 7px 3px rgba(0, 0, 0, 0.5);
@@ -14,7 +15,7 @@
   margin: 16px;
   position: fixed;
   top: 30%;
-  transition: all 0.3s ease-out;
+  transition: all 1.5s ease-out;
   width: 70%;
   z-index: 500;
 }
@@ -52,9 +53,10 @@ h3 {
   background: rgb(66, 66, 211);
 }
 
-@media (min-width: 600px) {
+/* TODO: fix mobile resolution issues */
+@media (max-width: 730px) {
   .Modal {
-    width: 500px;
-    left: calc(50% - 250px);
+    left: 0;
+    width: 90%;
   }
 }
