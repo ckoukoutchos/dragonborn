@@ -4,31 +4,49 @@ import classes from './SecondaryCard.module.css';
 import Button from '../../button/Button';
 
 interface SecondaryCardProps {
+  btnColor?: string[];
+  btnText?: string[];
   children: any;
   editing?: boolean;
   onEdit?: any;
+  onCancel?: any;
   label: string;
-  readOnly?: boolean;
   wide?: boolean;
 }
 
 const secondaryCard = (props: SecondaryCardProps) => {
-  const { children, editing, onEdit, label, readOnly, wide } = props;
+  const {
+    btnColor = ['Accent', 'Primary', 'Warn'],
+    btnText = ['Save', 'Edit', 'Cancel'],
+    children,
+    editing,
+    onEdit,
+    label,
+    wide
+  } = props;
+
+  let primaryButton = null;
+
+  if (onEdit) {
+    primaryButton = (
+      <Button
+        color={editing ? btnColor[0] : btnColor[1]}
+        btnType="CornerBottom"
+        clicked={onEdit}
+      >
+        {editing ? btnText[0] : btnText[1]}
+      </Button>
+    );
+  }
 
   return (
     <div className={wide ? classes.ContainerWide : classes.Container}>
       {children}
-      <div className={readOnly ? classes.Footer : classes.FooterEdit}>
+
+      <div className={onEdit ? classes.FooterEdit : classes.Footer}>
         <div className={classes.Label}>{label}</div>
-        {!readOnly ? (
-          <Button
-            color={editing ? 'Accent' : 'Primary'}
-            btnType="CornerBottom"
-            clicked={onEdit}
-          >
-            {editing ? 'Save' : 'Edit'}
-          </Button>
-        ) : null}
+
+        {primaryButton}
       </div>
     </div>
   );

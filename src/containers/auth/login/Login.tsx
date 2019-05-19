@@ -61,14 +61,14 @@ class Login extends Component<LoginProps, LoginState> {
     // redirect if already signed in
     let authRedirect = null;
     if (user) {
-      authRedirect = <Redirect to="/" />;
+      authRedirect = <Redirect to="/dashboard" />;
     }
 
     let login = <Spinner />;
 
     if (!loading) {
       login = (
-        <TitleCard title="Login" readOnly>
+        <TitleCard title="Login">
           {authRedirect}
 
           <form onSubmit={this.login}>

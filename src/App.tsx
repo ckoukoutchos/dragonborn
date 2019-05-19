@@ -6,6 +6,7 @@ import { AppState } from './store/rootReducer';
 import { User } from './models/User';
 
 import Create from './containers/create/Create';
+import Dashboard from './containers/dashboard/Dashboard';
 import Guide from './containers/guide/Guide';
 import Home from './containers/home/Home';
 import Layout from './hoc/layout/Layout';
@@ -37,6 +38,7 @@ class App extends Component<any> {
       routes = (
         <Switch>
           <Route path="/create" component={Create} />
+          <Route path="/dashboard" component={Dashboard} />
           <Route path="/track" exact component={Track} />
           <Route path="/track/:id/stats" component={TrackStats} />
           <Route path="/track/:id/spells" component={TrackSpells} />

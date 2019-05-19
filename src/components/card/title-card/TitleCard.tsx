@@ -5,11 +5,12 @@ import Button from '../../button/Button';
 import Input from '../../input/Input';
 
 interface TitleCardProps {
-  editing?: boolean;
+  btnColor?: string[];
+  btnText?: string[];
   children: any;
+  editing?: boolean;
   onChange?: any;
   onEdit?: any;
-  readOnly?: boolean;
   title: string;
   value?: any;
   wide?: boolean;
@@ -17,31 +18,45 @@ interface TitleCardProps {
 
 // TODO: refactor, maybe merged with another card or unnecessary
 const titleCard = (props: TitleCardProps) => {
-  const { editing, onChange, onEdit, readOnly, title, value, wide } = props;
+  const {
+    btnColor = ['Accent', 'Primary'],
+    btnText = ['Save', 'Edit'],
+    children,
+    editing,
+    onChange,
+    onEdit,
+    title,
+    value,
+    wide
+  } = props;
 
+  let heading = <h1 className={classes.Title}>{title}</h1>;
+
+  if (onEdit && editing) {
+    heading = <Input onChange={onChange} value={value} editing={editing} />;
+  }
+
+  let button = null;
+
+  if (onEdit) {
+    button = (
+      <Button
+        color={editing ? btnColor[0] : btnColor[1]}
+        btnType="Corner"
+        clicked={onEdit}
+      >
+        {editing ? btnText[0] : btnText[1]}
+      </Button>
+    );
+  }
   return (
     <div className={wide ? classes.CardWide : classes.Card}>
-      <div className={readOnly ? classes.Header : classes.HeaderEdit}>
-        {!readOnly && editing ? (
-          <Input onChange={onChange} value={value} editing={editing} />
-        ) : (
-          <h1 className={classes.Title}>{title}</h1>
-        )}
-
-        {readOnly ? null : (
-          <Button
-            color={editing ? 'Accent' : 'Primary'}
-            btnType="Corner"
-            clicked={onEdit}
-          >
-            {editing ? 'Save' : 'Edit'}
-          </Button>
-        )}
+      <div className={onEdit ? classes.HeaderEdit : classes.Header}>
+        {heading}
+        {button}
       </div>
 
-      <div className={wide ? classes.BodyWide : classes.Body}>
-        {props.children}
-      </div>
+      <div className={wide ? classes.BodyWide : classes.Body}>{children}</div>
     </div>
   );
 };

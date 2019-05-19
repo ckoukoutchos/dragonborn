@@ -223,10 +223,10 @@ class TrackStats extends Component<any, any> {
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <SecondaryCard label="Skills" readOnly>
+              <SecondaryCard label="Skills">
                 {this.createSkillInputs(hero, editing.abilities, 'skills')}
               </SecondaryCard>
-              <SecondaryCard label="Saving Throws" readOnly>
+              <SecondaryCard label="Saving Throws">
                 {this.createSkillInputs(
                   hero,
                   editing.abilities,

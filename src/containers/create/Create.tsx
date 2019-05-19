@@ -24,7 +24,6 @@ class Create extends Component<CreateProps> {
   /**
    * @name onCreateClicked
    * @description triggers action to create new hero and redirect to track page
-   * @memberof Create
    */
   onCreateClicked = (): void => {
     this.props.createHero(new Hero(), this.props.history, this.props.user.uid);
@@ -35,7 +34,7 @@ class Create extends Component<CreateProps> {
       <>
         <Jumbotron header="Create" subHeader="So Begins a New Legend" />
 
-        <TitleCard title="Traditional" readOnly wide>
+        <TitleCard title="Traditional" wide>
           {/* TODO: remove inline styles */}
           <p
             style={{

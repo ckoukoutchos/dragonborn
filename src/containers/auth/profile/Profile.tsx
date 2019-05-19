@@ -115,7 +115,13 @@ class Profile extends Component<any, any> {
 
     if (!loading) {
       profile = (
-        <TitleCard editing={false} onEdit={this.onModalToggled} title="Profile">
+        <TitleCard
+          btnColor={['Warn', 'Warn']}
+          btnText={['Delete', 'Delete']}
+          editing={false}
+          onEdit={this.onModalToggled}
+          title="Profile"
+        >
           {error ? <p className={classes.Error}>{error}</p> : null}
 
           <SecondaryCard
@@ -186,7 +192,7 @@ class Profile extends Component<any, any> {
             Are you sure you want to delete your account? This cannot be undone.
           </p>
 
-          <Button btnType="Flat" color="Warn" clicked={this.onDeleteClicked}>
+          <Button btnType="Raised" color="Warn" clicked={this.onDeleteClicked}>
             Yes
           </Button>
 

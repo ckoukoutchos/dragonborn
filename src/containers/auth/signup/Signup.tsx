@@ -80,7 +80,7 @@ class Signup extends Component<SignupProps, SignupState> {
     // redirect if already signed in
     let authRedirect = null;
     if (this.props.user) {
-      authRedirect = <Redirect to="/" />;
+      authRedirect = <Redirect to="/dashboard" />;
     }
 
     let signup = <Spinner />;
@@ -90,7 +90,7 @@ class Signup extends Component<SignupProps, SignupState> {
         <form onSubmit={this.signup}>
           {authRedirect}
 
-          <TitleCard title="Sign Up" readOnly>
+          <TitleCard title="Sign Up">
             {this.state.error ? (
               <p className={classes.Error}>{this.state.error}</p>
             ) : null}
