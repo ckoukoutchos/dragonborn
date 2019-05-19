@@ -8,11 +8,12 @@ import { createHero } from '../../store/hero/heroActionCreators';
 import { HeroActionTypes } from '../../store/hero/heroActionTypes';
 
 // components
-import Create from '../../containers/create/Create';
+import Create from '../create/Create';
 import Jumbotron from '../../components/jumbotron/Jumbotron';
 import Profile from '../../containers/auth/profile/Profile';
 import SecondaryCard from '../../components/card/secondary-card/SecondaryCard';
 import TitleCard from '../../components/card/title-card/TitleCard';
+import Track from '../track/Track';
 
 // shared
 import Hero from '../../models/Hero';
@@ -34,8 +35,11 @@ class Dashboard extends Component<any> {
           }
         />
 
-        <div style={{ display: 'flex', flexDirection: 'column' }} />
-        <Create />
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
+          <Create />
+          <Track />
+        </div>
+
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           <TitleCard subTitle="Troll-in-chief" title="Guide">
             <SecondaryCard label="Campaign Guide" wide>

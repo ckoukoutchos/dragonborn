@@ -117,7 +117,8 @@ class Profile extends Component<any, any> {
       displayName,
       email,
       password,
-      passwordCheck
+      passwordCheck,
+      showModal
     } = this.state;
 
     let profile = <Spinner />;
@@ -197,8 +198,8 @@ class Profile extends Component<any, any> {
         <Modal
           color="Warn"
           onClose={this.onModalToggled}
-          show={this.state.showModal}
-          title="Delete Account"
+          show={showModal}
+          title="Delete Account?"
         >
           <p>
             Are you sure you want to delete your account? This cannot be undone.

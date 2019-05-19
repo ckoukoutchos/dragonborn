@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
+import { withRouter } from 'react-router-dom';
 
 // store
 import { AppState } from '../../store/rootReducer';
@@ -14,10 +15,11 @@ import TitleCard from '../../components/card/title-card/TitleCard';
 
 // shared
 import Hero from '../../models/Hero';
+import { User } from '../../models/User';
 
 interface CreateProps {
   history: History;
-  user: any;
+  user: User | null;
   createHero: (hero: Hero, route: any, uid: string) => HeroActionTypes;
 }
 
@@ -29,8 +31,14 @@ class Create extends Component<CreateProps> {
    * @name onCreateClicked
    * @description triggers action to create new hero and redirect to track page
    */
-  onCreateClicked = (): void => {
-    this.props.createHero(new Hero(), this.props.history, this.props.user.uid);
+  onCreateClicked = () => {
+    if (this.props.user) {
+      this.props.createHero(
+        new Hero(),
+        this.props.history,
+        this.props.user.uid
+      );
+    }
   };
 
   render() {
@@ -64,7 +72,9 @@ const mapDispatchToProps = (dispatch: Dispatch<HeroActionTypes>) => ({
     dispatch(createHero(hero, route, uid))
 });
 
-export default connect(
-  mapStatetoProps,
-  mapDispatchToProps
-)(Create);
+export default withRouter(
+  connect(
+    mapStatetoProps,
+    mapDispatchToProps
+  )(Create)
+);
