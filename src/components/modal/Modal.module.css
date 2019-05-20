@@ -35,22 +35,19 @@
   justify-content: space-between;
 }
 
-h3 {
-  margin: 0px;
-  padding: 8px 16px;
-}
-
 .Primary {
-  background: rgb(184, 31, 31);
+  background: rgb(170, 45, 45);
 }
 
 .Title {
   font-family: 'Metamorphous', cursive;
+  margin: 0px;
+  padding: 16px;
   text-align: center;
 }
 
 .Warn {
-  background: rgb(66, 66, 211);
+  background: rgb(58, 58, 177);
 }
 
 /* TODO: fix mobile resolution issues */

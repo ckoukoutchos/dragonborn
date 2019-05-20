@@ -1,6 +1,5 @@
 .NavItem {
   margin: 10px;
-  width: 100%;
 }
 
 .NavItem a {
@@ -10,18 +9,8 @@
   width: 100%;
 }
 
-.NavItem a:hover,
-.NavItem a:active {
+.NavItem a:hover {
   background: white;
   border-radius: 4px;
   color: black;
-}
-
-.NavItem a.active {
-  border-bottom: 4px solid white;
-  border-radius: 4px;
-}
-
-.Menu {
-  margin: 24px;
 }

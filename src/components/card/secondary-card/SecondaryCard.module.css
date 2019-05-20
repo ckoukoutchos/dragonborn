@@ -1,6 +1,6 @@
 .Container {
   background: rgb(233, 233, 233);
-  border: 2px solid rgb(61, 61, 61);
+  border: 2px solid rgb(44, 44, 44);
   border-radius: 7px;
   margin: 12px 8px;
   width: 190px;
@@ -8,14 +8,14 @@
 
 .ContainerWide {
   background: rgb(233, 233, 233);
-  border: 2px solid rgb(61, 61, 61);
+  border: 2px solid rgb(44, 44, 44);
   border-radius: 7px;
   margin: 12px 8px;
   width: 315px;
 }
 
 .Footer {
-  background: rgb(85, 85, 85);
+  background: rgb(70, 70, 70);
   border-radius: 0 0 4px 4px;
   color: rgb(255, 255, 255);
   display: block;
@@ -28,7 +28,7 @@
 
 .FooterEdit {
   align-items: center;
-  background: rgb(85, 85, 85);
+  background: rgb(70, 70, 70);
   border-radius: 0 0 4px 4px;
   color: rgb(255, 255, 255);
   display: flex;
