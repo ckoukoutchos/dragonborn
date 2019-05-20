@@ -1,20 +1,23 @@
+// library
 import React, { Component, FormEvent, ChangeEvent } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
 import { Dispatch } from 'redux';
 
+// store
 import { AppState } from '../../../store/rootReducer';
 import { AuthActionTypes } from '../../../store/auth/authActionTypes';
-import classes from './Login.module.css';
 import { login } from '../../../store/auth/authActionCreators';
-import { User } from '../../../models/User';
 
+// components
 import Button from '../../../components/button/Button';
+import classes from './Login.module.css';
 import Input from '../../../components/input/Input';
 import Spinner from '../../../components/spinner/Spinner';
 import TitleCard from '../../../components/card/title-card/TitleCard';
 
-// TODO: reset password link
+//shared
+import { User } from '../../../models/User';
 
 interface LoginProps {
   error: string;
@@ -91,8 +94,6 @@ class Login extends Component<LoginProps, LoginState> {
               value={password}
               onChange={this.onInputChange('password')}
             />
-
-            <p>Forgot your password? Click here to reset it.</p>
 
             <Button btnType="Raised" color="Primary">
               Login

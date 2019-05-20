@@ -35,7 +35,7 @@ class Modal extends Component<ModalProps> {
             }}
           >
             <div className={[classes.Header, classes[color]].join(' ')}>
-              <h3 className={classes.Title}>{title}</h3>
+              <h2 className={classes.Title}>{title}</h2>
             </div>
 
             <div className={classes.Body}>{children}</div>

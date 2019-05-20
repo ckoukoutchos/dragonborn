@@ -1,0 +1,45 @@
+.Body {
+  font-family: 'Rosario', sans-serif;
+}
+
+.Header {
+  background: linear-gradient(rgba(77, 77, 77, 0.8), transparent)
+    rgb(44, 44, 44);
+  border-radius: 0 8px 0 0;
+  color: white;
+  font-family: 'Metamorphous', cursive;
+  text-align: center;
+}
+
+h1 {
+  margin: 0px;
+  padding: 8px 32px;
+}
+
+.Left {
+  float: left;
+}
+
+.SideCard {
+  background: rgb(233, 233, 233);
+  border-radius: 0 10px 10px 0;
+  box-shadow: 5px 5px 3px 3px rgba(0, 0, 0, 0.5);
+  height: 200px;
+  margin: 16px 0;
+  width: 80%;
+}
+
+.Right {
+  border-radius: 10px 0 0 10px;
+  float: right;
+}
+
+.Right .Header {
+  border-radius: 8px 0 0 0;
+}
+
+@media (max-width: 730px) {
+  .SideCard {
+    width: 90%;
+  }
+}
