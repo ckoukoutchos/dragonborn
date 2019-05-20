@@ -1,5 +1,5 @@
 .Accent {
-  background: rgb(36, 184, 31);
+  background: rgb(45, 170, 45);
 }
 
 .Button {
@@ -16,18 +16,48 @@
   cursor: not-allowed;
 }
 
-.Corner {
-  border-radius: 0 8px 0 0;
-  font-size: 16px;
+.CornerTopLeft {
+  border-radius: 8px 0 0 0;
+  font-size: 14px;
   padding: 10px 10px;
-  width: 50px;
 }
 
-.CornerBottom {
+.CornerTopLeft:hover {
+  background: white;
+  color: black;
+}
+
+.CornerTopRight {
+  border-radius: 0 8px 0 0;
+  font-size: 14px;
+  padding: 10px 10px;
+}
+
+.CornerTopRight:hover {
+  background: white;
+  color: black;
+}
+
+.CornerBottomLeft {
+  border-radius: 0 0 0 4px;
+  font-size: 12px;
+  padding: 8px 8px;
+}
+
+.CornerBottomRight:hover {
+  background: white;
+  color: black;
+}
+
+.CornerBottomRight {
   border-radius: 0 0 4px 0;
   font-size: 12px;
   padding: 8px 8px;
-  width: 35px;
+}
+
+.CornerBottomLeft:hover {
+  background: white;
+  color: black;
 }
 
 .Fab {
@@ -49,34 +79,45 @@
 }
 
 .Primary {
-  background: rgb(184, 31, 31);
+  background: rgb(170, 45, 45);
 }
 
 .Primary.Flat {
   background: transparent;
-  color: rgb(184, 31, 31);
+  color: rgb(170, 45, 45);
 }
 
 .Primary.Flat:hover {
   background: rgba(184, 31, 31, 0.1);
 }
 
+.Primary.Raised:hover {
+  background: white;
+  border: 2px solid black;
+  color: black;
+}
+
 .Warn {
-  background: rgb(66, 66, 211);
+  background: rgb(58, 58, 177);
 }
 
 .Warn.Flat {
   background: transparent;
-  color: rgb(66, 66, 211);
+  color: rgb(58, 58, 177);
 }
 
 .Warn.Flat:hover {
   background: rgba(66, 66, 211, 0.1);
 }
+.Warn.Raised:hover {
+  background: white;
+  border: 2px solid black;
+  color: black;
+}
 
 .Raised {
   border-radius: 4px;
-  box-shadow: 2px 2px 3px 2px rgba(0, 0, 0, 0.5);
+  box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.5);
   font-size: 16px;
   height: 40px;
   margin: 8px;

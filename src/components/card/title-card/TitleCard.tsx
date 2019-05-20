@@ -5,43 +5,74 @@ import Button from '../../button/Button';
 import Input from '../../input/Input';
 
 interface TitleCardProps {
-  editing?: boolean;
+  btnColor?: string[];
+  btnText?: string[];
   children: any;
+  editing?: boolean;
+  onCancel?: any;
   onChange?: any;
   onEdit?: any;
-  readOnly?: boolean;
+  subTitle?: string;
   title: string;
   value?: any;
   wide?: boolean;
 }
 
-// TODO: refactor, maybe merged with another card or unnecessary
+// TODO: refactor, maybe merged with basic card using css
 const titleCard = (props: TitleCardProps) => {
-  const { editing, onChange, onEdit, readOnly, title, value, wide } = props;
+  const {
+    btnColor = ['Accent', 'Primary', 'Warn'],
+    btnText = ['Save', 'Edit', 'Cancel'],
+    children,
+    editing,
+    onCancel,
+    onChange,
+    onEdit,
+    subTitle,
+    title,
+    value,
+    wide
+  } = props;
+
+  let heading = <h1 className={classes.Title}>{title}</h1>;
+
+  if (onEdit && editing) {
+    heading = <Input onChange={onChange} value={value} editing={editing} />;
+  }
+
+  let primaryButton = null;
+  let secondaryButton = null;
+
+  if (onEdit) {
+    primaryButton = (
+      <Button
+        color={editing ? btnColor[0] : btnColor[1]}
+        btnType="CornerTopRight"
+        clicked={onEdit}
+      >
+        {editing ? btnText[0] : btnText[1]}
+      </Button>
+    );
+  }
+
+  if (onCancel && editing) {
+    secondaryButton = (
+      <Button color={btnColor[2]} btnType="CornerTopLeft" clicked={onEdit}>
+        {btnText[2]}
+      </Button>
+    );
+  }
 
   return (
     <div className={wide ? classes.CardWide : classes.Card}>
-      <div className={readOnly ? classes.Header : classes.HeaderEdit}>
-        {!readOnly && editing ? (
-          <Input onChange={onChange} value={value} editing={editing} />
-        ) : (
-          <h1 className={classes.Title}>{title}</h1>
-        )}
-
-        {readOnly ? null : (
-          <Button
-            color={editing ? 'Accent' : 'Primary'}
-            btnType="Corner"
-            clicked={onEdit}
-          >
-            {editing ? 'Save' : 'Edit'}
-          </Button>
-        )}
+      <div className={onEdit ? classes.HeaderEdit : classes.Header}>
+        {secondaryButton}
+        {heading}
+        {subTitle ? <h4>{subTitle}</h4> : null}
+        {primaryButton}
       </div>
 
-      <div className={wide ? classes.BodyWide : classes.Body}>
-        {props.children}
-      </div>
+      <div className={wide ? classes.BodyWide : classes.Body}>{children}</div>
     </div>
   );
 };

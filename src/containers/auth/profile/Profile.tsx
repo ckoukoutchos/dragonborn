@@ -47,6 +47,15 @@ class Profile extends Component<any, any> {
     updated: false
   };
 
+  onCancelClicked = (section: string) => () => {
+    this.setState((prevState: any) => {
+      const updatedValue = updateObject(prevState.editing, {
+        [section]: !prevState.editing[section]
+      });
+      return { editing: updatedValue, updated: false };
+    });
+  };
+
   onDeleteClicked = () => this.props.deleteUser();
 
   onEditToggled = (section: string) => () => {
@@ -108,19 +117,27 @@ class Profile extends Component<any, any> {
       displayName,
       email,
       password,
-      passwordCheck
+      passwordCheck,
+      showModal
     } = this.state;
 
     let profile = <Spinner />;
 
     if (!loading) {
       profile = (
-        <TitleCard editing={false} onEdit={this.onModalToggled} title="Profile">
+        <TitleCard
+          btnColor={['Warn', 'Warn']}
+          btnText={['Delete', 'Delete']}
+          editing={false}
+          onEdit={this.onModalToggled}
+          title="Profile"
+        >
           {error ? <p className={classes.Error}>{error}</p> : null}
 
           <SecondaryCard
             label="Display Name"
             editing={editing.displayName}
+            onCancel={this.onCancelClicked('displayName')}
             onEdit={this.onEditToggled('displayName')}
             wide
           >
@@ -135,6 +152,7 @@ class Profile extends Component<any, any> {
           <SecondaryCard
             label="Email Address"
             editing={editing.email}
+            onCancel={this.onCancelClicked('email')}
             onEdit={this.onEditToggled('email')}
             wide
           >
@@ -149,6 +167,7 @@ class Profile extends Component<any, any> {
           <SecondaryCard
             label="Reset Password"
             editing={editing.password}
+            onCancel={this.onCancelClicked('password')}
             onEdit={this.onEditToggled('password')}
             wide
           >
@@ -179,14 +198,14 @@ class Profile extends Component<any, any> {
         <Modal
           color="Warn"
           onClose={this.onModalToggled}
-          show={this.state.showModal}
-          title="Delete Account"
+          show={showModal}
+          title="Delete Account?"
         >
           <p>
             Are you sure you want to delete your account? This cannot be undone.
           </p>
 
-          <Button btnType="Flat" color="Warn" clicked={this.onDeleteClicked}>
+          <Button btnType="Raised" color="Warn" clicked={this.onDeleteClicked}>
             Yes
           </Button>
 

@@ -1,57 +1,64 @@
+// library
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
+import { withRouter } from 'react-router-dom';
 
-import Hero from '../../models/Hero';
+// store
 import { AppState } from '../../store/rootReducer';
 import { createHero } from '../../store/hero/heroActionCreators';
 import { HeroActionTypes } from '../../store/hero/heroActionTypes';
 
-import Button from '../../components/button/Button';
-import Jumbotron from '../../components/jumbotron/Jumbotron';
+// components
+import SecondaryCard from '../../components/card/secondary-card/SecondaryCard';
 import TitleCard from '../../components/card/title-card/TitleCard';
+
+// shared
+import Hero from '../../models/Hero';
+import { User } from '../../models/User';
 
 interface CreateProps {
   history: History;
-  user: any;
+  user: User | null;
   createHero: (hero: Hero, route: any, uid: string) => HeroActionTypes;
 }
 
 /*
- * Container for Create character page
+ * Container for Create hero widget
  */
 class Create extends Component<CreateProps> {
   /**
    * @name onCreateClicked
    * @description triggers action to create new hero and redirect to track page
-   * @memberof Create
    */
-  onCreateClicked = (): void => {
-    this.props.createHero(new Hero(), this.props.history, this.props.user.uid);
+  onCreateClicked = () => {
+    if (this.props.user) {
+      this.props.createHero(
+        new Hero(),
+        this.props.history,
+        this.props.user.uid
+      );
+    }
   };
 
   render() {
     return (
-      <>
-        <Jumbotron header="Create" subHeader="So Begins a New Legend" />
+      <TitleCard subTitle="So begins a new legend..." title="Create">
+        <SecondaryCard
+          btnText={['', 'Create']}
+          label="Traditional"
+          onEdit={this.onCreateClicked}
+          wide
+        >
+          <p>Just a clean new hero sheet</p>
+        </SecondaryCard>
 
-        <TitleCard title="Traditional" readOnly wide>
-          {/* TODO: remove inline styles */}
-          <p
-            style={{
-              fontSize: '20px',
-              margin: '4px',
-              padding: '8px 4px 0 4px'
-            }}
-          >
-            I know what I'm doing, just give me a clean sheet.
+        <SecondaryCard btnText={['', 'Create']} label="Hero Builder" wide>
+          <p>
+            Step-by-step guide to creating your next hero! Coming in phase 3.
           </p>
-
-          <Button btnType="Flat" color="Primary" clicked={this.onCreateClicked}>
-            Create
-          </Button>
-        </TitleCard>
-      </>
+        </SecondaryCard>
+      </TitleCard>
     );
   }
 }
@@ -65,7 +72,9 @@ const mapDispatchToProps = (dispatch: Dispatch<HeroActionTypes>) => ({
     dispatch(createHero(hero, route, uid))
 });
 
-export default connect(
-  mapStatetoProps,
-  mapDispatchToProps
-)(Create);
+export default withRouter(
+  connect(
+    mapStatetoProps,
+    mapDispatchToProps
+  )(Create)
+);

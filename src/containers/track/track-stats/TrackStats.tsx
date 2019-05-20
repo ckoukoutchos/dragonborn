@@ -68,6 +68,15 @@ class TrackStats extends Component<any, any> {
     ));
   }
 
+  onCancelClicked = (section: string) => () => {
+    this.setState((prevState: any) => {
+      const updatedValue = updateObject(prevState.editing, {
+        [section]: !prevState.editing[section]
+      });
+      return { editing: updatedValue, updated: false };
+    });
+  };
+
   onInputChange = (label: any) => (evt: any) => {
     this.setState({
       hero: updateObject(this.state.hero, { [label]: evt.target.value }),
@@ -126,6 +135,7 @@ class TrackStats extends Component<any, any> {
         <TitleCard
           title={hero.name}
           editing={editing.basics}
+          onCancel={this.onCancelClicked('basics')}
           onEdit={this.onEditToggled('basics')}
           onChange={this.onInputChange('name')}
           value={hero.name}
@@ -156,6 +166,7 @@ class TrackStats extends Component<any, any> {
           <BasicCard
             title="Vitals"
             editing={editing.vitals}
+            onCancel={this.onCancelClicked('vitals')}
             onEdit={this.onEditToggled('vitals')}
           >
             <BlockInput
@@ -202,6 +213,7 @@ class TrackStats extends Component<any, any> {
           <BasicCard
             title={'Abilities & Skills'}
             editing={editing.abilities}
+            onCancel={this.onCancelClicked('abilities')}
             onEdit={this.onEditToggled('abilities')}
           >
             <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -223,10 +235,10 @@ class TrackStats extends Component<any, any> {
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <SecondaryCard label="Skills" readOnly>
+              <SecondaryCard label="Skills">
                 {this.createSkillInputs(hero, editing.abilities, 'skills')}
               </SecondaryCard>
-              <SecondaryCard label="Saving Throws" readOnly>
+              <SecondaryCard label="Saving Throws">
                 {this.createSkillInputs(
                   hero,
                   editing.abilities,
@@ -240,6 +252,7 @@ class TrackStats extends Component<any, any> {
           <BasicCard
             title={'Proficiency & Language'}
             editing={editing.proficiencies}
+            onCancel={this.onCancelClicked('proficiencies')}
             onEdit={this.onEditToggled('proficiencies')}
           >
             <TextAreaInput editing={editing.proficiencies} />
@@ -251,6 +264,7 @@ class TrackStats extends Component<any, any> {
           <BasicCard
             title={'Attacks & Spellcasting'}
             editing={editing.attacks}
+            onCancel={this.onCancelClicked('attacks')}
             onEdit={this.onEditToggled('attacks')}
           >
             <TextAreaInput editing={editing.attacks} />
@@ -260,6 +274,7 @@ class TrackStats extends Component<any, any> {
           <BasicCard
             title={'Equipment'}
             editing={editing.equipment}
+            onCancel={this.onCancelClicked('equipment')}
             onEdit={this.onEditToggled('equipment')}
           >
             <TextAreaInput editing={editing.equipment} />
@@ -269,6 +284,7 @@ class TrackStats extends Component<any, any> {
           <BasicCard
             title={'Features & Traits'}
             editing={editing.features}
+            onCancel={this.onCancelClicked('features')}
             onEdit={this.onEditToggled('features')}
           >
             <TextAreaInput editing={editing.features} />
