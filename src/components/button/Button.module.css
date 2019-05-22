@@ -22,20 +22,10 @@
   padding: 10px 10px;
 }
 
-.CornerTopLeft:hover {
-  background: white;
-  color: black;
-}
-
 .CornerTopRight {
   border-radius: 0 8px 0 0;
   font-size: 14px;
   padding: 10px 10px;
-}
-
-.CornerTopRight:hover {
-  background: white;
-  color: black;
 }
 
 .CornerBottomLeft {
@@ -44,20 +34,10 @@
   padding: 8px 8px;
 }
 
-.CornerBottomRight:hover {
-  background: white;
-  color: black;
-}
-
 .CornerBottomRight {
   border-radius: 0 0 4px 0;
   font-size: 12px;
   padding: 8px 8px;
-}
-
-.CornerBottomLeft:hover {
-  background: white;
-  color: black;
 }
 
 .Fab {

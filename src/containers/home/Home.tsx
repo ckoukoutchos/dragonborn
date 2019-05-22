@@ -45,7 +45,7 @@ class Home extends Component<HomeProps> {
       <>
         {authRedirect}
 
-        <Jumbotron header="Dragonborn" subHeader="Create, Track & Guide" />
+        <Jumbotron header="Dragonborn" subHeader="Adventure awaits!" />
 
         <div className={classes.Center}>
           <SideCard align="Left" title="Create">

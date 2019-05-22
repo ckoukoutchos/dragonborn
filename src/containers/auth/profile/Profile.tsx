@@ -205,13 +205,23 @@ class Profile extends Component<any, any> {
             Are you sure you want to delete your account? This cannot be undone.
           </p>
 
-          <Button btnType="Raised" color="Warn" clicked={this.onDeleteClicked}>
-            Yes
-          </Button>
+          <div>
+            <Button
+              btnType="Raised"
+              color="Warn"
+              clicked={this.onDeleteClicked}
+            >
+              Yes
+            </Button>
 
-          <Button btnType="Flat" color="Primary" clicked={this.onModalToggled}>
-            No
-          </Button>
+            <Button
+              btnType="Flat"
+              color="Primary"
+              clicked={this.onModalToggled}
+            >
+              No
+            </Button>
+          </div>
         </Modal>
 
         {profile}

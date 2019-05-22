@@ -15,6 +15,7 @@ import { HeroActionTypes } from '../../store/hero/heroActionTypes';
 
 // components
 import Button from '../../components/button/Button';
+import classes from './Track.module.css';
 import Input from '../../components/input/Input';
 import Modal from '../../components/modal/Modal';
 import SecondaryCard from '../../components/card/secondary-card/SecondaryCard';
@@ -119,13 +120,15 @@ class Track extends Component<TrackProps, TrackState> {
             Are you sure you want to delete this hero? This cannot be undone.
           </p>
 
-          <Button btnType="Raised" color="Warn" clicked={this.onHeroDeletion}>
-            Yes
-          </Button>
+          <div className={classes.FullWidth}>
+            <Button btnType="Raised" color="Warn" clicked={this.onHeroDeletion}>
+              Yes
+            </Button>
 
-          <Button btnType="Flat" color="Primary" clicked={this.onModalClosed}>
-            No
-          </Button>
+            <Button btnType="Flat" color="Primary" clicked={this.onModalClosed}>
+              No
+            </Button>
+          </div>
         </Modal>
 
         <TitleCard subTitle="Keep tabs on all your heroes" title="Track">
