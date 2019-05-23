@@ -19,7 +19,7 @@
   border-radius: 0 0 4px 4px;
   color: rgb(255, 255, 255);
   display: block;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: bold;
   margin-top: 8px;
   padding: 4px;
@@ -33,7 +33,7 @@
   color: rgb(255, 255, 255);
   display: flex;
   justify-content: space-between;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: bold;
   margin-top: 8px;
 }

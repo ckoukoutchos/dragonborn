@@ -51,11 +51,8 @@ class Track extends Component<TrackProps, TrackState> {
     showModal: false
   };
 
-  // TODO: update conditional
   componentDidMount() {
-    if (!this.props.heroes.length) {
-      this.props.fetchHeroes(this.props.user.uid);
-    }
+    this.props.fetchHeroes(this.props.user.uid);
   }
 
   onHeroDeletion = () => {
@@ -81,10 +78,12 @@ class Track extends Component<TrackProps, TrackState> {
   };
 
   render() {
+    const { heroes, loading } = this.props;
+
     let heroList = <Spinner />;
 
-    if (!this.props.loading) {
-      heroList = this.props.heroes.map((hero: Hero, index: number) => (
+    if (!loading) {
+      heroList = heroes.map((hero: Hero, index: number) => (
         <SecondaryCard
           btnColor={['Primary', '', 'Warn']}
           btnText={['View', '', 'Delete']}
@@ -106,6 +105,10 @@ class Track extends Component<TrackProps, TrackState> {
           <Input label="Race" long value={hero.race} />
         </SecondaryCard>
       ));
+    }
+
+    if (heroes.length === 0) {
+      heroList = <p>You have not created any heroes yet!</p>;
     }
 
     return (

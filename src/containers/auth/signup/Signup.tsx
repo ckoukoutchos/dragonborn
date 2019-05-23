@@ -126,7 +126,7 @@ class Signup extends Component<SignupProps, SignupState> {
             />
 
             <Button btnType="Raised" color="Primary">
-              Login
+              Sign Up
             </Button>
           </TitleCard>
         </form>

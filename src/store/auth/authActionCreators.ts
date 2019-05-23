@@ -94,8 +94,9 @@ export const updateDisplayNameFail = (error: any): AuthActionTypes => ({
   error
 });
 
-export const updateDisplayNameSuccess = (): AuthActionTypes => ({
-  type: UPDATE_DISPLAY_NAME_SUCCESS
+export const updateDisplayNameSuccess = (displayName: string): AuthActionTypes => ({
+  type: UPDATE_DISPLAY_NAME_SUCCESS,
+  displayName
 });
 
 export const updateEmail = (email: string): AuthActionTypes => ({
@@ -108,8 +109,9 @@ export const updateEmailFail = (error: any): AuthActionTypes => ({
   error
 });
 
-export const updateEmailSuccess = (): AuthActionTypes => ({
-  type: UPDATE_EMAIL_SUCCESS
+export const updateEmailSuccess = (email: string): AuthActionTypes => ({
+  type: UPDATE_EMAIL_SUCCESS,
+  email
 });
 
 export const updatePassword = (password: string): AuthActionTypes => ({

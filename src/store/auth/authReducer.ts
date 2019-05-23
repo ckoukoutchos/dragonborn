@@ -31,9 +31,9 @@ const authReducer = (
     case SIGNUP_FAIL: return signupFail(state, action);
     case SIGNUP_SUCCESS: return signupSuccess(state);
     case UPDATE_DISPLAY_NAME_FAIL: return updateDisplayNameFail(state, action);
-    case UPDATE_DISPLAY_NAME_SUCCESS: return updateDisplayNameSuccess(state);
+    case UPDATE_DISPLAY_NAME_SUCCESS: return updateDisplayNameSuccess(state, action);
     case UPDATE_EMAIL_FAIL: return updateEmailFail(state, action);
-    case UPDATE_EMAIL_SUCCESS: return updateEmailSuccess(state);
+    case UPDATE_EMAIL_SUCCESS: return updateEmailSuccess(state, action);
     case UPDATE_PASSWORD_FAIL: return updatePasswordFail(state, action);
     case UPDATE_PASSWORD_SUCCESS: return updatePasswordSuccess(state);
     default: return state;
@@ -61,11 +61,11 @@ const signupSuccess = (state: AuthState): AuthState => updateObject(state, { loa
 
 const updateDisplayNameFail = (state: AuthState, { error }: { error: string }): AuthState => updateObject(state, { error, loading: false });
 
-const updateDisplayNameSuccess = (state: AuthState): AuthState => updateObject(state, { loading: false });
+const updateDisplayNameSuccess = (state: AuthState, { displayName }: { displayName: string }): AuthState => updateObject(state, { loading: false, user: updateObject(state.user, { displayName }) });
 
 const updateEmailFail = (state: AuthState, { error }: { error: string }): AuthState => updateObject(state, { error, loading: false });
 
-const updateEmailSuccess = (state: AuthState): AuthState => updateObject(state, { loading: false });
+const updateEmailSuccess = (state: AuthState, { email }: { email: string }): AuthState => updateObject(state, { loading: false, user: updateObject(state.user, { email }) });
 
 const updatePasswordFail = (state: AuthState, { error }: { error: string }): AuthState => updateObject(state, { error, loading: false });
 

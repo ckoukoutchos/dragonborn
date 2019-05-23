@@ -110,6 +110,7 @@ interface UpdateDisplayNameFail {
 
 interface UpdateDisplayNameSuccess {
   type: typeof UPDATE_DISPLAY_NAME_SUCCESS;
+  displayName: string;
 }
 
 interface UpdateEmail {
@@ -124,6 +125,7 @@ interface UpdateEmailFail {
 
 interface UpdateEmailSuccess {
   type: typeof UPDATE_EMAIL_SUCCESS;
+  email: string;
 }
 
 interface UpdatePassword {

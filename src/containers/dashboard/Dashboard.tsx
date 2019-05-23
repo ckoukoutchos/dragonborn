@@ -4,8 +4,6 @@ import { connect } from 'react-redux';
 
 // store
 import { AppState } from '../../store/rootReducer';
-import { createHero } from '../../store/hero/heroActionCreators';
-import { HeroActionTypes } from '../../store/hero/heroActionTypes';
 
 // components
 import Create from '../create/Create';
@@ -58,12 +56,4 @@ const mapStateToProps = (state: AppState) => ({
   user: state.auth.user
 });
 
-const mapDispatchToProps = (dispatch: Dispatch<HeroActionTypes>) => ({
-  createHero: (hero: Hero, route: any, uid: string) =>
-    dispatch(createHero(hero, route, uid))
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Dashboard);
+export default connect(mapStateToProps)(Dashboard);

@@ -154,8 +154,8 @@ function* updateDisplayName({ displayName }: { displayName: string }): IterableI
 
     // check if there is a valid user
     if (user != null) {
-      yield user.updateProfile({ displayName });
-      yield put(updateDisplayNameSuccess());
+      yield user.updateProfile(displayName);
+      yield put(updateDisplayNameSuccess(displayName));
     }
 
   } catch (error) {
@@ -178,7 +178,7 @@ function* updateEmail({ email }: { email: string }): IterableIterator<any> {
     // check if there is a valid user
     if (user != null) {
       yield user.updateEmail(email);
-      yield put(updateEmailSuccess());
+      yield put(updateEmailSuccess(email));
     }
 
   } catch (error) {

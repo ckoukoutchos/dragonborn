@@ -88,7 +88,7 @@ class Profile extends Component<any, any> {
         this.props.updateDisplayName(prevState.displayName);
         return;
       case 'email':
-        if (validEmail(prevState.displayName)) {
+        if (validEmail(prevState.email)) {
           this.props.updateEmail(prevState.email);
           return;
         } else {
@@ -121,6 +121,7 @@ class Profile extends Component<any, any> {
       showModal
     } = this.state;
 
+    console.log(this.props.user);
     let profile = <Spinner />;
 
     if (!loading) {

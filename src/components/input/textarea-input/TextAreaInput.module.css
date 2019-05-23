@@ -21,6 +21,7 @@
 }
 
 .Disabled {
+  color: rgb(61, 61, 61);
   background: rgb(233, 233, 233);
 }
 
