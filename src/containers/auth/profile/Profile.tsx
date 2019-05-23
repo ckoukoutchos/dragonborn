@@ -121,7 +121,6 @@ class Profile extends Component<any, any> {
       showModal
     } = this.state;
 
-    console.log(this.props.user);
     let profile = <Spinner />;
 
     if (!loading) {

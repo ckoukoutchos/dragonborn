@@ -16,6 +16,8 @@ export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGOUT = 'LOGOUT';
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 
+export const REAUTH = 'REAUTH';
+
 export const SIGNUP = 'SIGNUP';
 export const SIGNUP_FAIL = 'SIGNUP_FAIL';
 export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
@@ -81,6 +83,10 @@ interface LogoutAction {
 interface LogoutSuccessAction {
   type: typeof LOGOUT_SUCCESS;
   user: null;
+}
+
+interface ReAuthAction {
+  type: typeof REAUTH;
 }
 
 interface SignupAction {
@@ -152,6 +158,7 @@ export type AuthActionTypes =
   | LoginSuccessAction
   | LogoutAction
   | LogoutSuccessAction
+  | ReAuthAction
   | SignupAction
   | SignupFailAction
   | SignupSuccessAction

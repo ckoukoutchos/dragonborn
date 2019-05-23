@@ -3,7 +3,7 @@ import { eventChannel } from 'redux-saga';
 import { AUTH } from '../../firebase/firebase';
 
 import { LOGIN, LOGOUT, SIGNUP, UPDATE_DISPLAY_NAME, UPDATE_EMAIL, UPDATE_PASSWORD, DELETE_USER } from '../auth/authActionTypes';
-import { loginSuccess, logoutSuccess, authLoading, signupSuccess, signupFail, loginFail, updateDisplayNameSuccess, updateDisplayNameFail, updateEmailSuccess, updateEmailFail, updatePasswordSuccess, updatePasswordFail, deleteUserSuccess, deleteUserFail } from './authActionCreators';
+import { loginSuccess, logoutSuccess, authLoading, signupSuccess, signupFail, loginFail, updateDisplayNameSuccess, updateDisplayNameFail, updateEmailSuccess, updateEmailFail, updatePasswordSuccess, updatePasswordFail, deleteUserSuccess, deleteUserFail, reauth } from './authActionCreators';
 
 // TODO: error handling
 
@@ -44,7 +44,13 @@ function* deleteUserSaga(): IterableIterator<any> {
     }
 
   } catch (error) {
-    yield put(deleteUserFail(error));
+    if (error.code === 'auth/requires-recent-login') {
+      // yield put(reauth());
+      console.log('Please sign in again to change your email or password');
+      yield put(deleteUserFail(error));
+    } else {
+      yield put(deleteUserFail(error));
+    }
   }
 }
 /**
@@ -182,7 +188,13 @@ function* updateEmail({ email }: { email: string }): IterableIterator<any> {
     }
 
   } catch (error) {
-    yield put(updateEmailFail(error));
+    if (error.code === 'auth/requires-recent-login') {
+      // yield put(reauth());
+      console.log('Please sign in again to change your email or password');
+      yield put(updateEmailFail(error));
+    } else {
+      yield put(updateEmailFail(error));
+    }
   }
 }
 
@@ -205,6 +217,12 @@ function* updatePassword({ password }: { password: string }): IterableIterator<a
     }
 
   } catch (error) {
-    yield put(updatePasswordFail(error));
+    if (error.code === 'auth/requires-recent-login') {
+      // yield put(reauth());
+      console.log('Please sign in again to change your email or password');
+      yield put(updatePasswordFail(error));
+    } else {
+      yield put(updatePasswordFail(error));
+    }
   }
 }

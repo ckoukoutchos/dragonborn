@@ -20,7 +20,8 @@ import {
   UPDATE_PASSWORD_SUCCESS,
   DELETE_USER,
   DELETE_USER_FAIL,
-  DELETE_USER_SUCCESS
+  DELETE_USER_SUCCESS,
+  REAUTH
 } from './authActionTypes';
 import { User } from '../../models/User';
 
@@ -67,6 +68,10 @@ export const logout = (): AuthActionTypes => ({
 export const logoutSuccess = (user: null): AuthActionTypes => ({
   type: LOGOUT_SUCCESS,
   user
+});
+
+export const reauth = (): AuthActionTypes => ({
+  type: REAUTH
 });
 
 export const signup = (email: string, password: string): AuthActionTypes => ({

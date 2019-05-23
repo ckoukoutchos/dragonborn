@@ -13,9 +13,7 @@ import SecondaryCard from '../../components/card/secondary-card/SecondaryCard';
 import TitleCard from '../../components/card/title-card/TitleCard';
 import Track from '../track/Track';
 
-// shared
-import Hero from '../../models/Hero';
-
+// TODO: docs, comments, interfaces
 class Dashboard extends Component<any> {
   signup = () => {
     this.props.history.push('/signup');
