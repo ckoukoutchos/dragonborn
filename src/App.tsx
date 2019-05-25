@@ -16,31 +16,31 @@ import TrackSpells from './containers/track/track-spells/TrackSpells';
 import TrackStats from './containers/track/track-stats/TrackStats';
 
 interface AppProps {
-  user: User;
+  user: User | null;
 }
 
-class App extends Component<any> {
+class App extends Component<AppProps> {
   render() {
     let routes = (
       <Switch>
-        <Route path="/login" component={Login} />
-        <Route path="/signup" component={Signup} />
-        <Route path="/" exact component={Home} />
-        <Redirect to="/" />
+        <Route path='/login' component={Login} />
+        <Route path='/signup' component={Signup} />
+        <Route path='/' exact component={Home} />
+        <Redirect to='/' />
       </Switch>
     );
 
     if (this.props.user) {
       routes = (
         <Switch>
-          <Route path="/dashboard" component={Dashboard} />
-          <Route path="/track/:id/stats" component={TrackStats} />
-          <Route path="/track/:id/spells" component={TrackSpells} />
-          <Route path="/track/:id/play" component={TrackPlay} />
-          <Route path="/login" component={Login} />
-          <Route path="/logout" component={Logout} />
-          <Route path="/" exact component={Home} />
-          <Redirect to="/" />
+          <Route path='/dashboard' component={Dashboard} />
+          <Route path='/track/:id/stats' component={TrackStats} />
+          <Route path='/track/:id/spells' component={TrackSpells} />
+          <Route path='/track/:id/play' component={TrackPlay} />
+          <Route path='/login' component={Login} />
+          <Route path='/logout' component={Logout} />
+          <Route path='/' exact component={Home} />
+          <Redirect to='/' />
         </Switch>
       );
     }

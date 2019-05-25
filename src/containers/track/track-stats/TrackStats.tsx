@@ -1,13 +1,18 @@
+// library
 import React, { Component } from 'react';
+import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 
-import { updateObject, updateObjectInArray } from '../../../shared/immutable';
+// store
+import { AppState } from '../../../store/rootReducer';
 import {
   fetchHero,
   getHero,
   updateHero
 } from '../../../store/hero/heroActionCreators';
+import { HeroActionTypes } from '../../../store/hero/heroActionTypes';
 
+// components
 import BasicCard from '../../../components/card/basic-card/BasicCard';
 import BlockInput from '../../../components/input/block-input/BlockInput';
 import BlockInsetInput from '../../../components/input/block-inset-input/BlockInsetInput';
@@ -18,8 +23,42 @@ import TextAreaInput from '../../../components/input/textarea-input/TextAreaInpu
 import TitleCard from '../../../components/card/title-card/TitleCard';
 import ToggleLineInput from '../../../components/input/toggle-line-input/ToggleLineInput';
 
-// TODO: refactor, remove style tags, use loops to repeat similar sections, use object fields to generate labels rather than strings?, comment functions
-class TrackStats extends Component<any, any> {
+// shared
+import { updateObject, updateObjectInArray } from '../../../shared/immutable';
+import Hero from '../../../models/Hero';
+import { User } from '../../../models/User';
+
+// TODO: update types in functions, refactor, remove style tags, use loops to repeat similar sections, use object fields to generate labels rather than strings?
+
+interface TrackStatsProps {
+  hero: any;
+  history: any;
+  match: any;
+  user: User | null;
+  fetchHero: (heroId: number, uid: string) => HeroActionTypes;
+  getHero: (heroId: number) => HeroActionTypes;
+  updateHero: (hero: Hero, uid: string) => HeroActionTypes;
+}
+
+interface TrackStatsState {
+  editing: {
+    abilities: boolean;
+    attacks: boolean;
+    basics: boolean;
+    equipment: boolean;
+    features: boolean;
+    proficiencies: boolean;
+    vitals: boolean;
+  };
+  hero: Hero;
+  toggled: boolean;
+  updated: boolean;
+}
+
+/*
+ * trackstats container widget
+ */
+class TrackStats extends Component<TrackStatsProps, TrackStatsState> {
   state = {
     editing: {
       abilities: false,
@@ -41,6 +80,10 @@ class TrackStats extends Component<any, any> {
     }
   }
 
+  /**
+   * @name createAbilityInputs
+   * @description creates any array of block inset inputs for each ability score
+   */
   createAbilityInputs(abilityScores: any, editing: any) {
     return abilityScores.map((ability: any, index: any) => (
       <BlockInsetInput
@@ -53,8 +96,12 @@ class TrackStats extends Component<any, any> {
     ));
   }
 
-  createSkillInputs(hero: any, editing: any, section: any) {
-    return hero[section].map((skill: any, index: any) => (
+  /**
+   * @name createSkillInputs
+   * @description creates an array of toggle line inputs for each skill
+   */
+  createSkillInputs(hero: any, editing: any, section: string) {
+    return hero[section].map((skill: any, index: number) => (
       <ToggleLineInput
         key={index}
         label={skill.name}
@@ -68,6 +115,10 @@ class TrackStats extends Component<any, any> {
     ));
   }
 
+  /**
+   * @name onCancelClicked
+   * @description on cancel clicked, sets editing to false for section and updated to false
+   */
   onCancelClicked = (section: string) => () => {
     this.setState((prevState: any) => {
       const updatedValue = updateObject(prevState.editing, {
@@ -77,14 +128,22 @@ class TrackStats extends Component<any, any> {
     });
   };
 
-  onInputChange = (label: any) => (evt: any) => {
+  /**
+   * @name onInputChange
+   * @description updates value for field on input change
+   */
+  onInputChange = (label: string) => (evt: any) => {
     this.setState({
       hero: updateObject(this.state.hero, { [label]: evt.target.value }),
       updated: true
     });
   };
 
-  onListInputChange = (index: any, section: any) => (evt: any) => {
+  /**
+   * @name onListInputChange
+   * @description updates value for field in hero when input changes
+   */
+  onListInputChange = (index: number, section: string) => (evt: any) => {
     const updatedValue = updateObjectInArray(
       this.state.hero[section],
       index,
@@ -97,7 +156,11 @@ class TrackStats extends Component<any, any> {
     });
   };
 
-  onListInputToggle = (index: any, section: any) => () => {
+  /**
+   * @name onListInputToggle
+   * @description updates proficiency value for skill on hero when input is toggled
+   */
+  onListInputToggle = (index: number, section: string) => () => {
     this.setState((prevState: any) => {
       const updatedValue = updateObjectInArray(
         prevState.hero[section],
@@ -106,19 +169,24 @@ class TrackStats extends Component<any, any> {
         !prevState.hero[section][index].proficient
       );
       return {
-        hero: updateObject(this.state.hero, { [section]: updatedValue }),
+        hero: updateObject(prevState.hero, { [section]: updatedValue }),
         updated: true
       };
     });
   };
 
-  onEditToggled = (section: any) => () => {
+  /**
+   * @name onEditToggled
+   * @description updates editing status when section is toggled
+   */
+  onEditToggled = (section: string) => () => {
     this.setState((prevState: any) => {
       const updatedValue = updateObject(prevState.editing, {
         [section]: !prevState.editing[section]
       });
 
       if (prevState.updated) {
+        // @ts-ignore
         this.props.updateHero(prevState.hero, this.props.user.uid);
       }
 
@@ -147,14 +215,16 @@ class TrackStats extends Component<any, any> {
             onChange={this.onInputChange('heroClass')}
             value={hero.heroClass}
           />
+
           <Input
-            label="Race"
+            label='Race'
             editing={editing.basics}
             onChange={this.onInputChange('race')}
             value={hero.race}
           />
+
           <Input
-            label="Alignment"
+            label='Alignment'
             editing={editing.basics}
             onChange={this.onInputChange('alignment')}
             value={hero.alignment}
@@ -164,43 +234,48 @@ class TrackStats extends Component<any, any> {
         {/* Vitals */}
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           <BasicCard
-            title="Vitals"
+            title='Vitals'
             editing={editing.vitals}
             onCancel={this.onCancelClicked('vitals')}
             onEdit={this.onEditToggled('vitals')}
           >
             <BlockInput
-              label="Armor Class"
+              label='Armor Class'
               editing={editing.vitals}
               onChange={this.onInputChange('armorClass')}
               value={hero.armorClass}
             />
+
             <BlockInput
-              label="Initiative"
+              label='Initiative'
               editing={editing.vitals}
               onChange={this.onInputChange('initative')}
               value={hero.initative}
             />
+
             <BlockInput
-              label="Experience"
+              label='Experience'
               editing={editing.vitals}
               onChange={this.onInputChange('xp')}
               value={hero.xp}
             />
+
             <BlockInput
-              label="Speed"
+              label='Speed'
               editing={editing.vitals}
               onChange={this.onInputChange('speed')}
               value={hero.speed}
             />
+
             <BlockInput
-              label="Hit Points"
+              label='Hit Points'
               editing={editing.vitals}
               onChange={this.onInputChange('currentHP')}
               value={hero.currentHP}
             />
+
             <BlockInput
-              label="Hit Dice"
+              label='Hit Dice'
               editing={editing.vitals}
               onChange={this.onInputChange('numberOfDice')}
               value={
@@ -221,13 +296,14 @@ class TrackStats extends Component<any, any> {
 
               <div style={{ height: '24px' }} />
               <BlockInput
-                label="Proficiency"
+                label='Proficiency'
                 editing={editing.abilities}
                 onChange={this.onInputChange('proficiency')}
                 value={hero.proficiency}
               />
+
               <BlockInput
-                label="Inspiration"
+                label='Inspiration'
                 editing={editing.abilities}
                 onChange={this.onInputChange('inspiration')}
                 value={hero.inspiration}
@@ -235,10 +311,11 @@ class TrackStats extends Component<any, any> {
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <SecondaryCard label="Skills">
+              <SecondaryCard label='Skills'>
                 {this.createSkillInputs(hero, editing.abilities, 'skills')}
               </SecondaryCard>
-              <SecondaryCard label="Saving Throws">
+
+              <SecondaryCard label='Saving Throws'>
                 {this.createSkillInputs(
                   hero,
                   editing.abilities,
@@ -296,15 +373,15 @@ class TrackStats extends Component<any, any> {
   }
 }
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: AppState) => ({
   hero: state.hero.hero,
   user: state.auth.user
 });
 
-const mapDispatchToProps = (dispatch: any) => ({
-  fetchHero: (heroId: any, uid: string) => dispatch(fetchHero(heroId, uid)),
-  getHero: (heroId: any) => dispatch(getHero(heroId)),
-  updateHero: (hero: any, uid: string) => dispatch(updateHero(hero, uid))
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  fetchHero: (heroId: number, uid: string) => dispatch(fetchHero(heroId, uid)),
+  getHero: (heroId: number) => dispatch(getHero(heroId)),
+  updateHero: (hero: Hero, uid: string) => dispatch(updateHero(hero, uid))
 });
 
 export default connect(

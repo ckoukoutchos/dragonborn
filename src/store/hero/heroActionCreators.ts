@@ -1,4 +1,3 @@
-import Hero from '../../models/Hero';
 import {
   HeroActionTypes,
   CREATE_HERO,
@@ -19,6 +18,8 @@ import {
   UPDATE_HERO_FAIL,
   UPDATE_HERO_SUCCESS
 } from './heroActionTypes';
+
+import Hero from '../../models/Hero';
 
 /*
  * Hero action creators

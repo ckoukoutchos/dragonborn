@@ -21,6 +21,10 @@
   width: 100%;
 }
 
+input:disabled {
+  -webkit-text-fill-color: rgb(61, 61, 61);
+}
+
 .Disabled {
   color: rgb(61, 61, 61);
   background-color: rgb(233, 233, 233);

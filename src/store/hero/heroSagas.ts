@@ -1,7 +1,8 @@
-/* eslint-disable no-unused-vars */
+// library
 import { put, all, takeEvery } from 'redux-saga/effects';
 import { DATABASE } from '../../firebase/firebase';
 
+// action types
 import {
   CREATE_HERO,
   DELETE_HERO,
@@ -9,6 +10,8 @@ import {
   FETCH_HEROES,
   UPDATE_HERO
 } from '../hero/heroActionTypes';
+
+// action creators
 import {
   createHeroSuccess,
   deleteHeroSuccess,
@@ -16,11 +19,14 @@ import {
   fetchHeroSuccess,
   fetchHeroesSuccess,
   fetchHeroesFail,
-  updateHeroSuccess
+  updateHeroSuccess,
+  createHeroFail,
+  deleteHeroFail,
+  updateHeroFail
 } from './heroActionCreators';
-import Hero from '../../models/Hero';
 
-// TODO: error handling
+// shared
+import Hero from '../../models/Hero';
 
 /**
  * @name watchHero
@@ -49,7 +55,7 @@ function* createHeroSaga({ hero, route, uid }: { hero: Hero; route: any, uid: st
     const newHeroRef = yield DATABASE.ref(`users/${uid}/heroes`).push();
 
     // set new hero in created spot
-    const res = yield newHeroRef.set(hero);
+    yield newHeroRef.set(hero);
 
     // grab unique DB id created by Firebase
     hero.id = newHeroRef.key;
@@ -58,9 +64,9 @@ function* createHeroSaga({ hero, route, uid }: { hero: Hero; route: any, uid: st
 
     // redirect to track page
     yield route.push(`/track/${hero.id}/stats`);
+
   } catch (error) {
-    // TODO: add error handling
-    console.log(error);
+    yield put(createHeroFail(error));
   }
 }
 
@@ -76,12 +82,12 @@ function* deleteHeroSaga({ heroId, uid }: { heroId: number, uid: string }): Iter
     const heroRef = yield DATABASE.ref(`users/${uid}/heroes/${heroId}`);
 
     // delete hero
-    const res = yield heroRef.remove();
+    yield heroRef.remove();
 
     yield put(deleteHeroSuccess(heroId));
+
   } catch (error) {
-    // TODO: add error handling
-    console.log(error);
+    yield put(deleteHeroFail(error));
   }
 }
 
@@ -103,8 +109,8 @@ function* fetchHeroSaga({ heroId, uid }: { heroId: number, uid: string }): Itera
     const hero = heroData.val();
 
     yield put(fetchHeroSuccess(hero));
+
   } catch (error) {
-    // TODO: add error handling
     console.log(error);
   }
 }
@@ -133,6 +139,7 @@ function* fetchHeroesSaga({ uid }: { uid: string }): IterableIterator<{}> {
     }
 
     yield put(fetchHeroesSuccess(heroesList));
+
   } catch (error) {
     yield put(fetchHeroesFail(error));
   }
@@ -150,11 +157,11 @@ function* updateHeroSaga({ hero, uid }: { hero: Hero, uid: string }): IterableIt
     const heroRef = yield DATABASE.ref(`users/${uid}/heroes/${hero.id}`);
 
     // set updated hero
-    const res = yield heroRef.set(hero);
+    yield heroRef.set(hero);
 
     yield put(updateHeroSuccess(hero));
+
   } catch (error) {
-    // TODO: add error handling
-    console.log(error);
+    yield put(updateHeroFail(error));
   }
 }

@@ -33,7 +33,7 @@ const secondaryCard = (props: SecondaryCardProps) => {
     primaryButton = (
       <Button
         color={editing ? btnColor[0] : btnColor[1]}
-        btnType="CornerBottomRight"
+        btnType='CornerBottomRight'
         clicked={onEdit}
       >
         {editing ? btnText[0] : btnText[1]}
@@ -43,7 +43,7 @@ const secondaryCard = (props: SecondaryCardProps) => {
 
   if (onCancel && editing) {
     secondaryButton = (
-      <Button color={btnColor[2]} btnType="CornerBottomLeft" clicked={onCancel}>
+      <Button color={btnColor[2]} btnType='CornerBottomLeft' clicked={onCancel}>
         {btnText[2]}
       </Button>
     );
@@ -55,7 +55,9 @@ const secondaryCard = (props: SecondaryCardProps) => {
 
       <div className={onEdit ? classes.FooterEdit : classes.Footer}>
         {secondaryButton}
+
         <div className={classes.Label}>{label}</div>
+
         {primaryButton}
       </div>
     </div>

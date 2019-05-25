@@ -47,7 +47,7 @@ const titleCard = (props: TitleCardProps) => {
     primaryButton = (
       <Button
         color={editing ? btnColor[0] : btnColor[1]}
-        btnType="CornerTopRight"
+        btnType='CornerTopRight'
         clicked={onEdit}
       >
         {editing ? btnText[0] : btnText[1]}
@@ -57,7 +57,7 @@ const titleCard = (props: TitleCardProps) => {
 
   if (onCancel && editing) {
     secondaryButton = (
-      <Button color={btnColor[2]} btnType="CornerTopLeft" clicked={onEdit}>
+      <Button color={btnColor[2]} btnType='CornerTopLeft' clicked={onEdit}>
         {btnText[2]}
       </Button>
     );
@@ -67,8 +67,11 @@ const titleCard = (props: TitleCardProps) => {
     <div className={wide ? classes.CardWide : classes.Card}>
       <div className={onEdit ? classes.HeaderEdit : classes.Header}>
         {secondaryButton}
+
         {heading}
+
         {subTitle ? <h4>{subTitle}</h4> : null}
+
         {primaryButton}
       </div>
 

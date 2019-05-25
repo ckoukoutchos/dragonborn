@@ -1,7 +1,13 @@
 import React from 'react';
 import classes from './SideCard.module.css';
 
-const sideCard = (props: any) => {
+interface SideCardProps {
+  align: string;
+  children: any;
+  title: string;
+}
+
+const sideCard = (props: SideCardProps) => {
   const { align, children, title } = props;
 
   return (
@@ -9,6 +15,7 @@ const sideCard = (props: any) => {
       <div className={classes.Header}>
         <h1>{title}</h1>
       </div>
+
       <div className={classes.Body}>{children}</div>
     </div>
   );

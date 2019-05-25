@@ -1,23 +1,28 @@
+// library
 import React, { Component, FormEvent, ChangeEvent } from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
 
+// store
 import { AppState } from '../../../store/rootReducer';
 import { AuthActionTypes } from '../../../store/auth/authActionTypes';
 import { signup } from '../../../store/auth/authActionCreators';
+
+//components
+import Button from '../../../components/button/Button';
+import classes from './Signup.module.css';
+import Input from '../../../components/input/Input';
+import Spinner from '../../../components/spinner/Spinner';
+import TitleCard from '../../../components/card/title-card/TitleCard';
+
+//shared
 import { User } from '../../../models/User';
 import {
   passwordMatch,
   validPassword,
   validEmail
 } from '../../../shared/validation';
-
-import Button from '../../../components/button/Button';
-import classes from './Signup.module.css';
-import Input from '../../../components/input/Input';
-import Spinner from '../../../components/spinner/Spinner';
-import TitleCard from '../../../components/card/title-card/TitleCard';
 
 interface SignupProps {
   error: string;
@@ -33,6 +38,9 @@ interface SignupState {
   passwordCheck: string;
 }
 
+/*
+* Sign up container widget
+*/
 class Signup extends Component<SignupProps, SignupState> {
   state = {
     email: '',

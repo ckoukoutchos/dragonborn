@@ -31,6 +31,9 @@ interface LoginState {
   password: string;
 }
 
+/*
+ * Login container widget
+ */
 class Login extends Component<LoginProps, LoginState> {
   state = {
     email: '',
@@ -64,14 +67,14 @@ class Login extends Component<LoginProps, LoginState> {
     // redirect if already signed in
     let authRedirect = null;
     if (user) {
-      authRedirect = <Redirect to="/dashboard" />;
+      authRedirect = <Redirect to='/dashboard' />;
     }
 
     let login = <Spinner />;
 
     if (!loading) {
       login = (
-        <TitleCard title="Login">
+        <TitleCard title='Login'>
           {authRedirect}
 
           <form onSubmit={this.login}>
@@ -79,23 +82,23 @@ class Login extends Component<LoginProps, LoginState> {
 
             <Input
               editing
-              label="Email"
+              label='Email'
               long
-              type="email"
+              type='email'
               value={email}
               onChange={this.onInputChange('email')}
             />
 
             <Input
               editing
-              label="Password"
+              label='Password'
               long
-              type="password"
+              type='password'
               value={password}
               onChange={this.onInputChange('password')}
             />
 
-            <Button btnType="Raised" color="Primary">
+            <Button btnType='Raised' color='Primary'>
               Login
             </Button>
           </form>

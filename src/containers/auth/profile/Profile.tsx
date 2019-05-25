@@ -1,5 +1,6 @@
 // library
-import React, { Component, Dispatch, ChangeEvent } from 'react';
+import React, { Component, ChangeEvent } from 'react';
+import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 
 // store
@@ -28,27 +29,60 @@ import {
   passwordMatch,
   validPassword
 } from '../../../shared/validation';
+import { User } from '../../../models/User';
 
-// TODO: error msg, func docs, comments, interfaces
+interface ProfileProps {
+  error: any;
+  loading: boolean;
+  user: User | null;
+  deleteUser: () => AuthActionTypes;
+  updateDisplayName: (displayName: string) => AuthActionTypes;
+  updateEmail: (email: string) => AuthActionTypes;
+  updatePassword: (password: string) => AuthActionTypes;
+}
 
-class Profile extends Component<any, any> {
+interface ProfileState {
+  editing: {
+    displayName: boolean;
+    email: boolean;
+    password: boolean;
+    [key: string]: any;
+  };
+  displayName: string;
+  error: any;
+  email: string;
+  password: string;
+  passwordCheck: string;
+  showModal: boolean;
+  updated: boolean;
+}
+
+/*
+ * Profile container widget
+ */
+class Profile extends Component<ProfileProps, ProfileState> {
   state = {
     editing: {
       displayName: false,
       email: false,
       password: false
     },
-    displayName: this.props.user.displayName || '',
+    displayName: this.props.user ? this.props.user.displayName || '' : '',
     error: null,
-    email: this.props.user.email,
+    email: this.props.user ? this.props.user.email : '',
     password: '',
     passwordCheck: '',
     showModal: false,
     updated: false
   };
 
+  /**
+   * @name onCancelClicked
+   * @description on cancel clicked, sets editing to false for section and updated to false
+   * @param section string
+   */
   onCancelClicked = (section: string) => () => {
-    this.setState((prevState: any) => {
+    this.setState((prevState: ProfileState) => {
       const updatedValue = updateObject(prevState.editing, {
         [section]: !prevState.editing[section]
       });
@@ -56,10 +90,19 @@ class Profile extends Component<any, any> {
     });
   };
 
+  /**
+   * @name onDeleteClicked
+   * @description on delete clicked dispatches action to delete user
+   */
   onDeleteClicked = () => this.props.deleteUser();
 
+  /**
+   * @name onEditToggled
+   * @description on edit clicked, toggles section edit status, sets updated to false and if a field was updated, saves it
+   * @parm section string
+   */
   onEditToggled = (section: string) => () => {
-    this.setState((prevState: any) => {
+    this.setState((prevState: ProfileState) => {
       const updatedValue = updateObject(prevState.editing, {
         [section]: !prevState.editing[section]
       });
@@ -73,16 +116,33 @@ class Profile extends Component<any, any> {
     });
   };
 
+  /**
+   * @name onModalToggled
+   * @description toggles modal show status
+   */
   onModalToggled = () => {
-    this.setState((prevState: any) => ({ showModal: !prevState.showModal }));
+    this.setState((prevState: ProfileState) => ({
+      showModal: !prevState.showModal
+    }));
   };
 
+  /**
+   * @name onInputChange
+   * @description updates the value of a field on change
+   * @param label string
+   */
   onInputChange = (label: string) => (evt: ChangeEvent<HTMLInputElement>) => {
-    this.setState({ [label]: evt.target.value, updated: true });
+    // ts-bug requires this.state to prevent error with string lteral type
+    this.setState({ ...this.state, [label]: evt.target.value, updated: true });
   };
 
-  // TODO: error handling
-  saveUpdatedSection = (section: string, prevState: any) => {
+  /**
+   * @name saveUpdatedSection
+   * @description based on section passed in, will validate and dispatch action to save
+   * @param section string
+   * @param prevState ProfileState
+   */
+  saveUpdatedSection = (section: string, prevState: ProfileState) => {
     switch (section) {
       case 'displayName':
         this.props.updateDisplayName(prevState.displayName);
@@ -130,12 +190,12 @@ class Profile extends Component<any, any> {
           btnText={['Delete', 'Delete']}
           editing={false}
           onEdit={this.onModalToggled}
-          title="Profile"
+          title='Profile'
         >
           {error ? <p className={classes.Error}>{error}</p> : null}
 
           <SecondaryCard
-            label="Display Name"
+            label='Display Name'
             editing={editing.displayName}
             onCancel={this.onCancelClicked('displayName')}
             onEdit={this.onEditToggled('displayName')}
@@ -150,7 +210,7 @@ class Profile extends Component<any, any> {
           </SecondaryCard>
 
           <SecondaryCard
-            label="Email Address"
+            label='Email Address'
             editing={editing.email}
             onCancel={this.onCancelClicked('email')}
             onEdit={this.onEditToggled('email')}
@@ -165,7 +225,7 @@ class Profile extends Component<any, any> {
           </SecondaryCard>
 
           <SecondaryCard
-            label="Reset Password"
+            label='Reset Password'
             editing={editing.password}
             onCancel={this.onCancelClicked('password')}
             onEdit={this.onEditToggled('password')}
@@ -174,18 +234,18 @@ class Profile extends Component<any, any> {
             <Input
               editing={editing.password}
               onChange={this.onInputChange('password')}
-              label="New Password"
+              label='New Password'
               long
-              type="password"
+              type='password'
               value={password}
             />
 
             <Input
               editing={editing.password}
               onChange={this.onInputChange('passwordCheck')}
-              label="Re-type"
+              label='Re-type'
               long
-              type="password"
+              type='password'
               value={passwordCheck}
             />
           </SecondaryCard>
@@ -196,10 +256,10 @@ class Profile extends Component<any, any> {
     return (
       <>
         <Modal
-          color="Warn"
+          color='Warn'
           onClose={this.onModalToggled}
           show={showModal}
-          title="Delete Account?"
+          title='Delete Account?'
         >
           <p>
             Are you sure you want to delete your account? This cannot be undone.
@@ -207,16 +267,16 @@ class Profile extends Component<any, any> {
 
           <div>
             <Button
-              btnType="Raised"
-              color="Warn"
+              btnType='Raised'
+              color='Warn'
               clicked={this.onDeleteClicked}
             >
               Yes
             </Button>
 
             <Button
-              btnType="Flat"
-              color="Primary"
+              btnType='Flat'
+              color='Primary'
               clicked={this.onModalToggled}
             >
               No

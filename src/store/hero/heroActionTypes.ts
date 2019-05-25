@@ -30,6 +30,7 @@ export const UPDATE_HERO_SUCCESS = 'UPDATE_HERO_SUCCESS';
  * Hero action type interfaces
  */
 export interface HeroState {
+  error: any;
   hero: Hero;
   heroes: Hero[];
   loading: boolean;

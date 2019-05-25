@@ -25,11 +25,9 @@ import TitleCard from '../../components/card/title-card/TitleCard';
 // shared
 import Hero from '../../models/Hero';
 
-// TODO: func docs, comments
-
 interface TrackProps {
   history: any;
-  heroes: any; // TS bug, needs to be declared type <any>
+  heroes: Hero[];
   loading: boolean;
   user: any;
   deleteHero: (heroId: number, uid: string) => HeroActionTypes;
@@ -55,6 +53,10 @@ class Track extends Component<TrackProps, TrackState> {
     this.props.fetchHeroes(this.props.user.uid);
   }
 
+  /**
+   * @name onHeroDeletion
+   * @description on hero deleted, close modal and set hero to null, dispatch acction to delete
+   */
   onHeroDeletion = () => {
     this.setState({ heroId: null, showModal: false });
 
@@ -69,10 +71,18 @@ class Track extends Component<TrackProps, TrackState> {
     this.props.history.push(`/track/${heroId}/stats`);
   };
 
+  /**
+   * @name onModalClosed
+   * @description close modal
+   */
   onModalClosed = () => {
     this.setState({ heroId: null, showModal: false });
   };
 
+  /**
+   * @name onModalOpened
+   * @description open modal
+   */
   onModalOpened = (heroId: number) => () => {
     this.setState({ heroId, showModal: true });
   };
@@ -80,7 +90,7 @@ class Track extends Component<TrackProps, TrackState> {
   render() {
     const { heroes, loading } = this.props;
 
-    let heroList = <Spinner />;
+    let heroList: any = <Spinner />;
 
     if (!loading) {
       heroList = heroes.map((hero: Hero, index: number) => (
@@ -94,7 +104,7 @@ class Track extends Component<TrackProps, TrackState> {
           onEdit={this.onHeroSelection(hero.id)}
           wide
         >
-          <Input label="Hero" long value={hero.name} />
+          <Input label='Hero' long value={hero.name} />
 
           <Input
             label={'Class & Level'}
@@ -102,7 +112,7 @@ class Track extends Component<TrackProps, TrackState> {
             value={hero.heroClass + ' ' + hero.level}
           />
 
-          <Input label="Race" long value={hero.race} />
+          <Input label='Race' long value={hero.race} />
         </SecondaryCard>
       ));
     }
@@ -114,27 +124,27 @@ class Track extends Component<TrackProps, TrackState> {
     return (
       <>
         <Modal
-          color="Warn"
+          color='Warn'
           onClose={this.onModalClosed}
           show={this.state.showModal}
-          title="Delete Hero?"
+          title='Delete Hero?'
         >
           <p>
             Are you sure you want to delete this hero? This cannot be undone.
           </p>
 
           <div className={classes.FullWidth}>
-            <Button btnType="Raised" color="Warn" clicked={this.onHeroDeletion}>
+            <Button btnType='Raised' color='Warn' clicked={this.onHeroDeletion}>
               Yes
             </Button>
 
-            <Button btnType="Flat" color="Primary" clicked={this.onModalClosed}>
+            <Button btnType='Flat' color='Primary' clicked={this.onModalClosed}>
               No
             </Button>
           </div>
         </Modal>
 
-        <TitleCard subTitle="Keep tabs on all your heroes" title="Track">
+        <TitleCard subTitle='Keep tabs on all your heroes' title='Track'>
           {heroList}
         </TitleCard>
       </>

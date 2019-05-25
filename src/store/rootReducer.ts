@@ -11,8 +11,6 @@ const rootReducer = combineReducers({
   auth: authReducer
 });
 
-/*
- * TS infers state shape using return type
- */
+// TS infers state shape using return type
 export type AppState = ReturnType<typeof rootReducer>;
 export default rootReducer;
