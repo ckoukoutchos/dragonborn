@@ -26,8 +26,7 @@ const initialState: HeroState = {
   error: null,
   hero: new Hero(),
   heroes: [],
-  loading: false,
-  userId: 1
+  loading: false
 };
 
 /**
@@ -67,6 +66,7 @@ const deleteHeroFail = (state: HeroState, { error }: { error: any }): HeroState 
 
 const deleteHeroSuccess = (state: HeroState, { heroId }: { heroId: number }): HeroState => {
   const newHeroes = state.heroes.filter((hero: Hero) => hero.id !== heroId);
+
   return updateObject(state, { heroes: newHeroes });
 };
 
@@ -80,6 +80,7 @@ const fetchHeroesSuccess = (state: HeroState, { heroes }: { heroes: Hero[] }): H
 
 const getHero = (state: HeroState, { heroId }: { heroId: number }): HeroState => {
   const selectedHero = state.heroes.find((hero: Hero) => hero.id === heroId);
+
   return updateObject(state, { hero: selectedHero });
 };
 
@@ -87,7 +88,9 @@ const updateHeroFail = (state: HeroState, { error }: { error: any }): HeroState 
 
 const updateHeroSuccess = (state: HeroState, { hero }: { hero: Hero }): HeroState => {
   const index = state.heroes.findIndex((item: Hero) => item.id === hero.id);
+
   const updatedHeroes = updateArray(state.heroes, hero, index);
+
   return updateObject(state, { heroes: updatedHeroes, hero });
 };
 

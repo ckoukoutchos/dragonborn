@@ -5,6 +5,16 @@ import { AUTH } from '../../firebase/firebase';
 import { LOGIN, LOGOUT, SIGNUP, UPDATE_DISPLAY_NAME, UPDATE_EMAIL, UPDATE_PASSWORD, DELETE_USER } from '../auth/authActionTypes';
 import { loginSuccess, logoutSuccess, authLoading, signupSuccess, signupFail, loginFail, updateDisplayNameSuccess, updateDisplayNameFail, updateEmailSuccess, updateEmailFail, updatePasswordSuccess, updatePasswordFail, deleteUserSuccess, deleteUserFail, reauth } from './authActionCreators';
 
+// firebase auth error codes
+enum AuthError {
+  'auth/email-already-in-use' = 'A user with this email address already exists, please use a different one.',
+  'auth/invalid-email' = 'Please use a valid email address.',
+  'auth/requires-recent-login' = 'Please login in again to perform this action.',
+  'auth/user-not-found' = 'Incorrect user/password.',
+  'auth/weak-password' = 'Your password must be at least 6 characters long.',
+  'auth/wrong-password' = 'Incorrect user/password.'
+}
+
 /**
  * @name watchAuth
  * @description combinator for auth sagas
@@ -42,12 +52,10 @@ function* deleteUserSaga(): IterableIterator<any> {
     }
 
   } catch (error) {
-    if (error.code === 'auth/requires-recent-login') {
-      // yield put(reauth());
-      console.log('Please sign in again to change your email or password');
-      yield put(deleteUserFail(error));
+    if (AuthError[error.code]) {
+      yield put(deleteUserFail(AuthError[error.code]));
     } else {
-      yield put(deleteUserFail(error));
+      console.log('error');
     }
   }
 }
@@ -70,7 +78,11 @@ function* loginSaga({
     yield AUTH.signInWithEmailAndPassword(email, password);
 
   } catch (error) {
-    yield put(loginFail(error.message));
+    if (AuthError[error.code]) {
+      yield put(loginFail(AuthError[error.code]));
+    } else {
+      console.log('here');
+    }
   }
 }
 
@@ -100,7 +112,11 @@ function* signupSaga({ email, password }: { email: string, password: string }): 
     yield put(signupSuccess());
 
   } catch (error) {
-    yield put(signupFail(error.message));
+    if (AuthError[error.code]) {
+      yield put(signupFail(AuthError[error.code]));
+    } else {
+      console.log('error');
+    }
   }
 }
 
@@ -187,12 +203,10 @@ function* updateEmail({ email }: { email: string }): IterableIterator<any> {
     }
 
   } catch (error) {
-    if (error.code === 'auth/requires-recent-login') {
-      // yield put(reauth());
-      console.log('Please sign in again to change your email or password');
-      yield put(updateEmailFail(error));
+    if (AuthError[error.code]) {
+      yield put(updateEmailFail(AuthError[error.code]));
     } else {
-      yield put(updateEmailFail(error));
+      console.log('error');
     }
   }
 }
@@ -216,12 +230,10 @@ function* updatePassword({ password }: { password: string }): IterableIterator<a
     }
 
   } catch (error) {
-    if (error.code === 'auth/requires-recent-login') {
-      // yield put(reauth());
-      console.log('Please sign in again to change your email or password');
-      yield put(updatePasswordFail(error));
+    if (AuthError[error.code]) {
+      yield put(updatePasswordFail(AuthError[error.code]));
     } else {
-      yield put(updatePasswordFail(error));
+      console.log('error');
     }
   }
 }

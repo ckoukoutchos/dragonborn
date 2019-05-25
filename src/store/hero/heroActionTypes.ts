@@ -34,7 +34,6 @@ export interface HeroState {
   hero: Hero;
   heroes: Hero[];
   loading: boolean;
-  userId: number;
 }
 
 interface CreateHeroAction {
