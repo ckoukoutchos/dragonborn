@@ -19,6 +19,7 @@ import { User } from '../../models/User';
 
 interface CreateProps {
   history: History;
+  heroes: Hero[];
   user: User | null;
   createHero: (hero: Hero, route: any, uid: string) => HeroActionTypes;
 }
@@ -32,7 +33,8 @@ class Create extends Component<CreateProps> {
    * @description triggers action to create new hero and redirect to track page
    */
   onCreateClicked = () => {
-    if (this.props.user) {
+    // TODO: add error if user tries to create another hero when they already have 5 made
+    if (this.props.user && this.props.heroes.length <= 5) {
       this.props.createHero(
         new Hero(),
         this.props.history,
@@ -43,17 +45,17 @@ class Create extends Component<CreateProps> {
 
   render() {
     return (
-      <TitleCard subTitle="So begins a new legend..." title="Create">
+      <TitleCard subTitle='So begins a new legend...' title='Create'>
         <SecondaryCard
           btnText={['', 'Create']}
-          label="Traditional"
+          label='Traditional'
           onEdit={this.onCreateClicked}
           wide
         >
           <p>Just a clean new hero sheet</p>
         </SecondaryCard>
 
-        <SecondaryCard btnText={['', 'Create']} label="Hero Builder" wide>
+        <SecondaryCard btnText={['', 'Create']} label='Hero Builder' wide>
           <p>
             Step-by-step guide to creating your next hero! Coming in phase 3.
           </p>
@@ -64,6 +66,7 @@ class Create extends Component<CreateProps> {
 }
 
 const mapStatetoProps = (state: AppState) => ({
+  heroes: state.hero.heroes,
   user: state.auth.user
 });
 

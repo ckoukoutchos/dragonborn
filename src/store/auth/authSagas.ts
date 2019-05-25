@@ -158,7 +158,8 @@ function* updateDisplayName({ displayName }: { displayName: string }): IterableI
 
     // check if there is a valid user
     if (user != null) {
-      yield user.updateProfile(displayName);
+      yield user.updateProfile({ displayName });
+
       yield put(updateDisplayNameSuccess(displayName));
     }
 

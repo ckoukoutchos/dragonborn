@@ -67,7 +67,7 @@ class Profile extends Component<ProfileProps, ProfileState> {
       email: false,
       password: false
     },
-    displayName: this.props.user ? this.props.user.displayName || '' : '',
+    displayName: this.props.user ? this.props.user.displayName : '',
     error: null,
     email: this.props.user ? this.props.user.email : '',
     password: '',

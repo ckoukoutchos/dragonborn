@@ -11,6 +11,7 @@ import Button from '../../components/button/Button';
 import classes from './Home.module.css';
 import Jumbotron from '../../components/jumbotron/Jumbotron';
 import SideCard from '../../components/card/side-card/SideCard';
+import BasicCard from '../../components/card/basic-card/BasicCard';
 
 // shared
 import { User } from '../../models/User';
@@ -38,17 +39,17 @@ class Home extends Component<HomeProps> {
     // redirect if already signed in
     let authRedirect = null;
     if (user) {
-      authRedirect = <Redirect to="/dashboard" />;
+      authRedirect = <Redirect to='/dashboard' />;
     }
 
     return (
       <>
         {authRedirect}
 
-        <Jumbotron header="Dragonborn" subHeader="Adventure awaits!" />
+        <Jumbotron header='Dragonborn' subHeader='Adventure awaits!' />
 
         <div className={classes.Center}>
-          <SideCard align="Left" title="Create">
+          <SideCard align='Left' title='Create'>
             <h3 className={classes.Center}>
               Create a hero for the ages with the hero builder:
             </h3>
@@ -59,9 +60,9 @@ class Home extends Component<HomeProps> {
             </p>
           </SideCard>
 
-          <SideCard align="Right" title="Track">
+          <SideCard align='Right' title='Track'>
             <h3 className={classes.Center}>
-              Track your heroes as they play thru epic adventures:
+              Track your heroes as they play through epic adventures:
             </h3>
 
             <p className={classes.Center}>
@@ -70,20 +71,24 @@ class Home extends Component<HomeProps> {
             </p>
           </SideCard>
 
-          <SideCard align="Left" title="Guide">
+          <SideCard align='Left' title='Guide'>
             <h3 className={classes.Center}>
-              Guide your friends on a whorlwind campaign:
+              Guide your friends on a whirlwind campaign:
             </h3>
 
             <p className={classes.Center}>
-              Track the state of your adventure and adventurers in real-time!
+              See the state of your adventure and adventurers in real-time!
             </p>
           </SideCard>
         </div>
 
-        <Button btnType="Raised" color="Primary" clicked={this.onSignup}>
-          Sign Up
-        </Button>
+        <BasicCard title='Begin Your Journey'>
+          <div className={classes.Center}>
+            <Button btnType='Raised' color='Primary' clicked={this.onSignup}>
+              Sign Up
+            </Button>
+          </div>
+        </BasicCard>
       </>
     );
   }

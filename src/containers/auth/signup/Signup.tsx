@@ -39,8 +39,8 @@ interface SignupState {
 }
 
 /*
-* Sign up container widget
-*/
+ * Sign up container widget
+ */
 class Signup extends Component<SignupProps, SignupState> {
   state = {
     email: '',
@@ -88,7 +88,7 @@ class Signup extends Component<SignupProps, SignupState> {
     // redirect if already signed in
     let authRedirect = null;
     if (this.props.user) {
-      authRedirect = <Redirect to="/dashboard" />;
+      authRedirect = <Redirect to='/dashboard' />;
     }
 
     let signup = <Spinner />;
@@ -98,7 +98,7 @@ class Signup extends Component<SignupProps, SignupState> {
         <form onSubmit={this.signup}>
           {authRedirect}
 
-          <TitleCard title="Sign Up">
+          <TitleCard title='Sign Up'>
             {this.state.error ? (
               <p className={classes.Error}>{this.state.error}</p>
             ) : null}
@@ -108,32 +108,32 @@ class Signup extends Component<SignupProps, SignupState> {
 
             <Input
               editing
-              label="Email"
+              label='Email'
               long
-              type="email"
+              type='email'
               value={email}
               onChange={this.onInputChange('email')}
             />
 
             <Input
               editing
-              label="Password"
+              label='Password'
               long
-              type="password"
+              type='password'
               value={password}
               onChange={this.onInputChange('password')}
             />
 
             <Input
               editing
-              label="Password Check"
+              label='Re-type Password'
               long
-              type="password"
+              type='password'
               value={passwordCheck}
               onChange={this.onInputChange('passwordCheck')}
             />
 
-            <Button btnType="Raised" color="Primary">
+            <Button btnType='Raised' color='Primary'>
               Sign Up
             </Button>
           </TitleCard>
