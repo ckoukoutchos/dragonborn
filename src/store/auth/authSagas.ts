@@ -10,9 +10,9 @@ enum AuthError {
   'auth/email-already-in-use' = 'A user with this email address already exists, please use a different one.',
   'auth/invalid-email' = 'Please use a valid email address.',
   'auth/requires-recent-login' = 'Please login in again to perform this action.',
-  'auth/user-not-found' = 'Incorrect user/password.',
+  'auth/user-not-found' = 'Incorrect user and/or password.',
   'auth/weak-password' = 'Your password must be at least 6 characters long.',
-  'auth/wrong-password' = 'Incorrect user/password.'
+  'auth/wrong-password' = 'Incorrect user and/or password.'
 }
 
 /**

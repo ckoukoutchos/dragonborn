@@ -50,11 +50,11 @@ class Signup extends Component<SignupProps, SignupState> {
   };
 
   /**
-   * @name signup
+   * @name onSignup
    * @description validates email and passwords and triggers signup action or displays error message
    * @param evt form submit event
    */
-  signup = (evt: FormEvent) => {
+  onSignup = (evt: FormEvent) => {
     evt.preventDefault();
     const { email, password, passwordCheck } = this.state;
 
@@ -64,10 +64,13 @@ class Signup extends Component<SignupProps, SignupState> {
       validEmail(email)
     ) {
       this.props.signup(email, password);
+    } else if (validEmail(email)) {
+      this.setState({
+        error: 'Your passwords must be at least 6 characters long and match.'
+      });
     } else {
       this.setState({
-        error:
-          'Please use a valid email address and ensure your passwords match.'
+        error: 'Please use a valid email address.'
       });
     }
   };
@@ -79,32 +82,29 @@ class Signup extends Component<SignupProps, SignupState> {
    */
   onInputChange = (label: string) => (evt: ChangeEvent<HTMLInputElement>) => {
     // ts-bug requires this.state to prevent error with string lteral type
-    this.setState({ ...this.state, [label]: evt.target.value });
+    this.setState({ ...this.state, [label]: evt.target.value, error: null });
   };
 
   render() {
-    const { email, password, passwordCheck } = this.state;
+    const { email, error: localErr, password, passwordCheck } = this.state;
+    const { error: authErr, loading, user } = this.props;
 
     // redirect if already signed in
     let authRedirect = null;
-    if (this.props.user) {
+    if (user) {
       authRedirect = <Redirect to='/dashboard' />;
     }
 
     let signup = <Spinner />;
 
-    if (!this.props.loading) {
+    if (!loading) {
       signup = (
-        <form onSubmit={this.signup}>
+        <form onSubmit={this.onSignup}>
           {authRedirect}
 
           <TitleCard title='Sign Up'>
-            {this.state.error ? (
-              <p className={classes.Error}>{this.state.error}</p>
-            ) : null}
-            {this.props.error ? (
-              <p className={classes.Error}>{this.props.error}</p>
-            ) : null}
+            {localErr ? <p className={classes.Error}>{localErr}</p> : null}
+            {authErr ? <p className={classes.Error}>{authErr}</p> : null}
 
             <Input
               editing
