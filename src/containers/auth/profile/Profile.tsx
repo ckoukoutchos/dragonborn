@@ -170,10 +170,10 @@ class Profile extends Component<ProfileProps, ProfileState> {
   };
 
   render() {
-    const { loading } = this.props;
+    const { error: authError, loading } = this.props;
     const {
       editing,
-      error,
+      error: localErr,
       displayName,
       email,
       password,
@@ -192,7 +192,8 @@ class Profile extends Component<ProfileProps, ProfileState> {
           onEdit={this.onModalToggled}
           title='Profile'
         >
-          {error ? <p className={classes.Error}>{error}</p> : null}
+          {localErr ? <p className={classes.Error}>{localErr}</p> : null}
+          {authError ? <p className={classes.Error}>{authError}</p> : null}
 
           <SecondaryCard
             label='Display Name'

@@ -60,6 +60,7 @@ const authReducer = (
   }
 };
 
+// TODO: some of these can be pulled into a more generic handler
 /*
  * reducer case functions
  */

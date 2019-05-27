@@ -4,6 +4,7 @@ import { AUTH } from '../../firebase/firebase';
 
 import { LOGIN, LOGOUT, SIGNUP, UPDATE_DISPLAY_NAME, UPDATE_EMAIL, UPDATE_PASSWORD, DELETE_USER } from '../auth/authActionTypes';
 import { loginSuccess, logoutSuccess, authLoading, signupSuccess, signupFail, loginFail, updateDisplayNameSuccess, updateDisplayNameFail, updateEmailSuccess, updateEmailFail, updatePasswordSuccess, updatePasswordFail, deleteUserSuccess, deleteUserFail, reauth } from './authActionCreators';
+import { httpError } from '../session/session';
 
 // firebase auth error codes
 enum AuthError {
@@ -81,7 +82,8 @@ function* loginSaga({
     if (AuthError[error.code]) {
       yield put(loginFail(AuthError[error.code]));
     } else {
-      console.log('here');
+      yield put(loginFail(''));
+      yield put(httpError());
     }
   }
 }
@@ -95,8 +97,7 @@ function* logoutSaga(): IterableIterator<any> {
     yield AUTH.signOut();
 
   } catch (error) {
-    // TODO: add error handling
-    console.log(error);
+    yield put(httpError());
   }
 }
 
@@ -115,7 +116,8 @@ function* signupSaga({ email, password }: { email: string, password: string }): 
     if (AuthError[error.code]) {
       yield put(signupFail(AuthError[error.code]));
     } else {
-      console.log('error');
+      yield put(signupFail(''));
+      yield put(httpError());
     }
   }
 }
@@ -206,7 +208,8 @@ function* updateEmail({ email }: { email: string }): IterableIterator<any> {
     if (AuthError[error.code]) {
       yield put(updateEmailFail(AuthError[error.code]));
     } else {
-      console.log('error');
+      yield put(updateEmailFail(''));
+      yield put(httpError());
     }
   }
 }
@@ -233,7 +236,8 @@ function* updatePassword({ password }: { password: string }): IterableIterator<a
     if (AuthError[error.code]) {
       yield put(updatePasswordFail(AuthError[error.code]));
     } else {
-      console.log('error');
+      yield put(updatePasswordFail(''));
+      yield put(httpError());
     }
   }
 }

@@ -1,14 +1,16 @@
 import { combineReducers } from 'redux';
 
-import heroReducer from './hero/heroReducer';
 import authReducer from './auth/authReducer';
+import heroReducer from './hero/heroReducer';
+import sessionReducer from './session/session';
 
 /*
  * Root reducer combinator
  */
 const rootReducer = combineReducers({
+  auth: authReducer,
   hero: heroReducer,
-  auth: authReducer
+  session: sessionReducer
 });
 
 // TS infers state shape using return type
