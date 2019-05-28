@@ -41,7 +41,7 @@ class Layout extends Component<LayoutProps> {
         >
           <p>An error occured, please try again.</p>
 
-          <div>
+          <div className={classes.FullWidth}>
             <Button btnType='Flat' color='Primary' clicked={httpErrorReset}>
               Ok
             </Button>

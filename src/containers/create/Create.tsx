@@ -33,8 +33,8 @@ class Create extends Component<CreateProps> {
    * @description triggers action to create new hero and redirect to track page
    */
   onCreateClicked = () => {
-    // TODO: add error if user tries to create another hero when they already have 5 made
-    if (this.props.user && this.props.heroes.length <= 5) {
+    // TODO: add error if user tries to create another hero when they already have 3 made
+    if (this.props.user && this.props.heroes.length < 3) {
       this.props.createHero(
         new Hero(),
         this.props.history,

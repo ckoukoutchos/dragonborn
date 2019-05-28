@@ -1,7 +1,7 @@
 export default class Hero {
   abilityScores: AbilityScore[];
   active: boolean;
-  alignment: string;
+  alignment: Alignments;
   armor = [];
   armorClass: number;
   attacks = [];
@@ -11,7 +11,7 @@ export default class Hero {
     failures: 0,
     successes: 0
   };
-  heroClass: string;
+  heroClass: HeroClasses;
   hitDice = {
     numberOfDice: 1,
     numberOfSides: 4
@@ -23,25 +23,26 @@ export default class Hero {
   name: string;
   playerName: string;
   proficiency: number;
-  race: string;
-  savingThrows: SavingThrows[];
+  race: Races;
+  savingThrows: SavingThrow[];
   speed: number;
-  skills: Skills[];
+  skills: Skill[];
   subrace = null;
   temporaryHP: number;
   xp: number;
+  [key: string]: any
 
   constructor() {
     this.abilityScores = [
-      { name: 'Charisma', value: 0 },
-      { name: 'Constitution', value: 0 },
-      { name: 'Dexterity', value: 0 },
-      { name: 'Intelligence', value: 0 },
-      { name: 'Strength', value: 0 },
-      { name: 'Wisdom', value: 0 }
+      { name: Abilities.CHA, value: 0 },
+      { name: Abilities.CON, value: 0 },
+      { name: Abilities.DEX, value: 0 },
+      { name: Abilities.INT, value: 0 },
+      { name: Abilities.STR, value: 0 },
+      { name: Abilities.WIS, value: 0 }
     ];
     this.active = false;
-    this.alignment = '';
+    this.alignment = Alignments.NN;
     this.armor = [];
     this.armorClass = 0;
     this.attacks = [];
@@ -51,7 +52,7 @@ export default class Hero {
       failures: 0,
       successes: 0
     };
-    this.heroClass = '';
+    this.heroClass = HeroClasses.BARBARIAN;
     this.hitDice = {
       numberOfDice: 1,
       numberOfSides: 4
@@ -63,60 +64,35 @@ export default class Hero {
     this.name = '';
     this.playerName = '';
     this.proficiency = 0;
-    this.race = '';
+    this.race = Races.HUMAN;
     this.savingThrows = [
-      { name: 'Charisma', proficient: false, value: 0 },
-      { name: 'Constitution', proficient: false, value: 0 },
-      { name: 'Dexterity', proficient: false, value: 0 },
-      { name: 'Intelligence', proficient: false, value: 0 },
-      { name: 'Strength', proficient: false, value: 0 },
-      { name: 'Wisdom', proficient: false, value: 0 }
+      { name: Abilities.CHA, proficient: false, value: 0 },
+      { name: Abilities.CON, proficient: false, value: 0 },
+      { name: Abilities.DEX, proficient: false, value: 0 },
+      { name: Abilities.INT, proficient: false, value: 0 },
+      { name: Abilities.STR, proficient: false, value: 0 },
+      { name: Abilities.WIS, proficient: false, value: 0 }
     ];
     this.speed = 0;
     this.skills = [
-      { name: 'Acrobatics', proficient: false, ability: 'dexterity', value: 0 },
-      {
-        name: 'Animal Handling',
-        proficient: false,
-        ability: 'Wisdom',
-        value: 0
-      },
-      { name: 'Arcana', proficient: false, ability: 'intelligence', value: 0 },
-      { name: 'Athletics', proficient: false, ability: 'strength', value: 0 },
-      { name: 'Deception', proficient: false, ability: 'charisma', value: 0 },
-      { name: 'History', proficient: false, ability: 'intelligence', value: 0 },
-      { name: 'Insight', proficient: false, ability: 'wisdom', value: 0 },
-      {
-        name: 'Intimidation',
-        proficient: false,
-        ability: 'charisma',
-        value: 0
-      },
-      {
-        name: 'Investigation',
-        proficient: false,
-        ability: 'intelligence',
-        value: 0
-      },
-      { name: 'Medicine', proficient: false, ability: 'wisdom', value: 0 },
-      { name: 'Nature', proficient: false, ability: 'intelligence', value: 0 },
-      { name: 'Perception', proficient: false, ability: 'wisdom', value: 0 },
-      { name: 'Performance', proficient: false, ability: 'charisma', value: 0 },
-      { name: 'Persuasion', proficient: false, ability: 'charisma', value: 0 },
-      {
-        name: 'Religion',
-        proficient: false,
-        ability: 'intelligence',
-        value: 0
-      },
-      {
-        name: 'Sleight Of Hand',
-        proficient: false,
-        ability: 'dexterity',
-        value: 0
-      },
-      { name: 'Stealth', proficient: false, ability: 'dexterity', value: 0 },
-      { name: 'Survival', proficient: false, ability: 'wisdom', value: 0 }
+      { name: Skills.ACROBATICS, proficient: false, ability: Abilities.DEX, value: 0 },
+      { name: Skills.ANIMAL_HERDING, proficient: false, ability: Abilities.WIS, value: 0 },
+      { name: Skills.ARCANA, proficient: false, ability: Abilities.INT, value: 0 },
+      { name: Skills.ATHLETICS, proficient: false, ability: Abilities.STR, value: 0 },
+      { name: Skills.DECEPTION, proficient: false, ability: Abilities.CHA, value: 0 },
+      { name: Skills.HISTORY, proficient: false, ability: Abilities.INT, value: 0 },
+      { name: Skills.INSIGHT, proficient: false, ability: Abilities.WIS, value: 0 },
+      { name: Skills.INTIMIDATION, proficient: false, ability: Abilities.CHA, value: 0 },
+      { name: Skills.INVESTIGATION, proficient: false, ability: Abilities.INT, value: 0 },
+      { name: Skills.MEDICINE, proficient: false, ability: Abilities.WIS, value: 0 },
+      { name: Skills.NATURE, proficient: false, ability: Abilities.INT, value: 0 },
+      { name: Skills.PERCEPTION, proficient: false, ability: Abilities.WIS, value: 0 },
+      { name: Skills.PERFORMANCE, proficient: false, ability: Abilities.CHA, value: 0 },
+      { name: Skills.PERSUASION, proficient: false, ability: Abilities.CHA, value: 0 },
+      { name: Skills.RELIGION, proficient: false, ability: Abilities.INT, value: 0 },
+      { name: Skills.SLEIGHT_OF_HAND, proficient: false, ability: Abilities.DEX, value: 0 },
+      { name: Skills.STEALTH, proficient: false, ability: Abilities.DEX, value: 0 },
+      { name: Skills.SURVIVAL, proficient: false, ability: Abilities.WIS, value: 0 }
     ];
     this.subrace = null;
     this.temporaryHP = 0;
@@ -125,19 +101,88 @@ export default class Hero {
 }
 
 export interface AbilityScore {
-  name: string;
+  name: Abilities;
   value: number;
 }
 
-export interface SavingThrows {
-  name: string;
+export interface SavingThrow {
+  name: Abilities;
   proficient: boolean;
   value: number;
 }
 
-export interface Skills {
-  ability: string;
-  name: string;
+export interface Skill {
+  ability: Abilities;
+  name: Skills;
   proficient: boolean;
   value: number;
+}
+
+export enum Abilities {
+  CHA = 'Charisma',
+  CON = 'Constitution',
+  DEX = 'Dexterity',
+  INT = 'Intelligence',
+  STR = 'Strength',
+  WIS = 'Wisdom'
+}
+
+export enum Alignments {
+  CG = 'Chaotic Good',
+  NG = 'Neutral Good',
+  LG = 'Lawful Good',
+  CN = 'Chaotic Neutral',
+  NN = 'Neutral Neutral',
+  LN = ' Lawful Neutral',
+  CE = 'Chaotic Evil',
+  NE = 'Neutral Evil',
+  LE = 'Lawful Evil',
+}
+
+export enum HeroClasses {
+  BARBARIAN = 'Barbarian',
+  BARD = 'Bard',
+  CLERIC = 'Cleric',
+  DRUID = 'Druid',
+  FIGHTER = 'Fighter',
+  MONK = 'Monk',
+  PALADIN = 'Paladin',
+  RANGER = 'Ranger',
+  ROGUE = 'Rogue',
+  SORCERER = 'Sorcerer',
+  WARLOCK = 'Warlock',
+  WIZARD = 'Wizard'
+}
+
+export enum Skills {
+  ACROBATICS = 'Acrobatics',
+  ANIMAL_HERDING = 'Animal Handling',
+  ARCANA = 'Arcana',
+  ATHLETICS = 'Athletics',
+  DECEPTION = 'Deception',
+  HISTORY = 'History',
+  INSIGHT = 'Insight',
+  INTIMIDATION = 'Intimidation',
+  INVESTIGATION = 'Investigation',
+  MEDICINE = 'Medicine',
+  NATURE = 'Nature',
+  PERCEPTION = 'Perception',
+  PERFORMANCE = 'Performance',
+  PERSUASION = 'Persuasion',
+  RELIGION = 'Religion',
+  SLEIGHT_OF_HAND = 'Sleight Of Hand',
+  STEALTH = 'Stealth',
+  SURVIVAL = 'Survival'
+}
+
+export enum Races {
+  DWARF = 'Dwarf',
+  ELF = 'Elf',
+  HALFLING = 'Halfling',
+  HUMAN = 'Human',
+  DRAGONBORN = 'Dragonborn',
+  GNOME = 'Gnome',
+  HALF_ELF = 'Half-Elf',
+  HALF_ORC = 'Half-Orc',
+  TIEFLING = 'Tiefling'
 }

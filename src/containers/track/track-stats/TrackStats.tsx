@@ -1,5 +1,5 @@
 // library
-import React, { Component } from 'react';
+import React, { Component, ChangeEvent, ReactElement } from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 
@@ -25,10 +25,10 @@ import ToggleLineInput from '../../../components/input/toggle-line-input/ToggleL
 
 // shared
 import { updateObject, updateObjectInArray } from '../../../shared/immutable';
-import Hero from '../../../models/Hero';
+import Hero, { AbilityScore, SavingThrow, Skill } from '../../../models/Hero';
 import { User } from '../../../models/User';
 
-// TODO: update types in functions, refactor, remove style tags, use loops to repeat similar sections, use object fields to generate labels rather than strings?
+// TODO:  refactor, remove style tags, use loops to repeat similar sections, use object fields to generate labels rather than strings?
 
 interface TrackStatsProps {
   hero: any;
@@ -49,10 +49,12 @@ interface TrackStatsState {
     features: boolean;
     proficiencies: boolean;
     vitals: boolean;
+    [key: string]: any
   };
   hero: Hero;
   toggled: boolean;
   updated: boolean;
+  [key: string]: any
 }
 
 /*
@@ -84,8 +86,8 @@ class TrackStats extends Component<TrackStatsProps, TrackStatsState> {
    * @name createAbilityInputs
    * @description creates any array of block inset inputs for each ability score
    */
-  createAbilityInputs(abilityScores: any, editing: any) {
-    return abilityScores.map((ability: any, index: any) => (
+  createAbilityInputs(abilityScores: AbilityScore[], editing: any): ReactElement[] {
+    return abilityScores.map((ability: AbilityScore, index: number) => (
       <BlockInsetInput
         key={index}
         editing={editing.abilities}
@@ -100,8 +102,8 @@ class TrackStats extends Component<TrackStatsProps, TrackStatsState> {
    * @name createSkillInputs
    * @description creates an array of toggle line inputs for each skill
    */
-  createSkillInputs(hero: any, editing: any, section: string) {
-    return hero[section].map((skill: any, index: number) => (
+  createSkillInputs(hero: Hero, editing: any, section: string): ReactElement[] {
+    return hero[section].map((skill: SavingThrow | Skill, index: number) => (
       <ToggleLineInput
         key={index}
         label={skill.name}
@@ -120,7 +122,7 @@ class TrackStats extends Component<TrackStatsProps, TrackStatsState> {
    * @description on cancel clicked, sets editing to false for section and updated to false
    */
   onCancelClicked = (section: string) => () => {
-    this.setState((prevState: any) => {
+    this.setState((prevState: TrackStatsState) => {
       const updatedValue = updateObject(prevState.editing, {
         [section]: !prevState.editing[section]
       });
@@ -132,7 +134,7 @@ class TrackStats extends Component<TrackStatsProps, TrackStatsState> {
    * @name onInputChange
    * @description updates value for field on input change
    */
-  onInputChange = (label: string) => (evt: any) => {
+  onInputChange = (label: string) => (evt: ChangeEvent<HTMLInputElement>) => {
     this.setState({
       hero: updateObject(this.state.hero, { [label]: evt.target.value }),
       updated: true
@@ -143,7 +145,7 @@ class TrackStats extends Component<TrackStatsProps, TrackStatsState> {
    * @name onListInputChange
    * @description updates value for field in hero when input changes
    */
-  onListInputChange = (index: number, section: string) => (evt: any) => {
+  onListInputChange = (index: number, section: string) => (evt: ChangeEvent<HTMLInputElement>) => {
     const updatedValue = updateObjectInArray(
       this.state.hero[section],
       index,
@@ -161,7 +163,7 @@ class TrackStats extends Component<TrackStatsProps, TrackStatsState> {
    * @description updates proficiency value for skill on hero when input is toggled
    */
   onListInputToggle = (index: number, section: string) => () => {
-    this.setState((prevState: any) => {
+    this.setState((prevState: TrackStatsState) => {
       const updatedValue = updateObjectInArray(
         prevState.hero[section],
         index,
@@ -180,7 +182,7 @@ class TrackStats extends Component<TrackStatsProps, TrackStatsState> {
    * @description updates editing status when section is toggled
    */
   onEditToggled = (section: string) => () => {
-    this.setState((prevState: any) => {
+    this.setState((prevState: TrackStatsState) => {
       const updatedValue = updateObject(prevState.editing, {
         [section]: !prevState.editing[section]
       });

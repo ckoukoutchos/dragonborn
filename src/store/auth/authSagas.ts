@@ -56,7 +56,8 @@ function* deleteUserSaga(): IterableIterator<any> {
     if (AuthError[error.code]) {
       yield put(deleteUserFail(AuthError[error.code]));
     } else {
-      console.log('error');
+      yield put(deleteUserFail(''));
+      yield put(httpError());
     }
   }
 }
@@ -177,7 +178,6 @@ function* updateDisplayName({ displayName }: { displayName: string }): IterableI
     // check if there is a valid user
     if (user != null) {
       yield user.updateProfile({ displayName });
-
       yield put(updateDisplayNameSuccess(displayName));
     }
 

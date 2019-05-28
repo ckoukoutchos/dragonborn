@@ -7,7 +7,7 @@ import { User } from './models/User';
 
 import Dashboard from './containers/dashboard/Dashboard';
 import Home from './containers/home/Home';
-import Layout from './hoc/layout/Layout';
+import Layout from './containers/layout/Layout';
 import Login from './containers/auth/login/Login';
 import Logout from './containers/auth/logout/Logout';
 import Signup from './containers/auth/signup/Signup';
