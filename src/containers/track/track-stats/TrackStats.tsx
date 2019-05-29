@@ -16,7 +16,6 @@ import { HeroActionTypes } from '../../../store/hero/heroActionTypes';
 import BasicCard from '../../../components/card/basic-card/BasicCard';
 import BlockInput from '../../../components/input/block-input/BlockInput';
 import BlockInsetInput from '../../../components/input/block-inset-input/BlockInsetInput';
-import Input from '../../../components/input/Input';
 import SecondaryCard from '../../../components/card/secondary-card/SecondaryCard';
 import Dropdown from '../../../components/dropdown/Dropdown';
 import TabBar from '../../../components/tab-bar/TabBar';

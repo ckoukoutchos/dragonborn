@@ -19,6 +19,12 @@ class Dropdown extends Component<DropdownProps, DropdownState> {
     showDropdown: false
   }
 
+  componentDidUpdate(prevProps: DropdownProps, prevState: DropdownState) {
+    if (this.props.disabled && prevState.showDropdown) {
+      this.setState({ showDropdown: false });
+    }
+  }
+
   /**
    * @name onToggleDropdown
    * @description toggles state of dropdown menu
@@ -29,9 +35,10 @@ class Dropdown extends Component<DropdownProps, DropdownState> {
 
   /**
    * @name onOptionSelected
-   * @description calls onSlected props callback with selected value
+   * @description calls onSelected props callback with selected value
    */
   onOptionSelected = (value: string) => (evt: any) => {
+    this.setState({ showDropdown: false });
     this.props.onSelected(value);
   }
 
@@ -43,11 +50,6 @@ class Dropdown extends Component<DropdownProps, DropdownState> {
     let value = this.props.value;
     if (value === '' || value == null) {
       value = 'Select';
-    }
-
-    // if disabled, close menu
-    if (disabled && showDropdown) {
-      this.onToggleDropdown();
     }
 
     let options = null;
@@ -80,8 +82,8 @@ class Dropdown extends Component<DropdownProps, DropdownState> {
       <div className={classes.Dropdown}>
         <button
           className={classes.DropdownBtn}
-          onClick={this.onToggleDropdown}
           disabled={disabled}
+          onClick={this.onToggleDropdown}
         >
           <span>{value}</span>
 
