@@ -1,0 +1,74 @@
+.Label {
+  color: rgb(61, 61, 61);
+  display: block;
+  font-size: 12px;
+  font-weight: bold;
+  padding-left: 12px;
+}
+
+.UpArrow {
+  display: inline-block;
+  width: 0; 
+  height: 0;
+  margin: 0 0 4px 8px;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid rgb(61, 61, 61);
+}
+
+.DownArrow {
+  display: inline-block;
+  width: 0; 
+  height: 0;
+  margin: 0 0 4px 8px;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid rgb(61, 61, 61);
+}
+
+.DropdownBtn {
+  background-color: rgb(233, 233, 233);
+  border: none;
+  border-bottom: 1px solid rgb(149, 149, 149);
+  font-family: 'Rosario', sans-serif;
+  color: rgb(61, 61, 61);
+  padding: 6px 10px;
+  font-size: 24px;
+  width: 100%;
+  text-align: center;
+  cursor: pointer;
+}
+
+.Dropdown {
+  position: relative;
+  margin: 8px;
+  width: 200px;
+}
+
+.DropdownMenu {
+  border-radius: 0 0 4px 4px;
+  position: absolute;
+  background-color: rgb(44, 44, 44);
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 100;
+}
+
+.DropdownMenu div {
+  font-family: 'Rosario', sans-serif;
+  cursor: pointer;
+  border: 1px solid white;
+  color: white;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.DropdownMenu div:hover {
+  background-color: white;
+  color: black;
+}
+
+.Dropdown:hover .DropdownBtn {
+  border-radius: 4px 4px 0 0;
+  background-color: white;
+}

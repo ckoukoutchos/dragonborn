@@ -18,6 +18,7 @@ import BlockInput from '../../../components/input/block-input/BlockInput';
 import BlockInsetInput from '../../../components/input/block-inset-input/BlockInsetInput';
 import Input from '../../../components/input/Input';
 import SecondaryCard from '../../../components/card/secondary-card/SecondaryCard';
+import Dropdown from '../../../components/dropdown/Dropdown';
 import TabBar from '../../../components/tab-bar/TabBar';
 import TextAreaInput from '../../../components/input/textarea-input/TextAreaInput';
 import TitleCard from '../../../components/card/title-card/TitleCard';
@@ -25,7 +26,7 @@ import ToggleLineInput from '../../../components/input/toggle-line-input/ToggleL
 
 // shared
 import { updateObject, updateObjectInArray } from '../../../shared/immutable';
-import Hero, { AbilityScore, SavingThrow, Skill } from '../../../models/Hero';
+import Hero, { AbilityScore, SavingThrow, Skill, Races } from '../../../models/Hero';
 import { User } from '../../../models/User';
 
 // TODO:  refactor, remove style tags, use loops to repeat similar sections, use object fields to generate labels rather than strings?
@@ -224,6 +225,8 @@ class TrackStats extends Component<TrackStatsProps, TrackStatsState> {
             onChange={this.onInputChange('race')}
             value={hero.race}
           />
+
+          <Dropdown optObj={Races} value={hero.race}></Dropdown>
 
           <Input
             label='Alignment'
