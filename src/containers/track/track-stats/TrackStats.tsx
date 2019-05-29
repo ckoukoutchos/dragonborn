@@ -26,7 +26,7 @@ import ToggleLineInput from '../../../components/input/toggle-line-input/ToggleL
 
 // shared
 import { updateObject, updateObjectInArray } from '../../../shared/immutable';
-import Hero, { AbilityScore, SavingThrow, Skill, Races } from '../../../models/Hero';
+import Hero, { AbilityScore, SavingThrow, Skill, Races, Alignments, HeroClasses } from '../../../models/Hero';
 import { User } from '../../../models/User';
 
 // TODO:  refactor, remove style tags, use loops to repeat similar sections, use object fields to generate labels rather than strings?
@@ -132,6 +132,17 @@ class TrackStats extends Component<TrackStatsProps, TrackStatsState> {
   };
 
   /**
+   * @name onDropdownSelection
+   * @description on dropdown selection, update hero value
+   */
+  onDropdownSelection = (label: string) => (value: string) => {
+    this.setState({
+      hero: updateObject(this.state.hero, { [label]: value }),
+      updated: true
+    });
+  }
+
+  /**
    * @name onInputChange
    * @description updates value for field on input change
    */
@@ -212,26 +223,24 @@ class TrackStats extends Component<TrackStatsProps, TrackStatsState> {
           value={hero.name}
           wide
         >
-          <Input
-            label={'Class & Level'}
-            editing={editing.basics}
-            onChange={this.onInputChange('heroClass')}
+          <Dropdown
+            disabled={!editing.basics}
+            label="Class" onSelected={this.onDropdownSelection('heroClass')}
+            optObj={HeroClasses}
             value={hero.heroClass}
           />
 
-          <Input
-            label='Race'
-            editing={editing.basics}
-            onChange={this.onInputChange('race')}
+          <Dropdown
+            disabled={!editing.basics}
+            label="Race" onSelected={this.onDropdownSelection('race')}
+            optObj={Races}
             value={hero.race}
           />
 
-          <Dropdown optObj={Races} value={hero.race}></Dropdown>
-
-          <Input
-            label='Alignment'
-            editing={editing.basics}
-            onChange={this.onInputChange('alignment')}
+          <Dropdown
+            disabled={!editing.basics}
+            label="Alignment" onSelected={this.onDropdownSelection('alignment')}
+            optObj={Alignments}
             value={hero.alignment}
           />
         </TitleCard>
