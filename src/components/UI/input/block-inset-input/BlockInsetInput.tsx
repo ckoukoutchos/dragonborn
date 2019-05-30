@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { calcAbilityModifier } from '../../../../shared/Convert';
+import { calcAbilityModifier } from '../../../../shared/convert';
 import classes from './BlockInsetInput.module.css';
 
 interface BlockInsetInput {

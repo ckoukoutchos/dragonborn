@@ -13,6 +13,7 @@ import {
 import { HeroActionTypes } from '../../../store/hero/heroActionTypes';
 
 // components
+import Attacks from '../../../components/hero/attacks/Attacks';
 import BasicCard from '../../../components/UI/card/basic-card/BasicCard';
 import BlockInput from '../../../components/UI/input/block-input/BlockInput';
 import BlockInsetInput from '../../../components/UI/input/block-inset-input/BlockInsetInput';
@@ -367,18 +368,7 @@ class TrackStats extends Component<TrackStatsProps, TrackStatsState> {
 
         {/* Attacks */}
         <div style={{ display: 'flex', flexDirection: 'column' }}>
-          <BasicCard
-            title={'Attacks'}
-            editing={editing.attacks}
-            onCancel={this.onCancelClicked('attacks')}
-            onEdit={this.onEditToggled('attacks')}
-          >
-            <SecondaryCard label='Attacks' wide>
-              {hero.attacks}
-            </SecondaryCard>
-          </BasicCard>
-
-          <Equipment />
+          <Attacks />
 
           {/* Features */}
           <BasicCard

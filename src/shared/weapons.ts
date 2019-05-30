@@ -4,28 +4,36 @@ import { WeaponTypes, DamageTypes, WeaponProps } from '../models/Weapon';
 
 export default [
   {
-    type: WeaponTypes.SIMPLE_MELEE,
+    attackBonus: 0,
     cost: '1 sp',
-    damage: {
-      attackBonus: 0,
-      damageType: DamageTypes.BLUDGEONING,
-      numberOfDamageDice: 1,
-      numberOfDamageDiceSides: 4
-    },
+    damageType: DamageTypes.BLUDGEONING,
     desc: 'A simple blunt instrument of death, usually fashioned out of wood.',
     name: 'Club',
+    numberOfDamageDice: 1,
+    numberOfDamageDiceSides: 4,
     properties: [WeaponProps.LIGHT],
+    type: WeaponTypes.SIMPLE_MELEE,
     weight: '2 lb'
+  },
+  {
+    type: WeaponTypes.SIMPLE_RANGED,
+    cost: '25 gp',
+    attackBonus: 0,
+    damageType: DamageTypes.PIERCING,
+    numberOfDamageDice: 1,
+    numberOfDamageDiceSides: 8,
+    desc: 'A contraption to sling arrows from the hip.',
+    name: 'Light Crossbow',
+    properties: [WeaponProps.AMMUNITION, WeaponProps.LOADING, WeaponProps.TWO_HANDED],
+    weight: '5 lb'
   },
   {
     type: WeaponTypes.MARTIAL_MELEE,
     cost: '10 gp',
-    damage: {
-      attackBonus: 0,
-      damageType: DamageTypes.SLASHING,
-      numberOfDamageDice: 1,
-      numberOfDamageDiceSides: 8
-    },
+    attackBonus: 0,
+    damageType: DamageTypes.SLASHING,
+    numberOfDamageDice: 1,
+    numberOfDamageDiceSides: 8,
     desc: 'A castle forged axe tailor made for the field of battle.',
     name: 'Battleaxe',
     properties: [WeaponProps.VERSATILE],

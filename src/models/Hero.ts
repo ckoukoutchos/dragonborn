@@ -6,7 +6,6 @@ export default class Hero {
   alignment: Alignments;
   armor = [];
   armorClass: number;
-  attacks = [];
   background: string;
   currentHP: number;
   deathSaves = {
@@ -28,6 +27,7 @@ export default class Hero {
   race: Races;
   savingThrows: SavingThrow[];
   speed: number;
+  spells: any;
   skills: Skill[];
   subrace = null;
   temporaryHP: number;
@@ -48,7 +48,6 @@ export default class Hero {
     this.alignment = Alignments.NN;
     this.armor = [];
     this.armorClass = 0;
-    this.attacks = [];
     this.background = '';
     this.currentHP = 0;
     this.deathSaves = {
@@ -77,6 +76,7 @@ export default class Hero {
       { name: Abilities.WIS, proficient: false, value: 0 }
     ];
     this.speed = 0;
+    this.spells = [];
     this.skills = [
       { name: Skills.ACROBATICS, proficient: false, ability: Abilities.DEX, value: 0 },
       { name: Skills.ANIMAL_HERDING, proficient: false, ability: Abilities.WIS, value: 0 },

@@ -1,3 +1,18 @@
+.Column {
+  display: flex;
+  flex-direction: column;
+}
+
+.Column div {
+  border-bottom: 1px solid rgb(149, 149, 149);
+  color: rgb(61, 61, 61);
+  display: inline-block;
+  font-family: 'Rosario', sans-serif;
+  font-size: 20px;
+  margin: 0 5px;
+  text-align: center;
+}
+
 .Container {
   display: flex;
   flex-direction: row;
@@ -5,35 +20,14 @@
 }
 
 .Input1 {
-  border-bottom: 1px solid rgb(149, 149, 149);
-  color: rgb(61, 61, 61);
-  display: inline-block;
-  font-family: 'Rosario', sans-serif;
-  font-size: 20px;
-  margin: 0 5px;
-  text-align: center;
   width: 50px;
 }
 
 .Input2 {
-  border-bottom: 1px solid rgb(149, 149, 149);
-  color: rgb(61, 61, 61);
-  display: inline-block;
-  font-family: 'Rosario', sans-serif;
-  font-size: 20px;
-  margin: 0 5px;
-  text-align: center;
   width: 70px;
 }
 
 .Input3 {
-  border-bottom: 1px solid rgb(149, 149, 149);
-  color: rgb(61, 61, 61);
-  display: inline-block;
-  font-family: 'Rosario', sans-serif;
-  font-size: 20px;
-  margin: 0 5px;
-  text-align: center;
   width: 140px;
 }
 

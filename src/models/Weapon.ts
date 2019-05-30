@@ -1,19 +1,15 @@
 export interface Weapon {
-  category: WeaponTypes;
+  attackBonus: number;
   cost: string;
-  damage: WeaponDamage;
+  damageType: DamageTypes;
   desc: string;
   name: string;
-  properties: WeaponProps[];
-  range?: string;
-  weight: string;
-}
-
-export interface WeaponDamage {
-  attackBonus: number;
-  damageType: DamageTypes;
   numberOfDamageDice: number;
   numberOfDamageDiceSides: number;
+  properties: WeaponProps[];
+  range?: string;
+  type: WeaponTypes;
+  weight: string;
 }
 
 export enum DamageTypes {
