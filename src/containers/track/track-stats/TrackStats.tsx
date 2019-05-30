@@ -28,8 +28,8 @@ import ToggleLineInput from '../../../components/UI/input/toggle-line-input/Togg
 // shared
 import { updateObject, updateObjectInArray } from '../../../shared/immutable';
 import Hero, {
-  AbilityScore,
-  SavingThrow,
+  AbilityScores,
+  SavingThrowsScores,
   Skill,
   Races,
   Alignments,
@@ -96,18 +96,23 @@ class TrackStats extends Component<TrackStatsProps, TrackStatsState> {
    * @description creates any array of block inset inputs for each ability score
    */
   createAbilityInputs(
-    abilityScores: AbilityScore[],
+    abilityScores: AbilityScores,
     editing: any
   ): ReactElement[] {
-    return abilityScores.map((ability: AbilityScore, index: number) => (
-      <BlockInsetInput
-        key={index}
-        editing={editing.abilities}
-        label={ability.name}
-        onChange={this.onListInputChange(index, 'abilityScores')}
-        value={ability.value}
-      />
-    ));
+    const abilityScoreList = [];
+
+    for (const ability in abilityScores) {
+      abilityScoreList.push(
+        <BlockInsetInput
+          key={ability}
+          editing={editing.abilities}
+          label={ability}
+          onChange={this.onListInputChange(name, 'abilityScores')}
+          value={abilityScores[ability]}
+        />
+      );
+    }
+    return abilityScoreList;
   }
 
   /**
@@ -115,18 +120,24 @@ class TrackStats extends Component<TrackStatsProps, TrackStatsState> {
    * @description creates an array of toggle line inputs for each skill
    */
   createSkillInputs(hero: Hero, editing: any, section: string): ReactElement[] {
-    return hero[section].map((skill: SavingThrow | Skill, index: number) => (
-      <ToggleLineInput
-        key={index}
-        label={skill.name}
-        editing={editing}
-        onChange={this.onListInputChange(index, section)}
-        onToggle={this.onListInputToggle(index, section)}
-        proficient={skill.proficient}
-        proficientBonus={hero.proficiency}
-        value={skill.value}
-      />
-    ));
+    const skills = hero[section];
+    const skillsList = [];
+
+    for (const skill in skills) {
+      skillsList.push(
+        <ToggleLineInput
+          key={skill}
+          label={skill}
+          editing={editing}
+          onChange={this.onListInputChange(skill, section)}
+          onToggle={this.onListInputToggle(skill, section)}
+          proficient={skills[skill].proficient}
+          proficientBonus={hero.proficiency}
+          value={skills[skill].value}
+        />
+      );
+    }
+    return skillsList;
   }
 
   /**
@@ -168,17 +179,18 @@ class TrackStats extends Component<TrackStatsProps, TrackStatsState> {
    * @name onListInputChange
    * @description updates value for field in hero when input changes
    */
-  onListInputChange = (index: number, section: string) => (
+  onListInputChange = (label: string, section: string) => (
     evt: ChangeEvent<HTMLInputElement>
   ) => {
-    const updatedValue = updateObjectInArray(
-      this.state.hero[section],
-      index,
-      'value',
-      evt.target.value
-    );
+    const updatedValue = updateObject(this.state.hero[section][label], {
+      value: evt.target.value
+    });
+    const sectionToUpdate = updateObject(this.state.hero[section], {
+      [label]: updatedValue
+    });
+
     this.setState({
-      hero: updateObject(this.state.hero, { [section]: updatedValue }),
+      hero: updateObject(this.state.hero, { [section]: sectionToUpdate }),
       updated: true
     });
   };
@@ -187,16 +199,18 @@ class TrackStats extends Component<TrackStatsProps, TrackStatsState> {
    * @name onListInputToggle
    * @description updates proficiency value for skill on hero when input is toggled
    */
-  onListInputToggle = (index: number, section: string) => () => {
+  onListInputToggle = (label: string, section: string) => () => {
     this.setState((prevState: TrackStatsState) => {
-      const updatedValue = updateObjectInArray(
-        prevState.hero[section],
-        index,
-        'proficient',
-        !prevState.hero[section][index].proficient
-      );
+      const updatedValue = updateObject(prevState.hero[section][label], {
+        proficient: !prevState.hero[section][label].proficient
+      });
+
+      const sectionToUpdate = updateObject(this.state.hero[section], {
+        [label]: updatedValue
+      });
+
       return {
-        hero: updateObject(prevState.hero, { [section]: updatedValue }),
+        hero: updateObject(prevState.hero, { [section]: sectionToUpdate }),
         updated: true
       };
     });
@@ -342,14 +356,14 @@ class TrackStats extends Component<TrackStatsProps, TrackStatsState> {
 
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               <SecondaryCard label='Skills'>
-                {this.createSkillInputs(hero, editing.abilities, 'skills')}
+                {this.createSkillInputs(hero, editing.abilities, 'skillScores')}
               </SecondaryCard>
 
               <SecondaryCard label='Saving Throws'>
                 {this.createSkillInputs(
                   hero,
                   editing.abilities,
-                  'savingThrows'
+                  'savingThrowsScores'
                 )}
               </SecondaryCard>
             </div>

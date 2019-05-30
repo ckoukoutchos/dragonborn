@@ -1,7 +1,7 @@
 import { Weapon } from './Weapon';
 
 export default class Hero {
-  abilityScores: AbilityScore[];
+  abilityScores: AbilityScores;
   active: boolean;
   alignment: Alignments;
   armor = [];
@@ -25,10 +25,10 @@ export default class Hero {
   playerName: string;
   proficiency: number;
   race: Races;
-  savingThrows: SavingThrow[];
+  savingThrowsScores: SavingThrowsScores;
   speed: number;
   spells: any;
-  skills: Skill[];
+  skillScores: SkillScores;
   subrace = null;
   temporaryHP: number;
   weapons: Weapon[];
@@ -36,14 +36,14 @@ export default class Hero {
   [key: string]: any
 
   constructor() {
-    this.abilityScores = [
-      { name: Abilities.CHA, value: 0 },
-      { name: Abilities.CON, value: 0 },
-      { name: Abilities.DEX, value: 0 },
-      { name: Abilities.INT, value: 0 },
-      { name: Abilities.STR, value: 0 },
-      { name: Abilities.WIS, value: 0 }
-    ];
+    this.abilityScores = {
+      [Abilities.CHA]: 0,
+      [Abilities.CON]: 0,
+      [Abilities.DEX]: 0,
+      [Abilities.INT]: 0,
+      [Abilities.STR]: 0,
+      [Abilities.WIS]: 0
+    };
     this.active = false;
     this.alignment = Alignments.NN;
     this.armor = [];
@@ -67,61 +67,42 @@ export default class Hero {
     this.playerName = '';
     this.proficiency = 0;
     this.race = Races.HUMAN;
-    this.savingThrows = [
-      { name: Abilities.CHA, proficient: false, value: 0 },
-      { name: Abilities.CON, proficient: false, value: 0 },
-      { name: Abilities.DEX, proficient: false, value: 0 },
-      { name: Abilities.INT, proficient: false, value: 0 },
-      { name: Abilities.STR, proficient: false, value: 0 },
-      { name: Abilities.WIS, proficient: false, value: 0 }
-    ];
+    this.savingThrowsScores = {
+      [Abilities.CHA]: { proficient: false, value: 0 },
+      [Abilities.CON]: { proficient: false, value: 0 },
+      [Abilities.DEX]: { proficient: false, value: 0 },
+      [Abilities.INT]: { proficient: false, value: 0 },
+      [Abilities.STR]: { proficient: false, value: 0 },
+      [Abilities.WIS]: { proficient: false, value: 0 }
+    };
     this.speed = 0;
     this.spells = [];
-    this.skills = [
-      { name: Skills.ACROBATICS, proficient: false, ability: Abilities.DEX, value: 0 },
-      { name: Skills.ANIMAL_HERDING, proficient: false, ability: Abilities.WIS, value: 0 },
-      { name: Skills.ARCANA, proficient: false, ability: Abilities.INT, value: 0 },
-      { name: Skills.ATHLETICS, proficient: false, ability: Abilities.STR, value: 0 },
-      { name: Skills.DECEPTION, proficient: false, ability: Abilities.CHA, value: 0 },
-      { name: Skills.HISTORY, proficient: false, ability: Abilities.INT, value: 0 },
-      { name: Skills.INSIGHT, proficient: false, ability: Abilities.WIS, value: 0 },
-      { name: Skills.INTIMIDATION, proficient: false, ability: Abilities.CHA, value: 0 },
-      { name: Skills.INVESTIGATION, proficient: false, ability: Abilities.INT, value: 0 },
-      { name: Skills.MEDICINE, proficient: false, ability: Abilities.WIS, value: 0 },
-      { name: Skills.NATURE, proficient: false, ability: Abilities.INT, value: 0 },
-      { name: Skills.PERCEPTION, proficient: false, ability: Abilities.WIS, value: 0 },
-      { name: Skills.PERFORMANCE, proficient: false, ability: Abilities.CHA, value: 0 },
-      { name: Skills.PERSUASION, proficient: false, ability: Abilities.CHA, value: 0 },
-      { name: Skills.RELIGION, proficient: false, ability: Abilities.INT, value: 0 },
-      { name: Skills.SLEIGHT_OF_HAND, proficient: false, ability: Abilities.DEX, value: 0 },
-      { name: Skills.STEALTH, proficient: false, ability: Abilities.DEX, value: 0 },
-      { name: Skills.SURVIVAL, proficient: false, ability: Abilities.WIS, value: 0 }
-    ];
+    this.skillScores = {
+      [Skills.ACROBATICS]: { proficient: false, ability: Abilities.DEX, value: 0 },
+      [Skills.ANIMAL_HERDING]: { proficient: false, ability: Abilities.WIS, value: 0 },
+      [Skills.ARCANA]: { proficient: false, ability: Abilities.INT, value: 0 },
+      [Skills.ATHLETICS]: { proficient: false, ability: Abilities.STR, value: 0 },
+      [Skills.DECEPTION]: { proficient: false, ability: Abilities.CHA, value: 0 },
+      [Skills.HISTORY]: { proficient: false, ability: Abilities.INT, value: 0 },
+      [Skills.INSIGHT]: { proficient: false, ability: Abilities.WIS, value: 0 },
+      [Skills.INTIMIDATION]: { proficient: false, ability: Abilities.CHA, value: 0 },
+      [Skills.INVESTIGATION]: { proficient: false, ability: Abilities.INT, value: 0 },
+      [Skills.MEDICINE]: { proficient: false, ability: Abilities.WIS, value: 0 },
+      [Skills.NATURE]: { proficient: false, ability: Abilities.INT, value: 0 },
+      [Skills.PERCEPTION]: { proficient: false, ability: Abilities.WIS, value: 0 },
+      [Skills.PERFORMANCE]: { proficient: false, ability: Abilities.CHA, value: 0 },
+      [Skills.PERSUASION]: { proficient: false, ability: Abilities.CHA, value: 0 },
+      [Skills.RELIGION]: { proficient: false, ability: Abilities.INT, value: 0 },
+      [Skills.SLEIGHT_OF_HAND]: { proficient: false, ability: Abilities.DEX, value: 0 },
+      [Skills.STEALTH]: { proficient: false, ability: Abilities.DEX, value: 0 },
+      [Skills.SURVIVAL]: { proficient: false, ability: Abilities.WIS, value: 0 }
+    };
     this.subrace = null;
     this.temporaryHP = 0;
     this.weapons = [];
     this.xp = 0;
   }
 }
-
-export interface AbilityScore {
-  name: Abilities;
-  value: number;
-}
-
-export interface SavingThrow {
-  name: Abilities;
-  proficient: boolean;
-  value: number;
-}
-
-export interface Skill {
-  ability: Abilities;
-  name: Skills;
-  proficient: boolean;
-  value: number;
-}
-
 export enum Abilities {
   CHA = 'Charisma',
   CON = 'Constitution',
@@ -129,6 +110,73 @@ export enum Abilities {
   INT = 'Intelligence',
   STR = 'Strength',
   WIS = 'Wisdom'
+}
+
+export enum Skills {
+  ACROBATICS = 'Acrobatics',
+  ANIMAL_HERDING = 'Animal Handling',
+  ARCANA = 'Arcana',
+  ATHLETICS = 'Athletics',
+  DECEPTION = 'Deception',
+  HISTORY = 'History',
+  INSIGHT = 'Insight',
+  INTIMIDATION = 'Intimidation',
+  INVESTIGATION = 'Investigation',
+  MEDICINE = 'Medicine',
+  NATURE = 'Nature',
+  PERCEPTION = 'Perception',
+  PERFORMANCE = 'Performance',
+  PERSUASION = 'Persuasion',
+  RELIGION = 'Religion',
+  SLEIGHT_OF_HAND = 'Sleight Of Hand',
+  STEALTH = 'Stealth',
+  SURVIVAL = 'Survival'
+}
+
+export interface AbilityScores {
+  [Abilities.CHA]: number,
+  [Abilities.CON]: number,
+  [Abilities.DEX]: number,
+  [Abilities.INT]: number,
+  [Abilities.STR]: number,
+  [Abilities.WIS]: number,
+  [key: string]: any
+}
+
+export interface SavingThrowsScores {
+  [Abilities.CHA]: Skill;
+  [Abilities.CON]: Skill;
+  [Abilities.DEX]: Skill;
+  [Abilities.INT]: Skill;
+  [Abilities.STR]: Skill;
+  [Abilities.WIS]: Skill;
+}
+
+export interface SkillScores {
+  [Skills.ACROBATICS]: Skill;
+  [Skills.ANIMAL_HERDING]: Skill;
+  [Skills.ARCANA]: Skill;
+  [Skills.ATHLETICS]: Skill;
+  [Skills.DECEPTION]: Skill;
+  [Skills.HISTORY]: Skill;
+  [Skills.INSIGHT]: Skill;
+  [Skills.INTIMIDATION]: Skill;
+  [Skills.INVESTIGATION]: Skill;
+  [Skills.MEDICINE]: Skill;
+  [Skills.NATURE]: Skill;
+  [Skills.PERCEPTION]: Skill;
+  [Skills.PERFORMANCE]: Skill;
+  [Skills.PERSUASION]: Skill;
+  [Skills.RELIGION]: Skill;
+  [Skills.SLEIGHT_OF_HAND]: Skill;
+  [Skills.STEALTH]: Skill;
+  [Skills.SURVIVAL]: Skill;
+}
+
+export interface Skill {
+  ability?: Abilities;
+  proficient: boolean;
+  value: number;
 }
 
 export enum Alignments {
@@ -156,27 +204,6 @@ export enum HeroClasses {
   SORCERER = 'Sorcerer',
   WARLOCK = 'Warlock',
   WIZARD = 'Wizard'
-}
-
-export enum Skills {
-  ACROBATICS = 'Acrobatics',
-  ANIMAL_HERDING = 'Animal Handling',
-  ARCANA = 'Arcana',
-  ATHLETICS = 'Athletics',
-  DECEPTION = 'Deception',
-  HISTORY = 'History',
-  INSIGHT = 'Insight',
-  INTIMIDATION = 'Intimidation',
-  INVESTIGATION = 'Investigation',
-  MEDICINE = 'Medicine',
-  NATURE = 'Nature',
-  PERCEPTION = 'Perception',
-  PERFORMANCE = 'Performance',
-  PERSUASION = 'Persuasion',
-  RELIGION = 'Religion',
-  SLEIGHT_OF_HAND = 'Sleight Of Hand',
-  STEALTH = 'Stealth',
-  SURVIVAL = 'Survival'
 }
 
 export enum Races {

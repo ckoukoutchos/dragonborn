@@ -1,5 +1,5 @@
 import { Weapon } from '../models/Weapon';
-import { AbilityScore } from '../models/Hero';
+import { AbilityScores } from '../models/Hero';
 
 /**
  * @name calcAbilityModifier
@@ -9,7 +9,7 @@ import { AbilityScore } from '../models/Hero';
 export const calcAbilityModifier = (value: number): number =>
   Math.floor((value - 10) / 2);
 
-export const calcAtkBonus = ({ attackBonus, properties }: Weapon, abilityScores: AbilityScore[]): number => {
+export const calcAtkBonus = ({ attackBonus, properties }: Weapon, abilityScores: AbilityScores): number => {
 
   return 1;
 }
