@@ -5,6 +5,7 @@ export interface Weapon {
   desc: string;
   name: string;
   properties: WeaponProps[];
+  range?: string;
   weight: string;
 }
 
@@ -22,6 +23,7 @@ export enum DamageTypes {
 }
 
 export enum WeaponProps {
+  AMMUNITION = 'Ammunition',
   FINESSE = 'Finesse',
   HEAVY = 'Heavy',
   LIGHT = 'Light',

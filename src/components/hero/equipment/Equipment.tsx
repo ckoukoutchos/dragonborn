@@ -7,9 +7,9 @@ import { Dispatch } from 'redux';
 import { AppState } from '../../../store/rootReducer';
 
 // components
-import BasicCard from '../../card/basic-card/BasicCard';
-import MultiLineInput from '../../input/multi-line-input/MultiLineInput';
-import SecondaryCard from '../../card/secondary-card/SecondaryCard';
+import BasicCard from '../../UI/card/basic-card/BasicCard';
+import MultiLineInput from '../../UI/input/multi-line-input/MultiLineInput';
+import SecondaryCard from '../../UI/card/secondary-card/SecondaryCard';
 
 // shared
 import Weapons from '../../../shared/weapons';

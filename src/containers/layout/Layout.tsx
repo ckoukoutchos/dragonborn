@@ -11,11 +11,11 @@ import {
 } from '../../store/session/session';
 
 // components
-import Button from '../../components/button/Button';
+import Button from '../../components/UI/button/Button';
 import classes from './Layout.module.css';
-import Footer from '../../components/footer/Footer';
-import Modal from '../../components/modal/Modal';
-import NavBar from '../../components/nav-bar/NavBar';
+import Footer from '../../components/UI/footer/Footer';
+import Modal from '../../components/UI/modal/Modal';
+import NavBar from '../../components/UI/nav-bar/NavBar';
 
 interface LayoutProps {
   children: any;

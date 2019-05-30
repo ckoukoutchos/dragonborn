@@ -14,13 +14,13 @@ import {
 } from '../../../store/auth/authActionCreators';
 
 // components
-import Button from '../../../components/button/Button';
+import Button from '../../../components/UI/button/Button';
 import classes from './Profile.module.css';
-import Input from '../../../components/input/Input';
-import Modal from '../../../components/modal/Modal';
-import Spinner from '../../../components/spinner/Spinner';
-import SecondaryCard from '../../../components/card/secondary-card/SecondaryCard';
-import TitleCard from '../../../components/card/title-card/TitleCard';
+import Input from '../../../components/UI/input/Input';
+import Modal from '../../../components/UI/modal/Modal';
+import Spinner from '../../../components/UI/spinner/Spinner';
+import SecondaryCard from '../../../components/UI/card/secondary-card/SecondaryCard';
+import TitleCard from '../../../components/UI/card/title-card/TitleCard';
 
 // shared
 import { updateObject } from '../../../shared/immutable';

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import TabBar from '../../../components/tab-bar/TabBar';
+import TabBar from '../../../components/UI/tab-bar/TabBar';
 
 class TrackPlay extends Component<any, any> {
   render() {

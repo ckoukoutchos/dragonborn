@@ -8,10 +8,10 @@ import { AppState } from '../../store/rootReducer';
 // components
 import Create from '../create/Create';
 import classes from './Dashboard.module.css';
-import Jumbotron from '../../components/jumbotron/Jumbotron';
+import Jumbotron from '../../components/UI/jumbotron/Jumbotron';
 import Profile from '../../containers/auth/profile/Profile';
-import SecondaryCard from '../../components/card/secondary-card/SecondaryCard';
-import TitleCard from '../../components/card/title-card/TitleCard';
+import SecondaryCard from '../../components/UI/card/secondary-card/SecondaryCard';
+import TitleCard from '../../components/UI/card/title-card/TitleCard';
 import Track from '../track/Track';
 
 // shared

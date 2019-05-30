@@ -10,11 +10,11 @@ import { AuthActionTypes } from '../../../store/auth/authActionTypes';
 import { signup } from '../../../store/auth/authActionCreators';
 
 //components
-import Button from '../../../components/button/Button';
+import Button from '../../../components/UI/button/Button';
 import classes from './Signup.module.css';
-import Input from '../../../components/input/Input';
-import Spinner from '../../../components/spinner/Spinner';
-import TitleCard from '../../../components/card/title-card/TitleCard';
+import Input from '../../../components/UI/input/Input';
+import Spinner from '../../../components/UI/spinner/Spinner';
+import TitleCard from '../../../components/UI/card/title-card/TitleCard';
 
 //shared
 import { User } from '../../../models/User';

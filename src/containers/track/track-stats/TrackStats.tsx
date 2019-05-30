@@ -13,16 +13,16 @@ import {
 import { HeroActionTypes } from '../../../store/hero/heroActionTypes';
 
 // components
-import BasicCard from '../../../components/card/basic-card/BasicCard';
-import BlockInput from '../../../components/input/block-input/BlockInput';
-import BlockInsetInput from '../../../components/input/block-inset-input/BlockInsetInput';
+import BasicCard from '../../../components/UI/card/basic-card/BasicCard';
+import BlockInput from '../../../components/UI/input/block-input/BlockInput';
+import BlockInsetInput from '../../../components/UI/input/block-inset-input/BlockInsetInput';
 import Equipment from '../../../components/hero/equipment/Equipment';
-import SecondaryCard from '../../../components/card/secondary-card/SecondaryCard';
-import Dropdown from '../../../components/dropdown/Dropdown';
-import TabBar from '../../../components/tab-bar/TabBar';
-import TextAreaInput from '../../../components/input/textarea-input/TextAreaInput';
-import TitleCard from '../../../components/card/title-card/TitleCard';
-import ToggleLineInput from '../../../components/input/toggle-line-input/ToggleLineInput';
+import SecondaryCard from '../../../components/UI/card/secondary-card/SecondaryCard';
+import Dropdown from '../../../components/UI/dropdown/Dropdown';
+import TabBar from '../../../components/UI/tab-bar/TabBar';
+import TextAreaInput from '../../../components/UI/input/textarea-input/TextAreaInput';
+import TitleCard from '../../../components/UI/card/title-card/TitleCard';
+import ToggleLineInput from '../../../components/UI/input/toggle-line-input/ToggleLineInput';
 
 // shared
 import { updateObject, updateObjectInArray } from '../../../shared/immutable';
@@ -368,7 +368,7 @@ class TrackStats extends Component<TrackStatsProps, TrackStatsState> {
         {/* Attacks */}
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           <BasicCard
-            title={'Attacks & Spellcasting'}
+            title={'Attacks'}
             editing={editing.attacks}
             onCancel={this.onCancelClicked('attacks')}
             onEdit={this.onEditToggled('attacks')}

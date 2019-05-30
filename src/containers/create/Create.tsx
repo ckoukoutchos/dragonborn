@@ -10,8 +10,8 @@ import { createHero } from '../../store/hero/heroActionCreators';
 import { HeroActionTypes } from '../../store/hero/heroActionTypes';
 
 // components
-import SecondaryCard from '../../components/card/secondary-card/SecondaryCard';
-import TitleCard from '../../components/card/title-card/TitleCard';
+import SecondaryCard from '../../components/UI/card/secondary-card/SecondaryCard';
+import TitleCard from '../../components/UI/card/title-card/TitleCard';
 
 // shared
 import Hero from '../../models/Hero';

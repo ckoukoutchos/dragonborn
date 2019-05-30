@@ -7,11 +7,11 @@ import { Redirect } from 'react-router-dom';
 import { AppState } from '../../store/rootReducer';
 
 // components
-import Button from '../../components/button/Button';
+import Button from '../../components/UI/button/Button';
 import classes from './Home.module.css';
-import Jumbotron from '../../components/jumbotron/Jumbotron';
-import SideCard from '../../components/card/side-card/SideCard';
-import BasicCard from '../../components/card/basic-card/BasicCard';
+import Jumbotron from '../../components/UI/jumbotron/Jumbotron';
+import SideCard from '../../components/UI/card/side-card/SideCard';
+import BasicCard from '../../components/UI/card/basic-card/BasicCard';
 
 // shared
 import { User } from '../../models/User';

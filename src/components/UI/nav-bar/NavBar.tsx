@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { AppState } from '../../store/rootReducer';
+import { AppState } from '../../../store/rootReducer';
 
 import classes from './NavBar.module.css';
 import NavItem from './nav-items/NavItem';
-import { User } from '../../models/User';
+import { User } from '../../../models/User';
 
 interface NavBarProps {
   user: User | null;
