@@ -1,0 +1,50 @@
+.Container {
+  display: flex;
+  flex-direction: row;
+  margin: 6px 10px;
+}
+
+.Input1 {
+  border-bottom: 1px solid rgb(149, 149, 149);
+  color: rgb(61, 61, 61);
+  display: inline-block;
+  font-family: 'Rosario', sans-serif;
+  font-size: 20px;
+  margin: 0 5px;
+  text-align: center;
+  width: 50px;
+}
+
+.Input2 {
+  border-bottom: 1px solid rgb(149, 149, 149);
+  color: rgb(61, 61, 61);
+  display: inline-block;
+  font-family: 'Rosario', sans-serif;
+  font-size: 20px;
+  margin: 0 5px;
+  text-align: center;
+  width: 70px;
+}
+
+.Input3 {
+  border-bottom: 1px solid rgb(149, 149, 149);
+  color: rgb(61, 61, 61);
+  display: inline-block;
+  font-family: 'Rosario', sans-serif;
+  font-size: 20px;
+  margin: 0 5px;
+  text-align: center;
+  width: 140px;
+}
+
+input:disabled {
+  -webkit-text-fill-color: rgb(61, 61, 61);
+}
+
+.Label {
+  color: rgb(61, 61, 61);
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
+  text-transform: capitalize;
+}

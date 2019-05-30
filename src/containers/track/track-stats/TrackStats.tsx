@@ -16,6 +16,7 @@ import { HeroActionTypes } from '../../../store/hero/heroActionTypes';
 import BasicCard from '../../../components/card/basic-card/BasicCard';
 import BlockInput from '../../../components/input/block-input/BlockInput';
 import BlockInsetInput from '../../../components/input/block-inset-input/BlockInsetInput';
+import Equipment from '../../../components/hero/equipment/Equipment';
 import SecondaryCard from '../../../components/card/secondary-card/SecondaryCard';
 import Dropdown from '../../../components/dropdown/Dropdown';
 import TabBar from '../../../components/tab-bar/TabBar';
@@ -25,7 +26,14 @@ import ToggleLineInput from '../../../components/input/toggle-line-input/ToggleL
 
 // shared
 import { updateObject, updateObjectInArray } from '../../../shared/immutable';
-import Hero, { AbilityScore, SavingThrow, Skill, Races, Alignments, HeroClasses } from '../../../models/Hero';
+import Hero, {
+  AbilityScore,
+  SavingThrow,
+  Skill,
+  Races,
+  Alignments,
+  HeroClasses
+} from '../../../models/Hero';
 import { User } from '../../../models/User';
 
 // TODO:  refactor, remove style tags, use loops to repeat similar sections, use object fields to generate labels rather than strings?
@@ -49,12 +57,12 @@ interface TrackStatsState {
     features: boolean;
     proficiencies: boolean;
     vitals: boolean;
-    [key: string]: any
+    [key: string]: any;
   };
   hero: Hero;
   toggled: boolean;
   updated: boolean;
-  [key: string]: any
+  [key: string]: any;
 }
 
 /*
@@ -86,7 +94,10 @@ class TrackStats extends Component<TrackStatsProps, TrackStatsState> {
    * @name createAbilityInputs
    * @description creates any array of block inset inputs for each ability score
    */
-  createAbilityInputs(abilityScores: AbilityScore[], editing: any): ReactElement[] {
+  createAbilityInputs(
+    abilityScores: AbilityScore[],
+    editing: any
+  ): ReactElement[] {
     return abilityScores.map((ability: AbilityScore, index: number) => (
       <BlockInsetInput
         key={index}
@@ -139,7 +150,7 @@ class TrackStats extends Component<TrackStatsProps, TrackStatsState> {
       hero: updateObject(this.state.hero, { [label]: value }),
       updated: true
     });
-  }
+  };
 
   /**
    * @name onInputChange
@@ -156,7 +167,9 @@ class TrackStats extends Component<TrackStatsProps, TrackStatsState> {
    * @name onListInputChange
    * @description updates value for field in hero when input changes
    */
-  onListInputChange = (index: number, section: string) => (evt: ChangeEvent<HTMLInputElement>) => {
+  onListInputChange = (index: number, section: string) => (
+    evt: ChangeEvent<HTMLInputElement>
+  ) => {
     const updatedValue = updateObjectInArray(
       this.state.hero[section],
       index,
@@ -224,21 +237,24 @@ class TrackStats extends Component<TrackStatsProps, TrackStatsState> {
         >
           <Dropdown
             disabled={!editing.basics}
-            label="Class" onSelected={this.onDropdownSelection('heroClass')}
+            label='Class'
+            onSelected={this.onDropdownSelection('heroClass')}
             optObj={HeroClasses}
             value={hero.heroClass}
           />
 
           <Dropdown
             disabled={!editing.basics}
-            label="Race" onSelected={this.onDropdownSelection('race')}
+            label='Race'
+            onSelected={this.onDropdownSelection('race')}
             optObj={Races}
             value={hero.race}
           />
 
           <Dropdown
             disabled={!editing.basics}
-            label="Alignment" onSelected={this.onDropdownSelection('alignment')}
+            label='Alignment'
+            onSelected={this.onDropdownSelection('alignment')}
             optObj={Alignments}
             value={hero.alignment}
           />
@@ -357,18 +373,12 @@ class TrackStats extends Component<TrackStatsProps, TrackStatsState> {
             onCancel={this.onCancelClicked('attacks')}
             onEdit={this.onEditToggled('attacks')}
           >
-            <TextAreaInput editing={editing.attacks} />
+            <SecondaryCard label='Attacks' wide>
+              {hero.attacks}
+            </SecondaryCard>
           </BasicCard>
 
-          {/* Equipment */}
-          <BasicCard
-            title={'Equipment'}
-            editing={editing.equipment}
-            onCancel={this.onCancelClicked('equipment')}
-            onEdit={this.onEditToggled('equipment')}
-          >
-            <TextAreaInput editing={editing.equipment} />
-          </BasicCard>
+          <Equipment />
 
           {/* Features */}
           <BasicCard

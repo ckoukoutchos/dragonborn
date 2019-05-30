@@ -1,3 +1,5 @@
+import { Weapon } from './Weapon';
+
 export default class Hero {
   abilityScores: AbilityScore[];
   active: boolean;
@@ -29,6 +31,7 @@ export default class Hero {
   skills: Skill[];
   subrace = null;
   temporaryHP: number;
+  weapons: Weapon[];
   xp: number;
   [key: string]: any
 
@@ -96,6 +99,7 @@ export default class Hero {
     ];
     this.subrace = null;
     this.temporaryHP = 0;
+    this.weapons = [];
     this.xp = 0;
   }
 }
