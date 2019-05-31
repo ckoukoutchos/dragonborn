@@ -7,23 +7,17 @@ export default class Hero {
   armor = [];
   armorClass: number;
   background: string;
-  currentHP: number;
-  deathSaves = {
-    failures: 0,
-    successes: 0
-  };
   heroClass: HeroClasses;
-  hitDice = {
-    numberOfDice: 1,
-    numberOfSides: 4
-  };
+  numberOfHitDice: number;
+  numberOfHitDiceSides: number;
   id: number;
   initative: number;
   inspiration: number;
   level: number;
   name: string;
   playerName: string;
-  proficiency: number;
+  proficiencies: string[];
+  proficiencyBonus: number;
   race: Races;
   savingThrowsScores: SavingThrowsScores;
   speed: number;
@@ -55,17 +49,16 @@ export default class Hero {
       successes: 0
     };
     this.heroClass = HeroClasses.BARBARIAN;
-    this.hitDice = {
-      numberOfDice: 1,
-      numberOfSides: 4
-    };
+    this.numberOfHitDice = 1;
+    this.numberOfHitDiceSides = 4;
     this.id = 0;
     this.initative = 0;
     this.inspiration = 0;
     this.level = 0;
     this.name = '';
     this.playerName = '';
-    this.proficiency = 0;
+    this.proficiencies = [Proficiencies.SIMPLE_MELEE];
+    this.proficiencyBonus = 0;
     this.race = Races.HUMAN;
     this.savingThrowsScores = {
       [Abilities.CHA]: { proficient: false, value: 0 },
@@ -103,6 +96,53 @@ export default class Hero {
     this.xp = 0;
   }
 }
+
+export interface AbilityScores {
+  Charisma: number,
+  Constitution: number,
+  Dexterity: number,
+  Intelligence: number,
+  Strength: number,
+  Wisdom: number,
+  [key: string]: any
+}
+
+export interface SavingThrowsScores {
+  Charisma: Skill;
+  Constitution: Skill;
+  Dexterity: Skill;
+  Intelligence: Skill;
+  Strength: Skill;
+  Wisdom: Skill;
+}
+
+export interface Skill {
+  ability?: Abilities;
+  proficient: boolean;
+  value: number;
+}
+
+export interface SkillScores {
+  Acrobatics: Skill;
+  'Animal Handling': Skill;
+  Arcana: Skill;
+  Athletics: Skill;
+  Deception: Skill;
+  History: Skill;
+  Insight: Skill;
+  Intimidation: Skill;
+  Investigation: Skill;
+  Medicine: Skill;
+  Nature: Skill;
+  Perception: Skill;
+  Performance: Skill;
+  Persuasion: Skill;
+  Religion: Skill;
+  'Sleight Of Hand': Skill;
+  Stealth: Skill;
+  Survival: Skill;
+}
+
 export enum Abilities {
   CHA = 'Charisma',
   CON = 'Constitution',
@@ -110,73 +150,6 @@ export enum Abilities {
   INT = 'Intelligence',
   STR = 'Strength',
   WIS = 'Wisdom'
-}
-
-export enum Skills {
-  ACROBATICS = 'Acrobatics',
-  ANIMAL_HERDING = 'Animal Handling',
-  ARCANA = 'Arcana',
-  ATHLETICS = 'Athletics',
-  DECEPTION = 'Deception',
-  HISTORY = 'History',
-  INSIGHT = 'Insight',
-  INTIMIDATION = 'Intimidation',
-  INVESTIGATION = 'Investigation',
-  MEDICINE = 'Medicine',
-  NATURE = 'Nature',
-  PERCEPTION = 'Perception',
-  PERFORMANCE = 'Performance',
-  PERSUASION = 'Persuasion',
-  RELIGION = 'Religion',
-  SLEIGHT_OF_HAND = 'Sleight Of Hand',
-  STEALTH = 'Stealth',
-  SURVIVAL = 'Survival'
-}
-
-export interface AbilityScores {
-  [Abilities.CHA]: number,
-  [Abilities.CON]: number,
-  [Abilities.DEX]: number,
-  [Abilities.INT]: number,
-  [Abilities.STR]: number,
-  [Abilities.WIS]: number,
-  [key: string]: any
-}
-
-export interface SavingThrowsScores {
-  [Abilities.CHA]: Skill;
-  [Abilities.CON]: Skill;
-  [Abilities.DEX]: Skill;
-  [Abilities.INT]: Skill;
-  [Abilities.STR]: Skill;
-  [Abilities.WIS]: Skill;
-}
-
-export interface SkillScores {
-  [Skills.ACROBATICS]: Skill;
-  [Skills.ANIMAL_HERDING]: Skill;
-  [Skills.ARCANA]: Skill;
-  [Skills.ATHLETICS]: Skill;
-  [Skills.DECEPTION]: Skill;
-  [Skills.HISTORY]: Skill;
-  [Skills.INSIGHT]: Skill;
-  [Skills.INTIMIDATION]: Skill;
-  [Skills.INVESTIGATION]: Skill;
-  [Skills.MEDICINE]: Skill;
-  [Skills.NATURE]: Skill;
-  [Skills.PERCEPTION]: Skill;
-  [Skills.PERFORMANCE]: Skill;
-  [Skills.PERSUASION]: Skill;
-  [Skills.RELIGION]: Skill;
-  [Skills.SLEIGHT_OF_HAND]: Skill;
-  [Skills.STEALTH]: Skill;
-  [Skills.SURVIVAL]: Skill;
-}
-
-export interface Skill {
-  ability?: Abilities;
-  proficient: boolean;
-  value: number;
 }
 
 export enum Alignments {
@@ -206,6 +179,13 @@ export enum HeroClasses {
   WIZARD = 'Wizard'
 }
 
+export enum Proficiencies {
+  SIMPLE_MELEE = 'Simple Melee',
+  SIMPLE_RANGED = 'Simple Ranged',
+  MARTIAL_MELEE = 'Martial Melee',
+  MARTIAL_RANGED = 'Martial Ranged'
+}
+
 export enum Races {
   DWARF = 'Dwarf',
   ELF = 'Elf',
@@ -216,4 +196,25 @@ export enum Races {
   HALF_ELF = 'Half-Elf',
   HALF_ORC = 'Half-Orc',
   TIEFLING = 'Tiefling'
+}
+
+export enum Skills {
+  ACROBATICS = 'Acrobatics',
+  ANIMAL_HERDING = 'Animal Handling',
+  ARCANA = 'Arcana',
+  ATHLETICS = 'Athletics',
+  DECEPTION = 'Deception',
+  HISTORY = 'History',
+  INSIGHT = 'Insight',
+  INTIMIDATION = 'Intimidation',
+  INVESTIGATION = 'Investigation',
+  MEDICINE = 'Medicine',
+  NATURE = 'Nature',
+  PERCEPTION = 'Perception',
+  PERFORMANCE = 'Performance',
+  PERSUASION = 'Persuasion',
+  RELIGION = 'Religion',
+  SLEIGHT_OF_HAND = 'Sleight Of Hand',
+  STEALTH = 'Stealth',
+  SURVIVAL = 'Survival'
 }

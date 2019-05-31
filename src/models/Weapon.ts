@@ -1,14 +1,13 @@
 export interface Weapon {
-  attackBonus: number;
   cost: string;
-  damageType: DamageTypes;
+  damageType: string;
   desc: string;
   name: string;
   numberOfDamageDice: number;
   numberOfDamageDiceSides: number;
-  properties: WeaponProps[];
+  properties: string[];
   range?: string;
-  type: WeaponTypes;
+  type: string;
   weight: string;
 }
 

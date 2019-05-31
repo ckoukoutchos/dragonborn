@@ -1,5 +1,5 @@
-import { Weapon } from '../models/Weapon';
-import { AbilityScores } from '../models/Hero';
+import { Weapon, WeaponProps } from '../models/Weapon';
+import Hero from '../models/Hero';
 
 /**
  * @name calcAbilityModifier
@@ -9,7 +9,49 @@ import { AbilityScores } from '../models/Hero';
 export const calcAbilityModifier = (value: number): number =>
   Math.floor((value - 10) / 2);
 
-export const calcAtkBonus = ({ attackBonus, properties }: Weapon, abilityScores: AbilityScores): number => {
+/**
+ * @name calcAttackBonus
+ * @description calculates a weapons attack bonus based on the hero's proficiency with the weapon,proficiency bouns, and ability score modifier
+ * @param Hero
+ * @param Weapon 
+ */
+export const calcAttackBonus = ({ abilityScores, proficiencies, proficiencyBonus }: Hero, { properties, type }: Weapon): string => {
+  const weaponProficiencyBonus = proficiencies.includes(type) ? proficiencyBonus : 0;
+  const dexMod = calcAbilityModifier(abilityScores.Dexterity);
+  const strMod = calcAbilityModifier(abilityScores.Strength);
 
-  return 1;
+  // if finesse weapon, use greater of dex and str mod
+  if (properties.includes(WeaponProps.FINESSE)) {
+    if (dexMod > strMod) {
+      return `+${Number(dexMod) + Number(weaponProficiencyBonus)}`;
+    } else {
+      return `+${Number(strMod) + Number(weaponProficiencyBonus)}`;
+    }
+    // if range weapon, use dex
+  } else if (properties.includes(WeaponProps.AMMUNITION)) {
+    return `+${Number(dexMod) + Number(weaponProficiencyBonus)}`;
+    // if melee, use str
+  } else {
+    return `+${Number(strMod) + Number(weaponProficiencyBonus)}`;
+  }
+}
+
+export const calcDamageDice = ({ abilityScores }: Hero, { numberOfDamageDice, numberOfDamageDiceSides, properties }: Weapon) => {
+  const dexMod = calcAbilityModifier(abilityScores.Dexterity);
+  const strMod = calcAbilityModifier(abilityScores.Strength);
+
+  // if finesse weapon, use greater of dex and str mod
+  if (properties.includes(WeaponProps.FINESSE)) {
+    if (dexMod > strMod) {
+      return `${numberOfDamageDice}d${numberOfDamageDiceSides}+${Number(dexMod)}`;
+    } else {
+      return `${numberOfDamageDice}d${numberOfDamageDiceSides}+${Number(strMod)}`;
+    }
+    // if range weapon, use dex
+  } else if (properties.includes(WeaponProps.AMMUNITION)) {
+    return `${numberOfDamageDice}d${numberOfDamageDiceSides}+${Number(dexMod)}`;
+    // if melee, use str
+  } else {
+    return `${numberOfDamageDice}d${numberOfDamageDiceSides}+${Number(strMod)}`;
+  }
 }

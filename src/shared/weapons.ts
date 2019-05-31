@@ -4,7 +4,6 @@ import { WeaponTypes, DamageTypes, WeaponProps } from '../models/Weapon';
 
 export default [
   {
-    attackBonus: 0,
     cost: '1 sp',
     damageType: DamageTypes.BLUDGEONING,
     desc: 'A simple blunt instrument of death, usually fashioned out of wood.',
@@ -18,7 +17,6 @@ export default [
   {
     type: WeaponTypes.SIMPLE_RANGED,
     cost: '25 gp',
-    attackBonus: 0,
     damageType: DamageTypes.PIERCING,
     numberOfDamageDice: 1,
     numberOfDamageDiceSides: 8,
@@ -30,7 +28,6 @@ export default [
   {
     type: WeaponTypes.MARTIAL_MELEE,
     cost: '10 gp',
-    attackBonus: 0,
     damageType: DamageTypes.SLASHING,
     numberOfDamageDice: 1,
     numberOfDamageDiceSides: 8,

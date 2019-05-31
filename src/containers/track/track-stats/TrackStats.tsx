@@ -107,7 +107,7 @@ class TrackStats extends Component<TrackStatsProps, TrackStatsState> {
           key={ability}
           editing={editing.abilities}
           label={ability}
-          onChange={this.onListInputChange(name, 'abilityScores')}
+          onChange={this.onListInputChange(ability, 'abilityScores')}
           value={abilityScores[ability]}
         />
       );
@@ -132,7 +132,7 @@ class TrackStats extends Component<TrackStatsProps, TrackStatsState> {
           onChange={this.onListInputChange(skill, section)}
           onToggle={this.onListInputToggle(skill, section)}
           proficient={skills[skill].proficient}
-          proficientBonus={hero.proficiency}
+          proficientBonus={hero.proficiencyBonus}
           value={skills[skill].value}
         />
       );
@@ -182,12 +182,21 @@ class TrackStats extends Component<TrackStatsProps, TrackStatsState> {
   onListInputChange = (label: string, section: string) => (
     evt: ChangeEvent<HTMLInputElement>
   ) => {
-    const updatedValue = updateObject(this.state.hero[section][label], {
-      value: evt.target.value
-    });
-    const sectionToUpdate = updateObject(this.state.hero[section], {
-      [label]: updatedValue
-    });
+    let sectionToUpdate;
+    if (section !== 'abilityScores') {
+      // need to update object one layer deeper
+      const updatedValue = updateObject(this.state.hero[section][label], {
+        value: evt.target.value
+      });
+
+      sectionToUpdate = updateObject(this.state.hero[section], {
+        [label]: updatedValue
+      });
+    } else {
+      sectionToUpdate = updateObject(this.state.hero[section], {
+        [label]: evt.target.value
+      });
+    }
 
     this.setState({
       hero: updateObject(this.state.hero, { [section]: sectionToUpdate }),
@@ -322,9 +331,7 @@ class TrackStats extends Component<TrackStatsProps, TrackStatsState> {
               label='Hit Dice'
               editing={editing.vitals}
               onChange={this.onInputChange('numberOfDice')}
-              value={
-                hero.hitDice.numberOfDice + 'd' + hero.hitDice.numberOfSides
-              }
+              value={hero.numberOfHitDice + 'd' + hero.numberOfHitDiceSides}
             />
           </BasicCard>
 
@@ -342,8 +349,8 @@ class TrackStats extends Component<TrackStatsProps, TrackStatsState> {
               <BlockInput
                 label='Proficiency'
                 editing={editing.abilities}
-                onChange={this.onInputChange('proficiency')}
-                value={hero.proficiency}
+                onChange={this.onInputChange('proficiencyBonus')}
+                value={hero.proficiencyBonus}
               />
 
               <BlockInput
