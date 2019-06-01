@@ -1,41 +1,11 @@
 .Container {
   background: rgb(233, 233, 233);
   border: 2px solid rgb(44, 44, 44);
-  border-radius: 9px;
+  border-radius: 10px 10px 0 0;
   margin: 12px 8px;
   width: 315px;
 }
 
-.PanelHeader {
-  align-items: center;
-  background: rgb(170, 45, 45);
-  border-bottom: 2px solid white;
-  border-radius: 7px 7px 0 0;
-  color: rgb(255, 255, 255);
-  display: flex;
-  justify-content: space-between;
-  font-size: 14px;
-  font-weight: bold;
-}
-
-.Label {
-  padding: 0 0 0 8px;
-}
-
-.DownArrow {
-  border-left: 8px solid transparent;
-  border-right: 8px solid transparent;
-  border-top: 8px solid white;
-  display: inline-block;
-  height: 0;
-  width: 0;
-}
-
-.UpArrow {
-  border-left: 8px solid transparent;
-  border-right: 8px solid transparent;
-  border-bottom: 8px solid white;
-  display: inline-block;
-  height: 0;
-  width: 0;
+.PanelHeader:last-child {
+  border-bottom: none;
 }

@@ -1,63 +1,23 @@
-import React, { Component } from 'react';
-
+import React from 'react';
 import classes from './Accordian.module.css';
-import Button from '../button/Button';
+import Panel from './panel/Panel';
 
-// interface SecondaryCardProps {
-//   btnColor?: string[];
-//   btnText?: string[];
-//   children: any;
-//   editing?: boolean;
-//   onCancel?: any;
-//   onEdit?: any;
-//   label: string;
-//   wide?: boolean;
-// }
+const accordian = (props: any) => {
+  const { items } = props;
 
-class Accordian extends Component<any, any> {
-  state = {
-    showItem: null
-  };
-
-  render() {
-    const { children, editing, onEdit, items, label } = this.props;
-
-    let button: any = null;
-
-    if (this.state.showItem) {
-      button = (
-        <Button color='Primary' btnType='CornerTopRight' clicked={onEdit}>
-          {editing ? (
-            <span className={classes.DownArrow} />
-          ) : (
-            <span className={classes.UpArrow} />
-          )}
-        </Button>
-      );
-    }
-
-    const itemList = items.map((item: any) => {
-      return (
-        <div className={classes.PanelHeader}>
-          <div className={classes.Label}>{label}</div>
-          <Button color='Primary' btnType='CornerTopRight' clicked={onEdit}>
-            {editing ? (
-              <span className={classes.DownArrow} />
-            ) : (
-              <span className={classes.UpArrow} />
-            )}
-          </Button>
-        </div>
-      );
-    });
-
+  const itemList = items.map((item: any, index: number) => {
     return (
-      <div className={classes.Container}>
-        {itemList}
-        {children}
-      </div>
+      <Panel key={index} label={item.name}>
+        <p>{item.desc}</p>
+      </Panel>
     );
-  }
-}
+  });
 
-export default Accordian;
+  return (
+    <div className={[classes.Container, classes.Panel].join(' ')}>
+      {itemList}
+    </div>
+  );
+};
+
+export default accordian;

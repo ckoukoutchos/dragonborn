@@ -1,0 +1,47 @@
+.PanelHeader {
+  align-items: center;
+  background: rgb(70, 70, 70);
+  border-bottom: 2px solid white;
+  border-radius: 7px 7px 0 0;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.PanelHeaderEditing {
+  align-items: center;
+  background: rgb(170, 45, 45);
+  border-bottom: 2px solid white;
+  border-radius: 7px 7px 0 0;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.Label {
+  padding: 0 0 0 8px;
+}
+
+.DownArrow {
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid white;
+  display: inline-block;
+  height: 0;
+  width: 0;
+}
+
+.UpArrow {
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid white;
+  display: inline-block;
+  height: 0;
+  width: 0;
+}
