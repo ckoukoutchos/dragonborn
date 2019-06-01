@@ -24,10 +24,21 @@ class Equipment extends Component<any> {
     weapons: [...Weapons]
   };
 
+  onAddItem = (weaponName: string) => () => {
+    const choosenWeapon = Weapons.find(
+      ({ name }: Weapon) => name === weaponName
+    );
+
+    this.setState((prevState: any) => ({
+      showModal: false,
+      weapons: prevState.weapons.concat(choosenWeapon)
+    }));
+  };
+
   onDeleteItem = (weaponName: string) => () => {
     this.setState((prevState: any) => {
       const newArray = prevState.weapons.filter(
-        (weapon: Weapon) => weapon.name !== weaponName
+        ({ name }: Weapon) => name !== weaponName
       );
       return { weapons: newArray };
     });
@@ -59,13 +70,13 @@ class Equipment extends Component<any> {
       );
     });
 
-    const allWeaponsList = weapons.map((weapon: Weapon, index: number) => {
+    const allWeaponsList = Weapons.map((weapon: Weapon, index: number) => {
       return (
         <Panel
           key={index}
           label={weapon.name}
           odd={index % 2 !== 0}
-          onPrimaryClicked={() => console.log('add')}
+          onPrimaryClicked={this.onAddItem(weapon.name)}
         >
           <WeaponDetails weapon={weapon} />
         </Panel>
