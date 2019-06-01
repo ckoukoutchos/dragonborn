@@ -121,9 +121,11 @@ class Profile extends Component<ProfileProps, ProfileState> {
    * @description toggles modal show status
    */
   onModalToggled = () => {
-    this.setState((prevState: ProfileState) => ({
-      showModal: !prevState.showModal
-    }));
+    if (!this.props.loading) {
+      this.setState((prevState: ProfileState) => ({
+        showModal: !prevState.showModal
+      }));
+    }
   };
 
   /**
@@ -185,13 +187,7 @@ class Profile extends Component<ProfileProps, ProfileState> {
 
     if (!loading) {
       profile = (
-        <TitleCard
-          btnColor={['Warn', 'Warn']}
-          btnText={['Delete', 'Delete']}
-          editing={false}
-          onEdit={this.onModalToggled}
-          title='Profile'
-        >
+        <>
           {localErr ? <p className={classes.Error}>{localErr}</p> : null}
           {authError ? <p className={classes.Error}>{authError}</p> : null}
 
@@ -250,7 +246,7 @@ class Profile extends Component<ProfileProps, ProfileState> {
               value={passwordCheck}
             />
           </SecondaryCard>
-        </TitleCard>
+        </>
       );
     }
 
@@ -285,7 +281,15 @@ class Profile extends Component<ProfileProps, ProfileState> {
           </div>
         </Modal>
 
-        {profile}
+        <TitleCard
+          btnColor={['Warn', 'Warn']}
+          btnText={['Delete', 'Delete']}
+          editing={false}
+          onEdit={this.onModalToggled}
+          title='Profile'
+        >
+          {profile}
+        </TitleCard>
       </>
     );
   }

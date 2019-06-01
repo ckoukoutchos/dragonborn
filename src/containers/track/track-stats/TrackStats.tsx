@@ -391,6 +391,8 @@ class TrackStats extends Component<TrackStatsProps, TrackStatsState> {
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           <Attacks />
 
+          <Equipment />
+
           {/* Features */}
           <BasicCard
             title={'Features & Traits'}

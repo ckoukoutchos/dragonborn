@@ -36,6 +36,12 @@ export const calcAttackBonus = ({ abilityScores, proficiencies, proficiencyBonus
   }
 }
 
+/**
+ * @name calcDamageDice
+ * @description calculates the damage dice and bonus for a weapon roll
+ * @param Hero 
+ * @param Weapon 
+ */
 export const calcDamageDice = ({ abilityScores }: Hero, { numberOfDamageDice, numberOfDamageDiceSides, properties }: Weapon) => {
   const dexMod = calcAbilityModifier(abilityScores.Dexterity);
   const strMod = calcAbilityModifier(abilityScores.Strength);

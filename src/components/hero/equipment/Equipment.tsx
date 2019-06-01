@@ -8,8 +8,7 @@ import { AppState } from '../../../store/rootReducer';
 
 // components
 import BasicCard from '../../UI/card/basic-card/BasicCard';
-import MultiLineInput from '../../UI/input/multi-line-input/MultiLineInput';
-import SecondaryCard from '../../UI/card/secondary-card/SecondaryCard';
+import Accordian from '../../UI/accordian/Accordian';
 
 // shared
 import Weapons from '../../../shared/weapons';
@@ -43,46 +42,6 @@ class Equipment extends Component<any> {
   render() {
     const { editing } = this.state;
 
-    let weapons = null;
-    if (editing) {
-      weapons = Weapons.map((weapon: any) => (
-        <SecondaryCard
-          btnColor={['Warn', 'Warn']}
-          btnText={['Delete', 'Delete']}
-          key={weapon.name}
-          label={weapon.name}
-          onEdit={() => console.log('remove')}
-          wide
-        >
-          <MultiLineInput
-            value={[
-              weapon.damage.attackBonus,
-              weapon.damage.numberOfDamageDice +
-                'd' +
-                weapon.damage.numberOfDamageDiceSides,
-              weapon.damage.damageType
-            ]}
-            label={['Atk Bonus', 'Damage', 'Damage Type']}
-          />
-        </SecondaryCard>
-      ));
-    } else {
-      weapons = Weapons.map((weapon: any) => (
-        <SecondaryCard key={weapon.name} label={weapon.name} wide>
-          <MultiLineInput
-            value={[
-              weapon.damage.attackBonus,
-              weapon.damage.numberOfDamageDice +
-                'd' +
-                weapon.damage.numberOfDamageDiceSides,
-              weapon.damage.damageType
-            ]}
-            label={['Atk Bonus', 'Damage', 'Damage Type']}
-          />
-        </SecondaryCard>
-      ));
-    }
-
     return (
       <BasicCard
         title='Equipment'
@@ -90,7 +49,15 @@ class Equipment extends Component<any> {
         onCancel={this.onCancelClicked}
         onEdit={this.onEditToggled}
       >
-        {weapons}
+        <Accordian
+          label='Club'
+          editing={true}
+          onEdit={() => console.log('click')}
+          onCancel={() => console.log('click')}
+          items={[1, 2, 3]}
+        >
+          text
+        </Accordian>
       </BasicCard>
     );
   }

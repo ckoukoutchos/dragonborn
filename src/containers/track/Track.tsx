@@ -117,7 +117,7 @@ class Track extends Component<TrackProps, TrackState> {
       ));
     }
 
-    if (heroes.length === 0) {
+    if (!loading && heroes.length === 0) {
       heroList = <p>You have not created any heroes yet!</p>;
     }
 
