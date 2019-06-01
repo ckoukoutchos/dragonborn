@@ -8,6 +8,7 @@ interface ModalProps {
   onClose: () => void;
   show: boolean;
   title: string;
+  wide?: boolean;
 }
 
 class Modal extends Component<ModalProps> {
@@ -29,10 +30,7 @@ class Modal extends Component<ModalProps> {
           <div
             className={classes.Modal}
             // @ts-ignore
-            style={{
-              transform: show ? 'translateY(0)' : 'translateY(-100vh)',
-              opacity: this.props.show ? '1' : '0'
-            }}
+            style={{ opacity: show ? '1' : '0' }}
           >
             <div className={[classes.Header, classes[color]].join(' ')}>
               <h2 className={classes.Title}>{title}</h2>

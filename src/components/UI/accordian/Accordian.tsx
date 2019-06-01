@@ -1,23 +1,12 @@
 import React from 'react';
 import classes from './Accordian.module.css';
-import Panel from './panel/Panel';
 
-const accordian = (props: any) => {
-  const { items } = props;
+interface AccordianProps {
+  children: any;
+}
 
-  const itemList = items.map((item: any, index: number) => {
-    return (
-      <Panel key={index} label={item.name}>
-        <p>{item.desc}</p>
-      </Panel>
-    );
-  });
-
-  return (
-    <div className={[classes.Container, classes.Panel].join(' ')}>
-      {itemList}
-    </div>
-  );
-};
+const accordian = (props: AccordianProps) => (
+  <div className={classes.Container}>{props.children}</div>
+);
 
 export default accordian;

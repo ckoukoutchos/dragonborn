@@ -1,7 +1,7 @@
 .DownArrow {
-  border-left: 8px solid transparent;
-  border-right: 8px solid transparent;
-  border-top: 8px solid rgb(61, 61, 61);
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid rgb(61, 61, 61);
   display: inline-block;
   height: 0;
   margin: 0 0 4px 8px;
@@ -56,13 +56,14 @@
   display: block;
   font-size: 12px;
   font-weight: bold;
+  margin-top: 4px;
   padding-left: 12px;
 }
 
 .UpArrow {
-  border-left: 8px solid transparent;
-  border-right: 8px solid transparent;
-  border-bottom: 8px solid rgb(61, 61, 61);
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid rgb(61, 61, 61);
   display: inline-block;
   height: 0;
   margin: 0 0 4px 8px;

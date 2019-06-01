@@ -16,7 +16,8 @@
 .Container {
   display: flex;
   flex-direction: row;
-  margin: 6px 10px;
+  justify-content: center;
+  margin: 6px 0;
 }
 
 .Input1 {
@@ -39,6 +40,6 @@ input:disabled {
   color: rgb(61, 61, 61);
   font-size: 12px;
   font-weight: bold;
+  margin-top: 4px;
   text-align: center;
-  text-transform: capitalize;
 }
