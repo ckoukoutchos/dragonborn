@@ -1,4 +1,5 @@
 import { Weapon } from './Weapon';
+import weapons from '../shared/weapons';
 
 export default class Hero {
   abilityScores: AbilityScores;
@@ -31,17 +32,17 @@ export default class Hero {
 
   constructor() {
     this.abilityScores = {
-      [Abilities.CHA]: 0,
-      [Abilities.CON]: 0,
-      [Abilities.DEX]: 0,
-      [Abilities.INT]: 0,
-      [Abilities.STR]: 0,
-      [Abilities.WIS]: 0
+      [Abilities.CHA]: 10,
+      [Abilities.CON]: 10,
+      [Abilities.DEX]: 10,
+      [Abilities.INT]: 10,
+      [Abilities.STR]: 10,
+      [Abilities.WIS]: 10
     };
     this.active = false;
     this.alignment = Alignments.NN;
     this.armor = [];
-    this.armorClass = 0;
+    this.armorClass = 10;
     this.background = '';
     this.currentHP = 0;
     this.deathSaves = {
@@ -54,11 +55,11 @@ export default class Hero {
     this.id = 0;
     this.initative = 0;
     this.inspiration = 0;
-    this.level = 0;
+    this.level = 1;
     this.name = '';
     this.playerName = '';
     this.proficiencies = [Proficiencies.SIMPLE_MELEE];
-    this.proficiencyBonus = 0;
+    this.proficiencyBonus = 2;
     this.race = Races.HUMAN;
     this.savingThrowsScores = {
       [Abilities.CHA]: { proficient: false, value: 0 },
@@ -68,7 +69,7 @@ export default class Hero {
       [Abilities.STR]: { proficient: false, value: 0 },
       [Abilities.WIS]: { proficient: false, value: 0 }
     };
-    this.speed = 0;
+    this.speed = 25;
     this.spells = [];
     this.skillScores = {
       [Skills.ACROBATICS]: { proficient: false, ability: Abilities.DEX, value: 0 },

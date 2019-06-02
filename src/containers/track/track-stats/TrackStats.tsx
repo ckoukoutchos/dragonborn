@@ -26,11 +26,9 @@ import TitleCard from '../../../components/UI/card/title-card/TitleCard';
 import ToggleLineInput from '../../../components/UI/input/toggle-line-input/ToggleLineInput';
 
 // shared
-import { updateObject, updateObjectInArray } from '../../../shared/immutable';
+import { updateObject } from '../../../shared/immutable';
 import Hero, {
   AbilityScores,
-  SavingThrowsScores,
-  Skill,
   Races,
   Alignments,
   HeroClasses

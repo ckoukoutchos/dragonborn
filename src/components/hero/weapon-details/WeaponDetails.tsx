@@ -1,9 +1,18 @@
+// library
 import React from 'react';
-import MultiLineInput from '../../UI/input/multi-line-input/MultiLineInput';
-import classes from './WeaponDetails.module.css';
-import { WeaponProps } from '../../../models/Weapon';
 
-const weaponDetails = (props: any) => {
+// component
+import classes from './WeaponDetails.module.css';
+import MultiLineInput from '../../UI/input/multi-line-input/MultiLineInput';
+
+// shared
+import { WeaponProps, Weapon } from '../../../models/Weapon';
+
+interface WeaponDetailsProps {
+  weapon: Weapon;
+}
+
+const weaponDetails = (props: WeaponDetailsProps) => {
   const {
     weapon: {
       cost,
@@ -27,11 +36,14 @@ const weaponDetails = (props: any) => {
   return (
     <div>
       <p style={{ padding: '0 8px' }}>{desc}</p>
+
       <hr className={classes.Divide} />
+
       <MultiLineInput
         label={['Type', 'Damage Type']}
         value={[type, damageType]}
       />
+
       <MultiLineInput
         label={['Weight', 'Cost', 'Damage']}
         value={[
@@ -40,6 +52,7 @@ const weaponDetails = (props: any) => {
           `${numberOfDamageDice}d${numberOfDamageDiceSides} + ${mod}`
         ]}
       />
+
       <hr className={classes.Divide} />
     </div>
   );

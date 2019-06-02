@@ -5,6 +5,7 @@ import { Dispatch } from 'redux';
 
 // store
 import { AppState } from '../../../store/rootReducer';
+import { updateHero } from '../../../store/hero/heroActionCreators';
 
 // components
 import Accordian from '../../UI/accordian/Accordian';
@@ -15,33 +16,81 @@ import Panel from '../../UI/accordian/panel/Panel';
 import WeaponDetails from '../weapon-details/WeaponDetails';
 
 // shared
+import Hero from '../../../models/Hero';
 import Weapons from '../../../shared/weapons';
 import { Weapon } from '../../../models/Weapon';
+import { updateObject } from '../../../shared/immutable';
+import { HeroActionTypes } from '../../../store/hero/heroActionTypes';
+import { User } from '../../../models/User';
 
-class Equipment extends Component<any> {
+interface EquipmentProps {
+  hero: Hero;
+  user: User | null;
+  updateHero: (hero: Hero, uid: string) => HeroActionTypes;
+}
+
+interface EquipmentState {
+  showModal: boolean;
+}
+
+class Equipment extends Component<EquipmentProps, EquipmentState> {
   state = {
-    showModal: false,
-    weapons: [...Weapons]
+    showModal: false
   };
 
+  /**
+   * @name onAddItem
+   * @description adds choosen weapon to hero weapons list and dispatches action to update hero in FB
+   * @param weaponName string
+   */
   onAddItem = (weaponName: string) => () => {
+    const { hero, user } = this.props;
+
     const choosenWeapon = Weapons.find(
       ({ name }: Weapon) => name === weaponName
     );
 
-    this.setState((prevState: any) => ({
-      showModal: false,
-      weapons: prevState.weapons.concat(choosenWeapon)
-    }));
+    let updatedHero;
+
+    if (choosenWeapon) {
+      // if weapons is a prop on the hero object add to weapons array
+      if (hero.weapons) {
+        const newWeaponArray = hero.weapons.concat(choosenWeapon);
+        updatedHero = updateObject(hero, {
+          weapons: newWeaponArray
+        });
+
+        // create weapons prop on hero and adds weapon (sometimes FB deletes props with empty arrays)
+      } else {
+        updatedHero = updateObject(hero, {
+          weapons: [choosenWeapon]
+        });
+      }
+
+      if (user) {
+        this.props.updateHero(updatedHero, user.uid);
+      }
+    }
+
+    this.setState({ showModal: false });
   };
 
+  /**
+   * @name onDeleteItem
+   * @description removes choosen weapon from hero weapons list and dispatches action to update hero in FB
+   * @param weaponName string
+   */
   onDeleteItem = (weaponName: string) => () => {
-    this.setState((prevState: any) => {
-      const newArray = prevState.weapons.filter(
-        ({ name }: Weapon) => name !== weaponName
-      );
-      return { weapons: newArray };
+    const newWeaponArray = this.props.hero.weapons.filter(
+      ({ name }: Weapon) => name !== weaponName
+    );
+    const updatedHero = updateObject(this.props.hero, {
+      weapons: newWeaponArray
     });
+
+    if (this.props.user) {
+      this.props.updateHero(updatedHero, this.props.user.uid);
+    }
   };
 
   /**
@@ -55,21 +104,32 @@ class Equipment extends Component<any> {
   };
 
   render() {
-    const { showModal, weapons } = this.state;
+    const {
+      hero: { weapons }
+    } = this.props;
+    const { showModal } = this.state;
 
-    const weaponList = weapons.map((weapon: Weapon, index: number) => {
-      return (
-        <Panel
-          key={index}
-          label={weapon.name}
-          odd={index % 2 !== 0}
-          onSecondaryClicked={this.onDeleteItem(weapon.name)}
-        >
-          <WeaponDetails weapon={weapon} />
-        </Panel>
-      );
-    });
+    let weaponList: any = (
+      <p style={{ textAlign: 'center' }}>You do not have any weapons!</p>
+    );
 
+    // panels for current hero weapons
+    if (weapons) {
+      weaponList = weapons.map((weapon: Weapon, index: number) => {
+        return (
+          <Panel
+            key={index}
+            label={weapon.name}
+            odd={index % 2 !== 0}
+            onSecondaryClicked={this.onDeleteItem(weapon.name)}
+          >
+            <WeaponDetails weapon={weapon} />
+          </Panel>
+        );
+      });
+    }
+
+    // panels for add weapon modal
     const allWeaponsList = Weapons.map((weapon: Weapon, index: number) => {
       return (
         <Panel
@@ -113,14 +173,15 @@ class Equipment extends Component<any> {
 }
 
 const mapStateToProps = (state: AppState) => ({
-  hero: state.hero.hero
+  hero: state.hero.hero,
+  user: state.auth.user
 });
 
-// const mapDispatchToProps = (dispatch: Dispatch) => ({
-
-// });
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  updateHero: (hero: Hero, uid: string) => dispatch(updateHero(hero, uid))
+});
 
 export default connect(
-  mapStateToProps
-  // mapDispatchToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(Equipment);
