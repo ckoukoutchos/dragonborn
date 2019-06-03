@@ -5,7 +5,6 @@ import classes from './ToggleLineInput.module.css';
 interface ToggleLineInput {
   editing: boolean;
   label: string;
-  onChange: any;
   onToggle: any;
   proficient: boolean;
   proficientBonus: number;
@@ -16,12 +15,17 @@ const toggleLineInput = (props: ToggleLineInput) => {
   const {
     editing,
     label,
-    onChange,
     onToggle,
     proficient,
     proficientBonus,
     value
   } = props;
+
+  let skillModifier = proficient
+    ? Number(value) + Number(proficientBonus)
+    : value;
+
+  skillModifier > 0 ? (skillModifier = '+' + skillModifier) : null;
 
   return (
     <div className={classes.Container}>
@@ -30,17 +34,13 @@ const toggleLineInput = (props: ToggleLineInput) => {
           classes.Toggle,
           proficient ? classes.Toggled : classes.Edit
         ].join(' ')}
-        onClick={onToggle}
+        onClick={editing ? onToggle : null}
       />
 
       <input
-        className={[
-          classes.Input,
-          editing ? classes.Edit : classes.Disabled
-        ].join(' ')}
-        disabled={!editing}
-        onChange={onChange}
-        value={proficient ? Number(value) + Number(proficientBonus) : value}
+        className={[classes.Input, classes.Disabled].join(' ')}
+        disabled
+        value={skillModifier}
       />
 
       <label className={classes.Label}>{label}</label>

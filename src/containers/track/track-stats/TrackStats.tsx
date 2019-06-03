@@ -34,6 +34,7 @@ import Hero, {
   HeroClasses
 } from '../../../models/Hero';
 import { User } from '../../../models/User';
+import { calcAbilityModifier } from '../../../shared/convert';
 
 // TODO:  refactor, remove style tags, use loops to repeat similar sections, use object fields to generate labels rather than strings?
 
@@ -118,20 +119,29 @@ class TrackStats extends Component<TrackStatsProps, TrackStatsState> {
    * @description creates an array of toggle line inputs for each skill
    */
   createSkillInputs(hero: Hero, editing: any, section: string): ReactElement[] {
+    const { abilityScores } = hero;
     const skills = hero[section];
     const skillsList = [];
 
     for (const skill in skills) {
+      // in hero ability scores, grab ability that matches ability of the skill
+      let skillModifier;
+      if (section === 'skillScores') {
+        skillModifier = calcAbilityModifier(
+          abilityScores[skills[skill].ability]
+        );
+      } else {
+        skillModifier = calcAbilityModifier(abilityScores[skill]);
+      }
       skillsList.push(
         <ToggleLineInput
+          editing={editing}
           key={skill}
           label={skill}
-          editing={editing}
-          onChange={this.onListInputChange(skill, section)}
           onToggle={this.onListInputToggle(skill, section)}
           proficient={skills[skill].proficient}
           proficientBonus={hero.proficiencyBonus}
-          value={skills[skill].value}
+          value={skills[skill].value + skillModifier}
         />
       );
     }
