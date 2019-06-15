@@ -123,6 +123,8 @@ class TrackStats extends Component<TrackStatsProps, TrackStatsState> {
     const skills = hero[section];
     const skillsList = [];
 
+    // TODO: rework to use only calculated values for skill or actually use skill value
+
     for (const skill in skills) {
       // in hero ability scores, grab ability that matches ability of the skill
       let skillModifier;
@@ -383,6 +385,13 @@ class TrackStats extends Component<TrackStatsProps, TrackStatsState> {
               </SecondaryCard>
             </div>
           </BasicCard>
+        </div>
+
+        {/* Attacks */}
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
+          <Attacks />
+
+          <Equipment />
 
           {/* Proficiencies */}
           <BasicCard
@@ -393,13 +402,6 @@ class TrackStats extends Component<TrackStatsProps, TrackStatsState> {
           >
             <TextAreaInput editing={editing.proficiencies} />
           </BasicCard>
-        </div>
-
-        {/* Attacks */}
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
-          <Attacks />
-
-          <Equipment />
 
           {/* Features */}
           <BasicCard

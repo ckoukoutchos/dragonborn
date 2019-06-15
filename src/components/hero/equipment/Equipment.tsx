@@ -81,15 +81,17 @@ class Equipment extends Component<EquipmentProps, EquipmentState> {
    * @param weaponName string
    */
   onDeleteItem = (weaponName: string) => () => {
-    const newWeaponArray = this.props.hero.weapons.filter(
+    const { hero, user } = this.props;
+
+    const newWeaponArray = hero.weapons.filter(
       ({ name }: Weapon) => name !== weaponName
     );
-    const updatedHero = updateObject(this.props.hero, {
+    const updatedHero = updateObject(hero, {
       weapons: newWeaponArray
     });
 
-    if (this.props.user) {
-      this.props.updateHero(updatedHero, this.props.user.uid);
+    if (user) {
+      this.props.updateHero(updatedHero, user.uid);
     }
   };
 

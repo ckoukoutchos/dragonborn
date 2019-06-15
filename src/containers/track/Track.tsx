@@ -40,6 +40,8 @@ interface TrackState {
   showModal: boolean;
 }
 
+// TODO: clean up render function, move into funcs
+
 /*
  * Container for Track page
  */

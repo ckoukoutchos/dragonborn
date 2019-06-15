@@ -18,9 +18,10 @@ import Hero from '../../../models/Hero';
 interface AttackProps {
   hero: Hero;
 }
+// TODO: consider changing using a smaller slice of hero state so render is called less often
 
 class Attacks extends Component<AttackProps> {
-  render() {
+  createAttackCards = () => {
     const { hero } = this.props;
 
     let attacks: any = <p>You need to add a weapon or spell first.</p>;
@@ -40,7 +41,11 @@ class Attacks extends Component<AttackProps> {
       ));
     }
 
-    return <BasicCard title='Attacks'>{attacks}</BasicCard>;
+    return attacks;
+  };
+
+  render() {
+    return <BasicCard title='Attacks'>{this.createAttackCards()}</BasicCard>;
   }
 }
 

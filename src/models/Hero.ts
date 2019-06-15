@@ -1,5 +1,4 @@
 import { Weapon } from './Weapon';
-import weapons from '../shared/weapons';
 
 export default class Hero {
   abilityScores: AbilityScores;
@@ -44,7 +43,7 @@ export default class Hero {
     this.armor = [];
     this.armorClass = 10;
     this.background = '';
-    this.currentHP = 0;
+    this.currentHP = 10;
     this.deathSaves = {
       failures: 0,
       successes: 0

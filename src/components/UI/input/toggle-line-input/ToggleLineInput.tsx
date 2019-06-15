@@ -10,7 +10,7 @@ interface ToggleLineInput {
   proficientBonus: number;
   value: any;
 }
-
+// TODO: rework to use only calculated values for skill or actually use skill value
 const toggleLineInput = (props: ToggleLineInput) => {
   const {
     editing,
