@@ -20,6 +20,7 @@ const armorDetails = (props: ArmorDetailsProps) => {
       armorClass,
       cost,
       desc,
+      dexMod,
       equipped,
       stealthDisadvatage,
       type,
@@ -27,16 +28,19 @@ const armorDetails = (props: ArmorDetailsProps) => {
     }
   } = props;
 
+  let ac: any = armorClass;
+
+  if (dexMod) {
+    ac = ac + ' + dex';
+  }
+
   return (
     <div>
       <p style={{ padding: '0 8px' }}>{desc}</p>
 
       <hr className={classes.Divide} />
 
-      <MultiLineInput
-        label={['Type', 'Armor Class']}
-        value={[type, armorClass]}
-      />
+      <MultiLineInput label={['Type', 'Armor Class']} value={[type, ac]} />
 
       <MultiLineInput
         label={['Weight', 'Cost', 'Stealth Disadvantage']}
