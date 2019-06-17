@@ -33,6 +33,8 @@ interface EquipmentState {
   showModal: boolean;
 }
 
+// TODO: remove style tags
+
 class Equipment extends Component<EquipmentProps, EquipmentState> {
   state = {
     showModal: false

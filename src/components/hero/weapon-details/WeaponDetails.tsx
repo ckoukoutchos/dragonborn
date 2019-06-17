@@ -12,6 +12,8 @@ interface WeaponDetailsProps {
   weapon: Weapon;
 }
 
+// TODO: remove style tags
+
 const weaponDetails = (props: WeaponDetailsProps) => {
   const {
     weapon: {
@@ -21,6 +23,7 @@ const weaponDetails = (props: WeaponDetailsProps) => {
       numberOfDamageDice,
       numberOfDamageDiceSides,
       properties,
+      range,
       type,
       weight
     }
@@ -32,6 +35,10 @@ const weaponDetails = (props: WeaponDetailsProps) => {
   } else if (properties.includes(WeaponProps.FINESSE)) {
     mod = 'dex/str';
   }
+
+  const weaponProps = range
+    ? `Properties: ${properties.join(', ')}, Range: ${range}`
+    : `Properties: ${properties.join(', ')}`;
 
   return (
     <div>
@@ -54,6 +61,12 @@ const weaponDetails = (props: WeaponDetailsProps) => {
       />
 
       <hr className={classes.Divide} />
+      {properties.length > 0 ? (
+        <>
+          <p style={{ padding: '0 8px' }}>{weaponProps}</p>
+          <hr className={classes.Divide} />
+        </>
+      ) : null}
     </div>
   );
 };

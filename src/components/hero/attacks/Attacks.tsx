@@ -1,5 +1,5 @@
 // library
-import React, { Component } from 'react';
+import React, { Component, ReactElement } from 'react';
 import { connect } from 'react-redux';
 
 // store
@@ -21,9 +21,12 @@ interface AttackProps {
 // TODO: consider changing using a smaller slice of hero state so render is called less often
 
 class Attacks extends Component<AttackProps> {
-  createAttackCards = () => {
-    const { hero } = this.props;
-
+  /**
+   * @name createAttackCards
+   * @description creates an array of attack cards for each weapon the hero has
+   * @param hero Hero
+   */
+  createAttackCards = (hero: Hero): ReactElement[] => {
     let attacks: any = <p>You need to add a weapon or spell first.</p>;
 
     if (hero.weapons) {
@@ -45,7 +48,11 @@ class Attacks extends Component<AttackProps> {
   };
 
   render() {
-    return <BasicCard title='Attacks'>{this.createAttackCards()}</BasicCard>;
+    return (
+      <BasicCard title='Attacks'>
+        {this.createAttackCards(this.props.hero)}
+      </BasicCard>
+    );
   }
 }
 
