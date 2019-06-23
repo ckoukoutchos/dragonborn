@@ -44,7 +44,7 @@ export default class Hero {
     this.active = false;
     this.alignment = '';
     this.armor = [];
-    this.armorClass = 10;
+    this.armorClass = 0;
     this.background = '';
     this.gear = [],
       this.heroClass = '';
@@ -53,8 +53,8 @@ export default class Hero {
     this.inspiration = 0;
     this.level = 1;
     this.name = '';
-    this.numberOfHitDice = 1;
-    this.numberOfHitDiceSides = 12;
+    this.numberOfHitDice = 0;
+    this.numberOfHitDiceSides = 0;
     this.playerName = '';
     this.proficiencies = [];
     this.proficiencyBonus = 2;
@@ -67,7 +67,7 @@ export default class Hero {
       [Abilities.STR]: { proficient: false, value: 0 },
       [Abilities.WIS]: { proficient: false, value: 0 }
     };
-    this.speed = 25;
+    this.speed = 0;
     this.spells = [];
     this.skillScores = {
       [Skills.ACROBATICS]: { proficient: false, ability: Abilities.DEX, value: 0 },
