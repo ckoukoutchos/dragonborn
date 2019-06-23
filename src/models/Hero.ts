@@ -43,14 +43,9 @@ export default class Hero {
     this.armor = [];
     this.armorClass = 10;
     this.background = '';
-    this.currentHP = 10;
-    this.deathSaves = {
-      failures: 0,
-      successes: 0
-    };
     this.heroClass = HeroClasses.BARBARIAN;
     this.numberOfHitDice = 1;
-    this.numberOfHitDiceSides = 4;
+    this.numberOfHitDiceSides = 12;
     this.id = 0;
     this.initative = 0;
     this.inspiration = 0;

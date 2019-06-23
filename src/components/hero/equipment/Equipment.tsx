@@ -36,7 +36,7 @@ interface EquipmentState {
   showModal: boolean;
 }
 
-// TODO: remove style tags, clean up render func
+// TODO: remove style tags, clean up render func, smaller slice of state
 
 class Equipment extends Component<EquipmentProps, EquipmentState> {
   state = {
@@ -133,7 +133,7 @@ class Equipment extends Component<EquipmentProps, EquipmentState> {
       armorList = armor.map((armor: Armor, index: number) => {
         return (
           <Panel
-            key={index}
+            key={armor.name}
             label={armor.name}
             odd={index % 2 !== 0}
             onSecondaryClicked={this.onDeleteItem('armor', armor.name)}
@@ -148,7 +148,7 @@ class Equipment extends Component<EquipmentProps, EquipmentState> {
     const allArmorsList = Armors.map((armor: Armor, index: number) => {
       return (
         <Panel
-          key={index}
+          key={armor.name}
           label={armor.name}
           odd={index % 2 !== 0}
           onPrimaryClicked={this.onAddItem('armor', armor.name)}
@@ -167,7 +167,7 @@ class Equipment extends Component<EquipmentProps, EquipmentState> {
       weaponList = weapons.map((weapon: Weapon, index: number) => {
         return (
           <Panel
-            key={index}
+            key={weapon.name}
             label={weapon.name}
             odd={index % 2 !== 0}
             onSecondaryClicked={this.onDeleteItem('weapons', weapon.name)}
@@ -182,7 +182,7 @@ class Equipment extends Component<EquipmentProps, EquipmentState> {
     const allWeaponsList = Weapons.map((weapon: Weapon, index: number) => {
       return (
         <Panel
-          key={index}
+          key={weapon.name}
           label={weapon.name}
           odd={index % 2 !== 0}
           onPrimaryClicked={this.onAddItem('weapons', weapon.name)}
@@ -199,8 +199,10 @@ class Equipment extends Component<EquipmentProps, EquipmentState> {
           title='Equipment'
           onEdit={this.onModalToggled}
         >
-          <Accordian>{weaponList}</Accordian>
-          <Accordian>{armorList}</Accordian>
+          <Accordian>
+            {weaponList}
+            {armorList}
+          </Accordian>
         </BasicCard>
 
         <Modal
