@@ -1,24 +1,27 @@
 import { Weapon } from './Weapon';
+import { Armor } from './Armor';
+import { Gear } from './Gear';
 
 export default class Hero {
   abilityScores: AbilityScores;
   active: boolean;
-  alignment: Alignments;
-  armor = [];
+  alignment: Alignments | string;
+  armor: Armor[];
   armorClass: number;
   background: string;
-  heroClass: HeroClasses;
-  numberOfHitDice: number;
-  numberOfHitDiceSides: number;
+  gear: Gear[];
+  heroClass: HeroClasses | string;
   id: number;
   initative: number;
   inspiration: number;
   level: number;
   name: string;
+  numberOfHitDice: number;
+  numberOfHitDiceSides: number;
   playerName: string;
   proficiencies: string[];
   proficiencyBonus: number;
-  race: Races;
+  race: Races | string;
   savingThrowsScores: SavingThrowsScores;
   speed: number;
   spells: any;
@@ -39,22 +42,23 @@ export default class Hero {
       [Abilities.WIS]: 10
     };
     this.active = false;
-    this.alignment = Alignments.NN;
+    this.alignment = '';
     this.armor = [];
     this.armorClass = 10;
     this.background = '';
-    this.heroClass = HeroClasses.BARBARIAN;
-    this.numberOfHitDice = 1;
-    this.numberOfHitDiceSides = 12;
+    this.gear = [],
+      this.heroClass = '';
     this.id = 0;
     this.initative = 0;
     this.inspiration = 0;
     this.level = 1;
     this.name = '';
+    this.numberOfHitDice = 1;
+    this.numberOfHitDiceSides = 12;
     this.playerName = '';
-    this.proficiencies = [Proficiencies.SIMPLE_MELEE];
+    this.proficiencies = [];
     this.proficiencyBonus = 2;
-    this.race = Races.HUMAN;
+    this.race = '';
     this.savingThrowsScores = {
       [Abilities.CHA]: { proficient: false, value: 0 },
       [Abilities.CON]: { proficient: false, value: 0 },

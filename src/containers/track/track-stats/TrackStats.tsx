@@ -306,7 +306,9 @@ class TrackStats extends Component<TrackStatsProps, TrackStatsState> {
               label='Armor Class'
               editing={editing.vitals}
               onChange={this.onInputChange('armorClass')}
-              value={hero.armor.length ? hero.armor[0].armorClass : 0}
+              value={
+                hero.armor && hero.armor.length ? hero.armor[0].armorClass : 0
+              }
             />
 
             <BlockInput

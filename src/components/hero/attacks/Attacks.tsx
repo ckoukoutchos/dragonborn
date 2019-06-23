@@ -29,7 +29,7 @@ class Attacks extends Component<AttackProps> {
   createAttackCards = (hero: Hero): ReactElement[] => {
     let attacks: any = <p>You need to add a weapon or spell first.</p>;
 
-    if (hero.weapons) {
+    if (hero.weapons && hero.weapons.length) {
       attacks = hero.weapons.map((weapon: Weapon) => (
         <SecondaryCard key={weapon.name} label={weapon.name} wide>
           <MultiLineInput
