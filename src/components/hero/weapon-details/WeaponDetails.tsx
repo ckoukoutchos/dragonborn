@@ -6,7 +6,7 @@ import classes from './WeaponDetails.module.css';
 import MultiLineInput from '../../UI/input/multi-line-input/MultiLineInput';
 
 // shared
-import { WeaponProps, Weapon } from '../../../models/Weapon';
+import { WeaponProps, Weapon } from '../../../models/Gear';
 
 interface WeaponDetailsProps {
   weapon: Weapon;

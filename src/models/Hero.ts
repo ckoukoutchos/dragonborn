@@ -1,6 +1,4 @@
-import { Weapon } from './Weapon';
-import { Armor } from './Armor';
-import { Gear } from './Gear';
+import { Armor, Gear, Weapon } from './Gear';
 
 export default class Hero {
   abilityScores: AbilityScores;
@@ -9,11 +7,11 @@ export default class Hero {
   armor: Armor[];
   armorClass: number;
   background: string;
-  gear: Gear[];
   heroClass: HeroClasses | string;
   id: number;
   initative: number;
   inspiration: number;
+  items: Gear[];
   level: number;
   name: string;
   numberOfHitDice: number;
@@ -28,6 +26,7 @@ export default class Hero {
   skillScores: SkillScores;
   subrace = null;
   temporaryHP: number;
+  tools: Gear[];
   weapons: Weapon[];
   xp: number;
   [key: string]: any
@@ -46,11 +45,11 @@ export default class Hero {
     this.armor = [];
     this.armorClass = 0;
     this.background = '';
-    this.gear = [],
-      this.heroClass = '';
+    this.heroClass = '';
     this.id = 0;
     this.initative = 0;
     this.inspiration = 0;
+    this.items = [];
     this.level = 1;
     this.name = '';
     this.numberOfHitDice = 0;
@@ -91,6 +90,7 @@ export default class Hero {
     };
     this.subrace = null;
     this.temporaryHP = 0;
+    this.tools = [];
     this.weapons = [];
     this.xp = 0;
   }

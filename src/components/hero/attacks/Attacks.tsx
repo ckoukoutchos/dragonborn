@@ -11,7 +11,7 @@ import MultiLineInput from '../../UI/input/multi-line-input/MultiLineInput';
 import SecondaryCard from '../../UI/card/secondary-card/SecondaryCard';
 
 // shared
-import { Weapon } from '../../../models/Weapon';
+import { Weapon } from '../../../models/Gear';
 import { calcAttackBonus, calcDamageDice } from '../../../shared/convert';
 import Hero from '../../../models/Hero';
 

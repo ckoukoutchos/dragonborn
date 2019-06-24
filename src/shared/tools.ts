@@ -1,4 +1,4 @@
-import { ToolTypes } from '../models/Tool';
+import { ToolTypes } from '../models/Gear';
 
 export default [
   {

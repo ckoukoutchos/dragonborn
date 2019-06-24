@@ -20,11 +20,10 @@ import WeaponDetails from '../weapon-details/WeaponDetails';
 import Hero from '../../../models/Hero';
 import Weapons from '../../../shared/weapons';
 import Armors from '../../../shared/armors';
-import { Weapon } from '../../../models/Weapon';
+import { Armor, Weapon } from '../../../models/Gear';
 import { updateObject } from '../../../shared/immutable';
 import { HeroActionTypes } from '../../../store/hero/heroActionTypes';
 import { User } from '../../../models/User';
-import { Armor } from '../../../models/Armor';
 
 interface EquipmentProps {
   hero: Hero;

@@ -1,4 +1,4 @@
-import { Weapon, WeaponProps } from '../models/Weapon';
+import { Weapon, WeaponProps } from '../models/Gear';
 import Hero from '../models/Hero';
 
 /**

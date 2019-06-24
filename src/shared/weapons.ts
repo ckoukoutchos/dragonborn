@@ -1,4 +1,4 @@
-import { WeaponTypes, DamageTypes, WeaponProps } from '../models/Weapon';
+import { WeaponTypes, DamageTypes, WeaponProps } from '../models/Gear';
 
 // eventually will be stored in db and served as json from backend, till then will be served in app bundle
 

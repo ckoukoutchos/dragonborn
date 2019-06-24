@@ -6,7 +6,7 @@ import classes from './ArmorDetails.module.css';
 import MultiLineInput from '../../UI/input/multi-line-input/MultiLineInput';
 
 // shared
-import { Armor } from '../../../models/Armor';
+import { Armor } from '../../../models/Gear';
 
 interface ArmorDetailsProps {
   armor: Armor;

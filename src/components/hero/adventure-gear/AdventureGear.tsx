@@ -18,13 +18,12 @@ import WeaponDetails from '../weapon-details/WeaponDetails';
 
 // shared
 import Hero from '../../../models/Hero';
-import Weapons from '../../../shared/weapons';
-import Armors from '../../../shared/armors';
-import { Weapon } from '../../../models/Weapon';
+import Gears from '../../../shared/gears';
+import Tools from '../../../shared/tools';
+import { Armor, Gear, Weapon } from '../../../models/Gear';
 import { updateObject } from '../../../shared/immutable';
 import { HeroActionTypes } from '../../../store/hero/heroActionTypes';
 import { User } from '../../../models/User';
-import { Armor } from '../../../models/Armor';
 
 interface GearProps {
   hero: Hero;
@@ -38,7 +37,7 @@ interface GearState {
 
 // TODO: remove style tags, clean up render func, smaller slice of state
 
-class Gear extends Component<GearProps, GearState> {
+class AdventureGear extends Component<GearProps, GearState> {
   state = {
     showModal: false
   };
@@ -52,10 +51,10 @@ class Gear extends Component<GearProps, GearState> {
     const { hero, user } = this.props;
 
     let chosenItem;
-    if (type === 'weapons') {
-      chosenItem = Weapons.find(({ name }: Weapon) => name === itemName);
+    if (type === 'gear') {
+      chosenItem = Gears.find(({ name }: Gear) => name === itemName);
     } else {
-      chosenItem = Armors.find(({ name }: Armor) => name === itemName);
+      chosenItem = Tools.find(({ name }: Gear) => name === itemName);
     }
 
     if (chosenItem) {
@@ -92,12 +91,10 @@ class Gear extends Component<GearProps, GearState> {
     const { hero, user } = this.props;
 
     let newItemArray;
-    if (type === 'weapons') {
-      newItemArray = hero.weapons.filter(
-        ({ name }: Weapon) => name !== itemName
-      );
+    if (type === 'gear') {
+      newItemArray = hero.gear.filter(({ name }: Gear) => name !== itemName);
     } else {
-      newItemArray = hero.armor.filter(({ name }: Armor) => name !== itemName);
+      newItemArray = hero.tools.filter(({ name }: Gear) => name !== itemName);
     }
 
     const updatedHero = updateObject(hero, {
@@ -121,7 +118,7 @@ class Gear extends Component<GearProps, GearState> {
 
   render() {
     const {
-      hero: { armor, weapons }
+      hero: { gear }
     } = this.props;
     const { showModal } = this.state;
 
@@ -129,68 +126,68 @@ class Gear extends Component<GearProps, GearState> {
       <p style={{ textAlign: 'center' }}>You do not have any armor!</p>
     );
 
-    if (armor && armor.length) {
-      armorList = armor.map((armor: Armor, index: number) => {
+    if (gear && gear.length) {
+      armorList = gear.map((gear: Armor, index: number) => {
         return (
           <Panel
-            key={armor.name}
-            label={armor.name}
+            key={gear.name}
+            label={gear.name}
             odd={index % 2 !== 0}
-            onSecondaryClicked={this.onDeleteItem('armor', armor.name)}
+            onSecondaryClicked={this.onDeleteItem('armor', gear.name)}
           >
-            <ArmorDetails armor={armor} />
+            <ArmorDetails armor={gear} />
           </Panel>
         );
       });
     }
 
     // panels for add item modal
-    const allArmorsList = Armors.map((armor: Armor, index: number) => {
-      return (
-        <Panel
-          key={armor.name}
-          label={armor.name}
-          odd={index % 2 !== 0}
-          onPrimaryClicked={this.onAddItem('armor', armor.name)}
-        >
-          <ArmorDetails armor={armor} />
-        </Panel>
-      );
-    });
+    // const allArmorsList = Armors.map((armor: Armor, index: number) => {
+    //   return (
+    //     <Panel
+    //       key={armor.name}
+    //       label={armor.name}
+    //       odd={index % 2 !== 0}
+    //       onPrimaryClicked={this.onAddItem('armor', armor.name)}
+    //     >
+    //       <ArmorDetails armor={armor} />
+    //     </Panel>
+    //   );
+    // });
 
     let weaponList: any = (
       <p style={{ textAlign: 'center' }}>You do not have any weapons!</p>
     );
 
     // panels for current hero weapons
-    if (weapons && weapons.length) {
-      weaponList = weapons.map((weapon: Weapon, index: number) => {
-        return (
-          <Panel
-            key={weapon.name}
-            label={weapon.name}
-            odd={index % 2 !== 0}
-            onSecondaryClicked={this.onDeleteItem('weapons', weapon.name)}
-          >
-            <WeaponDetails weapon={weapon} />
-          </Panel>
-        );
-      });
-    }
+    // if (weapons && weapons.length) {
+    //   weaponList = weapons.map((weapon: Weapon, index: number) => {
+    //     return (
+    //       <Panel
+    //         key={weapon.name}
+    //         label={weapon.name}
+    //         odd={index % 2 !== 0}
+    //         onSecondaryClicked={this.onDeleteItem('weapons', weapon.name)}
+    //       >
+    //         <WeaponDetails weapon={weapon} />
+    //       </Panel>
+    //     );
+    //   });
+    // }
 
-    // panels for add weapon modal
-    const allWeaponsList = Weapons.map((weapon: Weapon, index: number) => {
-      return (
-        <Panel
-          key={weapon.name}
-          label={weapon.name}
-          odd={index % 2 !== 0}
-          onPrimaryClicked={this.onAddItem('weapons', weapon.name)}
-        >
-          <WeaponDetails weapon={weapon} />
-        </Panel>
-      );
-    });
+    // // panels for add weapon modal
+    // const allWeaponsList = Weapons.map((weapon: Weapon, index: number) => {
+    //   return (
+    //     <Panel
+    //       key={weapon.name}
+    //       label={weapon.name}
+    //       odd={index % 2 !== 0}
+    //       onPrimaryClicked={this.onAddItem('weapons', weapon.name)}
+    //     >
+    //       <WeaponDetails weapon={weapon} />
+    //     </Panel>
+    //   );
+    // });
 
     return (
       <>
@@ -211,8 +208,8 @@ class Gear extends Component<GearProps, GearState> {
           show={showModal}
           title='Add Equipment'
         >
-          <Accordian>{allWeaponsList}</Accordian>
-          <Accordian>{allArmorsList}</Accordian>
+          {/* <Accordian>{allWeaponsList}</Accordian> */}
+          {/* <Accordian>{allArmorsList}</Accordian> */}
 
           <div style={{ width: '100%' }}>
             <Button btnType='Flat' color='Warn' clicked={this.onModalToggled}>
@@ -237,4 +234,4 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Gear);
+)(AdventureGear);
