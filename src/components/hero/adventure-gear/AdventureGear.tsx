@@ -18,7 +18,7 @@ import WeaponDetails from '../weapon-details/WeaponDetails';
 
 // shared
 import Hero from '../../../models/Hero';
-import Gears from '../../../shared/gears';
+import Gears from '../../../shared/items';
 import Tools from '../../../shared/tools';
 import { Armor, Gear, Weapon } from '../../../models/Gear';
 import { updateObject } from '../../../shared/immutable';

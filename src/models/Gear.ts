@@ -16,6 +16,14 @@ export interface Armor extends Gear {
   type: string;
 }
 
+export interface Coinage {
+  cp: number;
+  sp: number;
+  ep: number;
+  gp: number;
+  pp: number;
+}
+
 export interface Weapon extends Gear {
   damageType: string;
   numberOfDamageDice: number;
@@ -30,6 +38,14 @@ export enum ArmorTypes {
   LIGHT = 'Light',
   MEDIUM = 'Medium',
   SHIELD = 'Shield'
+}
+
+export enum CoinTypes {
+  CP = 'cp',
+  SP = 'sp',
+  EP = 'ep',
+  GP = 'gp',
+  PP = 'pp'
 }
 
 export enum DamageTypes {
