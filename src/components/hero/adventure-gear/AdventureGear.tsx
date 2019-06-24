@@ -18,7 +18,7 @@ import WeaponDetails from '../weapon-details/WeaponDetails';
 
 // shared
 import Hero from '../../../models/Hero';
-import Gears from '../../../shared/items';
+import Items from '../../../shared/items';
 import Tools from '../../../shared/tools';
 import { Armor, Gear, Weapon } from '../../../models/Gear';
 import { updateObject } from '../../../shared/immutable';
@@ -51,8 +51,8 @@ class AdventureGear extends Component<GearProps, GearState> {
     const { hero, user } = this.props;
 
     let chosenItem;
-    if (type === 'gear') {
-      chosenItem = Gears.find(({ name }: Gear) => name === itemName);
+    if (type === 'items') {
+      chosenItem = Items.find(({ name }: Gear) => name === itemName);
     } else {
       chosenItem = Tools.find(({ name }: Gear) => name === itemName);
     }
@@ -91,8 +91,8 @@ class AdventureGear extends Component<GearProps, GearState> {
     const { hero, user } = this.props;
 
     let newItemArray;
-    if (type === 'gear') {
-      newItemArray = hero.gear.filter(({ name }: Gear) => name !== itemName);
+    if (type === 'items') {
+      newItemArray = hero.items.filter(({ name }: Gear) => name !== itemName);
     } else {
       newItemArray = hero.tools.filter(({ name }: Gear) => name !== itemName);
     }
@@ -118,76 +118,76 @@ class AdventureGear extends Component<GearProps, GearState> {
 
   render() {
     const {
-      hero: { gear }
+      hero: { items, tools }
     } = this.props;
     const { showModal } = this.state;
 
-    let armorList: any = (
-      <p style={{ textAlign: 'center' }}>You do not have any armor!</p>
+    let itemList: any = (
+      <p style={{ textAlign: 'center' }}>You do not have any items!</p>
     );
 
-    if (gear && gear.length) {
-      armorList = gear.map((gear: Armor, index: number) => {
+    if (items && items.length) {
+      itemList = items.map((item: Gear, index: number) => {
         return (
           <Panel
-            key={gear.name}
-            label={gear.name}
+            key={item.name}
+            label={item.name}
             odd={index % 2 !== 0}
-            onSecondaryClicked={this.onDeleteItem('armor', gear.name)}
+            onSecondaryClicked={this.onDeleteItem('items', item.name)}
           >
-            <ArmorDetails armor={gear} />
+            {/* <ArmorDetails armor={item} /> */}
           </Panel>
         );
       });
     }
 
     // panels for add item modal
-    // const allArmorsList = Armors.map((armor: Armor, index: number) => {
-    //   return (
-    //     <Panel
-    //       key={armor.name}
-    //       label={armor.name}
-    //       odd={index % 2 !== 0}
-    //       onPrimaryClicked={this.onAddItem('armor', armor.name)}
-    //     >
-    //       <ArmorDetails armor={armor} />
-    //     </Panel>
-    //   );
-    // });
+    const allItemsList = Items.map((item: Gear, index: number) => {
+      return (
+        <Panel
+          key={item.name}
+          label={item.name}
+          odd={index % 2 !== 0}
+          onPrimaryClicked={this.onAddItem('items', item.name)}
+        >
+          {/* <ArmorDetails armor={item} /> */}
+        </Panel>
+      );
+    });
 
-    let weaponList: any = (
-      <p style={{ textAlign: 'center' }}>You do not have any weapons!</p>
+    let toolList: any = (
+      <p style={{ textAlign: 'center' }}>You do not have any tools!</p>
     );
 
-    // panels for current hero weapons
-    // if (weapons && weapons.length) {
-    //   weaponList = weapons.map((weapon: Weapon, index: number) => {
-    //     return (
-    //       <Panel
-    //         key={weapon.name}
-    //         label={weapon.name}
-    //         odd={index % 2 !== 0}
-    //         onSecondaryClicked={this.onDeleteItem('weapons', weapon.name)}
-    //       >
-    //         <WeaponDetails weapon={weapon} />
-    //       </Panel>
-    //     );
-    //   });
-    // }
+    // panels for current hero tools
+    if (tools && tools.length) {
+      toolList = tools.map((tool: Gear, index: number) => {
+        return (
+          <Panel
+            key={tool.name}
+            label={tool.name}
+            odd={index % 2 !== 0}
+            onSecondaryClicked={this.onDeleteItem('tools', tool.name)}
+          >
+            {/* <WeaponDetails weapon={tool} /> */}
+          </Panel>
+        );
+      });
+    }
 
-    // // panels for add weapon modal
-    // const allWeaponsList = Weapons.map((weapon: Weapon, index: number) => {
-    //   return (
-    //     <Panel
-    //       key={weapon.name}
-    //       label={weapon.name}
-    //       odd={index % 2 !== 0}
-    //       onPrimaryClicked={this.onAddItem('weapons', weapon.name)}
-    //     >
-    //       <WeaponDetails weapon={weapon} />
-    //     </Panel>
-    //   );
-    // });
+    // // panels for add tool modal
+    const allToolsList = Tools.map((tool: Gear, index: number) => {
+      return (
+        <Panel
+          key={tool.name}
+          label={tool.name}
+          odd={index % 2 !== 0}
+          onPrimaryClicked={this.onAddItem('tools', tool.name)}
+        >
+          {/* <WeaponDetails weapon={tool} /> */}
+        </Panel>
+      );
+    });
 
     return (
       <>
@@ -197,8 +197,8 @@ class AdventureGear extends Component<GearProps, GearState> {
           onEdit={this.onModalToggled}
         >
           <Accordian>
-            {weaponList}
-            {armorList}
+            {toolList}
+            {itemList}
           </Accordian>
         </BasicCard>
 
@@ -208,9 +208,8 @@ class AdventureGear extends Component<GearProps, GearState> {
           show={showModal}
           title='Add Equipment'
         >
-          {/* <Accordian>{allWeaponsList}</Accordian> */}
-          {/* <Accordian>{allArmorsList}</Accordian> */}
-
+          <Accordian>{allToolsList}</Accordian>
+          <Accordian>{allItemsList}</Accordian>
           <div style={{ width: '100%' }}>
             <Button btnType='Flat' color='Warn' clicked={this.onModalToggled}>
               Cancel
