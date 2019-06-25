@@ -26,6 +26,20 @@
   height: 36px;
 }
 
+.PanelHeader:hover {
+  background: white;
+  box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.3);
+  color: black;
+}
+
+.PanelHeader:hover .DownArrow {
+  border-top: 10px solid black;
+}
+
+.PanelHeader:hover .UpArrow {
+  border-bottom: 10px solid black;
+}
+
 .Odd {
   background: rgb(97, 97, 97);
 }
@@ -34,7 +48,7 @@
 .Editing {
   background: rgb(170, 45, 45);
   border-bottom: none;
-  box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.3);
+  /* box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.3); */
 }
 
 .UpArrow {

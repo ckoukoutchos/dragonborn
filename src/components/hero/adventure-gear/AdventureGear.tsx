@@ -193,11 +193,12 @@ class AdventureGear extends Component<GearProps, GearState> {
       <>
         <BasicCard
           btnText={['', 'Add']}
-          title='Equipment'
+          title='Adventure Gear'
           onEdit={this.onModalToggled}
         >
           <Accordian>
             {toolList}
+            <hr style={{ margin: '0 0 2px 0' }} />
             {itemList}
           </Accordian>
         </BasicCard>
@@ -206,7 +207,7 @@ class AdventureGear extends Component<GearProps, GearState> {
           color='Primary'
           onClose={this.onModalToggled}
           show={showModal}
-          title='Add Equipment'
+          title='Add Adventure Gear'
         >
           <Accordian>{allToolsList}</Accordian>
           <Accordian>{allItemsList}</Accordian>
