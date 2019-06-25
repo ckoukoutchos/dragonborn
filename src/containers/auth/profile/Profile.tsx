@@ -263,20 +263,16 @@ class Profile extends Component<ProfileProps, ProfileState> {
           </p>
 
           <div>
-            <Button
-              btnType='Raised'
-              color='Warn'
-              clicked={this.onDeleteClicked}
-            >
-              Yes
+            <Button btnType='Raised' color='Warn' clicked={this.onModalToggled}>
+              No
             </Button>
 
             <Button
               btnType='Flat'
               color='Primary'
-              clicked={this.onModalToggled}
+              clicked={this.onDeleteClicked}
             >
-              No
+              Yes
             </Button>
           </div>
         </Modal>

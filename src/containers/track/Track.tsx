@@ -137,11 +137,11 @@ class Track extends Component<TrackProps, TrackState> {
 
           <div className={classes.FullWidth}>
             <Button btnType='Raised' color='Warn' clicked={this.onHeroDeletion}>
-              Yes
+              No
             </Button>
 
             <Button btnType='Flat' color='Primary' clicked={this.onModalClosed}>
-              No
+              Yes
             </Button>
           </div>
         </Modal>

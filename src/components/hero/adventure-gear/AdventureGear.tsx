@@ -198,7 +198,6 @@ class AdventureGear extends Component<GearProps, GearState> {
         >
           <Accordian>
             {toolList}
-            <hr style={{ margin: '0 0 2px 0' }} />
             {itemList}
           </Accordian>
         </BasicCard>
