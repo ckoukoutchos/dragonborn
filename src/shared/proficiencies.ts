@@ -1,6 +1,4 @@
-import { ArmorTypes } from '../models/Armor';
-import { ToolTypes } from '../models/Tool';
-import { WeaponTypes } from '../models/Weapon';
+import { WeaponTypes, ArmorTypes, ToolTypes } from '../models/Gear';
 
 export default [
   WeaponTypes.MARTIAL_MELEE,

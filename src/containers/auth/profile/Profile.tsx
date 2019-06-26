@@ -264,7 +264,7 @@ class Profile extends Component<ProfileProps, ProfileState> {
 
           <div>
             <Button btnType='Raised' color='Warn' clicked={this.onModalToggled}>
-              No
+              Cancel
             </Button>
 
             <Button

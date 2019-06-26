@@ -57,17 +57,16 @@ class AdventureGear extends Component<GearProps, GearState> {
       chosenItem = Tools.find(({ name }: Gear) => name === itemName);
     }
 
+    // check chosenItem was found in [type] list
     if (chosenItem) {
       let updatedHero;
 
-      // if [type] is a prop on the hero object add to the array
+      // check if prop is present on hero,sometimes FB deletes props with empty arrays
       if (hero[type]) {
         const newItemArray = hero[type].concat(chosenItem);
         updatedHero = updateObject(hero, {
           [type]: newItemArray
         });
-
-        // create item prop on hero and adds item (sometimes FB deletes props with empty arrays)
       } else {
         updatedHero = updateObject(hero, {
           [type]: [chosenItem]
@@ -196,6 +195,7 @@ class AdventureGear extends Component<GearProps, GearState> {
           title='Adventure Gear'
           onEdit={this.onModalToggled}
         >
+          <h3 style={{ padding: '8px 0 0 0' }}>Adventure Gear</h3>
           <Accordian>
             {toolList}
             {itemList}
