@@ -1,4 +1,4 @@
-import { WeaponTypes, DamageTypes, WeaponProps } from '../models/Gear';
+import { WeaponTypes, DamageTypes, WeaponProps, GearTypes } from '../models/Gear';
 
 // eventually will be stored in db and served as json from backend, till then will be served in app bundle
 
@@ -11,11 +11,12 @@ export default [
     numberOfDamageDice: 1,
     numberOfDamageDiceSides: 4,
     properties: [WeaponProps.LIGHT],
-    type: WeaponTypes.SIMPLE_MELEE,
+    type: GearTypes.WEAPONS,
+    weaponType: WeaponTypes.SIMPLE_MELEE,
     weight: '2 lb'
   },
   {
-    type: WeaponTypes.SIMPLE_RANGED,
+    weaponType: WeaponTypes.SIMPLE_RANGED,
     cost: '25 gp',
     damageType: DamageTypes.PIERCING,
     numberOfDamageDice: 1,
@@ -24,10 +25,11 @@ export default [
     name: 'Light Crossbow',
     properties: [WeaponProps.AMMUNITION, WeaponProps.LOADING, WeaponProps.TWO_HANDED],
     range: '80/320',
+    type: GearTypes.WEAPONS,
     weight: '5 lb'
   },
   {
-    type: WeaponTypes.MARTIAL_MELEE,
+    weaponType: WeaponTypes.MARTIAL_MELEE,
     cost: '10 gp',
     damageType: DamageTypes.SLASHING,
     numberOfDamageDice: 1,
@@ -35,10 +37,11 @@ export default [
     desc: 'A castle forged axe tailor made for the field of battle.',
     name: 'Battleaxe',
     properties: [WeaponProps.VERSATILE],
+    type: GearTypes.WEAPONS,
     weight: '4 lb'
   },
   {
-    type: WeaponTypes.SIMPLE_MELEE,
+    weaponType: WeaponTypes.SIMPLE_MELEE,
     cost: '2 gp',
     damageType: DamageTypes.PIERCING,
     numberOfDamageDice: 1,
@@ -46,10 +49,11 @@ export default [
     desc: 'A small knife that fits nicely up a sleave, or through a heart.',
     name: 'Dagger',
     properties: [WeaponProps.LIGHT],
+    type: GearTypes.WEAPONS,
     weight: '1 lb'
   },
   {
-    type: WeaponTypes.SIMPLE_MELEE,
+    weaponType: WeaponTypes.SIMPLE_MELEE,
     cost: '2 sp',
     damageType: DamageTypes.BLUDGEONING,
     numberOfDamageDice: 1,
@@ -57,10 +61,11 @@ export default [
     desc: 'A club of some repute known for felling large beasts and man alike.',
     name: 'Greatclub',
     properties: [WeaponProps.TWO_HANDED],
+    type: GearTypes.WEAPONS,
     weight: '10 lb'
   },
   {
-    type: WeaponTypes.SIMPLE_MELEE,
+    weaponType: WeaponTypes.SIMPLE_MELEE,
     cost: '5 sp',
     damageType: DamageTypes.PIERCING,
     numberOfDamageDice: 1,
@@ -68,6 +73,7 @@ export default [
     desc: '',
     name: 'Javelin',
     properties: [WeaponProps.THROWN],
+    type: GearTypes.WEAPONS,
     range: '30/120',
     weight: '2 lb'
   },
@@ -80,7 +86,8 @@ export default [
     numberOfDamageDiceSides: 4,
     properties: [WeaponProps.THROWN, WeaponProps.LIGHT],
     range: '20/60',
-    type: WeaponTypes.SIMPLE_MELEE,
+    type: GearTypes.WEAPONS,
+    weaponType: WeaponTypes.SIMPLE_MELEE,
     weight: '2 lb'
   },
   {
@@ -91,7 +98,8 @@ export default [
     numberOfDamageDice: 1,
     numberOfDamageDiceSides: 6,
     properties: [],
-    type: WeaponTypes.SIMPLE_MELEE,
+    weaponType: WeaponTypes.SIMPLE_MELEE,
+    type: GearTypes.WEAPONS,
     weight: '4 lb'
   },
   {
@@ -102,7 +110,8 @@ export default [
     numberOfDamageDice: 1,
     numberOfDamageDiceSides: 6,
     properties: [WeaponProps.VERSATILE],
-    type: WeaponTypes.SIMPLE_MELEE,
+    type: GearTypes.WEAPONS,
+    weaponType: WeaponTypes.SIMPLE_MELEE,
     weight: '4 lb'
   },
   {
@@ -113,7 +122,8 @@ export default [
     numberOfDamageDice: 1,
     numberOfDamageDiceSides: 4,
     properties: [WeaponProps.LIGHT],
-    type: WeaponTypes.SIMPLE_MELEE,
+    type: GearTypes.WEAPONS,
+    weaponType: WeaponTypes.SIMPLE_MELEE,
     weight: '2 lb'
   },
   {
@@ -124,7 +134,8 @@ export default [
     numberOfDamageDice: 1,
     numberOfDamageDiceSides: 6,
     properties: [WeaponProps.THROWN, WeaponProps.VERSATILE],
-    type: WeaponTypes.SIMPLE_MELEE,
+    type: GearTypes.WEAPONS,
+    weaponType: WeaponTypes.SIMPLE_MELEE,
     weight: '3 lb'
   },
   {
@@ -136,7 +147,8 @@ export default [
     numberOfDamageDiceSides: 4,
     properties: [WeaponProps.FINESSE, WeaponProps.THROWN],
     range: '20/60',
-    type: WeaponTypes.SIMPLE_RANGED,
+    type: GearTypes.WEAPONS,
+    weaponType: WeaponTypes.SIMPLE_RANGED,
     weight: '1/4 lb'
   },
   {
@@ -148,7 +160,8 @@ export default [
     numberOfDamageDiceSides: 6,
     properties: [WeaponProps.AMMUNITION, WeaponProps.TWO_HANDED],
     range: '80/320',
-    type: WeaponTypes.SIMPLE_RANGED,
+    type: GearTypes.WEAPONS,
+    weaponType: WeaponTypes.SIMPLE_RANGED,
     weight: '2 lb'
   },
   {
@@ -159,7 +172,8 @@ export default [
     numberOfDamageDice: 1,
     numberOfDamageDiceSides: 4,
     properties: [WeaponProps.AMMUNITION],
-    type: WeaponTypes.SIMPLE_RANGED,
+    type: GearTypes.WEAPONS,
+    weaponType: WeaponTypes.SIMPLE_RANGED,
     weight: '1/2 lb'
   },
   {
@@ -170,7 +184,8 @@ export default [
     numberOfDamageDice: 1,
     numberOfDamageDiceSides: 8,
     properties: [],
-    type: WeaponTypes.MARTIAL_MELEE,
+    type: GearTypes.WEAPONS,
+    weaponType: WeaponTypes.MARTIAL_MELEE,
     weight: '2 lb'
   },
   {
@@ -181,7 +196,8 @@ export default [
     numberOfDamageDice: 1,
     numberOfDamageDiceSides: 10,
     properties: [WeaponProps.HEAVY, WeaponProps.TWO_HANDED, WeaponProps.REACH],
-    type: WeaponTypes.MARTIAL_MELEE,
+    type: GearTypes.WEAPONS,
+    weaponType: WeaponTypes.MARTIAL_MELEE,
     weight: '6 lb'
   },
   {
@@ -192,7 +208,8 @@ export default [
     numberOfDamageDice: 1,
     numberOfDamageDiceSides: 12,
     properties: [WeaponProps.HEAVY, WeaponProps.TWO_HANDED],
-    type: WeaponTypes.MARTIAL_MELEE,
+    type: GearTypes.WEAPONS,
+    weaponType: WeaponTypes.MARTIAL_MELEE,
     weight: '7 lb'
   },
   {
@@ -203,7 +220,8 @@ export default [
     numberOfDamageDice: 2,
     numberOfDamageDiceSides: 6,
     properties: [WeaponProps.HEAVY, WeaponProps.TWO_HANDED],
-    type: WeaponTypes.MARTIAL_MELEE,
+    type: GearTypes.WEAPONS,
+    weaponType: WeaponTypes.MARTIAL_MELEE,
     weight: '6 lb'
   },
   {
@@ -214,7 +232,8 @@ export default [
     numberOfDamageDice: 1,
     numberOfDamageDiceSides: 10,
     properties: [WeaponProps.HEAVY, WeaponProps.TWO_HANDED, WeaponProps.REACH],
-    type: WeaponTypes.MARTIAL_MELEE,
+    type: GearTypes.WEAPONS,
+    weaponType: WeaponTypes.MARTIAL_MELEE,
     weight: '6 lb'
   },
   {
@@ -225,7 +244,8 @@ export default [
     numberOfDamageDice: 1,
     numberOfDamageDiceSides: 12,
     properties: [WeaponProps.SPECIAL, WeaponProps.REACH],
-    type: WeaponTypes.MARTIAL_MELEE,
+    type: GearTypes.WEAPONS,
+    weaponType: WeaponTypes.MARTIAL_MELEE,
     weight: '6 lb'
   },
   {
@@ -236,7 +256,7 @@ export default [
     numberOfDamageDice: 1,
     numberOfDamageDiceSides: 8,
     properties: [WeaponProps.VERSATILE],
-    type: WeaponTypes.MARTIAL_MELEE,
+    weaponType: WeaponTypes.MARTIAL_MELEE,
     weight: '3 lb'
   },
   {
@@ -247,7 +267,8 @@ export default [
     numberOfDamageDice: 2,
     numberOfDamageDiceSides: 6,
     properties: [WeaponProps.HEAVY, WeaponProps.TWO_HANDED],
-    type: WeaponTypes.MARTIAL_MELEE,
+    type: GearTypes.WEAPONS,
+    weaponType: WeaponTypes.MARTIAL_MELEE,
     weight: '10 lb'
   },
   {
@@ -258,7 +279,8 @@ export default [
     numberOfDamageDice: 1,
     numberOfDamageDiceSides: 8,
     properties: [],
-    type: WeaponTypes.MARTIAL_MELEE,
+    type: GearTypes.WEAPONS,
+    weaponType: WeaponTypes.MARTIAL_MELEE,
     weight: '4 lb'
   },
   {
@@ -269,7 +291,8 @@ export default [
     numberOfDamageDice: 1,
     numberOfDamageDiceSides: 10,
     properties: [WeaponProps.HEAVY, WeaponProps.TWO_HANDED, WeaponProps.REACH],
-    type: WeaponTypes.MARTIAL_MELEE,
+    type: GearTypes.WEAPONS,
+    weaponType: WeaponTypes.MARTIAL_MELEE,
     weight: '18 lb'
   },
   {
@@ -280,7 +303,8 @@ export default [
     numberOfDamageDice: 1,
     numberOfDamageDiceSides: 8,
     properties: [WeaponProps.FINESSE],
-    type: WeaponTypes.MARTIAL_MELEE,
+    type: GearTypes.WEAPONS,
+    weaponType: WeaponTypes.MARTIAL_MELEE,
     weight: '2 lb'
   },
   {
@@ -291,7 +315,8 @@ export default [
     numberOfDamageDice: 1,
     numberOfDamageDiceSides: 6,
     properties: [WeaponProps.FINESSE, WeaponProps.LIGHT],
-    type: WeaponTypes.MARTIAL_MELEE,
+    type: GearTypes.WEAPONS,
+    weaponType: WeaponTypes.MARTIAL_MELEE,
     weight: '3 lb'
   },
   {
@@ -302,7 +327,8 @@ export default [
     numberOfDamageDice: 1,
     numberOfDamageDiceSides: 6,
     properties: [WeaponProps.FINESSE, WeaponProps.LIGHT],
-    type: WeaponTypes.MARTIAL_MELEE,
+    type: GearTypes.WEAPONS,
+    weaponType: WeaponTypes.MARTIAL_MELEE,
     weight: '2 lb'
   },
   {
@@ -314,7 +340,8 @@ export default [
     numberOfDamageDiceSides: 6,
     properties: [WeaponProps.THROWN, WeaponProps.VERSATILE],
     range: '20/60',
-    type: WeaponTypes.MARTIAL_MELEE,
+    type: GearTypes.WEAPONS,
+    weaponType: WeaponTypes.MARTIAL_MELEE,
     weight: '4 lb'
   },
   {
@@ -325,7 +352,8 @@ export default [
     numberOfDamageDice: 1,
     numberOfDamageDiceSides: 8,
     properties: [],
-    type: WeaponTypes.MARTIAL_MELEE,
+    type: GearTypes.WEAPONS,
+    weaponType: WeaponTypes.MARTIAL_MELEE,
     weight: '2 lb'
   },
   {
@@ -336,7 +364,8 @@ export default [
     numberOfDamageDice: 1,
     numberOfDamageDiceSides: 8,
     properties: [WeaponProps.VERSATILE],
-    type: WeaponTypes.MARTIAL_MELEE,
+    type: GearTypes.WEAPONS,
+    weaponType: WeaponTypes.MARTIAL_MELEE,
     weight: '2 lb'
   },
   {
@@ -347,7 +376,8 @@ export default [
     numberOfDamageDice: 1,
     numberOfDamageDiceSides: 4,
     properties: [WeaponProps.FINESSE, WeaponProps.REACH],
-    type: WeaponTypes.MARTIAL_MELEE,
+    type: GearTypes.WEAPONS,
+    weaponType: WeaponTypes.MARTIAL_MELEE,
     weight: '3 lb'
   },
   {
@@ -358,8 +388,9 @@ export default [
     numberOfDamageDice: 1,
     numberOfDamageDiceSides: 6,
     properties: [WeaponProps.LIGHT, WeaponProps.LOADING, WeaponProps.AMMUNITION],
-    type: WeaponTypes.MARTIAL_RANGED,
+    weaponType: WeaponTypes.MARTIAL_RANGED,
     range: '30/120',
+    type: GearTypes.WEAPONS,
     weight: '3 lb'
   },
   {
@@ -370,8 +401,9 @@ export default [
     numberOfDamageDice: 1,
     numberOfDamageDiceSides: 10,
     properties: [WeaponProps.HEAVY, WeaponProps.LOADING, WeaponProps.TWO_HANDED, WeaponProps.AMMUNITION],
-    type: WeaponTypes.MARTIAL_RANGED,
+    weaponType: WeaponTypes.MARTIAL_RANGED,
     range: '100/400',
+    type: GearTypes.WEAPONS,
     weight: '18 lb'
   },
   {
@@ -382,8 +414,9 @@ export default [
     numberOfDamageDice: 1,
     numberOfDamageDiceSides: 8,
     properties: [WeaponProps.HEAVY, WeaponProps.AMMUNITION, WeaponProps.TWO_HANDED],
-    type: WeaponTypes.MARTIAL_RANGED,
+    weaponType: WeaponTypes.MARTIAL_RANGED,
     range: '150/600',
+    type: GearTypes.WEAPONS,
     weight: '2 lb'
   },
 ];

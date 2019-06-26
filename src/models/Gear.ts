@@ -3,7 +3,7 @@ export interface Gear {
   cost: string;
   desc: string;
   name: string;
-  type?: string;
+  type: string;
   weight: string;
 }
 
@@ -13,7 +13,7 @@ export interface Armor extends Gear {
   equipped: boolean;
   stealthDisadvatage: boolean;
   strengthReq?: number;
-  type: string;
+  armorType: string;
 }
 
 export interface Coinage {
@@ -30,7 +30,7 @@ export interface Weapon extends Gear {
   numberOfDamageDiceSides: number;
   properties: string[];
   range?: string;
-  type: string;
+  weaponType: string;
 }
 
 export enum ArmorTypes {
@@ -52,6 +52,13 @@ export enum DamageTypes {
   BLUDGEONING = 'Bludgeoning',
   PIERCING = 'Piercing',
   SLASHING = 'Slashing'
+}
+
+export enum GearTypes {
+  ARMOR = 'armor',
+  ITEMS = 'items',
+  TOOLS = 'tools',
+  WEAPONS = 'weapons'
 }
 
 export enum ToolTypes {

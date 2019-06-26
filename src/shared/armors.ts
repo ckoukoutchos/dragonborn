@@ -1,4 +1,4 @@
-import { ArmorTypes } from '../models/Gear';
+import { ArmorTypes, GearTypes } from '../models/Gear';
 
 // eventually will be stored in db and served as json from backend, till then will be served in app bundle
 export default [
@@ -10,7 +10,8 @@ export default [
     equipped: false,
     name: 'Padded',
     stealthDisadvatage: true,
-    type: ArmorTypes.LIGHT,
+    armorType: ArmorTypes.LIGHT,
+    type: GearTypes.ARMOR,
     weight: '8 lb'
   },
   {
@@ -21,7 +22,8 @@ export default [
     equipped: false,
     name: 'Hide',
     stealthDisadvatage: false,
-    type: ArmorTypes.MEDIUM,
+    armorType: ArmorTypes.MEDIUM,
+    type: GearTypes.ARMOR,
     weight: '12 lb'
   },
   {
@@ -32,7 +34,8 @@ export default [
     equipped: false,
     name: 'Ring Mail',
     stealthDisadvatage: true,
-    type: ArmorTypes.HEAVY,
+    armorType: ArmorTypes.HEAVY,
+    type: GearTypes.ARMOR,
     weight: '40 lb'
   }
 ];

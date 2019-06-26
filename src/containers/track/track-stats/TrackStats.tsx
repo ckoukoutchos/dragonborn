@@ -13,7 +13,6 @@ import {
 import { HeroActionTypes } from '../../../store/hero/heroActionTypes';
 
 // components
-import AdventureGear from '../../../components/hero/adventure-gear/AdventureGear';
 import Attacks from '../../../components/hero/attacks/Attacks';
 import BasicCard from '../../../components/UI/card/basic-card/BasicCard';
 import BlockInput from '../../../components/UI/input/block-input/BlockInput';
@@ -395,8 +394,6 @@ class TrackStats extends Component<TrackStatsProps, TrackStatsState> {
           <Attacks />
 
           <Equipment />
-
-          <AdventureGear />
 
           {/* Proficiencies */}
           <BasicCard

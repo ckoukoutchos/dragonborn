@@ -20,7 +20,9 @@ import WeaponDetails from '../weapon-details/WeaponDetails';
 import Hero from '../../../models/Hero';
 import Weapons from '../../../shared/weapons';
 import Armors from '../../../shared/armors';
-import { Armor, Weapon } from '../../../models/Gear';
+import Items from '../../../shared/items';
+import Tools from '../../../shared/tools';
+import { Armor, Weapon, Gear, GearTypes } from '../../../models/Gear';
 import { updateObject } from '../../../shared/immutable';
 import { HeroActionTypes } from '../../../store/hero/heroActionTypes';
 import { User } from '../../../models/User';
@@ -32,15 +34,70 @@ interface EquipmentProps {
 }
 
 interface EquipmentState {
+  gear: any[];
   showModal: boolean;
 }
 
-// TODO: remove style tags, clean up render func, smaller slice of state
+// TODO: remove style tags, smaller slice of state, func docs
 
 class Equipment extends Component<EquipmentProps, EquipmentState> {
   state = {
+    // eventually will be from json on server
+    gear: [...Weapons, ...Armors, ...Tools, ...Items],
     showModal: false
   };
+
+  createEquipmentPanels(hero: Hero) {
+    const equipment = [];
+
+    for (const [key, type] of Object.entries(GearTypes)) {
+      // check if [type] is prop on hero, sometimes FB deletes props with empty arrays
+      if (hero[type] && hero[type].length) {
+        // for each GearType, create panels for items in those types
+        const panels = hero[type].map(
+          (item: Gear | Armor | Weapon, index: number) => (
+            <Panel
+              key={item.name}
+              label={item.name}
+              odd={index % 2 !== 0}
+              onSecondaryClicked={this.onDeleteItem(type, item.name)}
+            >
+              {this.getDetailsComponent(type, item)}
+            </Panel>
+          )
+        );
+        equipment.push(panels);
+      }
+    }
+
+    return equipment;
+  }
+
+  createGearPanels(gear: any[]) {
+    return gear.map((item: any, index: number) => (
+      <Panel
+        key={item.name}
+        label={item.name}
+        odd={index % 2 !== 0}
+        onPrimaryClicked={this.onAddItem(item.type, item.name)}
+      >
+        {this.getDetailsComponent(item.type, item)}
+      </Panel>
+    ));
+  }
+
+  getDetailsComponent(gearType: string, item: Gear | Armor | Weapon) {
+    switch (gearType) {
+      case 'weapons':
+        //@ts-ignore
+        return <WeaponDetails weapon={item} />;
+      case 'armor':
+        //@ts-ignore
+        return <ArmorDetails armor={item} />;
+      default:
+        return;
+    }
+  }
 
   /**
    * @name onAddItem
@@ -49,13 +106,9 @@ class Equipment extends Component<EquipmentProps, EquipmentState> {
    */
   onAddItem = (type: string, itemName: string) => () => {
     const { hero, user } = this.props;
+    const { gear } = this.state;
 
-    let chosenItem;
-    if (type === 'weapons') {
-      chosenItem = Weapons.find(({ name }: Weapon) => name === itemName);
-    } else {
-      chosenItem = Armors.find(({ name }: Armor) => name === itemName);
-    }
+    const chosenItem = gear.find(({ name }: any) => name === itemName);
 
     if (chosenItem) {
       let updatedHero;
@@ -66,7 +119,6 @@ class Equipment extends Component<EquipmentProps, EquipmentState> {
         updatedHero = updateObject(hero, {
           [type]: newItemArray
         });
-
         // create item prop on hero and adds item (sometimes FB deletes props with empty arrays)
       } else {
         updatedHero = updateObject(hero, {
@@ -90,14 +142,9 @@ class Equipment extends Component<EquipmentProps, EquipmentState> {
   onDeleteItem = (type: string, itemName: string) => () => {
     const { hero, user } = this.props;
 
-    let newItemArray;
-    if (type === 'weapons') {
-      newItemArray = hero.weapons.filter(
-        ({ name }: Weapon) => name !== itemName
-      );
-    } else {
-      newItemArray = hero.armor.filter(({ name }: Armor) => name !== itemName);
-    }
+    let newItemArray = hero[type].filter(
+      ({ name }: Weapon | Armor | Gear) => name !== itemName
+    );
 
     const updatedHero = updateObject(hero, {
       [type]: newItemArray
@@ -119,77 +166,8 @@ class Equipment extends Component<EquipmentProps, EquipmentState> {
   };
 
   render() {
-    const {
-      hero: { armor, weapons }
-    } = this.props;
-    const { showModal } = this.state;
-
-    let armorList: any = (
-      <p style={{ textAlign: 'center' }}>You do not have any armor!</p>
-    );
-
-    if (armor && armor.length) {
-      armorList = armor.map((armor: Armor, index: number) => {
-        return (
-          <Panel
-            key={armor.name}
-            label={armor.name}
-            odd={index % 2 !== 0}
-            onSecondaryClicked={this.onDeleteItem('armor', armor.name)}
-          >
-            <ArmorDetails armor={armor} />
-          </Panel>
-        );
-      });
-    }
-
-    // panels for add item modal
-    const allArmorsList = Armors.map((armor: Armor, index: number) => {
-      return (
-        <Panel
-          key={armor.name}
-          label={armor.name}
-          odd={index % 2 !== 0}
-          onPrimaryClicked={this.onAddItem('armor', armor.name)}
-        >
-          <ArmorDetails armor={armor} />
-        </Panel>
-      );
-    });
-
-    let weaponList: any = (
-      <p style={{ textAlign: 'center' }}>You do not have any weapons!</p>
-    );
-
-    // panels for current hero weapons
-    if (weapons && weapons.length) {
-      weaponList = weapons.map((weapon: Weapon, index: number) => {
-        return (
-          <Panel
-            key={weapon.name}
-            label={weapon.name}
-            odd={index % 2 !== 0}
-            onSecondaryClicked={this.onDeleteItem('weapons', weapon.name)}
-          >
-            <WeaponDetails weapon={weapon} />
-          </Panel>
-        );
-      });
-    }
-
-    // panels for add weapon modal
-    const allWeaponsList = Weapons.map((weapon: Weapon, index: number) => {
-      return (
-        <Panel
-          key={weapon.name}
-          label={weapon.name}
-          odd={index % 2 !== 0}
-          onPrimaryClicked={this.onAddItem('weapons', weapon.name)}
-        >
-          <WeaponDetails weapon={weapon} />
-        </Panel>
-      );
-    });
+    const { hero } = this.props;
+    const { gear, showModal } = this.state;
 
     return (
       <>
@@ -198,10 +176,7 @@ class Equipment extends Component<EquipmentProps, EquipmentState> {
           title='Equipment'
           onEdit={this.onModalToggled}
         >
-          <Accordian>
-            {weaponList}
-            {armorList}
-          </Accordian>
+          <Accordian>{this.createEquipmentPanels(hero)}</Accordian>
         </BasicCard>
 
         <Modal
@@ -210,8 +185,7 @@ class Equipment extends Component<EquipmentProps, EquipmentState> {
           show={showModal}
           title='Add Equipment'
         >
-          <Accordian>{allWeaponsList}</Accordian>
-          <Accordian>{allArmorsList}</Accordian>
+          <Accordian>{this.createGearPanels(gear)}</Accordian>
 
           <div style={{ width: '100%' }}>
             <Button btnType='Flat' color='Warn' clicked={this.onModalToggled}>
