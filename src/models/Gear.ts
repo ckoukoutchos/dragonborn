@@ -3,6 +3,7 @@ export interface Gear {
   cost: string;
   desc: string;
   name: string;
+  number: number;
   type: string;
   weight: string;
 }

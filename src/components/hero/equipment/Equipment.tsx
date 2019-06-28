@@ -1,5 +1,5 @@
 // library
-import React, { Component } from 'react';
+import React, { Component, ReactElement } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 
@@ -38,7 +38,7 @@ interface EquipmentState {
   showModal: boolean;
 }
 
-// TODO: remove style tags, smaller slice of state, func docs
+// TODO: smaller slice of state?, add other detail components
 
 class Equipment extends Component<EquipmentProps, EquipmentState> {
   state = {
@@ -47,6 +47,11 @@ class Equipment extends Component<EquipmentProps, EquipmentState> {
     showModal: false
   };
 
+  /**
+   * @name createEquipmentPanels
+   * @description creates an array of <Panel> for each item in each gear type of a hero
+   * @param hero Hero
+   */
   createEquipmentPanels(hero: Hero) {
     const equipment = [];
 
@@ -73,7 +78,12 @@ class Equipment extends Component<EquipmentProps, EquipmentState> {
     return equipment;
   }
 
-  createGearPanels(gear: any[]) {
+  /**
+   * @name createGearPanels
+   * @description creates an array of <Panel> for each passed gear item
+   * @param gear gear[]
+   */
+  createGearPanels(gear: any[]): ReactElement[] {
     return gear.map((item: any, index: number) => (
       <Panel
         key={item.name}
@@ -86,7 +96,16 @@ class Equipment extends Component<EquipmentProps, EquipmentState> {
     ));
   }
 
-  getDetailsComponent(gearType: string, item: Gear | Armor | Weapon) {
+  /**
+   * @name getDetailsComponent
+   * @description returns appropriate Details component based on passed gearType
+   * @param gearType string
+   * @param item Gear | Armor | Weapon
+   */
+  getDetailsComponent(
+    gearType: string,
+    item: Gear | Armor | Weapon
+  ): ReactElement {
     switch (gearType) {
       case 'weapons':
         //@ts-ignore
@@ -95,7 +114,7 @@ class Equipment extends Component<EquipmentProps, EquipmentState> {
         //@ts-ignore
         return <ArmorDetails armor={item} />;
       default:
-        return;
+        return <p>Empty</p>;
     }
   }
 
