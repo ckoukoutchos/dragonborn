@@ -63,7 +63,7 @@ class Equipment extends Component<EquipmentProps, EquipmentState> {
           (item: Gear | Armor | Weapon, index: number) => (
             <Panel
               key={item.name}
-              label={item.name}
+              label={this.itemLabel(item)}
               odd={index % 2 !== 0}
               onSecondaryClicked={this.onDeleteItem(type, item.name)}
             >
@@ -83,17 +83,27 @@ class Equipment extends Component<EquipmentProps, EquipmentState> {
    * @description creates an array of <Panel> for each passed gear item
    * @param gear gear[]
    */
-  createGearPanels(gear: any[]): ReactElement[] {
-    return gear.map((item: any, index: number) => (
-      <Panel
-        key={item.name}
-        label={item.name}
-        odd={index % 2 !== 0}
-        onPrimaryClicked={this.onAddItem(item.type, item.name)}
-      >
-        {this.getDetailsComponent(item.type, item)}
-      </Panel>
-    ));
+  createGearPanels(gear: any[], equipment: any[]): ReactElement[] {
+    // filter options that the hero has already equipped
+    const filteredGear = gear.filter((item: Gear) => {
+      // checks if item is already equipped on hero
+      return (
+        equipment.find((equip: Gear) => equip.name === item.name) === undefined
+      );
+    });
+
+    return filteredGear.map((item: any, index: number) => {
+      return (
+        <Panel
+          key={item.name}
+          label={this.itemLabel(item)}
+          odd={index % 2 !== 0}
+          onPrimaryClicked={this.onAddItem(item.type, item.name)}
+        >
+          {this.getDetailsComponent(item.type, item)}
+        </Panel>
+      );
+    });
   }
 
   /**
@@ -116,6 +126,15 @@ class Equipment extends Component<EquipmentProps, EquipmentState> {
       default:
         return <p>Empty</p>;
     }
+  }
+
+  /**
+   * @name itemLabel
+   * @description creates display label for an item
+   * @param item Gear
+   */
+  itemLabel({ name, number }: Gear) {
+    return number === 1 ? name : `${name} (${number})`;
   }
 
   /**
@@ -204,7 +223,9 @@ class Equipment extends Component<EquipmentProps, EquipmentState> {
           show={showModal}
           title='Add Equipment'
         >
-          <Accordian>{this.createGearPanels(gear)}</Accordian>
+          <Accordian>
+            {this.createGearPanels(gear, [...hero.items, ...hero.weapons])}
+          </Accordian>
 
           <div style={{ width: '100%' }}>
             <Button btnType='Flat' color='Warn' clicked={this.onModalToggled}>
