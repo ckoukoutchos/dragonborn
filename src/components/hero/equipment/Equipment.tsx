@@ -12,6 +12,7 @@ import Accordian from '../../UI/accordian/Accordian';
 import ArmorDetails from '../armor-details/ArmorDetails';
 import BasicCard from '../../UI/card/basic-card/BasicCard';
 import Button from '../../UI/button/Button';
+import GearDetails from '../gear-details/GearDetails';
 import Modal from '../../UI/modal/Modal';
 import Panel from '../../UI/accordian/panel/Panel';
 import WeaponDetails from '../weapon-details/WeaponDetails';
@@ -118,10 +119,7 @@ class Equipment extends Component<EquipmentProps, EquipmentState> {
    * @param gearType string
    * @param item Gear | Armor | Weapon
    */
-  getDetailsComponent(
-    gearType: string,
-    item: Gear | Armor | Weapon
-  ): ReactElement {
+  getDetailsComponent(gearType: string, item: Gear): ReactElement {
     switch (gearType) {
       case 'weapons':
         //@ts-ignore
@@ -129,6 +127,10 @@ class Equipment extends Component<EquipmentProps, EquipmentState> {
       case 'armor':
         //@ts-ignore
         return <ArmorDetails armor={item} />;
+      case 'items':
+        return <GearDetails gear={item} />;
+      case 'tools':
+        return <GearDetails gear={item} />;
       default:
         return <p>Empty</p>;
     }

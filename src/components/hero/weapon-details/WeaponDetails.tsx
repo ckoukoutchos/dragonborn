@@ -24,7 +24,7 @@ const weaponDetails = (props: WeaponDetailsProps) => {
       numberOfDamageDiceSides,
       properties,
       range,
-      type,
+      weaponType,
       weight
     }
   } = props;
@@ -48,7 +48,7 @@ const weaponDetails = (props: WeaponDetailsProps) => {
 
       <MultiLineInput
         label={['Type', 'Damage Type']}
-        value={[type, damageType]}
+        value={[weaponType, damageType]}
       />
 
       <MultiLineInput
