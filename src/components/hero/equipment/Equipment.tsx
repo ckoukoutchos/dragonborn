@@ -84,13 +84,19 @@ class Equipment extends Component<EquipmentProps, EquipmentState> {
    * @param gear gear[]
    */
   createGearPanels(gear: any[], equipment: any[]): ReactElement[] {
-    // filter options that the hero has already equipped
-    const filteredGear = gear.filter((item: Gear) => {
-      // checks if item is already equipped on hero
-      return (
-        equipment.find((equip: Gear) => equip.name === item.name) === undefined
-      );
+    // create index of equipment for quick look up
+    const indexedEquipment: any = {};
+    equipment.forEach((item: Gear) => {
+      // FB sometimes deletes empty arrays so item maybe undefined
+      if (item) {
+        indexedEquipment[item.name] = item;
+      }
     });
+
+    // filter gear alread equipped
+    const filteredGear = gear.filter(
+      (item: Gear) => !indexedEquipment[item.name]
+    );
 
     return filteredGear.map((item: any, index: number) => {
       return (
@@ -207,6 +213,14 @@ class Equipment extends Component<EquipmentProps, EquipmentState> {
     const { hero } = this.props;
     const { gear, showModal } = this.state;
 
+    const equipment = [].concat(
+      //@ts-ignore
+      hero.armor,
+      hero.weapons,
+      hero.tools,
+      hero.items
+    );
+
     return (
       <>
         <BasicCard
@@ -223,9 +237,7 @@ class Equipment extends Component<EquipmentProps, EquipmentState> {
           show={showModal}
           title='Add Equipment'
         >
-          <Accordian>
-            {this.createGearPanels(gear, [...hero.items, ...hero.weapons])}
-          </Accordian>
+          <Accordian>{this.createGearPanels(gear, equipment)}</Accordian>
 
           <div style={{ width: '100%' }}>
             <Button btnType='Flat' color='Warn' clicked={this.onModalToggled}>
