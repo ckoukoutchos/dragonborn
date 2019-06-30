@@ -39,7 +39,7 @@ interface EquipmentState {
   showModal: boolean;
 }
 
-// TODO: smaller slice of state?, add other detail components
+// TODO: smaller slice of state
 
 class Equipment extends Component<EquipmentProps, EquipmentState> {
   state = {
@@ -54,29 +54,30 @@ class Equipment extends Component<EquipmentProps, EquipmentState> {
    * @param hero Hero
    */
   createEquipmentPanels(hero: Hero) {
-    const equipment = [];
-
-    for (const [key, type] of Object.entries(GearTypes)) {
-      // check if [type] is prop on hero, sometimes FB deletes props with empty arrays
-      if (hero[type] && hero[type].length) {
-        // for each GearType, create panels for items in those types
-        const panels = hero[type].map(
-          (item: Gear | Armor | Weapon, index: number) => (
-            <Panel
-              key={item.name}
-              label={this.itemLabel(item)}
-              odd={index % 2 !== 0}
-              onSecondaryClicked={this.onDeleteItem(type, item.name)}
-            >
-              {this.getDetailsComponent(type, item)}
-            </Panel>
-          )
-        );
-        equipment.push(panels);
+    // combine all hero gear, ignore if prop isnt on hero, sometimes FB deletes empty arrays
+    let equipment: any = [];
+    for (const [key, value] of Object.entries(GearTypes)) {
+      if (hero[value] !== undefined) {
+        equipment.push(...hero[value]);
       }
     }
 
-    return equipment;
+    if (equipment.length) {
+      return equipment.map((item: Gear | Armor | Weapon, index: number) => {
+        return (
+          <Panel
+            key={item.name}
+            label={this.itemLabel(item)}
+            odd={index % 2 !== 0}
+            onSecondaryClicked={this.onDeleteItem(item.type, item.name)}
+          >
+            {this.getDetailsComponent(item.type, item)}
+          </Panel>
+        );
+      });
+    } else {
+      return <p style={{ textAlign: 'center' }}>You need to add equipment!</p>;
+    }
   }
 
   /**

@@ -17,9 +17,10 @@ import Attacks from '../../../components/hero/attacks/Attacks';
 import BasicCard from '../../../components/UI/card/basic-card/BasicCard';
 import BlockInput from '../../../components/UI/input/block-input/BlockInput';
 import BlockInsetInput from '../../../components/UI/input/block-inset-input/BlockInsetInput';
-import Equipment from '../../../components/hero/equipment/Equipment';
-import SecondaryCard from '../../../components/UI/card/secondary-card/SecondaryCard';
 import Dropdown from '../../../components/UI/dropdown/Dropdown';
+import Equipment from '../../../components/hero/equipment/Equipment';
+import Proficiency from '../../../components/hero/proficiencies/Proficiency';
+import SecondaryCard from '../../../components/UI/card/secondary-card/SecondaryCard';
 import TabBar from '../../../components/UI/tab-bar/TabBar';
 import TextAreaInput from '../../../components/UI/input/textarea-input/TextAreaInput';
 import TitleCard from '../../../components/UI/card/title-card/TitleCard';
@@ -36,7 +37,7 @@ import Hero, {
 import { User } from '../../../models/User';
 import { calcAbilityModifier } from '../../../shared/convert';
 
-// TODO:  refactor, remove style tags, use loops to repeat similar sections, use object fields to generate labels rather than strings?
+// TODO:  refactor, remove style tags, move to own components
 
 interface TrackStatsProps {
   hero: any;
@@ -395,6 +396,7 @@ class TrackStats extends Component<TrackStatsProps, TrackStatsState> {
 
           <Equipment />
 
+          <Proficiency />
           {/* Proficiencies */}
           <BasicCard
             title={'Proficiency & Language'}
