@@ -15,11 +15,11 @@ export const calcAbilityModifier = (value: number): number =>
  * @param Hero
  * @param Weapon 
  */
-export const calcAttackBonus = ({ abilityScores, proficiencies, proficiencyBonus }: Hero, { properties, type }: Weapon): string => {
+export const calcAttackBonus = ({ abilityScores, proficiencies, proficiencyBonus }: Hero, { properties, weaponType }: Weapon): string => {
   // sometimes FB deletes empty arrays so need to check that proficiencies exist on hero
   const proficiencyList = proficiencies ? proficiencies : [];
 
-  const weaponProficiencyBonus = proficiencyList.includes(type) ? proficiencyBonus : 0;
+  const weaponProficiencyBonus = proficiencyList.includes(weaponType) ? proficiencyBonus : 0;
   const dexMod = calcAbilityModifier(abilityScores.Dexterity);
   const strMod = calcAbilityModifier(abilityScores.Strength);
 

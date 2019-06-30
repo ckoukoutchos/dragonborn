@@ -57,7 +57,7 @@ class Proficiency extends Component<ProficiencyProps, ProficiencyState> {
             odd={index % 2 !== 0}
             onSecondaryClicked={this.onDeleteItem(proficiency)}
           >
-            text
+            Adds your proficiency bouns to all actions with this item.
           </Panel>
         );
       });
@@ -70,72 +70,78 @@ class Proficiency extends Component<ProficiencyProps, ProficiencyState> {
 
   /**
    * @name createGearPanels
-   * @description creates an array of <Panel> for each passed gear item
-   * @param gear gear[]
+   * @description creates an array of <Panel> for each passed proficiency
+   * @param proficiencies string[]
+   * @param proficiencyList string[]
    */
-  //   createGearPanels(gear: any[], equipment: any[]): ReactElement[] {
-  //     // create index of equipment for quick look up
-  //     const indexedEquipment: any = {};
-  //     equipment.forEach((item: Gear) => {
-  //       // FB sometimes deletes empty arrays so item maybe undefined
-  //       if (item) {
-  //         indexedEquipment[item.name] = item;
-  //       }
-  //     });
+  createModalProficiencyPanels(
+    proficiencies: string[],
+    proficiencyList: string[]
+  ): ReactElement[] {
+    // create index of equipment for quick look up
+    const indexedProficiencies: any = {};
+    // FB sometimes deletes empty arrays so proficiencies maybe undefined
+    if (proficiencies) {
+      proficiencies.forEach((item: string) => {
+        indexedProficiencies[item] = item;
+      });
+    }
 
-  //     // filter gear alread equipped
-  //     const filteredGear = gear.filter(
-  //       (item: Gear) => !indexedEquipment[item.name]
-  //     );
+    // filter proficiency already equipped
+    const filteredProficiencies = proficiencyList.filter(
+      (item: string) => !indexedProficiencies[item]
+    );
 
-  //     return filteredGear.map((item: any, index: number) => {
-  //       return (
-  //         <Panel
-  //           key={item.name}
-  //           label={this.itemLabel(item)}
-  //           odd={index % 2 !== 0}
-  //           onPrimaryClicked={this.onAddItem(item.type, item.name)}
-  //         >
-  //           {this.getDetailsComponent(item.type, item)}
-  //         </Panel>
-  //       );
-  //     });
-  //   }
+    return filteredProficiencies.map((item: string, index: number) => {
+      return (
+        <Panel
+          key={item}
+          label={item}
+          odd={index % 2 !== 0}
+          onPrimaryClicked={this.onAddItem(item)}
+        >
+          Adds your proficiency bouns to all actions with this item.
+        </Panel>
+      );
+    });
+  }
 
   /**
    * @name onAddItem
-   * @description adds choosen item to hero item list and dispatches action to update hero in FB
-   * @param itemName string
+   * @description adds choosen proficiency to hero item list and dispatches action to update hero in FB
+   * @param proficiency string
    */
-  // onAddItem = (type: string, itemName: string) => () => {
-  //   const { hero, user } = this.props;
-  //   const { gear } = this.state;
+  onAddItem = (proficiency: string) => () => {
+    const { hero, user } = this.props;
+    const { proficiencies } = this.state;
 
-  //   const chosenItem = gear.find(({ name }: any) => name === itemName);
+    const chosenProficiency = proficiencies.find(
+      (item: string) => proficiency === item
+    );
 
-  //   if (chosenItem) {
-  //     let updatedHero;
+    if (chosenProficiency) {
+      let updatedHero;
 
-  //     // if [type] is a prop on the hero object add to the array
-  //     if (hero[type]) {
-  //       const newItemArray = hero[type].concat(chosenItem);
-  //       updatedHero = updateObject(hero, {
-  //         [type]: newItemArray
-  //       });
-  //       // create item prop on hero and adds item (sometimes FB deletes props with empty arrays)
-  //     } else {
-  //       updatedHero = updateObject(hero, {
-  //         [type]: [chosenItem]
-  //       });
-  //     }
+      // if proficiencies is a prop on the hero object add to the array
+      if (hero.proficiencies) {
+        const newItemArray = hero.proficiencies.concat(chosenProficiency);
+        updatedHero = updateObject(hero, {
+          proficiencies: newItemArray
+        });
+        // create item prop on hero and adds item (sometimes FB deletes props with empty arrays)
+      } else {
+        updatedHero = updateObject(hero, {
+          proficiencies: [chosenProficiency]
+        });
+      }
 
-  //     if (user) {
-  //       this.props.updateHero(updatedHero, user.uid);
-  //     }
-  //   }
+      if (user) {
+        this.props.updateHero(updatedHero, user.uid);
+      }
+    }
 
-  //   this.setState({ showModal: false });
-  // };
+    this.setState({ showModal: false });
+  };
 
   /**
    * @name onDeleteItem
@@ -169,8 +175,8 @@ class Proficiency extends Component<ProficiencyProps, ProficiencyState> {
   };
 
   render() {
-    const { proficiencies } = this.props;
-    const { showModal } = this.state;
+    const { hero } = this.props;
+    const { proficiencies, showModal } = this.state;
 
     return (
       <>
@@ -179,23 +185,30 @@ class Proficiency extends Component<ProficiencyProps, ProficiencyState> {
           title='Proficiency'
           onEdit={this.onModalToggled}
         >
-          <Accordian>{this.createProficiencyPanels(proficiencies)}</Accordian>
+          <Accordian>
+            {this.createProficiencyPanels(hero.proficiencies)}
+          </Accordian>
         </BasicCard>
 
-        {/* <Modal
+        <Modal
           color='Primary'
           onClose={this.onModalToggled}
           show={showModal}
-          title='Add Equipment'
+          title='Add Proficiency'
         >
-          <Accordian>{this.createGearPanels(gear, equipment)}</Accordian>
+          <Accordian>
+            {this.createModalProficiencyPanels(
+              hero.proficiencies,
+              proficiencies
+            )}
+          </Accordian>
 
           <div style={{ width: '100%' }}>
             <Button btnType='Flat' color='Warn' clicked={this.onModalToggled}>
               Cancel
             </Button>
           </div>
-        </Modal> */}
+        </Modal>
       </>
     );
   }
