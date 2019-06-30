@@ -397,15 +397,6 @@ class TrackStats extends Component<TrackStatsProps, TrackStatsState> {
           <Equipment />
 
           <Proficiency />
-          {/* Proficiencies */}
-          <BasicCard
-            title={'Proficiency & Language'}
-            editing={editing.proficiencies}
-            onCancel={this.onCancelClicked('proficiencies')}
-            onEdit={this.onEditToggled('proficiencies')}
-          >
-            <TextAreaInput editing={editing.proficiencies} />
-          </BasicCard>
 
           {/* Features */}
           <BasicCard
@@ -414,7 +405,11 @@ class TrackStats extends Component<TrackStatsProps, TrackStatsState> {
             onCancel={this.onCancelClicked('features')}
             onEdit={this.onEditToggled('features')}
           >
-            <TextAreaInput editing={editing.features} />
+            <TextAreaInput
+              editing={editing.features}
+              onChange={this.onInputChange('features')}
+              value={hero.features}
+            />
           </BasicCard>
         </div>
         <TabBar id={this.props.match.params.id} />

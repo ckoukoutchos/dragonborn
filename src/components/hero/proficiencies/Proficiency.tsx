@@ -33,7 +33,7 @@ interface ProficiencyState {
   showModal: boolean;
 }
 
-// TODO: smaller slice of state
+// TODO: smaller slice of state, remove style tags
 
 class Proficiency extends Component<ProficiencyProps, ProficiencyState> {
   state = {
@@ -182,7 +182,7 @@ class Proficiency extends Component<ProficiencyProps, ProficiencyState> {
       <>
         <BasicCard
           btnText={['', 'Add']}
-          title='Proficiency'
+          title='Proficiencies'
           onEdit={this.onModalToggled}
         >
           <Accordian>

@@ -7,6 +7,7 @@ export default class Hero {
   armor: Armor[];
   armorClass: number;
   background: string;
+  features: string;
   heroClass: HeroClasses | string;
   id: number;
   initative: number;
@@ -45,6 +46,7 @@ export default class Hero {
     this.armor = [];
     this.armorClass = 0;
     this.background = '';
+    this.features = '';
     this.heroClass = '';
     this.id = 0;
     this.initative = 0;

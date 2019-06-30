@@ -4,11 +4,12 @@ import classes from './TextAreaInput.module.css';
 
 interface TextareaInput {
   editing: boolean;
+  onChange: any;
   value?: string;
 }
 
 const textareaInput = (props: TextareaInput) => {
-  const { editing, value } = props;
+  const { editing, onChange, value } = props;
   return (
     <div
       className={[
@@ -22,6 +23,7 @@ const textareaInput = (props: TextareaInput) => {
           editing ? classes.Edit : classes.Disabled
         ].join(' ')}
         disabled={!editing}
+        onChange={onChange}
         value={value}
       />
     </div>
