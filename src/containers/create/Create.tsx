@@ -56,7 +56,7 @@ class Create extends Component<CreateProps> {
         </SecondaryCard>
 
         <SecondaryCard btnText={['', 'Create']} label='Hero Builder' wide>
-          <p>
+          <p style={{ padding: '0px 8px' }}>
             Step-by-step guide to creating your next hero! Coming in phase 3.
           </p>
         </SecondaryCard>

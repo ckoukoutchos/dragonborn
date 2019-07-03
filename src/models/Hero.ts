@@ -1,4 +1,4 @@
-import { Armor, Gear, Weapon } from './Gear';
+import { Armor, Gear, Weapon, Coinage, CoinTypes } from './Gear';
 
 export default class Hero {
   abilityScores: AbilityScores;
@@ -7,6 +7,7 @@ export default class Hero {
   armor: Armor[];
   armorClass: number;
   background: string;
+  coinage: Coinage;
   features: string;
   heroClass: HeroClasses | string;
   id: number;
@@ -46,6 +47,13 @@ export default class Hero {
     this.armor = [];
     this.armorClass = 0;
     this.background = '';
+    this.coinage = {
+      [CoinTypes.CP]: 0,
+      [CoinTypes.SP]: 0,
+      [CoinTypes.EP]: 0,
+      [CoinTypes.GP]: 0,
+      [CoinTypes.PP]: 0,
+    };
     this.features = '';
     this.heroClass = '';
     this.id = 0;

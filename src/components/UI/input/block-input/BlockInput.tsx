@@ -6,7 +6,7 @@ interface BlockInput {
   editing: boolean;
   label: string;
   onChange: any;
-  value: string;
+  value: string | number;
 }
 
 const blockInput = (props: BlockInput) => {

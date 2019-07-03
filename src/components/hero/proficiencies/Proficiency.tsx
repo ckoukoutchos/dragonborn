@@ -8,6 +8,7 @@ import { AppState } from '../../../store/rootReducer';
 import { updateHero } from '../../../store/hero/heroActionCreators';
 
 // components
+import classes from './Proficiency.module.css';
 import Accordian from '../../UI/accordian/Accordian';
 import BasicCard from '../../UI/card/basic-card/BasicCard';
 import Button from '../../UI/button/Button';
@@ -57,7 +58,10 @@ class Proficiency extends Component<ProficiencyProps, ProficiencyState> {
             odd={index % 2 !== 0}
             onSecondaryClicked={this.onDeleteItem(proficiency)}
           >
-            Adds your proficiency bouns to all actions with this item.
+            <p style={{ padding: '0px 8px' }}>
+              Adds your proficiency bouns to all actions with this item.
+            </p>
+            <hr className={classes.Divide} />
           </Panel>
         );
       });

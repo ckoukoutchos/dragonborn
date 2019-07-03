@@ -403,6 +403,7 @@ export default [
     damageType: DamageTypes.SLASHING,
     desc: 'Keep you enemies at bay, and your allies in line.',
     name: 'Whip',
+    number: 1,
     numberOfDamageDice: 1,
     numberOfDamageDiceSides: 4,
     properties: [WeaponProps.FINESSE, WeaponProps.REACH],

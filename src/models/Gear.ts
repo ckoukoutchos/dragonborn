@@ -4,7 +4,7 @@ export interface Gear {
   desc: string;
   name: string;
   number: number;
-  type: string;
+  type: GearTypes;
   weight: string;
 }
 
@@ -14,7 +14,7 @@ export interface Armor extends Gear {
   equipped: boolean;
   stealthDisadvatage: boolean;
   strengthReq?: number;
-  armorType: string;
+  armorType: ArmorTypes;
 }
 
 export interface Coinage {
@@ -26,12 +26,12 @@ export interface Coinage {
 }
 
 export interface Weapon extends Gear {
-  damageType: string;
+  damageType: DamageTypes;
   numberOfDamageDice: number;
   numberOfDamageDiceSides: number;
-  properties: string[];
+  properties: WeaponProps[];
   range?: string;
-  weaponType: string;
+  weaponType: WeaponTypes;
 }
 
 export enum ArmorTypes {

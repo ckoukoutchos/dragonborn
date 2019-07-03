@@ -13,8 +13,10 @@ import ArmorDetails from '../armor-details/ArmorDetails';
 import BasicCard from '../../UI/card/basic-card/BasicCard';
 import Button from '../../UI/button/Button';
 import GearDetails from '../gear-details/GearDetails';
+import MutliLineInput from '../../UI/input/multi-line-input/MultiLineInput';
 import Modal from '../../UI/modal/Modal';
 import Panel from '../../UI/accordian/panel/Panel';
+import SecondaryCard from '../../UI/card/secondary-card/SecondaryCard';
 import WeaponDetails from '../weapon-details/WeaponDetails';
 
 // shared

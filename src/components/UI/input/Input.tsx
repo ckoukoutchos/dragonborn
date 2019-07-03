@@ -8,7 +8,7 @@ interface InputProps {
   onChange?: any;
   long?: boolean;
   type?: string;
-  value: string;
+  value: string | number;
 }
 
 const input = (props: InputProps) => {
