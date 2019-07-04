@@ -11,6 +11,7 @@ export default class Hero {
   coinage: Coinage;
   features: string;
   heroClass: HeroClasses | string;
+  hp: number;
   id: number;
   initative: number;
   inspiration: number;
@@ -29,7 +30,6 @@ export default class Hero {
   spellCasting: SpellCasting;
   skillScores: SkillScores;
   subrace = null;
-  temporaryHP: number;
   tools: Gear[];
   weapons: Weapon[];
   xp: number;
@@ -58,6 +58,7 @@ export default class Hero {
     };
     this.features = '';
     this.heroClass = '';
+    this.hp = 0;
     this.id = 0;
     this.initative = 0;
     this.inspiration = 0;
@@ -71,33 +72,33 @@ export default class Hero {
     this.proficiencyBonus = 2;
     this.race = '';
     this.savingThrowsScores = {
-      [Abilities.CHA]: { proficient: false, value: 0 },
-      [Abilities.CON]: { proficient: false, value: 0 },
-      [Abilities.DEX]: { proficient: false, value: 0 },
-      [Abilities.INT]: { proficient: false, value: 0 },
-      [Abilities.STR]: { proficient: false, value: 0 },
-      [Abilities.WIS]: { proficient: false, value: 0 }
+      [Abilities.CHA]: { proficient: false, mod: 0 },
+      [Abilities.CON]: { proficient: false, mod: 0 },
+      [Abilities.DEX]: { proficient: false, mod: 0 },
+      [Abilities.INT]: { proficient: false, mod: 0 },
+      [Abilities.STR]: { proficient: false, mod: 0 },
+      [Abilities.WIS]: { proficient: false, mod: 0 }
     };
     this.speed = 0;
     this.skillScores = {
-      [Skills.ACROBATICS]: { proficient: false, ability: Abilities.DEX, value: 0 },
-      [Skills.ANIMAL_HERDING]: { proficient: false, ability: Abilities.WIS, value: 0 },
-      [Skills.ARCANA]: { proficient: false, ability: Abilities.INT, value: 0 },
-      [Skills.ATHLETICS]: { proficient: false, ability: Abilities.STR, value: 0 },
-      [Skills.DECEPTION]: { proficient: false, ability: Abilities.CHA, value: 0 },
-      [Skills.HISTORY]: { proficient: false, ability: Abilities.INT, value: 0 },
-      [Skills.INSIGHT]: { proficient: false, ability: Abilities.WIS, value: 0 },
-      [Skills.INTIMIDATION]: { proficient: false, ability: Abilities.CHA, value: 0 },
-      [Skills.INVESTIGATION]: { proficient: false, ability: Abilities.INT, value: 0 },
-      [Skills.MEDICINE]: { proficient: false, ability: Abilities.WIS, value: 0 },
-      [Skills.NATURE]: { proficient: false, ability: Abilities.INT, value: 0 },
-      [Skills.PERCEPTION]: { proficient: false, ability: Abilities.WIS, value: 0 },
-      [Skills.PERFORMANCE]: { proficient: false, ability: Abilities.CHA, value: 0 },
-      [Skills.PERSUASION]: { proficient: false, ability: Abilities.CHA, value: 0 },
-      [Skills.RELIGION]: { proficient: false, ability: Abilities.INT, value: 0 },
-      [Skills.SLEIGHT_OF_HAND]: { proficient: false, ability: Abilities.DEX, value: 0 },
-      [Skills.STEALTH]: { proficient: false, ability: Abilities.DEX, value: 0 },
-      [Skills.SURVIVAL]: { proficient: false, ability: Abilities.WIS, value: 0 }
+      [Skills.ACROBATICS]: { proficient: false, ability: Abilities.DEX, mod: 0 },
+      [Skills.ANIMAL_HERDING]: { proficient: false, ability: Abilities.WIS, mod: 0 },
+      [Skills.ARCANA]: { proficient: false, ability: Abilities.INT, mod: 0 },
+      [Skills.ATHLETICS]: { proficient: false, ability: Abilities.STR, mod: 0 },
+      [Skills.DECEPTION]: { proficient: false, ability: Abilities.CHA, mod: 0 },
+      [Skills.HISTORY]: { proficient: false, ability: Abilities.INT, mod: 0 },
+      [Skills.INSIGHT]: { proficient: false, ability: Abilities.WIS, mod: 0 },
+      [Skills.INTIMIDATION]: { proficient: false, ability: Abilities.CHA, mod: 0 },
+      [Skills.INVESTIGATION]: { proficient: false, ability: Abilities.INT, mod: 0 },
+      [Skills.MEDICINE]: { proficient: false, ability: Abilities.WIS, mod: 0 },
+      [Skills.NATURE]: { proficient: false, ability: Abilities.INT, mod: 0 },
+      [Skills.PERCEPTION]: { proficient: false, ability: Abilities.WIS, mod: 0 },
+      [Skills.PERFORMANCE]: { proficient: false, ability: Abilities.CHA, mod: 0 },
+      [Skills.PERSUASION]: { proficient: false, ability: Abilities.CHA, mod: 0 },
+      [Skills.RELIGION]: { proficient: false, ability: Abilities.INT, mod: 0 },
+      [Skills.SLEIGHT_OF_HAND]: { proficient: false, ability: Abilities.DEX, mod: 0 },
+      [Skills.STEALTH]: { proficient: false, ability: Abilities.DEX, mod: 0 },
+      [Skills.SURVIVAL]: { proficient: false, ability: Abilities.WIS, mod: 0 }
     };
     this.spells = [];
     this.spellCasting = {
@@ -105,7 +106,6 @@ export default class Hero {
       saveDC: 8
     }
     this.subrace = null;
-    this.temporaryHP = 0;
     this.tools = [];
     this.weapons = [];
     this.xp = 0;
@@ -129,12 +129,14 @@ export interface SavingThrowsScores {
   Intelligence: Skill;
   Strength: Skill;
   Wisdom: Skill;
+  [key: string]: any
 }
 
 export interface Skill {
   ability?: Abilities;
+  mod?: number;
   proficient: boolean;
-  value: number;
+  value?: number;
 }
 
 export interface SkillScores {
