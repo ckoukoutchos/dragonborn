@@ -12,7 +12,8 @@ import {
   UPDATE_HERO_SUCCESS,
   DELETE_HERO_FAIL,
   FETCH_HEROES_FAIL,
-  UPDATE_HERO_FAIL
+  UPDATE_HERO_FAIL,
+  CANCEL_HERO_UPDATE
 } from './heroActionTypes';
 
 // shared
@@ -40,6 +41,7 @@ const heroReducer = (
   action: HeroActionTypes
 ): HeroState => {
   switch (action.type) {
+    case CANCEL_HERO_UPDATE: return cancelHeroUpdate(state);
     case CREATE_HERO_FAIL: return createHeroFail(state, action);
     case CREATE_HERO_SUCCESS: return createHeroSuccess(state, action);
     case DELETE_HERO_FAIL: return deleteHeroFail(state, action);
@@ -58,6 +60,8 @@ const heroReducer = (
 /*
  * reducer case functions
  */
+const cancelHeroUpdate = (state: HeroState): HeroState => ({ ...state });
+
 const createHeroFail = (state: HeroState, { error }: { error: any }): HeroState => updateObject(state, { error });
 
 const createHeroSuccess = (state: HeroState, { hero }: { hero: Hero }): HeroState => updateObject(state, { heroes: state.heroes.concat(hero), hero });

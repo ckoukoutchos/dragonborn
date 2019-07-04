@@ -16,7 +16,8 @@ import {
   GET_HERO,
   UPDATE_HERO,
   UPDATE_HERO_FAIL,
-  UPDATE_HERO_SUCCESS
+  UPDATE_HERO_SUCCESS,
+  CANCEL_HERO_UPDATE
 } from './heroActionTypes';
 
 import Hero from '../../models/Hero';
@@ -24,6 +25,10 @@ import Hero from '../../models/Hero';
 /*
  * Hero action creators
  */
+export const cancelHeroUpdate = (): HeroActionTypes => ({
+  type: CANCEL_HERO_UPDATE
+});
+
 export const createHero = (hero: Hero, route: string, uid: string): HeroActionTypes => ({
   type: CREATE_HERO,
   hero,

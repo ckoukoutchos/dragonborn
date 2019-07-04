@@ -18,8 +18,6 @@ export default class Hero {
   items: Gear[];
   level: number;
   name: string;
-  numberOfHitDice: number;
-  numberOfHitDiceSides: number;
   playerName: string;
   proficiencies: string[];
   proficiencyBonus: number;
@@ -65,8 +63,6 @@ export default class Hero {
     this.items = [];
     this.level = 1;
     this.name = '';
-    this.numberOfHitDice = 0;
-    this.numberOfHitDiceSides = 0;
     this.playerName = '';
     this.proficiencies = [];
     this.proficiencyBonus = 2;

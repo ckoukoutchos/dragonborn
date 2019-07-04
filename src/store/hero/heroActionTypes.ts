@@ -3,6 +3,8 @@ import Hero from '../../models/Hero';
 /*
  * Hero action constants
  */
+export const CANCEL_HERO_UPDATE = 'CANCEL_HERO_UPDATE';
+
 export const CREATE_HERO = 'CREATE_HERO';
 export const CREATE_HERO_FAIL = 'CREATE_HERO_FAIL';
 export const CREATE_HERO_SUCCESS = 'CREATE_HERO_SUCCESS';
@@ -34,6 +36,10 @@ export interface HeroState {
   hero: Hero;
   heroes: Hero[];
   loading: boolean;
+}
+
+interface CancelHeroUpdate {
+  type: typeof CANCEL_HERO_UPDATE;
 }
 
 interface CreateHeroAction {
@@ -126,6 +132,7 @@ interface UpdateHeroSuccessAction {
 }
 
 export type HeroActionTypes =
+  | CancelHeroUpdate
   | CreateHeroAction
   | CreateHeroFailAction
   | CreateHeroSuccessAction

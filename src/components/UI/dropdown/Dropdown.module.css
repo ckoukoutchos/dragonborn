@@ -46,6 +46,16 @@
   text-decoration: none;
 }
 
+.DropdownMenuShort div {
+  border: 1px solid white;
+  color: white;
+  cursor: pointer;
+  display: block;
+  font-family: 'Rosario', sans-serif;
+  padding: 12px 16px;
+  text-decoration: none;
+}
+
 .DropdownMenu div:hover {
   background-color: white;
   color: black;

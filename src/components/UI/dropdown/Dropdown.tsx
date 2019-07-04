@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 import classes from './Dropdown.module.css';
 
 interface DropdownProps {
-  disabled: boolean;
+  disabled?: boolean;
   label: string;
   optArr?: any[];
   optObj?: any;
   value: string;
   onSelected: (value: string) => void;
 }
+
+// TODO: clean up render func
 
 interface DropdownState {
   showDropdown: boolean;
@@ -17,7 +19,7 @@ interface DropdownState {
 class Dropdown extends Component<DropdownProps, DropdownState> {
   state = {
     showDropdown: false
-  }
+  };
 
   componentDidUpdate(prevProps: DropdownProps, prevState: DropdownState) {
     if (this.props.disabled && prevState.showDropdown) {
@@ -30,8 +32,10 @@ class Dropdown extends Component<DropdownProps, DropdownState> {
    * @description toggles state of dropdown menu
    */
   onToggleDropdown = () => {
-    this.setState((prevState: DropdownState) => ({ showDropdown: !prevState.showDropdown }));
-  }
+    this.setState((prevState: DropdownState) => ({
+      showDropdown: !prevState.showDropdown
+    }));
+  };
 
   /**
    * @name onOptionSelected
@@ -40,7 +44,7 @@ class Dropdown extends Component<DropdownProps, DropdownState> {
   onOptionSelected = (value: string) => (evt: any) => {
     this.setState({ showDropdown: false });
     this.props.onSelected(value);
-  }
+  };
 
   render() {
     const { disabled, label, optArr, optObj } = this.props;
@@ -56,16 +60,13 @@ class Dropdown extends Component<DropdownProps, DropdownState> {
     // if option props are in an array
     if (optArr) {
       options = optArr.map((option: any) => (
-        <div
-          key={option}
-          onClick={this.onOptionSelected(option)}
-        >
+        <div key={option} onClick={this.onOptionSelected(option)}>
           {option}
-        </div>)
-      );
+        </div>
+      ));
       // if option props are in an object
     } else {
-      options = []
+      options = [];
       for (const option in optObj) {
         options.push(
           <div
@@ -87,14 +88,14 @@ class Dropdown extends Component<DropdownProps, DropdownState> {
         >
           <span>{value}</span>
 
-          <span className={showDropdown ? classes.UpArrow : classes.DownArrow}></span>
+          <span
+            className={showDropdown ? classes.UpArrow : classes.DownArrow}
+          />
         </button>
 
-        {showDropdown ?
-          <div className={classes.DropdownMenu}>
-            {options}
-          </div>
-          : null}
+        {showDropdown ? (
+          <div className={classes.DropdownMenu}>{options}</div>
+        ) : null}
 
         <label className={classes.Label}>{label}</label>
       </div>

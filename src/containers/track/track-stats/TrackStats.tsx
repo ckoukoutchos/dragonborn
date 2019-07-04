@@ -8,7 +8,8 @@ import { AppState } from '../../../store/rootReducer';
 import {
   fetchHero,
   getHero,
-  updateHero
+  updateHero,
+  cancelHeroUpdate
 } from '../../../store/hero/heroActionCreators';
 import { HeroActionTypes } from '../../../store/hero/heroActionTypes';
 
@@ -25,6 +26,7 @@ import TabBar from '../../../components/UI/tab-bar/TabBar';
 import TextAreaInput from '../../../components/UI/input/textarea-input/TextAreaInput';
 import TitleCard from '../../../components/UI/card/title-card/TitleCard';
 import ToggleLineInput from '../../../components/UI/input/toggle-line-input/ToggleLineInput';
+import Vitals from '../../../components/hero/vitals/Vitals';
 
 // shared
 import { updateObject } from '../../../shared/immutable';
@@ -44,6 +46,7 @@ interface TrackStatsProps {
   history: any;
   match: any;
   user: User | null;
+  cancelUpdate: () => HeroActionTypes;
   fetchHero: (heroId: number, uid: string) => HeroActionTypes;
   getHero: (heroId: number) => HeroActionTypes;
   updateHero: (hero: Hero, uid: string) => HeroActionTypes;
@@ -162,6 +165,7 @@ class TrackStats extends Component<TrackStatsProps, TrackStatsState> {
       });
       return { editing: updatedValue, updated: false };
     });
+    this.props.cancelUpdate();
   };
 
   /**
@@ -348,6 +352,8 @@ class TrackStats extends Component<TrackStatsProps, TrackStatsState> {
             />
           </BasicCard>
 
+          <Vitals />
+
           {/* Abilities */}
           <BasicCard
             title={'Abilities & Skills'}
@@ -358,19 +364,12 @@ class TrackStats extends Component<TrackStatsProps, TrackStatsState> {
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               {this.createAbilityInputs(hero.abilityScores, editing)}
 
-              <div style={{ height: '24px' }} />
+              <div style={{ height: '14px' }} />
               <BlockInput
                 label='Proficiency'
                 editing={editing.abilities}
                 onChange={this.onInputChange('proficiencyBonus')}
                 value={hero.proficiencyBonus}
-              />
-
-              <BlockInput
-                label='Inspiration'
-                editing={editing.abilities}
-                onChange={this.onInputChange('inspiration')}
-                value={hero.inspiration}
               />
             </div>
 
@@ -424,6 +423,7 @@ const mapStateToProps = (state: AppState) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
+  cancelUpdate: () => dispatch(cancelHeroUpdate()),
   fetchHero: (heroId: number, uid: string) => dispatch(fetchHero(heroId, uid)),
   getHero: (heroId: number) => dispatch(getHero(heroId)),
   updateHero: (hero: Hero, uid: string) => dispatch(updateHero(hero, uid))

@@ -1,7 +1,7 @@
 .Container {
   border: 2px solid rgb(61, 61, 61);
   border-radius: 7px;
-  height: 90px;
+  height: 110px;
   margin: 12px 8px;
   width: 90px;
 }
@@ -15,7 +15,7 @@
   border-radius: 8px;
   color: black;
   font-family: 'Rosario', sans-serif;
-  font-size: 24px;
+  font-size: 28px;
   margin-bottom: 4px;
   outline: none;
   padding: 8px 4px;
@@ -31,11 +31,12 @@ input:disabled {
   background-color: rgb(240, 240, 240);
   border: 2px solid rgb(61, 61, 61);
   border-radius: 20px;
-  font-size: 20px;
-  height: 40px;
+  font-size: 24px;
+  height: 50px;
   margin: auto;
+  padding-top: 4px;
   text-align: center;
-  width: 50px;
+  width: 60px;
 }
 
 .Disabled {

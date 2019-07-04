@@ -18,6 +18,7 @@ class Vitals extends Component<any> {
     hp: this.props.hp,
     editing: false,
     initative: this.props.initative,
+    level: this.props.level,
     numberOfHitDice: this.props.numberOfHitDice,
     numberOfHitDiceSides: this.props.numberOfHitDiceSides,
     speed: this.props.speed,
@@ -55,7 +56,7 @@ class Vitals extends Component<any> {
     this.setState((prevState: any) => {
       if (prevState.updated) {
         // @ts-ignore
-        this.props.updateHero(prevState.hero, this.props.user.uid);
+        // this.props.updateHero(prevState.hero, this.props.user.uid);
       }
       return { editing: !prevState.editing, updated: false };
     });
@@ -73,52 +74,15 @@ class Vitals extends Component<any> {
   };
 
   render() {
-    const {
-      armor,
-      hp,
-      editing,
-      initative,
-      numberOfHitDice,
-      numberOfHitDiceSides,
-      speed,
-      xp
-    } = this.state;
+    const { armor, hp, editing, level, speed, xp } = this.state;
 
     return (
       <BasicCard
         title='Vitals'
         editing={editing}
-        onCancel={this.onCancelClicked()}
-        onEdit={this.onEditToggled()}
+        onCancel={this.onCancelClicked}
+        onEdit={this.onEditToggled}
       >
-        <BlockInput
-          label='Armor Class'
-          editing={false}
-          onChange={() => console.log('Easter Egg')}
-          value={armor && armor.length ? armor[0].armorClass : 0}
-        />
-
-        <BlockInput
-          label='Initiative'
-          editing={editing}
-          onChange={this.onInputChange('initative')}
-          value={initative}
-        />
-
-        <BlockInput
-          label='Experience'
-          editing={editing}
-          onChange={this.onInputChange('xp')}
-          value={xp}
-        />
-
-        <BlockInput
-          label='Speed'
-          editing={editing}
-          onChange={this.onInputChange('speed')}
-          value={speed}
-        />
-
         <BlockInput
           label='Hit Points'
           editing={editing}
@@ -130,7 +94,35 @@ class Vitals extends Component<any> {
           label='Hit Dice'
           editing={editing}
           onChange={this.onInputChange('numberOfDice')}
-          value={numberOfHitDice + 'd' + numberOfHitDiceSides}
+          value='1d8'
+        />
+
+        <BlockInput
+          label='Armor Class'
+          editing={false}
+          onChange={() => console.log('Easter Egg')}
+          value={armor && armor.length ? armor[0].armorClass : 0}
+        />
+
+        <BlockInput
+          label='Experience'
+          editing={editing}
+          onChange={this.onInputChange('xp')}
+          value={xp}
+        />
+
+        <BlockInput
+          label='Level'
+          editing={editing}
+          onChange={this.onInputChange('level')}
+          value={level}
+        />
+
+        <BlockInput
+          label='Speed'
+          editing={editing}
+          onChange={this.onInputChange('speed')}
+          value={speed}
         />
       </BasicCard>
     );
@@ -141,9 +133,7 @@ const mapStateToProps = (state: AppState) => ({
   armor: state.hero.hero.armor,
   hp: state.hero.hero.hp,
   id: state.hero.hero.id,
-  initative: state.hero.hero.initative,
-  numberOfHitDice: state.hero.hero.numberOfHitDice,
-  numberOfHitDiceSides: state.hero.hero.numberOfHitDiceSides,
+  level: state.hero.hero.level,
   speed: state.hero.hero.speed,
   xp: state.hero.hero.xp
 });
