@@ -1,16 +1,31 @@
+import { Abilities } from './Hero';
+
 export interface Spell {
     castingTime: string;
-    components: Components[];
+    spellComponents: SpellComponents[];
     concentration: boolean;
+    damageMod?: number;
     desc: string;
-    duration: string;
+    duration: Durations;
     level: number;
     name: string;
+    numberOfDamageDice?: number;
+    numberOfDamageDiceSides?: number;
     range: string;
+    savingThrow?: Abilities;
     type: SpellTypes;
 }
 
-export enum Components {
+export interface SpellCasting {
+    castingAbility: Abilities | string;
+    saveDC: number;
+}
+
+export enum Durations {
+    INSTANTANEOUS = 'Instantaneous'
+}
+
+export enum SpellComponents {
     MATERIAL = 'Material',
     SOMATIC = 'Somatic',
     VERBAL = 'Verbal'

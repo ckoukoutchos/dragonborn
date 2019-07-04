@@ -1,4 +1,5 @@
 import { Armor, Gear, Weapon, Coinage, CoinTypes } from './Gear';
+import { SpellCasting } from './Spell';
 
 export default class Hero {
   abilityScores: AbilityScores;
@@ -25,6 +26,7 @@ export default class Hero {
   savingThrowsScores: SavingThrowsScores;
   speed: number;
   spells: any;
+  spellCasting: SpellCasting;
   skillScores: SkillScores;
   subrace = null;
   temporaryHP: number;
@@ -77,7 +79,6 @@ export default class Hero {
       [Abilities.WIS]: { proficient: false, value: 0 }
     };
     this.speed = 0;
-    this.spells = [];
     this.skillScores = {
       [Skills.ACROBATICS]: { proficient: false, ability: Abilities.DEX, value: 0 },
       [Skills.ANIMAL_HERDING]: { proficient: false, ability: Abilities.WIS, value: 0 },
@@ -98,6 +99,11 @@ export default class Hero {
       [Skills.STEALTH]: { proficient: false, ability: Abilities.DEX, value: 0 },
       [Skills.SURVIVAL]: { proficient: false, ability: Abilities.WIS, value: 0 }
     };
+    this.spells = [];
+    this.spellCasting = {
+      castingAbility: '',
+      saveDC: 8
+    }
     this.subrace = null;
     this.temporaryHP = 0;
     this.tools = [];
